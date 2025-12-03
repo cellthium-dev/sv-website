@@ -47,17 +47,19 @@ export default function About() {
   ];
 
   return (
-    <section className="bg-gray-50 py-16" id="ueber-mich">
+    <section className="bg-gray-50 py-12 md:py-16" id="ueber-mich">
       <div className="container mx-auto px-5">
-        <h2 className="mb-16 text-center font-bold text-4xl">Über mich</h2>
+        <h2 className="mb-8 text-center font-bold text-3xl md:mb-16 md:text-4xl">
+          Über mich
+        </h2>
 
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="grid gap-6 md:gap-8 lg:grid-cols-2">
           {/* Left Column */}
           <div>
-            <h3 className="mb-4 font-bold text-2xl">
+            <h3 className="mb-3 font-bold text-xl md:mb-4 md:text-2xl">
               Kompetenz durch Expertise
             </h3>
-            <p className="mb-4 leading-relaxed">
+            <p className="mb-3 text-sm leading-relaxed md:mb-4 md:text-base">
               Als ISO-17024 zertifizierter Sachverständiger für
               Photovoltaikanlagen und Batteriesysteme verfüge ich über
               umfassende akademische Ausbildung und langjährige praktische
@@ -67,10 +69,10 @@ export default function About() {
               Batteriespeicher.
             </p>
 
-            <h4 className="mt-8 mb-4 font-bold text-xl">
+            <h4 className="mt-6 mb-3 font-bold text-lg md:mt-8 md:mb-4 md:text-xl">
               Akademischer Werdegang
             </h4>
-            <ul className="mb-6 space-y-3">
+            <ul className="mb-4 space-y-2 text-sm md:mb-6 md:space-y-3 md:text-base">
               <li>
                 <strong>
                   M.Sc. Elektrotechnik, Informationstechnik und Technische
@@ -98,10 +100,10 @@ export default function About() {
               </li>
             </ul>
 
-            <h4 className="mt-8 mb-4 font-bold text-xl">
+            <h4 className="mt-6 mb-3 font-bold text-lg md:mt-8 md:mb-4 md:text-xl">
               Zertifizierungen & Qualifikationen
             </h4>
-            <ul className="space-y-2">
+            <ul className="space-y-2 text-sm md:text-base">
               <li>
                 <strong>ISO-17024 Zertifizierung</strong> als freier
                 Sachverständiger für Photovoltaikanlagen
@@ -130,16 +132,20 @@ export default function About() {
 
           {/* Right Column */}
           <div>
-            <h3 className="mb-4 font-bold text-2xl">Berufliche Expertise</h3>
-            <div className="relative border-[#0066CC] border-l-2 pl-12">
+            <h3 className="mb-3 font-bold text-xl md:mb-4 md:text-2xl">
+              Berufliche Expertise
+            </h3>
+            <div className="relative border-[#0066CC] border-l-2 pl-8 md:pl-12">
               {timelineItems.map((item, index) => (
-                <div className="relative mb-8 pl-8" key={index}>
-                  <div className="absolute top-[5px] left-[-42px] h-3 w-3 rounded-full border-[3px] border-white bg-[#0066CC]" />
-                  <div className="mb-2 font-bold text-[#0066CC]">
+                <div className="relative mb-6 pl-6 md:mb-8 md:pl-8" key={index}>
+                  <div className="absolute top-[5px] left-[-34px] h-2.5 w-2.5 rounded-full border-[3px] border-white bg-[#0066CC] md:left-[-42px] md:h-3 md:w-3" />
+                  <div className="mb-1.5 font-bold text-[#0066CC] text-sm md:mb-2 md:text-base">
                     {item.date}
                   </div>
-                  <div className="mb-1 font-semibold">{item.title}</div>
-                  <div className="text-gray-600">
+                  <div className="mb-1 font-semibold text-sm md:text-base">
+                    {item.title}
+                  </div>
+                  <div className="text-gray-600 text-xs md:text-sm">
                     <strong>{item.company}</strong>
                     {item.description.map((desc, i) => (
                       <div key={i}>{desc}</div>
@@ -149,34 +155,42 @@ export default function About() {
               ))}
             </div>
 
-            <h4 className="mt-8 mb-4 font-bold text-xl">
+            <h4 className="mt-6 mb-3 font-bold text-lg md:mt-8 md:mb-4 md:text-xl">
               Technische Kompetenzen
             </h4>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:gap-4">
               <div>
-                <h5 className="mb-2 font-semibold">Qualitätswerkzeuge</h5>
-                <p className="text-sm">
+                <h5 className="mb-1.5 font-semibold text-sm md:mb-2 md:text-base">
+                  Qualitätswerkzeuge
+                </h5>
+                <p className="text-xs md:text-sm">
                   FMEA, FTA, DOE, QFD, 8D, Six Sigma, APQP, 5s/5WHY,
                   Risikofilter
                 </p>
               </div>
               <div>
-                <h5 className="mb-2 font-semibold">Prüfstandards</h5>
-                <p className="text-sm">
+                <h5 className="mb-1.5 font-semibold text-sm md:mb-2 md:text-base">
+                  Prüfstandards
+                </h5>
+                <p className="text-xs md:text-sm">
                   DGUV V3, DGUV 314-003, ECE R 100, VDE 0701-702, DIN EN 61000,
                   ISO 15118
                 </p>
               </div>
               <div>
-                <h5 className="mb-2 font-semibold">Software & Tools</h5>
-                <p className="text-sm">
+                <h5 className="mb-1.5 font-semibold text-sm md:mb-2 md:text-base">
+                  Software & Tools
+                </h5>
+                <p className="text-xs md:text-sm">
                   Matlab/Simulink, ANSYS, CANape, CANoe, Polarion ALM, LiBal BMS
                   Creator
                 </p>
               </div>
               <div>
-                <h5 className="mb-2 font-semibold">Normenkompetenz</h5>
-                <p className="text-sm">
+                <h5 className="mb-1.5 font-semibold text-sm md:mb-2 md:text-base">
+                  Normenkompetenz
+                </h5>
+                <p className="text-xs md:text-sm">
                   ISO 26262, ISO 21434, ISO 9001, ISO 13849, ISO 21780, IATF
                   16949
                 </p>
@@ -185,9 +199,11 @@ export default function About() {
           </div>
         </div>
 
-        <div className="mt-12 text-center">
-          <h4 className="mb-4 font-bold text-2xl">Tätigkeitsbereich</h4>
-          <p className="text-lg">
+        <div className="mt-8 text-center md:mt-12">
+          <h4 className="mb-3 font-bold text-xl md:mb-4 md:text-2xl">
+            Tätigkeitsbereich
+          </h4>
+          <p className="px-4 text-base md:text-lg">
             Standort: <strong>Aachen</strong> | Deutschlandweit tätig mit
             Schwerpunkt <strong>Nordrhein-Westfalen</strong>
           </p>
