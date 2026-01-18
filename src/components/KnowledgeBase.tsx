@@ -110,13 +110,13 @@ export default function KnowledgeBase() {
         {/* Search Box */}
         <div className="mx-auto mb-8 flex max-w-2xl gap-2">
           <input
-            className="flex-1 rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#0066CC] focus:outline-none focus:ring-2 focus:ring-[#0066CC]/20"
+            className="flex-1 rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Artikel durchsuchen..."
             type="text"
             value={searchQuery}
           />
-          <button className="rounded-lg bg-[#0066CC] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#004C99]">
+          <button className="rounded-lg bg-[#2563EB] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#004C99]">
             Suchen
           </button>
         </div>
@@ -127,8 +127,8 @@ export default function KnowledgeBase() {
             <button
               className={`rounded-lg border-2 px-4 py-2 transition-all ${
                 selectedCategory === category.id
-                  ? "border-[#0066CC] bg-[#0066CC] text-white"
-                  : "border-gray-300 bg-white text-gray-700 hover:border-[#0066CC]"
+                  ? "border-[#2563EB] bg-[#2563EB] text-white"
+                  : "border-gray-300 bg-white text-gray-700 hover:border-[#2563EB]"
               }`}
               key={category.id}
               onClick={() => setSelectedCategory(category.id)}
@@ -161,7 +161,7 @@ export default function KnowledgeBase() {
                 <h3 className="mb-3 font-bold text-2xl">{article.title}</h3>
                 <p className="mb-4 text-gray-600">{article.excerpt}</p>
                 <a
-                  className="inline-block rounded-lg border-2 border-[#0066CC] bg-transparent px-6 py-2 font-semibold text-[#0066CC] transition-all hover:bg-[#0066CC] hover:text-white"
+                  className="inline-block rounded-lg border-2 border-[#2563EB] bg-transparent px-6 py-2 font-semibold text-[#2563EB] transition-all hover:bg-[#2563EB] hover:text-white"
                   href={article.link}
                 >
                   Weiterlesen →
@@ -181,7 +181,7 @@ export default function KnowledgeBase() {
         )}
 
         <div className="mt-12 text-center">
-          <button className="rounded-lg border-2 border-[#0066CC] bg-transparent px-8 py-3 font-semibold text-[#0066CC] transition-all hover:bg-[#0066CC] hover:text-white">
+          <button className="rounded-lg border-2 border-[#2563EB] bg-transparent px-8 py-3 font-semibold text-[#2563EB] transition-all hover:bg-[#2563EB] hover:text-white">
             Mehr Artikel laden
           </button>
         </div>

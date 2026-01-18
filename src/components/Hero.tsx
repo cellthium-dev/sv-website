@@ -20,29 +20,26 @@ export default function Hero() {
   };
 
   return (
-    <section
-      className="bg-gradient-to-br from-[#0066CC] to-[#004C99] py-16 text-center text-white"
-      id="home"
-    >
+    <section className="bg-[#0F172A] py-16 text-center text-white" id="home">
       <div className="container mx-auto px-5">
         <h1 className="mb-6 font-bold text-3xl leading-tight sm:text-4xl md:mb-8 md:text-5xl lg:text-6xl">
           Unabhängige Sachverständigen-Gutachten für Photovoltaik &
           Batteriesysteme
         </h1>
-        <p className="mb-6 px-4 text-base opacity-95 sm:text-lg md:mb-8 md:text-xl">
+        <p className="mb-6 px-4 text-gray-300 opacity-95 sm:text-lg md:mb-8 md:text-xl">
           ISO-17024 zertifiziert | Deutschlandweit tätig | Schwerpunkt NRW
         </p>
 
         <div className="flex flex-col flex-wrap justify-center gap-3 px-4 sm:flex-row sm:gap-4">
           <a
-            className="hover:-translate-y-0.5 inline-block w-full rounded-lg border-2 border-transparent bg-[#0066CC] px-6 py-3 font-semibold text-base text-white transition-all hover:bg-[#004C99] hover:shadow-xl sm:w-auto sm:px-8 sm:py-4 sm:text-lg"
+            className="hover:-translate-y-0.5 inline-block w-full rounded-lg border-2 border-transparent bg-[#2563EB] px-6 py-3 font-semibold text-base text-white transition-all hover:bg-[#004C99] hover:shadow-xl sm:w-auto sm:px-8 sm:py-4 sm:text-lg"
             href="#kontakt"
             onClick={(e) => handleScroll(e, "#kontakt")}
           >
             Jetzt Beratung buchen
           </a>
           <a
-            className="inline-block w-full rounded-lg border-2 border-white bg-transparent px-6 py-3 font-semibold text-base text-white transition-all hover:bg-white hover:text-[#0066CC] sm:w-auto sm:px-8 sm:py-4 sm:text-lg"
+            className="hover:-translate-y-0.5 inline-block w-full rounded-lg border-2 border-transparent bg-[#2563EB] px-6 py-3 font-semibold text-base text-white transition-all hover:bg-[#004C99] hover:shadow-xl sm:w-auto sm:px-8 sm:py-4 sm:text-lg"
             href="#leistungen"
             onClick={(e) => handleScroll(e, "#leistungen")}
           >

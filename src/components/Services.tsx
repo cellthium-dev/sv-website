@@ -116,8 +116,8 @@ export default function Services() {
               className="hover:-translate-y-1 rounded-xl border border-gray-200 bg-white p-8 transition-all hover:shadow-2xl"
               key={index}
             >
-              <div className="mb-4 text-5xl text-[#0066CC]">{service.icon}</div>
-              <h3 className="mb-4 font-bold text-2xl text-[#0066CC]">
+              <div className="mb-4 text-5xl text-[#2563EB]">{service.icon}</div>
+              <h3 className="mb-4 font-bold text-2xl text-[#2563EB]">
                 {service.title}
               </h3>
               <p className="mb-4 text-gray-600">{service.description}</p>
@@ -129,7 +129,7 @@ export default function Services() {
                 ))}
               </ul>
               <a
-                className="block w-full rounded-lg bg-[#0066CC] px-6 py-3 text-center font-semibold text-white transition-all hover:bg-[#004C99] hover:shadow-lg"
+                className="block w-full rounded-lg bg-[#2563EB] px-6 py-3 text-center font-semibold text-white transition-all hover:bg-[#004C99] hover:shadow-lg"
                 href={service.ctaLink}
                 onClick={(e) => handleScroll(e, service.ctaLink)}
               >
@@ -141,7 +141,7 @@ export default function Services() {
 
         <div className="mt-12 text-center">
           <a
-            className="inline-flex items-center gap-2 rounded-lg border-2 border-gray-300 bg-gray-100 px-6 py-4 transition-all hover:border-[#0066CC] hover:bg-[#0066CC] hover:text-white"
+            className="inline-flex items-center gap-2 rounded-lg border-2 border-gray-300 bg-gray-100 px-6 py-4 transition-all hover:border-[#2563EB] hover:bg-[#2563EB] hover:text-white"
             href="#"
           >
             <span>📄</span>

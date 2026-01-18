@@ -32,20 +32,20 @@ export default function CookieBanner() {
             <strong>Cookie-Hinweis:</strong> Diese Website verwendet notwendige
             Cookies zur Gewährleistung der Funktionalität. Weitere Informationen
             finden Sie in unserer{" "}
-            <a className="text-[#0066CC] hover:underline" href="#datenschutz">
+            <a className="text-[#2563EB] hover:underline" href="#datenschutz">
               Datenschutzerklärung
             </a>
             .
           </div>
           <div className="flex flex-shrink-0 gap-3">
             <button
-              className="rounded-lg bg-[#0066CC] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#004C99]"
+              className="rounded-lg bg-[#2563EB] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#004C99]"
               onClick={acceptCookies}
             >
               Akzeptieren
             </button>
             <button
-              className="rounded-lg border-2 border-[#0066CC] bg-transparent px-6 py-3 font-semibold text-[#0066CC] transition-all hover:bg-[#0066CC] hover:text-white"
+              className="rounded-lg border-2 border-[#2563EB] bg-transparent px-6 py-3 font-semibold text-[#2563EB] transition-all hover:bg-[#2563EB] hover:text-white"
               onClick={declineCookies}
             >
               Nur notwendige

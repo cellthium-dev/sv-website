@@ -155,7 +155,7 @@ export default function ContactForm() {
                 <div
                   className={`mb-2 flex h-10 w-10 items-center justify-center rounded-full font-bold transition-all ${
                     currentStep === step
-                      ? "border-2 border-[#0066CC] bg-[#0066CC] text-white"
+                      ? "border-2 border-[#2563EB] bg-[#2563EB] text-white"
                       : currentStep > step
                         ? "border-2 border-green-500 bg-green-500 text-white"
                         : "border-2 border-gray-300 bg-gray-200 text-gray-600"
@@ -166,7 +166,7 @@ export default function ContactForm() {
                 <div
                   className={`text-center text-sm ${
                     currentStep === step
-                      ? "font-semibold text-[#0066CC]"
+                      ? "font-semibold text-[#2563EB]"
                       : "text-gray-500"
                   }`}
                 >
@@ -192,7 +192,7 @@ export default function ContactForm() {
                     Anfragetyp auswählen <span className="text-red-500">*</span>
                   </label>
                   <select
-                    className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#0066CC] focus:outline-none focus:ring-2 focus:ring-[#0066CC]/20"
+                    className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
                     id="requestType"
                     onChange={handleInputChange}
                     required
@@ -221,7 +221,7 @@ export default function ContactForm() {
                     Sie sind... <span className="text-red-500">*</span>
                   </label>
                   <select
-                    className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#0066CC] focus:outline-none focus:ring-2 focus:ring-[#0066CC]/20"
+                    className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
                     id="customerType"
                     onChange={handleInputChange}
                     required
@@ -239,7 +239,7 @@ export default function ContactForm() {
 
                 <div className="flex justify-end">
                   <button
-                    className="rounded-lg bg-[#0066CC] px-8 py-3 font-semibold text-white transition-colors hover:bg-[#004C99]"
+                    className="rounded-lg bg-[#2563EB] px-8 py-3 font-semibold text-white transition-colors hover:bg-[#004C99]"
                     onClick={nextStep}
                     type="button"
                   >
@@ -261,7 +261,7 @@ export default function ContactForm() {
                     Beschreibung <span className="text-red-500">*</span>
                   </label>
                   <textarea
-                    className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#0066CC] focus:outline-none focus:ring-2 focus:ring-[#0066CC]/20"
+                    className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
                     id="description"
                     onChange={handleInputChange}
                     placeholder="Bitte beschreiben Sie Ihr Anliegen möglichst detailliert..."
@@ -277,14 +277,14 @@ export default function ContactForm() {
 
                 <div className="flex justify-between">
                   <button
-                    className="rounded-lg border-2 border-[#0066CC] bg-transparent px-8 py-3 font-semibold text-[#0066CC] transition-all hover:bg-[#0066CC] hover:text-white"
+                    className="rounded-lg border-2 border-[#2563EB] bg-transparent px-8 py-3 font-semibold text-[#2563EB] transition-all hover:bg-[#2563EB] hover:text-white"
                     onClick={prevStep}
                     type="button"
                   >
                     ← Zurück
                   </button>
                   <button
-                    className="rounded-lg bg-[#0066CC] px-8 py-3 font-semibold text-white transition-colors hover:bg-[#004C99]"
+                    className="rounded-lg bg-[#2563EB] px-8 py-3 font-semibold text-white transition-colors hover:bg-[#004C99]"
                     onClick={nextStep}
                     type="button"
                   >
@@ -305,7 +305,7 @@ export default function ContactForm() {
                       Vorname <span className="text-red-500">*</span>
                     </label>
                     <input
-                      className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#0066CC] focus:outline-none focus:ring-2 focus:ring-[#0066CC]/20"
+                      className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
                       id="firstName"
                       onChange={handleInputChange}
                       required
@@ -318,7 +318,7 @@ export default function ContactForm() {
                       Nachname <span className="text-red-500">*</span>
                     </label>
                     <input
-                      className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#0066CC] focus:outline-none focus:ring-2 focus:ring-[#0066CC]/20"
+                      className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
                       id="lastName"
                       onChange={handleInputChange}
                       required
@@ -331,7 +331,7 @@ export default function ContactForm() {
                 <div className="mb-6 hidden" id="companyField">
                   <label className="mb-2 block font-semibold">Firma</label>
                   <input
-                    className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#0066CC] focus:outline-none focus:ring-2 focus:ring-[#0066CC]/20"
+                    className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
                     id="company"
                     onChange={handleInputChange}
                     type="text"
@@ -345,7 +345,7 @@ export default function ContactForm() {
                       E-Mail <span className="text-red-500">*</span>
                     </label>
                     <input
-                      className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#0066CC] focus:outline-none focus:ring-2 focus:ring-[#0066CC]/20"
+                      className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
                       id="email"
                       onChange={handleInputChange}
                       required
@@ -358,7 +358,7 @@ export default function ContactForm() {
                       Telefon <span className="text-red-500">*</span>
                     </label>
                     <input
-                      className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#0066CC] focus:outline-none focus:ring-2 focus:ring-[#0066CC]/20"
+                      className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
                       id="phone"
                       onChange={handleInputChange}
                       required
@@ -373,7 +373,7 @@ export default function ContactForm() {
                     Straße & Hausnummer
                   </label>
                   <input
-                    className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#0066CC] focus:outline-none focus:ring-2 focus:ring-[#0066CC]/20"
+                    className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
                     id="street"
                     onChange={handleInputChange}
                     type="text"
@@ -385,7 +385,7 @@ export default function ContactForm() {
                   <div>
                     <label className="mb-2 block font-semibold">PLZ</label>
                     <input
-                      className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#0066CC] focus:outline-none focus:ring-2 focus:ring-[#0066CC]/20"
+                      className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
                       id="zip"
                       onChange={handleInputChange}
                       type="text"
@@ -395,7 +395,7 @@ export default function ContactForm() {
                   <div>
                     <label className="mb-2 block font-semibold">Ort</label>
                     <input
-                      className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#0066CC] focus:outline-none focus:ring-2 focus:ring-[#0066CC]/20"
+                      className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
                       id="city"
                       onChange={handleInputChange}
                       type="text"
@@ -409,7 +409,7 @@ export default function ContactForm() {
                     Bevorzugte Kontaktzeit
                   </label>
                   <select
-                    className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#0066CC] focus:outline-none focus:ring-2 focus:ring-[#0066CC]/20"
+                    className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
                     id="preferredTime"
                     onChange={handleInputChange}
                     value={formData.preferredTime}
@@ -434,7 +434,7 @@ export default function ContactForm() {
                     <span className="text-sm">
                       Ich habe die{" "}
                       <a
-                        className="text-[#0066CC] hover:underline"
+                        className="text-[#2563EB] hover:underline"
                         href="#datenschutz"
                       >
                         Datenschutzerklärung
@@ -465,14 +465,14 @@ export default function ContactForm() {
 
                 <div className="flex justify-between">
                   <button
-                    className="rounded-lg border-2 border-[#0066CC] bg-transparent px-8 py-3 font-semibold text-[#0066CC] transition-all hover:bg-[#0066CC] hover:text-white"
+                    className="rounded-lg border-2 border-[#2563EB] bg-transparent px-8 py-3 font-semibold text-[#2563EB] transition-all hover:bg-[#2563EB] hover:text-white"
                     onClick={prevStep}
                     type="button"
                   >
                     ← Zurück
                   </button>
                   <button
-                    className="rounded-lg bg-[#0066CC] px-8 py-3 font-semibold text-white transition-colors hover:bg-[#004C99]"
+                    className="rounded-lg bg-[#2563EB] px-8 py-3 font-semibold text-white transition-colors hover:bg-[#004C99]"
                     onClick={nextStep}
                     type="button"
                   >
@@ -518,7 +518,7 @@ export default function ContactForm() {
                   </div>
                 </div>
 
-                <div className="mb-6 border-[#0066CC] border-l-4 bg-blue-50 p-6">
+                <div className="mb-6 border-[#2563EB] border-l-4 bg-blue-50 p-6">
                   <strong>Was passiert als Nächstes?</strong>
                   <ul className="mt-2 list-inside list-disc space-y-2">
                     <li>
@@ -539,14 +539,14 @@ export default function ContactForm() {
 
                 <div className="flex justify-between">
                   <button
-                    className="rounded-lg border-2 border-[#0066CC] bg-transparent px-8 py-3 font-semibold text-[#0066CC] transition-all hover:bg-[#0066CC] hover:text-white"
+                    className="rounded-lg border-2 border-[#2563EB] bg-transparent px-8 py-3 font-semibold text-[#2563EB] transition-all hover:bg-[#2563EB] hover:text-white"
                     onClick={prevStep}
                     type="button"
                   >
                     ← Zurück
                   </button>
                   <button
-                    className="rounded-lg bg-[#0066CC] px-8 py-4 font-semibold text-lg text-white transition-colors hover:bg-[#004C99]"
+                    className="rounded-lg bg-[#2563EB] px-8 py-4 font-semibold text-lg text-white transition-colors hover:bg-[#004C99]"
                     type="submit"
                   >
                     Anfrage absenden ✓
@@ -558,18 +558,11 @@ export default function ContactForm() {
         </div>
 
         {/* Alternative Kontaktmöglichkeiten */}
-        <div className="mt-12 grid gap-8 md:grid-cols-3">
-          <div className="rounded-xl bg-white p-6 text-center shadow-md">
-            <div className="mb-3 text-4xl">📞</div>
-            <h4 className="mb-2 font-bold text-xl">Telefon</h4>
-            <p className="font-semibold">+49-15784410467</p>
-            <p className="text-gray-500 text-sm">Mo-Fr: 9:00-18:00 Uhr</p>
-          </div>
-
+        <div className="mt-12 grid gap-8 md:grid-cols-2">
           <div className="rounded-xl bg-white p-6 text-center shadow-md">
             <div className="mb-3 text-4xl">✉️</div>
             <h4 className="mb-2 font-bold text-xl">E-Mail</h4>
-            <p className="font-semibold">Andreas.Bauten@gmail.com</p>
+            <p className="font-semibold">service@sv-bauten.de</p>
             <p className="text-gray-500 text-sm">Antwort innerhalb 24h</p>
           </div>
 

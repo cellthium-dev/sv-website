@@ -10,7 +10,7 @@ export default function Header() {
     { href: "#ueber-mich", label: "Über mich" },
     { href: "#leistungen", label: "Leistungen" },
     { href: "#wissen", label: "Wissen" },
-    { href: "#referenzen", label: "Referenzen" },
+    // { href: "#referenzen", label: "Referenzen" },
   ];
 
   const handleNavClick = (
@@ -30,7 +30,7 @@ export default function Header() {
       <div className="container mx-auto px-5">
         <div className="flex items-center justify-between py-4">
           <div className="flex flex-col">
-            <div className="font-bold text-2xl text-[#0066CC]">
+            <div className="font-bold text-2xl text-[#2563EB]">
               Andreas Bauten
             </div>
             <span className="font-normal text-gray-500 text-sm">
@@ -63,7 +63,7 @@ export default function Header() {
               </a>
             ))}
             <a
-              className="hover:-translate-y-0.5 rounded-lg bg-[#0066CC] px-6 py-3 font-semibold text-white transition-all hover:bg-[#004C99] hover:shadow-lg"
+              className="hover:-translate-y-0.5 rounded-lg bg-[#2563EB] px-6 py-3 font-semibold text-white transition-all hover:bg-[#004C99] hover:shadow-lg"
               href="#kontakt"
               onClick={(e) => handleNavClick(e, "#kontakt")}
             >

@@ -13,7 +13,7 @@ export default function BookingSystem() {
         <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2">
           <div
             className="calendly-inline-widget col-span-2 h-[700px] min-w-[320px]"
-            data-url="https://calendly.com/felixarjuna17/30min"
+            data-url="https://calendly.com/andreas-bauten/30min"
           />
           <script
             async
