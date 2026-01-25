@@ -120,7 +120,7 @@ export default function Footer() {
               <li>
                 <a
                   className="hover text-gray-300 transition-colors"
-                  href="#impressum"
+                  href="/impressum"
                 >
                   Impressum
                 </a>
