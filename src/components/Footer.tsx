@@ -128,7 +128,7 @@ export default function Footer() {
               <li>
                 <a
                   className="hover text-gray-300 transition-colors"
-                  href="#datenschutz"
+                  href="/datenschutz"
                 >
                   Datenschutzerklärung
                 </a>
@@ -136,7 +136,7 @@ export default function Footer() {
               <li>
                 <a
                   className="hover text-gray-300 transition-colors"
-                  href="#agb"
+                  href="/agb"
                 >
                   AGB
                 </a>
