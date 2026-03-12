@@ -137,7 +137,10 @@ export default function About() {
             </h3>
             <div className="relative border-[#2563EB] border-l-2 pl-8 md:pl-12">
               {timelineItems.map((item, index) => (
-                <div className="relative mb-6 pl-6 md:mb-8 md:pl-8" key={index}>
+                <div
+                  className="relative mb-6 pl-6 md:mb-8 md:pl-8"
+                  key={index.toString()}
+                >
                   <div className="absolute top-[5px] left-[-34px] h-2.5 w-2.5 rounded-full border-[3px] border-white bg-[#2563EB] md:left-[-42px] md:h-3 md:w-3" />
                   <div className="mb-1.5 font-bold text-[#2563EB] text-sm md:mb-2 md:text-base">
                     {item.date}
@@ -148,7 +151,7 @@ export default function About() {
                   <div className="text-gray-600 text-xs md:text-sm">
                     <strong>{item.company}</strong>
                     {item.description.map((desc, i) => (
-                      <div key={i}>{desc}</div>
+                      <div key={i.toString()}>{desc}</div>
                     ))}
                   </div>
                 </div>

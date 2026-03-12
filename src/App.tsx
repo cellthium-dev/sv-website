@@ -1,12 +1,12 @@
-import About from "./components/About";
-import BookingSystem from "./components/BookingSystem";
-import ContactForm from "./components/ContactForm";
-import CookieBanner from "./components/CookieBanner";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import KnowledgeBase from "./components/KnowledgeBase";
-import Services from "./components/Services";
+import About from "./components/about";
+import BookingSystem from "./components/booking-system";
+import ContactForm from "./components/contact-form";
+import CookieBanner from "./components/cookie-banner";
+import Footer from "./components/footer";
+import Header from "./components/header";
+import Hero from "./components/hero";
+import KnowledgeBase from "./components/knowledge-base";
+import Services from "./components/services";
 
 function App() {
   return (
