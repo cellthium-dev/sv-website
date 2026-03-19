@@ -14,8 +14,139 @@ function RouteComponent() {
         <h1 className="mb-2 font-bold text-3xl">Datenschutzerklärung</h1>
         <p className="mb-10 text-gray-500 text-sm">Stand: 13.03.2026</p>
 
+        <nav className="mb-10 rounded-lg border border-gray-200 bg-gray-50 p-6">
+          <h2 className="mb-4 font-semibold text-lg">Inhaltsverzeichnis</h2>
+          <ol className="list-inside list-decimal space-y-1 text-sm">
+            <li>
+              <a
+                className="text-[#2563EB] hover:underline"
+                href="#verantwortlicher"
+              >
+                Verantwortlicher und Kontakt
+              </a>
+            </li>
+            <li>
+              <a
+                className="text-[#2563EB] hover:underline"
+                href="#geltungsbereich"
+              >
+                Geltungsbereich und Überblick
+              </a>
+            </li>
+            <li>
+              <a
+                className="text-[#2563EB] hover:underline"
+                href="#rechtsgrundlagen"
+              >
+                Rechtsgrundlagen der Datenverarbeitung
+              </a>
+            </li>
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#website">
+                Datenverarbeitung beim Besuch dieser Website
+              </a>
+            </li>
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#cookies">
+                Cookies und vergleichbare Technologien
+              </a>
+            </li>
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#kontakt">
+                Kontaktaufnahme und Kommunikation
+              </a>
+            </li>
+            <li>
+              <a
+                className="text-[#2563EB] hover:underline"
+                href="#sachverstaendigen"
+              >
+                Datenverarbeitung im Rahmen der Sachverständigentätigkeit
+              </a>
+            </li>
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#caleu">
+                Online-Terminbuchung (Cal.eu)
+              </a>
+            </li>
+            <li>
+              <a
+                className="text-[#2563EB] hover:underline"
+                href="#drittdienste"
+              >
+                Eingebettete Inhalte und Drittdienste
+              </a>
+            </li>
+            <li>
+              <a
+                className="text-[#2563EB] hover:underline"
+                href="#videokonferenzen"
+              >
+                Videokonferenzen und Online-Beratung
+              </a>
+            </li>
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#zahlung">
+                Zahlungsabwicklung
+              </a>
+            </li>
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#empfaenger">
+                Empfänger und Auftragsverarbeiter im Überblick
+              </a>
+            </li>
+            <li>
+              <a
+                className="text-[#2563EB] hover:underline"
+                href="#drittlaender"
+              >
+                Datenübermittlung in Drittländer
+              </a>
+            </li>
+            <li>
+              <a
+                className="text-[#2563EB] hover:underline"
+                href="#speicherdauer"
+              >
+                Speicherdauer im Überblick
+              </a>
+            </li>
+            <li>
+              <a
+                className="text-[#2563EB] hover:underline"
+                href="#betroffenenrechte"
+              >
+                Ihre Rechte als betroffene Person
+              </a>
+            </li>
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#pflicht">
+                Pflicht zur Bereitstellung personenbezogener Daten
+              </a>
+            </li>
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#profiling">
+                Automatisierte Entscheidungsfindung und Profiling
+              </a>
+            </li>
+            <li>
+              <a
+                className="text-[#2563EB] hover:underline"
+                href="#datensicherheit"
+              >
+                Datensicherheit
+              </a>
+            </li>
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#aktualitaet">
+                Aktualität und Änderungen dieser Datenschutzerklärung
+              </a>
+            </li>
+          </ol>
+        </nav>
+
         {/* 1 */}
-        <section className="mb-10">
+        <section className="mb-10" id="verantwortlicher">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             1. Verantwortlicher und Kontakt
           </h2>
@@ -50,7 +181,7 @@ function RouteComponent() {
         </section>
 
         {/* 2 */}
-        <section className="mb-10">
+        <section className="mb-10" id="geltungsbereich">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             2. Geltungsbereich und Überblick
           </h2>
@@ -66,7 +197,7 @@ function RouteComponent() {
         </section>
 
         {/* 3 */}
-        <section className="mb-10">
+        <section className="mb-10" id="rechtsgrundlagen">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             3. Rechtsgrundlagen der Datenverarbeitung
           </h2>
@@ -98,7 +229,7 @@ function RouteComponent() {
         </section>
 
         {/* 4 */}
-        <section className="mb-10">
+        <section className="mb-10" id="website">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             4. Datenverarbeitung beim Besuch dieser Website
           </h2>
@@ -139,7 +270,7 @@ function RouteComponent() {
         </section>
 
         {/* 5 */}
-        <section className="mb-10">
+        <section className="mb-10" id="cookies">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             5. Cookies und vergleichbare Technologien
           </h2>
@@ -181,7 +312,7 @@ function RouteComponent() {
         </section>
 
         {/* 6 */}
-        <section className="mb-10">
+        <section className="mb-10" id="kontakt">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             6. Kontaktaufnahme und Kommunikation
           </h2>
@@ -224,7 +355,7 @@ function RouteComponent() {
         </section>
 
         {/* 7 */}
-        <section className="mb-10">
+        <section className="mb-10" id="sachverstaendigen">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             7. Datenverarbeitung im Rahmen der Sachverständigentätigkeit
           </h2>
@@ -316,7 +447,7 @@ function RouteComponent() {
         </section>
 
         {/* 8 */}
-        <section className="mb-10">
+        <section className="mb-10" id="caleu">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             8. Online-Terminbuchung (Cal.eu)
           </h2>
@@ -350,7 +481,7 @@ function RouteComponent() {
         </section>
 
         {/* 9 */}
-        <section className="mb-10">
+        <section className="mb-10" id="drittdienste">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             9. Eingebettete Inhalte und Drittdienste
           </h2>
@@ -373,7 +504,7 @@ function RouteComponent() {
         </section>
 
         {/* 10 */}
-        <section className="mb-10">
+        <section className="mb-10" id="videokonferenzen">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             10. Videokonferenzen und Online-Beratung
           </h2>
@@ -389,7 +520,7 @@ function RouteComponent() {
         </section>
 
         {/* 11 */}
-        <section className="mb-10">
+        <section className="mb-10" id="zahlung">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             11. Zahlungsabwicklung
           </h2>
@@ -402,7 +533,7 @@ function RouteComponent() {
         </section>
 
         {/* 12 */}
-        <section className="mb-10">
+        <section className="mb-10" id="empfaenger">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             12. Empfänger und Auftragsverarbeiter im Überblick
           </h2>
@@ -427,7 +558,7 @@ function RouteComponent() {
         </section>
 
         {/* 13 */}
-        <section className="mb-10">
+        <section className="mb-10" id="drittlaender">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             13. Datenübermittlung in Drittländer
           </h2>
@@ -441,7 +572,7 @@ function RouteComponent() {
         </section>
 
         {/* 14 */}
-        <section className="mb-10">
+        <section className="mb-10" id="speicherdauer">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             14. Speicherdauer im Überblick
           </h2>
@@ -471,7 +602,7 @@ function RouteComponent() {
         </section>
 
         {/* 15 */}
-        <section className="mb-10">
+        <section className="mb-10" id="betroffenenrechte">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             15. Ihre Rechte als betroffene Person
           </h2>
@@ -539,7 +670,7 @@ function RouteComponent() {
         </section>
 
         {/* 16 */}
-        <section className="mb-10">
+        <section className="mb-10" id="pflicht">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             16. Pflicht zur Bereitstellung personenbezogener Daten
           </h2>
@@ -554,7 +685,7 @@ function RouteComponent() {
         </section>
 
         {/* 17 */}
-        <section className="mb-10">
+        <section className="mb-10" id="profiling">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             17. Automatisierte Entscheidungsfindung und Profiling
           </h2>
@@ -566,7 +697,7 @@ function RouteComponent() {
         </section>
 
         {/* 18 */}
-        <section className="mb-10">
+        <section className="mb-10" id="datensicherheit">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             18. Datensicherheit
           </h2>
@@ -597,7 +728,7 @@ function RouteComponent() {
         </section>
 
         {/* 19 */}
-        <section className="mb-10">
+        <section className="mb-10" id="aktualitaet">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             19. Aktualität und Änderungen dieser Datenschutzerklärung
           </h2>

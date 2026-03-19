@@ -22,8 +22,79 @@ function RouteComponent() {
         </p>
         <p className="mb-10 text-gray-500 text-sm">Stand: 12.03.2025</p>
 
+        <nav className="mb-10 rounded-lg border border-gray-200 bg-gray-50 p-6">
+          <h2 className="mb-4 font-semibold text-lg">Inhaltsverzeichnis</h2>
+          <ol className="list-inside list-decimal space-y-1 text-sm">
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#par1">
+                § 1 Geltungsbereich und Vertragspartner
+              </a>
+            </li>
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#par2">
+                § 2 Vertragsgegenstand und Art der Leistung
+              </a>
+            </li>
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#par3">
+                § 3 Vertragsschluss
+              </a>
+            </li>
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#par4">
+                § 4 Mitwirkungspflichten des Auftraggebers
+              </a>
+            </li>
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#par5">
+                § 5 Termine und Fristen
+              </a>
+            </li>
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#par6">
+                § 6 Vergütung und Zahlungsbedingungen
+              </a>
+            </li>
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#par7">
+                § 7 Gutachten, Berichte und Urheberrecht
+              </a>
+            </li>
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#par8">
+                § 8 Gewährleistung und Haftung
+              </a>
+            </li>
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#par9">
+                § 9 Vertraulichkeit und Datenschutz
+              </a>
+            </li>
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#par10">
+                § 10 Widerrufsrecht für Verbraucher
+              </a>
+            </li>
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#par11">
+                § 11 Eigentumsvorbehalt und Zurückbehaltungsrecht
+              </a>
+            </li>
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#par12">
+                § 12 Vertragslaufzeit und Kündigung
+              </a>
+            </li>
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#par13">
+                § 13 Schlussbestimmungen
+              </a>
+            </li>
+          </ol>
+        </nav>
+
         {/* §1 */}
-        <section className="mb-10">
+        <section className="mb-10" id="par1">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             § 1 Geltungsbereich und Vertragspartner
           </h2>
@@ -87,7 +158,7 @@ function RouteComponent() {
         </section>
 
         {/* §2 */}
-        <section className="mb-10">
+        <section className="mb-10" id="par2">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             § 2 Vertragsgegenstand und Art der Leistung
           </h2>
@@ -139,7 +210,7 @@ function RouteComponent() {
         </section>
 
         {/* §3 */}
-        <section className="mb-10">
+        <section className="mb-10" id="par3">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             § 3 Vertragsschluss
           </h2>
@@ -201,7 +272,7 @@ function RouteComponent() {
         </section>
 
         {/* §4 */}
-        <section className="mb-10">
+        <section className="mb-10" id="par4">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             § 4 Mitwirkungspflichten des Auftraggebers
           </h2>
@@ -267,7 +338,7 @@ function RouteComponent() {
         </section>
 
         {/* §5 */}
-        <section className="mb-10">
+        <section className="mb-10" id="par5">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             § 5 Termine und Fristen
           </h2>
@@ -345,7 +416,7 @@ function RouteComponent() {
         </section>
 
         {/* §6 */}
-        <section className="mb-10">
+        <section className="mb-10" id="par6">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             § 6 Vergütung und Zahlungsbedingungen
           </h2>
@@ -540,7 +611,7 @@ function RouteComponent() {
         </section>
 
         {/* §7 */}
-        <section className="mb-10">
+        <section className="mb-10" id="par7">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             § 7 Gutachten, Berichte und Urheberrecht
           </h2>
@@ -600,7 +671,7 @@ function RouteComponent() {
         </section>
 
         {/* §8 */}
-        <section className="mb-10">
+        <section className="mb-10" id="par8">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             § 8 Gewährleistung und Haftung
           </h2>
@@ -670,7 +741,7 @@ function RouteComponent() {
         </section>
 
         {/* §9 */}
-        <section className="mb-10">
+        <section className="mb-10" id="par9">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             § 9 Vertraulichkeit und Datenschutz
           </h2>
@@ -726,7 +797,7 @@ function RouteComponent() {
         </section>
 
         {/* §10 */}
-        <section className="mb-10">
+        <section className="mb-10" id="par10">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             § 10 Widerrufsrecht für Verbraucher
           </h2>
@@ -760,7 +831,7 @@ function RouteComponent() {
         </section>
 
         {/* §11 */}
-        <section className="mb-10">
+        <section className="mb-10" id="par11">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             § 11 Eigentumsvorbehalt und Zurückbehaltungsrecht
           </h2>
@@ -782,7 +853,7 @@ function RouteComponent() {
         </section>
 
         {/* §12 */}
-        <section className="mb-10">
+        <section className="mb-10" id="par12">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             § 12 Vertragslaufzeit und Kündigung
           </h2>
@@ -835,7 +906,7 @@ function RouteComponent() {
         </section>
 
         {/* §13 */}
-        <section className="mb-10">
+        <section className="mb-10" id="par13">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             § 13 Schlussbestimmungen
           </h2>

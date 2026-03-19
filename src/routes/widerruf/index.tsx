@@ -16,7 +16,48 @@ function RouteComponent() {
         </h1>
         <p className="mb-10 text-gray-500 text-sm">Stand: 12.03.2026</p>
 
-        <section className="mb-10">
+        <nav className="mb-10 rounded-lg border border-gray-200 bg-gray-50 p-6">
+          <h2 className="mb-4 font-semibold text-lg">Inhaltsverzeichnis</h2>
+          <ol className="list-inside list-decimal space-y-1 text-sm">
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#geltung">
+                Für wen gilt das Widerrufsrecht?
+              </a>
+            </li>
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#belehrung">
+                Widerrufsbelehrung
+              </a>
+            </li>
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#wertersatz">
+                Erläuterungen zum Wertersatz bei vorzeitigem Leistungsbeginn
+              </a>
+            </li>
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#formular">
+                Muster-Widerrufsformular
+              </a>
+            </li>
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#verhaeltnis">
+                Verhältnis zu unseren AGB
+              </a>
+            </li>
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#kontakt">
+                Kontakt bei Fragen zum Widerrufsrecht
+              </a>
+            </li>
+            <li>
+              <a className="text-[#2563EB] hover:underline" href="#grundlagen">
+                Rechtliche Grundlagen
+              </a>
+            </li>
+          </ol>
+        </nav>
+
+        <section className="mb-10" id="geltung">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             1. Für wen gilt das Widerrufsrecht?
           </h2>
@@ -55,7 +96,7 @@ function RouteComponent() {
           </p>
         </section>
 
-        <section className="mb-10">
+        <section className="mb-10" id="belehrung">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             2. Widerrufsbelehrung
           </h2>
@@ -134,7 +175,7 @@ function RouteComponent() {
           </div>
         </section>
 
-        <section className="mb-10">
+        <section className="mb-10" id="wertersatz">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             3. Erläuterungen zum Wertersatz bei vorzeitigem Leistungsbeginn
           </h2>
@@ -204,7 +245,7 @@ function RouteComponent() {
           </p>
         </section>
 
-        <section className="mb-10">
+        <section className="mb-10" id="formular">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             4. Muster-Widerrufsformular
           </h2>
@@ -247,7 +288,7 @@ function RouteComponent() {
           </div>
         </section>
 
-        <section className="mb-10">
+        <section className="mb-10" id="verhaeltnis">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             5. Verhältnis zu unseren AGB
           </h2>
@@ -263,7 +304,7 @@ function RouteComponent() {
           </p>
         </section>
 
-        <section className="mb-10">
+        <section className="mb-10" id="kontakt">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             6. Kontakt bei Fragen zum Widerrufsrecht
           </h2>
@@ -286,7 +327,7 @@ function RouteComponent() {
           </address>
         </section>
 
-        <section className="mb-10">
+        <section className="mb-10" id="grundlagen">
           <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
             7. Rechtliche Grundlagen
           </h2>
