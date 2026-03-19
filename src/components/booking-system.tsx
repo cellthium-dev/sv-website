@@ -1,14 +1,4 @@
-import Cal, { getCalApi } from "@calcom/embed-react";
-import React from "react";
-
 export default function BookingSystem() {
-  React.useEffect(() => {
-    (async () => {
-      const cal = await getCalApi({ namespace: "30min" });
-      cal("ui", { hideEventTypeDetails: false, layout: "month_view" });
-    })();
-  }, []);
-
   return (
     <section className="py-16" id="terminbuchung">
       <div className="container mx-auto px-5">
@@ -20,16 +10,17 @@ export default function BookingSystem() {
           Online-Beratung
         </p>
 
-        <Cal
-          calLink="felixarjuna/30min"
-          config={{
-            layout: "month_view",
-            useSlotsViewOnSmallScreen: "true",
-            theme: "light",
-          }}
-          namespace="30min"
-          style={{ width: "100%", height: "100%", overflow: "scroll" }}
-        />
+        <div>
+          <div
+            className="calendly-inline-widget col-span-2 h-[700px] min-w-[320px]"
+            data-url="https://www.cal.eu/sv-bauten/kostenlose-ersteinschatzung?overlayCalendar=true"
+          />
+          <script
+            async
+            src="https://assets.calendly.com/assets/external/widget.js"
+            type="text/javascript"
+          />
+        </div>
       </div>
     </section>
   );
