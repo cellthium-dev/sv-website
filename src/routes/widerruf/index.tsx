@@ -1,10 +1,59 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Copy, CopyCheck } from "lucide-react";
+import { useState } from "react";
 import Footer from "../../components/footer";
 import Header from "../../components/header";
 
 export const Route = createFileRoute("/widerruf/")({
   component: RouteComponent,
 });
+
+const WIDERRUFS_FORMULAR = `An:
+Andreas Bauten, Sachverständiger für Photovoltaikanlagen
+Banker-Feld-Straße 1, 52072 Aachen, Deutschland
+E-Mail: info@sv-bauten.de
+
+Hiermit widerrufe(n) ich/wir den von mir/uns abgeschlossenen Vertrag über die Erbringung der folgenden Dienstleistung:
+
+___________________________________
+
+Bestellt am / erhalten am: _______________
+Name des/der Verbraucher(s): _______________
+Anschrift des/der Verbraucher(s): _______________
+
+___________________________________
+Unterschrift des/der Verbraucher(s) (nur bei Mitteilung auf Papier): _______________
+Datum: _______________`;
+
+function CopyButton() {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(WIDERRUFS_FORMULAR);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <button
+      className="flex items-center gap-1.5 rounded-md border border-gray-300 bg-white px-3 py-1.5 text-gray-600 text-sm transition-colors hover:bg-gray-100"
+      onClick={handleCopy}
+      type="button"
+    >
+      {copied ? (
+        <div className="flex items-center gap-1.5 text-sm">
+          <CopyCheck className="h-4 w-4 text-green-600" />
+          <span className="text-green-600">Kopiert</span>
+        </div>
+      ) : (
+        <div className="flex items-center gap-1.5 text-sm">
+          <Copy className="h-4 w-4" />
+          <span>Kopieren</span>
+        </div>
+      )}
+    </button>
+  );
+}
 
 function RouteComponent() {
   return (
@@ -284,6 +333,12 @@ function RouteComponent() {
                 dieses Formulars ist nicht vorgeschrieben.
               </p>
               <div className="rounded-lg border border-gray-200 bg-gray-50 p-6">
+                <div className="mb-4 flex items-center justify-between">
+                  <span className="font-medium text-gray-700 text-sm">
+                    Vorlage
+                  </span>
+                  <CopyButton />
+                </div>
                 <p className="mb-4">
                   <strong>An:</strong>
                   <br />
