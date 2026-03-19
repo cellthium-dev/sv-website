@@ -15,7 +15,7 @@ function RouteComponent() {
         <p className="mb-10 text-gray-500 text-sm">Stand: 13.03.2026</p>
 
         <div className="relative lg:flex lg:items-start lg:gap-10">
-          <aside className="sticky top-24 mb-10 lg:order-2 lg:mb-0 lg:w-64 lg:shrink-0">
+          <aside className="top-24 mb-10 lg:sticky lg:order-2 lg:mb-0 lg:w-64 lg:shrink-0">
             <nav className="rounded-lg border border-gray-200 bg-gray-50 p-4 lg:sticky lg:top-20 lg:max-h-[calc(100vh-5rem)] lg:overflow-y-auto">
               <h2 className="mb-3 font-semibold text-gray-500 text-sm uppercase tracking-wide">
                 Inhaltsverzeichnis
