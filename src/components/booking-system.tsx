@@ -12,7 +12,7 @@ export default function BookingSystem() {
 
         <div>
           <div
-            className="calendly-inline-widget col-span-2 h-[700px] min-w-[320px]"
+            className="calendly-inline-widget col-span-2 h-[750px] min-w-[320px]"
             data-url="https://www.cal.eu/sv-bauten/kostenlose-ersteinschatzung?overlayCalendar=true"
           />
           <script
