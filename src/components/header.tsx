@@ -18,10 +18,12 @@ export default function Header() {
     href: string
   ) => {
     e.preventDefault();
+    setIsMenuOpen(false);
     const target = document.querySelector(href);
     if (target) {
       target.scrollIntoView({ behavior: "smooth", block: "start" });
-      setIsMenuOpen(false);
+    } else {
+      window.location.href = `/${href}`;
     }
   };
 
@@ -64,7 +66,7 @@ export default function Header() {
             ))}
             <a
               className="hover:-translate-y-0.5 rounded-lg bg-[#2563EB] px-6 py-3 font-semibold text-white transition-all hover:bg-[#004C99] hover:shadow-lg"
-              href="#kontakt"
+              href="/#kontakt"
               onClick={(e) => handleNavClick(e, "#kontakt")}
             >
               Kontakt
