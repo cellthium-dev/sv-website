@@ -28,7 +28,7 @@ function RouteComponent() {
               <h2 className="mb-3 font-semibold text-gray-500 text-sm uppercase tracking-wide">
                 Inhaltsverzeichnis
               </h2>
-              <ol className="list-decimal space-y-1 pl-4 text-sm">
+              <ul className="space-y-1 text-sm">
                 <li>
                   <a className="text-[#2563EB] hover:underline" href="#par1">
                     § 1 Geltungsbereich und Vertragspartner
@@ -94,7 +94,7 @@ function RouteComponent() {
                     § 13 Schlussbestimmungen
                   </a>
                 </li>
-              </ol>
+              </ul>
             </nav>
           </aside>
           <div className="min-w-0 flex-1 lg:order-1">

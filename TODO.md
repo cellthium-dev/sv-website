@@ -4,6 +4,8 @@
 [x] add table of contents for easier navigation
 [x] fix footer navigation
 [x] fix header navigation
+[x] delete numeration from AGB page
+[ ] fix cal.eu embedded link
 [ ] add easier copy at widderuf page
 [ ] clean up style with shadcn/ui
 [ ] use themes and and dark mode
