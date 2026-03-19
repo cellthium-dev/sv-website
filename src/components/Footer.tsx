@@ -144,7 +144,7 @@ export default function Footer() {
               <li>
                 <a
                   className="hover text-gray-300 transition-colors"
-                  href="#widerruf"
+                  href="/widerruf"
                 >
                   Widerrufsrecht
                 </a>

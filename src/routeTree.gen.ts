@@ -10,11 +10,19 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as WiderrufIndexRouteImport } from './routes/widerruf/index'
 import { Route as ImpressumIndexRouteImport } from './routes/impressum/index'
+import { Route as DatenschutzIndexRouteImport } from './routes/datenschutz/index'
+import { Route as AgbIndexRouteImport } from './routes/agb/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WiderrufIndexRoute = WiderrufIndexRouteImport.update({
+  id: '/widerruf/',
+  path: '/widerruf/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ImpressumIndexRoute = ImpressumIndexRouteImport.update({
@@ -22,31 +30,59 @@ const ImpressumIndexRoute = ImpressumIndexRouteImport.update({
   path: '/impressum/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DatenschutzIndexRoute = DatenschutzIndexRouteImport.update({
+  id: '/datenschutz/',
+  path: '/datenschutz/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgbIndexRoute = AgbIndexRouteImport.update({
+  id: '/agb/',
+  path: '/agb/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/agb/': typeof AgbIndexRoute
+  '/datenschutz/': typeof DatenschutzIndexRoute
   '/impressum/': typeof ImpressumIndexRoute
+  '/widerruf/': typeof WiderrufIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/agb': typeof AgbIndexRoute
+  '/datenschutz': typeof DatenschutzIndexRoute
   '/impressum': typeof ImpressumIndexRoute
+  '/widerruf': typeof WiderrufIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/agb/': typeof AgbIndexRoute
+  '/datenschutz/': typeof DatenschutzIndexRoute
   '/impressum/': typeof ImpressumIndexRoute
+  '/widerruf/': typeof WiderrufIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/impressum/'
+  fullPaths: '/' | '/agb/' | '/datenschutz/' | '/impressum/' | '/widerruf/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/impressum'
-  id: '__root__' | '/' | '/impressum/'
+  to: '/' | '/agb' | '/datenschutz' | '/impressum' | '/widerruf'
+  id:
+    | '__root__'
+    | '/'
+    | '/agb/'
+    | '/datenschutz/'
+    | '/impressum/'
+    | '/widerruf/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AgbIndexRoute: typeof AgbIndexRoute
+  DatenschutzIndexRoute: typeof DatenschutzIndexRoute
   ImpressumIndexRoute: typeof ImpressumIndexRoute
+  WiderrufIndexRoute: typeof WiderrufIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +94,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/widerruf/': {
+      id: '/widerruf/'
+      path: '/widerruf'
+      fullPath: '/widerruf/'
+      preLoaderRoute: typeof WiderrufIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/impressum/': {
       id: '/impressum/'
       path: '/impressum'
@@ -65,12 +108,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ImpressumIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/datenschutz/': {
+      id: '/datenschutz/'
+      path: '/datenschutz'
+      fullPath: '/datenschutz/'
+      preLoaderRoute: typeof DatenschutzIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agb/': {
+      id: '/agb/'
+      path: '/agb'
+      fullPath: '/agb/'
+      preLoaderRoute: typeof AgbIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AgbIndexRoute: AgbIndexRoute,
+  DatenschutzIndexRoute: DatenschutzIndexRoute,
   ImpressumIndexRoute: ImpressumIndexRoute,
+  WiderrufIndexRoute: WiderrufIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
