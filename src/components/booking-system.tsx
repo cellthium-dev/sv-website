@@ -14,6 +14,7 @@ export default function BookingSystem() {
           <div
             className="calendly-inline-widget col-span-2 h-[750px] min-w-[320px]"
             data-url="https://www.cal.eu/sv-bauten/kostenlose-ersteinschatzung?overlayCalendar=true"
+            style={{ colorScheme: "light" }}
           />
           <script
             async
