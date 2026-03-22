@@ -1,15 +1,3 @@
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { siteConfig } from "@/config/site";
-import { cn } from "@/lib/utils";
 import {
   ArrowRightIcon,
   CheckIcon,
@@ -23,6 +11,18 @@ import {
   TrendingUpIcon,
   WrenchIcon,
 } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
 
 const SERVICE_ICONS: Record<string, LucideIcon> = {
   "clipboard-list": ClipboardListIcon,
@@ -74,9 +74,9 @@ export default function Services() {
               key={index}
             >
               {service.highlight && (
-                <div className="-top-3 absolute right-4">
-                  <Badge className="bg-[var(--solar)] px-3 py-1 font-semibold text-[var(--solar-foreground)]">
-                    <StarIcon className="mr-1 size-3" />
+                <div className="absolute top-3 right-4">
+                  <Badge className="bg-solar px-3 py-1 font-semibold text-solar-foreground brightness-110">
+                    <StarIcon className="mr-1 size-3 fill-solar-foreground" />
                     Empfohlen
                   </Badge>
                 </div>

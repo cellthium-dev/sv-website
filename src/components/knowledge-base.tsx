@@ -124,7 +124,7 @@ export default function KnowledgeBase() {
         </div>
 
         {/* Search */}
-        <div className="mb-8 flex max-w-xl gap-2">
+        <div className="mb-8 flex max-w-xl items-center gap-2">
           <div className="relative flex-1">
             <SearchIcon className="-translate-y-1/2 pointer-events-none absolute top-1/2 left-3 size-4 text-muted-foreground" />
             <Input

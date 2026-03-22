@@ -147,7 +147,7 @@ export default function ContactForm() {
 
         <div className="grid gap-8 lg:grid-cols-[1fr_320px]">
           {/* Form card */}
-          <div className="rounded-2xl border border-border bg-card p-6 shadow-sm md:p-8">
+          <div className="rounded-2xl border border-border bg-card p-6 md:p-8">
             {submitted ? (
               /* Success state */
               <div className="flex flex-col items-center justify-center gap-4 py-16 text-center">
@@ -647,7 +647,7 @@ export default function ContactForm() {
 
           {/* Sidebar: quick contact */}
           <div className="flex flex-col gap-4">
-            <div className="flex flex-col items-start gap-3 rounded-2xl border border-border bg-card p-5">
+            <div className="flex flex-1 flex-col items-start gap-3 rounded-2xl border border-border bg-card p-5">
               <div className="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
                 <MailIcon className="size-5" />
               </div>
@@ -670,7 +670,7 @@ export default function ContactForm() {
               </div>
             </div>
 
-            <div className="flex flex-col items-start gap-3 rounded-2xl border border-border bg-card p-5">
+            <div className="flex flex-1 flex-col items-start gap-3 rounded-2xl border border-border bg-card p-5">
               <div className="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
                 <MapPinIcon className="size-5" />
               </div>

@@ -132,10 +132,7 @@ function RouteComponent() {
                   </a>
                 </li>
                 <li>
-                  <a
-                    className="text-primary hover:underline"
-                    href="#profiling"
-                  >
+                  <a className="text-primary hover:underline" href="#profiling">
                     Automatisierte Entscheidungsfindung
                   </a>
                 </li>

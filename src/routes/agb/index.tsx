@@ -802,10 +802,7 @@ function RouteComponent() {
                 Die Verarbeitung personenbezogener Daten erfolgt ausschließlich
                 nach Maßgabe der DSGVO und des BDSG. Die vollständigen
                 Informationen finden Sie in unserer{" "}
-                <a
-                  className="text-primary hover:underline"
-                  href="/datenschutz"
-                >
+                <a className="text-primary hover:underline" href="/datenschutz">
                   Datenschutzerklärung
                 </a>
                 .

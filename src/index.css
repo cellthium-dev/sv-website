@@ -98,7 +98,7 @@
 
   /* Brand-specific tokens */
   --solar: oklch(0.73 0.158 65);
-  --solar-foreground: oklch(0.18 0.02 65);
+  --solar-foreground: oklch(0.37 0.08672 57.708);
 
   --dark-surface: oklch(0.145 0.022 265);
   --dark-surface-foreground: oklch(0.97 0.005 265);

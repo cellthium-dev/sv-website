@@ -78,10 +78,7 @@ function RouteComponent() {
                   </a>
                 </li>
                 <li>
-                  <a
-                    className="text-primary hover:underline"
-                    href="#belehrung"
-                  >
+                  <a className="text-primary hover:underline" href="#belehrung">
                     Widerrufsbelehrung
                   </a>
                 </li>
@@ -94,10 +91,7 @@ function RouteComponent() {
                   </a>
                 </li>
                 <li>
-                  <a
-                    className="text-primary hover:underline"
-                    href="#formular"
-                  >
+                  <a className="text-primary hover:underline" href="#formular">
                     Muster-Widerrufsformular
                   </a>
                 </li>

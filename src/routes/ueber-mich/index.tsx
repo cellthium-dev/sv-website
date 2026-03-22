@@ -268,7 +268,7 @@ function UeberMich() {
                   <h3 className="mb-3 font-semibold text-primary text-xl leading-snug">
                     {card.title}
                   </h3>
-                  <p className="text-muted-foreground text-[15px] leading-[1.7]">
+                  <p className="text-[15px] text-muted-foreground leading-[1.7]">
                     {card.desc}
                   </p>
                 </div>
@@ -291,7 +291,7 @@ function UeberMich() {
                   className="relative mb-12 translate-y-6 animate-on-scroll opacity-0 transition-all duration-[600ms] ease-out last:mb-0"
                   key={item.title}
                 >
-                  <div className="-left-[47px] absolute top-0 size-3 rounded-full border-background border-[3px] bg-primary ring-1 ring-primary" />
+                  <div className="-left-[47px] absolute top-0 size-3 rounded-full border-[3px] border-background bg-primary ring-1 ring-primary" />
                   <div className="rounded-xl border border-border bg-white p-7 shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
                     <span className="mb-1.5 block font-semibold text-primary text-sm tracking-[0.3px]">
                       {item.date}
@@ -299,13 +299,13 @@ function UeberMich() {
                     <h3 className="mb-1 font-semibold text-foreground text-xl">
                       {item.title}
                     </h3>
-                    <p className="mb-3 text-muted-foreground text-[15px] italic">
+                    <p className="mb-3 text-[15px] text-muted-foreground italic">
                       {item.subtitle}
                     </p>
                     <ul className="space-y-1.5">
                       {item.items.map((li) => (
                         <li
-                          className="relative pl-5 text-muted-foreground text-[15px] leading-[1.6]"
+                          className="relative pl-5 text-[15px] text-muted-foreground leading-[1.6]"
                           key={li}
                         >
                           <span className="absolute top-[10px] left-0 block h-1.5 w-1.5 rounded-full bg-primary" />
@@ -330,7 +330,7 @@ function UeberMich() {
             <h2 className="mb-2 translate-y-6 animate-on-scroll font-semibold text-3xl text-white leading-snug opacity-0 transition-all duration-[600ms] ease-out">
               Vollständige Elektrifizierung eines BMW 3 (Baujahr 1978)
             </h2>
-            <p className="mb-6 translate-y-6 animate-on-scroll text-muted-foreground text-lg opacity-0 transition-all duration-[600ms] ease-out">
+            <p className="mb-6 translate-y-6 animate-on-scroll text-lg text-muted-foreground opacity-0 transition-all duration-[600ms] ease-out">
               Privates Ingenieursprojekt | 2020–2023 | Mit TÜV-EBE-Abnahme und
               Straßenzulassung
             </p>
@@ -357,7 +357,7 @@ function UeberMich() {
                     "BMS-Auslegung, Parametrierung, Kalibrierung und Validierung (inkl. Bluetooth-Monitoring)",
                   ].map((li) => (
                     <li
-                      className="relative pl-5 text-muted-foreground text-[15px] leading-[1.6]"
+                      className="relative pl-5 text-[15px] text-muted-foreground leading-[1.6]"
                       key={li}
                     >
                       <span className="absolute top-[10px] left-0 block h-1.5 w-1.5 rounded-full bg-[var(--solar)]" />
@@ -376,7 +376,7 @@ function UeberMich() {
                     "Erfolgreiche TÜV-EBE-Abnahme – Nachweis höchster System-, Sicherheits- und Integrationskompetenz",
                   ].map((li) => (
                     <li
-                      className="relative pl-5 text-muted-foreground text-[15px] leading-[1.6]"
+                      className="relative pl-5 text-[15px] text-muted-foreground leading-[1.6]"
                       key={li}
                     >
                       <span className="absolute top-[10px] left-0 block h-1.5 w-1.5 rounded-full bg-[var(--solar)]" />
@@ -441,7 +441,7 @@ function UeberMich() {
                       src={cert.img}
                     />
                   </div>
-                  <h3 className="mb-2.5 flex min-h-[44px] items-center justify-center font-semibold text-primary text-[17px] leading-snug">
+                  <h3 className="mb-2.5 flex min-h-[44px] items-center justify-center font-semibold text-[17px] text-primary leading-snug">
                     {cert.title}
                   </h3>
                   <p className="text-muted-foreground text-sm leading-[1.6]">
@@ -499,7 +499,7 @@ function UeberMich() {
                     <ul className="space-y-2">
                       {group.items.map((li) => (
                         <li
-                          className="relative pl-5 text-muted-foreground text-[15px] leading-[1.6]"
+                          className="relative pl-5 text-[15px] text-muted-foreground leading-[1.6]"
                           key={li}
                         >
                           <span className="absolute top-[10px] left-0 block h-1.5 w-1.5 rounded-full bg-primary" />
@@ -543,7 +543,7 @@ function UeberMich() {
                     <ul className="space-y-2">
                       {group.items.map((li) => (
                         <li
-                          className="relative pl-5 text-muted-foreground text-[15px] leading-[1.6]"
+                          className="relative pl-5 text-[15px] text-muted-foreground leading-[1.6]"
                           key={li}
                         >
                           <span className="absolute top-[10px] left-0 block h-1.5 w-1.5 rounded-full bg-primary" />

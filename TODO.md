@@ -16,5 +16,9 @@
 use frontend + shadcn ui skills for the agent
 [x] replace windows icons with react lib icons
 [x] unify and standardized primary color
+[x] fixing style
+[ ] handle contact form and online termin buchung
+[ ] article for the website
+[ ] leistungsübersicht pdf
 [ ] create a system design
 [ ] use themes and and dark mode
