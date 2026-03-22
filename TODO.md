@@ -9,6 +9,7 @@
 [x] fix cal.eu with light theme
 [x] update about me page
 [x] update favicon and title for the website
+[x] fix scroll spacing in the homepage
 [ ] fix cal.eu embedded link
 [ ] use frontend + shadcn ui skills for the agent
 [ ] clean up style with shadcn/ui

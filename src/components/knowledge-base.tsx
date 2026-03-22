@@ -99,7 +99,7 @@ export default function KnowledgeBase() {
   };
 
   return (
-    <section className="py-16" id="wissen">
+    <section className="scroll-mt-24 py-16" id="wissen">
       <div className="container mx-auto px-5">
         <h2 className="mb-4 text-center font-bold text-4xl">Wissensbereich</h2>
         <p className="mb-12 text-center text-gray-600 text-lg">

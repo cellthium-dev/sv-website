@@ -133,7 +133,7 @@ export default function ContactForm() {
   };
 
   return (
-    <section className="bg-gray-50 py-16" id="kontakt">
+    <section className="scroll-mt-24 bg-gray-50 py-16" id="kontakt">
       <div className="container mx-auto px-5">
         <h2 className="mb-4 text-center font-bold text-4xl">
           Kontakt & Terminbuchung

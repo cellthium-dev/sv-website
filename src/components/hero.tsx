@@ -20,7 +20,10 @@ export default function Hero() {
   };
 
   return (
-    <section className="bg-[#0F172A] py-16 text-center text-white" id="home">
+    <section
+      className="scroll-mt-24 bg-[#0F172A] py-16 text-center text-white"
+      id="home"
+    >
       <div className="container mx-auto px-5">
         <h1 className="mb-6 font-bold text-3xl leading-tight sm:text-4xl md:mb-8 md:text-5xl lg:text-6xl">
           Unabhängige Sachverständigen-Gutachten für Photovoltaik &

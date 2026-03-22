@@ -100,7 +100,7 @@ export default function Services() {
   };
 
   return (
-    <section className="py-16" id="leistungen">
+    <section className="scroll-mt-24 py-16" id="leistungen">
       <div className="container mx-auto px-5">
         <h2 className="mb-4 text-center font-bold text-4xl">
           Meine Leistungen
