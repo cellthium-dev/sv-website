@@ -11,7 +11,7 @@
 [x] update favicon and title for the website
 [x] fix scroll spacing in the homepage
 [x] fix cal.eu embedded link
-[ ] fix scroll to bottom on the page
+[x] fix scroll to bottom on the page
 [ ] clean up style with shadcn/ui
 use frontend + shadcn ui skills for the agent
 [ ] use themes and and dark mode
