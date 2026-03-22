@@ -1,4 +1,16 @@
+import Cal, { getCalApi } from "@calcom/embed-react";
+import React from "react";
+
 export default function BookingSystem() {
+  React.useEffect(() => {
+    (async () => {
+      const cal = await getCalApi({
+        namespace: "sv-bauten",
+      });
+      cal("ui", { hideEventTypeDetails: false, layout: "month_view" });
+    })();
+  }, []);
+
   return (
     <section className="scroll-mt-24 py-16" id="terminbuchung">
       <div className="container mx-auto px-5">
@@ -10,18 +22,13 @@ export default function BookingSystem() {
           Online-Beratung
         </p>
 
-        <div>
-          <div
-            className="calendly-inline-widget col-span-2 h-[750px] min-w-[320px]"
-            data-url="https://www.cal.eu/sv-bauten/kostenlose-ersteinschatzung?overlayCalendar=true"
-            style={{ colorScheme: "light" }}
-          />
-          <script
-            async
-            src="https://assets.calendly.com/assets/external/widget.js"
-            type="text/javascript"
-          />
-        </div>
+        <Cal
+          calLink="sv-bauten/kostenlose-ersteinschatzung"
+          calOrigin="https://cal.eu"
+          config={{ layout: "month_view", theme: "light" }}
+          namespace="sv-bauten"
+          style={{ width: "100%", height: "750px", overflow: "scroll" }}
+        />
       </div>
     </section>
   );
