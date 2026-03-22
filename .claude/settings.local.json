@@ -3,9 +3,18 @@
     "allow": [
       "Bash(mkdir:*)",
       "Bash(find \"C:\\\\Users\\\\Admin\\\\Desktop\\\\programming\\\\projects\\\\sv-website\\\\src\" -type f -name \"*.ts\" -o -name \"*.tsx\" -o -name \"*.json\" 2>/dev/null | head -30)",
-      "Bash(cd \"C:\\\\Users\\\\Admin\\\\Desktop\\\\programming\\\\projects\\\\sv-website\" && pnpm add tslib)"
+      "Bash(cd \"C:\\\\Users\\\\Admin\\\\Desktop\\\\programming\\\\projects\\\\sv-website\" && pnpm add tslib)",
+      "Bash(pnpm run:*)",
+      "WebFetch(domain:cal.eu)",
+      "WebFetch(domain:cal.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:developer.cal.com)",
+      "WebFetch(domain:raw.githubusercontent.com)"
     ],
     "deny": [],
     "ask": []
+  },
+  "enabledPlugins": {
+    "context7@claude-plugins-official": true
   }
 }
