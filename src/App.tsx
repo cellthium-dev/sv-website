@@ -1,4 +1,3 @@
-import About from "./components/about";
 import BookingSystem from "./components/booking-system";
 import ContactForm from "./components/contact-form";
 import CookieBanner from "./components/cookie-banner";
@@ -14,7 +13,6 @@ function App() {
       <Header />
       <main>
         <Hero />
-        <About />
         <Services />
         {/* <Testimonials /> */}
         <KnowledgeBase />

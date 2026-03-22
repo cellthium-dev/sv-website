@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as WiderrufIndexRouteImport } from './routes/widerruf/index'
+import { Route as UeberMichIndexRouteImport } from './routes/ueber-mich/index'
 import { Route as ImpressumIndexRouteImport } from './routes/impressum/index'
 import { Route as DatenschutzIndexRouteImport } from './routes/datenschutz/index'
 import { Route as AgbIndexRouteImport } from './routes/agb/index'
@@ -23,6 +24,11 @@ const IndexRoute = IndexRouteImport.update({
 const WiderrufIndexRoute = WiderrufIndexRouteImport.update({
   id: '/widerruf/',
   path: '/widerruf/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UeberMichIndexRoute = UeberMichIndexRouteImport.update({
+  id: '/ueber-mich/',
+  path: '/ueber-mich/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ImpressumIndexRoute = ImpressumIndexRouteImport.update({
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/agb/': typeof AgbIndexRoute
   '/datenschutz/': typeof DatenschutzIndexRoute
   '/impressum/': typeof ImpressumIndexRoute
+  '/ueber-mich/': typeof UeberMichIndexRoute
   '/widerruf/': typeof WiderrufIndexRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/agb': typeof AgbIndexRoute
   '/datenschutz': typeof DatenschutzIndexRoute
   '/impressum': typeof ImpressumIndexRoute
+  '/ueber-mich': typeof UeberMichIndexRoute
   '/widerruf': typeof WiderrufIndexRoute
 }
 export interface FileRoutesById {
@@ -61,19 +69,27 @@ export interface FileRoutesById {
   '/agb/': typeof AgbIndexRoute
   '/datenschutz/': typeof DatenschutzIndexRoute
   '/impressum/': typeof ImpressumIndexRoute
+  '/ueber-mich/': typeof UeberMichIndexRoute
   '/widerruf/': typeof WiderrufIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/agb/' | '/datenschutz/' | '/impressum/' | '/widerruf/'
+  fullPaths:
+    | '/'
+    | '/agb/'
+    | '/datenschutz/'
+    | '/impressum/'
+    | '/ueber-mich/'
+    | '/widerruf/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/agb' | '/datenschutz' | '/impressum' | '/widerruf'
+  to: '/' | '/agb' | '/datenschutz' | '/impressum' | '/ueber-mich' | '/widerruf'
   id:
     | '__root__'
     | '/'
     | '/agb/'
     | '/datenschutz/'
     | '/impressum/'
+    | '/ueber-mich/'
     | '/widerruf/'
   fileRoutesById: FileRoutesById
 }
@@ -82,6 +98,7 @@ export interface RootRouteChildren {
   AgbIndexRoute: typeof AgbIndexRoute
   DatenschutzIndexRoute: typeof DatenschutzIndexRoute
   ImpressumIndexRoute: typeof ImpressumIndexRoute
+  UeberMichIndexRoute: typeof UeberMichIndexRoute
   WiderrufIndexRoute: typeof WiderrufIndexRoute
 }
 
@@ -99,6 +116,13 @@ declare module '@tanstack/react-router' {
       path: '/widerruf'
       fullPath: '/widerruf/'
       preLoaderRoute: typeof WiderrufIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ueber-mich/': {
+      id: '/ueber-mich/'
+      path: '/ueber-mich'
+      fullPath: '/ueber-mich/'
+      preLoaderRoute: typeof UeberMichIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/impressum/': {
@@ -130,6 +154,7 @@ const rootRouteChildren: RootRouteChildren = {
   AgbIndexRoute: AgbIndexRoute,
   DatenschutzIndexRoute: DatenschutzIndexRoute,
   ImpressumIndexRoute: ImpressumIndexRoute,
+  UeberMichIndexRoute: UeberMichIndexRoute,
   WiderrufIndexRoute: WiderrufIndexRoute,
 }
 export const routeTree = rootRouteImport
