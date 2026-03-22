@@ -1,58 +1,95 @@
-import { useEffect, useState } from "react";
+import {
+  CheckIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  MailIcon,
+  MapPinIcon,
+  SendIcon,
+} from "lucide-react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
+import { Textarea } from "@/components/ui/textarea";
+import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
 import type { FormData } from "../types";
+
+const STEPS = ["Anfragetyp", "Details", "Kontaktdaten", "Bestätigung"];
+
+const REQUEST_TYPES = [
+  { value: "gutachten", label: "Technisches Gutachten" },
+  { value: "schadenanalyse", label: "Schadenanalyse" },
+  { value: "wirtschaftlichkeit", label: "Wirtschaftlichkeitsprüfung" },
+  { value: "anlagenabnahme", label: "Anlagenabnahme" },
+  { value: "beratung-installateur", label: "Beratung für Installateure" },
+  { value: "versicherung", label: "Anfrage Versicherung" },
+  { value: "online-gutachten", label: "Online-Gutachten (Express)" },
+  { value: "sonstiges", label: "Sonstige Anfrage" },
+];
+
+const CUSTOMER_TYPES = [
+  { value: "privatperson", label: "Privatperson" },
+  { value: "unternehmen", label: "Unternehmen" },
+  { value: "installateur", label: "Installateur/Fachbetrieb" },
+  { value: "versicherung", label: "Versicherung" },
+];
+
+const PREFERRED_TIMES = [
+  { value: "morning", label: "Vormittags (9–12 Uhr)" },
+  { value: "afternoon", label: "Nachmittags (12–15 Uhr)" },
+  { value: "evening", label: "Spätnachmittag (15–18 Uhr)" },
+];
+
+const EMPTY_FORM: FormData = {
+  requestType: "",
+  customerType: "",
+  description: "",
+  firstName: "",
+  lastName: "",
+  company: "",
+  email: "",
+  phone: "",
+  street: "",
+  zip: "",
+  city: "",
+  preferredTime: "",
+  privacy: false,
+  newsletter: false,
+};
+
+const getRequestTypeLabel = (v: string) =>
+  REQUEST_TYPES.find((t) => t.value === v)?.label ?? v;
+
+const getCustomerTypeLabel = (v: string) =>
+  CUSTOMER_TYPES.find((t) => t.value === v)?.label ?? v;
+
+const isCompanyType = (v: string) =>
+  v === "unternehmen" || v === "installateur";
 
 export default function ContactForm() {
   const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState<FormData>({
-    requestType: "",
-    customerType: "",
-    description: "",
-    firstName: "",
-    lastName: "",
-    company: "",
-    email: "",
-    phone: "",
-    street: "",
-    zip: "",
-    city: "",
-    preferredTime: "",
-    privacy: false,
-    newsletter: false,
-  });
+  const [formData, setFormData] = useState<FormData>(EMPTY_FORM);
+  const [submitted, setSubmitted] = useState(false);
 
-  useEffect(() => {
-    if (
-      formData.customerType === "unternehmen" ||
-      formData.customerType === "installateur"
-    ) {
-      document.getElementById("companyField")?.classList.remove("hidden");
-    } else {
-      document.getElementById("companyField")?.classList.add("hidden");
-    }
-  }, [formData.customerType]);
-
-  const handleInputChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    const { id, value, type } = e.target;
-    if (type === "checkbox") {
-      const checked = (e.target as HTMLInputElement).checked;
-      setFormData({ ...formData, [id]: checked });
-    } else {
-      setFormData({ ...formData, [id]: value });
-    }
+  const updateField = (key: keyof FormData, value: string | boolean) => {
+    setFormData((prev) => ({ ...prev, [key]: value }));
   };
 
   const validateStep = (step: number): boolean => {
-    if (step === 1) {
+    if (step === 1)
       return formData.requestType !== "" && formData.customerType !== "";
-    }
-    if (step === 2) {
-      return formData.description.trim() !== "";
-    }
-    if (step === 3) {
+    if (step === 2) return formData.description.trim() !== "";
+    if (step === 3)
       return (
         formData.firstName.trim() !== "" &&
         formData.lastName.trim() !== "" &&
@@ -60,7 +97,6 @@ export default function ContactForm() {
         formData.phone.trim() !== "" &&
         formData.privacy
       );
-    }
     return true;
   };
 
@@ -70,507 +106,589 @@ export default function ContactForm() {
       return;
     }
     if (currentStep < 4) {
-      setCurrentStep(currentStep + 1);
-      // Scroll to form
+      setCurrentStep((s) => s + 1);
       document
-        .getElementById("contactForm")
+        .getElementById("kontakt")
         ?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 
   const prevStep = () => {
-    if (currentStep > 1) {
-      setCurrentStep(currentStep - 1);
-    }
+    if (currentStep > 1) setCurrentStep((s) => s - 1);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    alert("Ihre Anfrage wurde erfolgreich gesendet!");
-    // Reset form
-    setFormData({
-      requestType: "",
-      customerType: "",
-      description: "",
-      firstName: "",
-      lastName: "",
-      company: "",
-      email: "",
-      phone: "",
-      street: "",
-      zip: "",
-      city: "",
-      preferredTime: "",
-      privacy: false,
-      newsletter: false,
-    });
+    setSubmitted(true);
+    setFormData(EMPTY_FORM);
     setCurrentStep(1);
   };
 
-  const getRequestTypeLabel = (type: string) => {
-    const labels: Record<string, string> = {
-      gutachten: "Technisches Gutachten",
-      schadenanalyse: "Schadenanalyse",
-      wirtschaftlichkeit: "Wirtschaftlichkeitsprüfung",
-      anlagenabnahme: "Anlagenabnahme",
-      "beratung-installateur": "Beratung für Installateure",
-      versicherung: "Anfrage Versicherung",
-      "online-gutachten": "Online-Gutachten (Express)",
-      sonstiges: "Sonstige Anfrage",
-    };
-    return labels[type] || type;
-  };
-
-  const getCustomerTypeLabel = (type: string) => {
-    const labels: Record<string, string> = {
-      privatperson: "Privatperson",
-      unternehmen: "Unternehmen",
-      installateur: "Installateur/Fachbetrieb",
-      versicherung: "Versicherung",
-    };
-    return labels[type] || type;
-  };
-
   return (
-    <section className="scroll-mt-24 bg-gray-50 py-16" id="kontakt">
-      <div className="container mx-auto px-5">
-        <h2 className="mb-4 text-center font-bold text-4xl">
-          Kontakt & Terminbuchung
-        </h2>
-        <p className="mb-12 text-center text-gray-600 text-lg">
-          Nehmen Sie Kontakt auf oder buchen Sie direkt einen Termin für Ihre
-          Beratung
-        </p>
-
-        <div className="mx-auto max-w-4xl rounded-xl bg-white p-8 shadow-lg">
-          {/* Step Indicator */}
-          <div className="relative mb-12 flex justify-between">
-            <div className="-z-10 absolute top-5 right-0 left-0 h-0.5 bg-gray-300" />
-            {[1, 2, 3, 4].map((step) => (
-              <div
-                className="z-10 flex flex-1 flex-col items-center"
-                key={step}
-              >
-                <div
-                  className={`mb-2 flex h-10 w-10 items-center justify-center rounded-full font-bold transition-all ${
-                    currentStep === step
-                      ? "border-2 border-[#2563EB] bg-[#2563EB] text-white"
-                      : currentStep > step
-                        ? "border-2 border-green-500 bg-green-500 text-white"
-                        : "border-2 border-gray-300 bg-gray-200 text-gray-600"
-                  }`}
-                >
-                  {currentStep > step ? "✓" : step}
-                </div>
-                <div
-                  className={`text-center text-sm ${
-                    currentStep === step
-                      ? "font-semibold text-[#2563EB]"
-                      : "text-gray-500"
-                  }`}
-                >
-                  {step === 1 && "Anfragetyp"}
-                  {step === 2 && "Details"}
-                  {step === 3 && "Kontaktdaten"}
-                  {step === 4 && "Bestätigung"}
-                </div>
-              </div>
-            ))}
+    <section className="scroll-mt-16 bg-muted/30 py-20 md:py-28" id="kontakt">
+      <div className="section-container">
+        {/* Section header */}
+        <div className="mb-14 max-w-2xl">
+          <div className="section-label mb-4">
+            <span className="solar-bar" />
+            <span>Kontakt</span>
           </div>
-
-          <form id="contactForm" onSubmit={handleSubmit}>
-            {/* Step 1: Anfragetyp */}
-            {currentStep === 1 && (
-              <div className="animate-fadeIn">
-                <h3 className="mb-6 font-bold text-2xl">
-                  Welche Art von Anfrage haben Sie?
-                </h3>
-
-                <div className="mb-6">
-                  <label className="mb-2 block font-semibold">
-                    Anfragetyp auswählen <span className="text-red-500">*</span>
-                  </label>
-                  <select
-                    className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
-                    id="requestType"
-                    onChange={handleInputChange}
-                    required
-                    value={formData.requestType}
-                  >
-                    <option value="">Bitte wählen...</option>
-                    <option value="gutachten">Technisches Gutachten</option>
-                    <option value="schadenanalyse">Schadenanalyse</option>
-                    <option value="wirtschaftlichkeit">
-                      Wirtschaftlichkeitsprüfung
-                    </option>
-                    <option value="anlagenabnahme">Anlagenabnahme</option>
-                    <option value="beratung-installateur">
-                      Beratung für Installateure
-                    </option>
-                    <option value="versicherung">Anfrage Versicherung</option>
-                    <option value="online-gutachten">
-                      Online-Gutachten (Express)
-                    </option>
-                    <option value="sonstiges">Sonstige Anfrage</option>
-                  </select>
-                </div>
-
-                <div className="mb-6">
-                  <label className="mb-2 block font-semibold">
-                    Sie sind... <span className="text-red-500">*</span>
-                  </label>
-                  <select
-                    className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
-                    id="customerType"
-                    onChange={handleInputChange}
-                    required
-                    value={formData.customerType}
-                  >
-                    <option value="">Bitte wählen...</option>
-                    <option value="privatperson">Privatperson</option>
-                    <option value="unternehmen">Unternehmen</option>
-                    <option value="installateur">
-                      Installateur/Fachbetrieb
-                    </option>
-                    <option value="versicherung">Versicherung</option>
-                  </select>
-                </div>
-
-                <div className="flex justify-end">
-                  <button
-                    className="rounded-lg bg-[#2563EB] px-8 py-3 font-semibold text-white transition-colors hover:bg-[#004C99]"
-                    onClick={nextStep}
-                    type="button"
-                  >
-                    Weiter →
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* Step 2: Details */}
-            {currentStep === 2 && (
-              <div className="animate-fadeIn">
-                <h3 className="mb-6 font-bold text-2xl">
-                  Details zu Ihrer Anfrage
-                </h3>
-
-                <div className="mb-6">
-                  <label className="mb-2 block font-semibold">
-                    Beschreibung <span className="text-red-500">*</span>
-                  </label>
-                  <textarea
-                    className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
-                    id="description"
-                    onChange={handleInputChange}
-                    placeholder="Bitte beschreiben Sie Ihr Anliegen möglichst detailliert..."
-                    required
-                    rows={5}
-                    value={formData.description}
-                  />
-                  <p className="mt-2 text-gray-500 text-sm">
-                    Je detaillierter Ihre Beschreibung, desto besser können wir
-                    Ihnen helfen.
-                  </p>
-                </div>
-
-                <div className="flex justify-between">
-                  <button
-                    className="rounded-lg border-2 border-[#2563EB] bg-transparent px-8 py-3 font-semibold text-[#2563EB] transition-all hover:bg-[#2563EB] hover:text-white"
-                    onClick={prevStep}
-                    type="button"
-                  >
-                    ← Zurück
-                  </button>
-                  <button
-                    className="rounded-lg bg-[#2563EB] px-8 py-3 font-semibold text-white transition-colors hover:bg-[#004C99]"
-                    onClick={nextStep}
-                    type="button"
-                  >
-                    Weiter →
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* Step 3: Kontaktdaten */}
-            {currentStep === 3 && (
-              <div className="animate-fadeIn">
-                <h3 className="mb-6 font-bold text-2xl">Ihre Kontaktdaten</h3>
-
-                <div className="mb-6 grid gap-6 md:grid-cols-2">
-                  <div>
-                    <label className="mb-2 block font-semibold">
-                      Vorname <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
-                      id="firstName"
-                      onChange={handleInputChange}
-                      required
-                      type="text"
-                      value={formData.firstName}
-                    />
-                  </div>
-                  <div>
-                    <label className="mb-2 block font-semibold">
-                      Nachname <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
-                      id="lastName"
-                      onChange={handleInputChange}
-                      required
-                      type="text"
-                      value={formData.lastName}
-                    />
-                  </div>
-                </div>
-
-                <div className="mb-6 hidden" id="companyField">
-                  <label className="mb-2 block font-semibold">Firma</label>
-                  <input
-                    className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
-                    id="company"
-                    onChange={handleInputChange}
-                    type="text"
-                    value={formData.company}
-                  />
-                </div>
-
-                <div className="mb-6 grid gap-6 md:grid-cols-2">
-                  <div>
-                    <label className="mb-2 block font-semibold">
-                      E-Mail <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
-                      id="email"
-                      onChange={handleInputChange}
-                      required
-                      type="email"
-                      value={formData.email}
-                    />
-                  </div>
-                  <div>
-                    <label className="mb-2 block font-semibold">
-                      Telefon <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
-                      id="phone"
-                      onChange={handleInputChange}
-                      required
-                      type="tel"
-                      value={formData.phone}
-                    />
-                  </div>
-                </div>
-
-                <div className="mb-6">
-                  <label className="mb-2 block font-semibold">
-                    Straße & Hausnummer
-                  </label>
-                  <input
-                    className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
-                    id="street"
-                    onChange={handleInputChange}
-                    type="text"
-                    value={formData.street}
-                  />
-                </div>
-
-                <div className="mb-6 grid gap-6 md:grid-cols-2">
-                  <div>
-                    <label className="mb-2 block font-semibold">PLZ</label>
-                    <input
-                      className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
-                      id="zip"
-                      onChange={handleInputChange}
-                      type="text"
-                      value={formData.zip}
-                    />
-                  </div>
-                  <div>
-                    <label className="mb-2 block font-semibold">Ort</label>
-                    <input
-                      className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
-                      id="city"
-                      onChange={handleInputChange}
-                      type="text"
-                      value={formData.city}
-                    />
-                  </div>
-                </div>
-
-                <div className="mb-6">
-                  <label className="mb-2 block font-semibold">
-                    Bevorzugte Kontaktzeit
-                  </label>
-                  <select
-                    className="w-full rounded-lg border-2 border-gray-300 px-4 py-3 focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
-                    id="preferredTime"
-                    onChange={handleInputChange}
-                    value={formData.preferredTime}
-                  >
-                    <option value="">Keine Präferenz</option>
-                    <option value="morning">Vormittags (9-12 Uhr)</option>
-                    <option value="afternoon">Nachmittags (12-15 Uhr)</option>
-                    <option value="evening">Spätnachmittag (15-18 Uhr)</option>
-                  </select>
-                </div>
-
-                <div className="mb-6">
-                  <label className="flex items-start gap-2">
-                    <input
-                      checked={formData.privacy}
-                      className="mt-1"
-                      id="privacy"
-                      onChange={handleInputChange}
-                      required
-                      type="checkbox"
-                    />
-                    <span className="text-sm">
-                      Ich habe die{" "}
-                      <a
-                        className="text-[#2563EB] hover:underline"
-                        href="#datenschutz"
-                      >
-                        Datenschutzerklärung
-                      </a>{" "}
-                      zur Kenntnis genommen. Ich stimme zu, dass meine Angaben
-                      zur Kontaktaufnahme und für Rückfragen dauerhaft
-                      gespeichert werden.{" "}
-                      <span className="text-red-500">*</span>
-                    </span>
-                  </label>
-                </div>
-
-                <div className="mb-6">
-                  <label className="flex items-start gap-2">
-                    <input
-                      checked={formData.newsletter}
-                      className="mt-1"
-                      id="newsletter"
-                      onChange={handleInputChange}
-                      type="checkbox"
-                    />
-                    <span className="text-sm">
-                      Ich möchte den Newsletter mit Fachartikeln und Updates
-                      erhalten (jederzeit abbestellbar)
-                    </span>
-                  </label>
-                </div>
-
-                <div className="flex justify-between">
-                  <button
-                    className="rounded-lg border-2 border-[#2563EB] bg-transparent px-8 py-3 font-semibold text-[#2563EB] transition-all hover:bg-[#2563EB] hover:text-white"
-                    onClick={prevStep}
-                    type="button"
-                  >
-                    ← Zurück
-                  </button>
-                  <button
-                    className="rounded-lg bg-[#2563EB] px-8 py-3 font-semibold text-white transition-colors hover:bg-[#004C99]"
-                    onClick={nextStep}
-                    type="button"
-                  >
-                    Weiter →
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {/* Step 4: Zusammenfassung */}
-            {currentStep === 4 && (
-              <div className="animate-fadeIn">
-                <h3 className="mb-6 font-bold text-2xl">
-                  Zusammenfassung Ihrer Anfrage
-                </h3>
-
-                <div className="mb-6 space-y-3 rounded-lg bg-gray-50 p-6">
-                  <div>
-                    <strong>Anfragetyp:</strong>{" "}
-                    {getRequestTypeLabel(formData.requestType)}
-                  </div>
-                  <div>
-                    <strong>Kundentyp:</strong>{" "}
-                    {getCustomerTypeLabel(formData.customerType)}
-                  </div>
-                  <div>
-                    <strong>Name:</strong> {formData.firstName}{" "}
-                    {formData.lastName}
-                  </div>
-                  {formData.company && (
-                    <div>
-                      <strong>Firma:</strong> {formData.company}
-                    </div>
-                  )}
-                  <div>
-                    <strong>E-Mail:</strong> {formData.email}
-                  </div>
-                  <div>
-                    <strong>Telefon:</strong> {formData.phone}
-                  </div>
-                  <div>
-                    <strong>Beschreibung:</strong> {formData.description}
-                  </div>
-                </div>
-
-                <div className="mb-6 border-[#2563EB] border-l-4 bg-blue-50 p-6">
-                  <strong>Was passiert als Nächstes?</strong>
-                  <ul className="mt-2 list-inside list-disc space-y-2">
-                    <li>
-                      Sie erhalten innerhalb von 24 Stunden eine
-                      Eingangsbestätigung
-                    </li>
-                    <li>
-                      Wir prüfen Ihre Anfrage und erstellen ein unverbindliches
-                      Angebot
-                    </li>
-                    <li>
-                      Bei Online-Gutachten: Express-Bearbeitung innerhalb 48
-                      Stunden
-                    </li>
-                    <li>Persönliche Kontaktaufnahme durch Andreas Bauten</li>
-                  </ul>
-                </div>
-
-                <div className="flex justify-between">
-                  <button
-                    className="rounded-lg border-2 border-[#2563EB] bg-transparent px-8 py-3 font-semibold text-[#2563EB] transition-all hover:bg-[#2563EB] hover:text-white"
-                    onClick={prevStep}
-                    type="button"
-                  >
-                    ← Zurück
-                  </button>
-                  <button
-                    className="rounded-lg bg-[#2563EB] px-8 py-4 font-semibold text-lg text-white transition-colors hover:bg-[#004C99]"
-                    type="submit"
-                  >
-                    Anfrage absenden ✓
-                  </button>
-                </div>
-              </div>
-            )}
-          </form>
+          <h2
+            className="mb-4 font-extrabold text-4xl tracking-tight md:text-5xl"
+            style={{ fontFamily: "var(--font-heading)" }}
+          >
+            Kontakt & Terminbuchung
+          </h2>
+          <p className="text-lg text-muted-foreground leading-relaxed">
+            Nehmen Sie Kontakt auf oder buchen Sie direkt einen Termin für Ihre
+            Beratung.
+          </p>
         </div>
 
-        {/* Alternative Kontaktmöglichkeiten */}
-        <div className="mt-12 grid gap-8 md:grid-cols-2">
-          <div className="rounded-xl bg-white p-6 text-center shadow-md">
-            <div className="mb-3 text-4xl">✉️</div>
-            <h4 className="mb-2 font-bold text-xl">E-Mail</h4>
-            <p className="font-semibold">service@sv-bauten.de</p>
-            <p className="text-gray-500 text-sm">Antwort innerhalb 24h</p>
+        <div className="grid gap-8 lg:grid-cols-[1fr_320px]">
+          {/* Form card */}
+          <div className="rounded-2xl border border-border bg-card p-6 shadow-sm md:p-8">
+            {submitted ? (
+              /* Success state */
+              <div className="flex flex-col items-center justify-center gap-4 py-16 text-center">
+                <div className="flex size-16 items-center justify-center rounded-full bg-primary/10 text-primary">
+                  <CheckIcon className="size-8" />
+                </div>
+                <h3
+                  className="font-bold text-2xl"
+                  style={{ fontFamily: "var(--font-heading)" }}
+                >
+                  Anfrage gesendet!
+                </h3>
+                <p className="max-w-sm text-muted-foreground">
+                  Vielen Dank. Sie erhalten innerhalb von 24 Stunden eine
+                  Eingangsbestätigung.
+                </p>
+                <Button
+                  className="mt-4"
+                  onClick={() => setSubmitted(false)}
+                  variant="outline"
+                >
+                  Neue Anfrage stellen
+                </Button>
+              </div>
+            ) : (
+              <>
+                {/* Step indicator */}
+                <div className="mb-8">
+                  <div className="mb-3 flex items-center justify-between">
+                    {STEPS.map((label, i) => {
+                      const step = i + 1;
+                      const done = currentStep > step;
+                      const active = currentStep === step;
+                      return (
+                        <div className="flex flex-1 items-center" key={step}>
+                          <div className="flex flex-col items-center gap-1.5">
+                            <div
+                              className={cn(
+                                "flex size-8 items-center justify-center rounded-full border-2 font-bold text-xs transition-all",
+                                done
+                                  ? "border-primary bg-primary text-primary-foreground"
+                                  : active
+                                    ? "border-primary bg-background text-primary"
+                                    : "border-border bg-background text-muted-foreground"
+                              )}
+                            >
+                              {done ? <CheckIcon className="size-3.5" /> : step}
+                            </div>
+                            <span
+                              className={cn(
+                                "hidden font-medium text-xs sm:block",
+                                active
+                                  ? "text-primary"
+                                  : done
+                                    ? "text-foreground"
+                                    : "text-muted-foreground"
+                              )}
+                            >
+                              {label}
+                            </span>
+                          </div>
+                          {i < STEPS.length - 1 && (
+                            <div
+                              className={cn(
+                                "mx-2 h-px flex-1 transition-colors",
+                                done ? "bg-primary" : "bg-border"
+                              )}
+                            />
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <form onSubmit={handleSubmit}>
+                  {/* Step 1 */}
+                  {currentStep === 1 && (
+                    <div className="flex animate-fadeIn flex-col gap-6">
+                      <h3
+                        className="font-bold text-xl"
+                        style={{ fontFamily: "var(--font-heading)" }}
+                      >
+                        Welche Art von Anfrage haben Sie?
+                      </h3>
+
+                      <div className="flex flex-col gap-2">
+                        <Label htmlFor="requestType">
+                          Anfragetyp <span className="text-destructive">*</span>
+                        </Label>
+                        <Select
+                          onValueChange={(v) => updateField("requestType", v)}
+                          value={formData.requestType}
+                        >
+                          <SelectTrigger className="h-11" id="requestType">
+                            <SelectValue placeholder="Bitte wählen..." />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {REQUEST_TYPES.map((t) => (
+                              <SelectItem key={t.value} value={t.value}>
+                                {t.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      <div className="flex flex-col gap-2">
+                        <Label htmlFor="customerType">
+                          Sie sind...{" "}
+                          <span className="text-destructive">*</span>
+                        </Label>
+                        <Select
+                          onValueChange={(v) => updateField("customerType", v)}
+                          value={formData.customerType}
+                        >
+                          <SelectTrigger className="h-11" id="customerType">
+                            <SelectValue placeholder="Bitte wählen..." />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {CUSTOMER_TYPES.map((t) => (
+                              <SelectItem key={t.value} value={t.value}>
+                                {t.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      <div className="flex justify-end pt-2">
+                        <Button
+                          className="px-6 font-semibold"
+                          onClick={nextStep}
+                          type="button"
+                        >
+                          Weiter
+                          <ChevronRightIcon data-icon="inline-end" />
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Step 2 */}
+                  {currentStep === 2 && (
+                    <div className="flex animate-fadeIn flex-col gap-6">
+                      <h3
+                        className="font-bold text-xl"
+                        style={{ fontFamily: "var(--font-heading)" }}
+                      >
+                        Details zu Ihrer Anfrage
+                      </h3>
+
+                      <div className="flex flex-col gap-2">
+                        <Label htmlFor="description">
+                          Beschreibung{" "}
+                          <span className="text-destructive">*</span>
+                        </Label>
+                        <Textarea
+                          className="resize-none"
+                          id="description"
+                          onChange={(e) =>
+                            updateField("description", e.target.value)
+                          }
+                          placeholder="Bitte beschreiben Sie Ihr Anliegen möglichst detailliert..."
+                          rows={6}
+                          value={formData.description}
+                        />
+                        <p className="text-muted-foreground text-xs">
+                          Je detaillierter Ihre Beschreibung, desto besser
+                          können wir Ihnen helfen.
+                        </p>
+                      </div>
+
+                      <div className="flex justify-between pt-2">
+                        <Button
+                          className="px-6 font-semibold"
+                          onClick={prevStep}
+                          type="button"
+                          variant="outline"
+                        >
+                          <ChevronLeftIcon data-icon="inline-start" />
+                          Zurück
+                        </Button>
+                        <Button
+                          className="px-6 font-semibold"
+                          onClick={nextStep}
+                          type="button"
+                        >
+                          Weiter
+                          <ChevronRightIcon data-icon="inline-end" />
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Step 3 */}
+                  {currentStep === 3 && (
+                    <div className="flex animate-fadeIn flex-col gap-5">
+                      <h3
+                        className="font-bold text-xl"
+                        style={{ fontFamily: "var(--font-heading)" }}
+                      >
+                        Ihre Kontaktdaten
+                      </h3>
+
+                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                        <div className="flex flex-col gap-2">
+                          <Label htmlFor="firstName">
+                            Vorname <span className="text-destructive">*</span>
+                          </Label>
+                          <Input
+                            className="h-11"
+                            id="firstName"
+                            onChange={(e) =>
+                              updateField("firstName", e.target.value)
+                            }
+                            value={formData.firstName}
+                          />
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <Label htmlFor="lastName">
+                            Nachname <span className="text-destructive">*</span>
+                          </Label>
+                          <Input
+                            className="h-11"
+                            id="lastName"
+                            onChange={(e) =>
+                              updateField("lastName", e.target.value)
+                            }
+                            value={formData.lastName}
+                          />
+                        </div>
+                      </div>
+
+                      {isCompanyType(formData.customerType) && (
+                        <div className="flex flex-col gap-2">
+                          <Label htmlFor="company">Firma</Label>
+                          <Input
+                            className="h-11"
+                            id="company"
+                            onChange={(e) =>
+                              updateField("company", e.target.value)
+                            }
+                            value={formData.company}
+                          />
+                        </div>
+                      )}
+
+                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                        <div className="flex flex-col gap-2">
+                          <Label htmlFor="email">
+                            E-Mail <span className="text-destructive">*</span>
+                          </Label>
+                          <Input
+                            className="h-11"
+                            id="email"
+                            onChange={(e) =>
+                              updateField("email", e.target.value)
+                            }
+                            type="email"
+                            value={formData.email}
+                          />
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <Label htmlFor="phone">
+                            Telefon <span className="text-destructive">*</span>
+                          </Label>
+                          <Input
+                            className="h-11"
+                            id="phone"
+                            onChange={(e) =>
+                              updateField("phone", e.target.value)
+                            }
+                            type="tel"
+                            value={formData.phone}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col gap-2">
+                        <Label htmlFor="street">Straße & Hausnummer</Label>
+                        <Input
+                          className="h-11"
+                          id="street"
+                          onChange={(e) =>
+                            updateField("street", e.target.value)
+                          }
+                          value={formData.street}
+                        />
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="flex flex-col gap-2">
+                          <Label htmlFor="zip">PLZ</Label>
+                          <Input
+                            className="h-11"
+                            id="zip"
+                            onChange={(e) => updateField("zip", e.target.value)}
+                            value={formData.zip}
+                          />
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <Label htmlFor="city">Ort</Label>
+                          <Input
+                            className="h-11"
+                            id="city"
+                            onChange={(e) =>
+                              updateField("city", e.target.value)
+                            }
+                            value={formData.city}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col gap-2">
+                        <Label htmlFor="preferredTime">
+                          Bevorzugte Kontaktzeit
+                        </Label>
+                        <Select
+                          onValueChange={(v) => updateField("preferredTime", v)}
+                          value={formData.preferredTime}
+                        >
+                          <SelectTrigger className="h-11" id="preferredTime">
+                            <SelectValue placeholder="Keine Präferenz" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {PREFERRED_TIMES.map((t) => (
+                              <SelectItem key={t.value} value={t.value}>
+                                {t.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      <Separator />
+
+                      <div className="flex flex-col gap-3">
+                        <div className="flex items-start gap-3">
+                          <Checkbox
+                            checked={formData.privacy}
+                            className="mt-0.5"
+                            id="privacy"
+                            onCheckedChange={(v) => updateField("privacy", !!v)}
+                          />
+                          <Label
+                            className="cursor-pointer font-normal text-sm leading-relaxed"
+                            htmlFor="privacy"
+                          >
+                            Ich habe die{" "}
+                            <a
+                              className="text-primary hover:underline"
+                              href="/datenschutz"
+                            >
+                              Datenschutzerklärung
+                            </a>{" "}
+                            zur Kenntnis genommen und stimme der
+                            Datenspeicherung für die Kontaktaufnahme zu.{" "}
+                            <span className="text-destructive">*</span>
+                          </Label>
+                        </div>
+
+                        <div className="flex items-start gap-3">
+                          <Checkbox
+                            checked={formData.newsletter}
+                            className="mt-0.5"
+                            id="newsletter"
+                            onCheckedChange={(v) =>
+                              updateField("newsletter", !!v)
+                            }
+                          />
+                          <Label
+                            className="cursor-pointer font-normal text-sm leading-relaxed"
+                            htmlFor="newsletter"
+                          >
+                            Ich möchte den Newsletter mit Fachartikeln und
+                            Updates erhalten (jederzeit abbestellbar).
+                          </Label>
+                        </div>
+                      </div>
+
+                      <div className="flex justify-between pt-2">
+                        <Button
+                          className="px-6 font-semibold"
+                          onClick={prevStep}
+                          type="button"
+                          variant="outline"
+                        >
+                          <ChevronLeftIcon data-icon="inline-start" />
+                          Zurück
+                        </Button>
+                        <Button
+                          className="px-6 font-semibold"
+                          onClick={nextStep}
+                          type="button"
+                        >
+                          Weiter
+                          <ChevronRightIcon data-icon="inline-end" />
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Step 4: Summary */}
+                  {currentStep === 4 && (
+                    <div className="flex animate-fadeIn flex-col gap-6">
+                      <h3
+                        className="font-bold text-xl"
+                        style={{ fontFamily: "var(--font-heading)" }}
+                      >
+                        Zusammenfassung Ihrer Anfrage
+                      </h3>
+
+                      <div className="flex flex-col gap-2.5 rounded-xl border border-border bg-muted/40 p-5 text-sm">
+                        {[
+                          {
+                            label: "Anfragetyp",
+                            value: getRequestTypeLabel(formData.requestType),
+                          },
+                          {
+                            label: "Kundentyp",
+                            value: getCustomerTypeLabel(formData.customerType),
+                          },
+                          {
+                            label: "Name",
+                            value: `${formData.firstName} ${formData.lastName}`,
+                          },
+                          formData.company
+                            ? { label: "Firma", value: formData.company }
+                            : null,
+                          { label: "E-Mail", value: formData.email },
+                          { label: "Telefon", value: formData.phone },
+                          {
+                            label: "Beschreibung",
+                            value: formData.description,
+                          },
+                        ]
+                          .filter(Boolean)
+                          .map((row) => (
+                            <div className="flex gap-3" key={row!.label}>
+                              <span className="w-28 shrink-0 font-semibold text-foreground">
+                                {row!.label}:
+                              </span>
+                              <span className="text-muted-foreground">
+                                {row!.value}
+                              </span>
+                            </div>
+                          ))}
+                      </div>
+
+                      <div className="rounded-xl border-primary border-l-4 bg-primary/5 px-5 py-4 text-sm">
+                        <p className="mb-2 font-semibold text-foreground">
+                          Was passiert als Nächstes?
+                        </p>
+                        <ul className="flex flex-col gap-1.5 text-muted-foreground">
+                          <li>
+                            · Eingangsbestätigung innerhalb von 24 Stunden
+                          </li>
+                          <li>
+                            · Wir prüfen Ihre Anfrage und erstellen ein
+                            unverbindliches Angebot
+                          </li>
+                          <li>
+                            · Bei Online-Gutachten: Express-Bearbeitung
+                            innerhalb 48 Stunden
+                          </li>
+                          <li>
+                            · Persönliche Kontaktaufnahme durch Andreas Bauten
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div className="flex justify-between pt-2">
+                        <Button
+                          className="px-6 font-semibold"
+                          onClick={prevStep}
+                          type="button"
+                          variant="outline"
+                        >
+                          <ChevronLeftIcon data-icon="inline-start" />
+                          Zurück
+                        </Button>
+                        <Button
+                          className="h-11 border-0 bg-[var(--solar)] px-8 font-semibold text-[var(--solar-foreground)] hover:bg-[var(--solar)]/90"
+                          type="submit"
+                        >
+                          Anfrage absenden
+                          <SendIcon data-icon="inline-end" />
+                        </Button>
+                      </div>
+                    </div>
+                  )}
+                </form>
+              </>
+            )}
           </div>
 
-          <div className="rounded-xl bg-white p-6 text-center shadow-md">
-            <div className="mb-3 text-4xl">📍</div>
-            <h4 className="mb-2 font-bold text-xl">Standort</h4>
-            <p className="font-semibold">Aachen, NRW</p>
-            <p className="text-gray-500 text-sm">Deutschlandweit tätig</p>
+          {/* Sidebar: quick contact */}
+          <div className="flex flex-col gap-4">
+            <div className="flex flex-col items-start gap-3 rounded-2xl border border-border bg-card p-5">
+              <div className="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <MailIcon className="size-5" />
+              </div>
+              <div>
+                <h4
+                  className="font-semibold text-sm"
+                  style={{ fontFamily: "var(--font-heading)" }}
+                >
+                  E-Mail
+                </h4>
+                <a
+                  className="font-medium text-primary text-sm hover:underline"
+                  href={`mailto:${siteConfig.contact.email}`}
+                >
+                  {siteConfig.contact.email}
+                </a>
+                <p className="mt-1 text-muted-foreground text-xs">
+                  Antwort innerhalb 24h
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-col items-start gap-3 rounded-2xl border border-border bg-card p-5">
+              <div className="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <MapPinIcon className="size-5" />
+              </div>
+              <div>
+                <h4
+                  className="font-semibold text-sm"
+                  style={{ fontFamily: "var(--font-heading)" }}
+                >
+                  Standort
+                </h4>
+                <p className="font-medium text-foreground text-sm">
+                  {siteConfig.contact.location}
+                </p>
+                <p className="mt-1 text-muted-foreground text-xs">
+                  Deutschlandweit tätig
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

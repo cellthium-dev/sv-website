@@ -9,7 +9,9 @@
       "WebFetch(domain:cal.com)",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:developer.cal.com)",
-      "WebFetch(domain:raw.githubusercontent.com)"
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Skill(shadcn)",
+      "Bash(pnpm add:*)"
     ],
     "deny": [],
     "ask": []

@@ -1,17 +1,13 @@
 import { Link } from "@tanstack/react-router";
+import { MenuIcon, XIcon, ZapIcon } from "lucide-react";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
-  const anchorItems = [
-    { href: "#home", label: "Startseite" },
-    { href: "#leistungen", label: "Leistungen" },
-    { href: "#wissen", label: "Wissen" },
-    // { href: "#referenzen", label: "Referenzen" },
-  ];
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -28,35 +24,32 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-1000 bg-white shadow-md transition-shadow">
-      <div className="container mx-auto px-5">
-        <div className="flex items-center justify-between py-4">
-          <Link className="flex flex-col" to="/">
-            <div className="font-bold text-2xl text-[#2563EB]">
-              Andreas Bauten
+    <header className="sticky top-0 z-50 border-border/60 border-b bg-background/95 backdrop-blur-sm transition-all">
+      <div className="section-container">
+        <div className="flex h-16 items-center justify-between md:h-18">
+          {/* Logo */}
+          <Link className="group flex items-center gap-3" to="/">
+            <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+              <ZapIcon className="size-4" />
             </div>
-            <span className="font-normal text-gray-500 text-sm">
-              Sachverständiger für Photovoltaik & Batteriesysteme
-            </span>
+            <div className="flex flex-col leading-none">
+              <span
+                className="font-bold text-base text-foreground tracking-tight transition-colors group-hover:text-primary"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                {siteConfig.name}
+              </span>
+              <span className="hidden text-muted-foreground text-xs sm:block">
+                {siteConfig.tagline}
+              </span>
+            </div>
           </Link>
 
-          <button
-            aria-label="Menü öffnen"
-            className="text-2xl text-gray-900 md:hidden"
-            onClick={toggleMenu}
-          >
-            ☰
-          </button>
-
-          <nav
-            className={`${
-              isMenuOpen ? "flex" : "hidden"
-            } absolute top-full right-0 left-0 flex-col items-center gap-8 bg-white p-4 shadow-md md:relative md:top-auto md:flex md:flex-row md:bg-transparent md:p-0 md:shadow-none`}
-            role="navigation"
-          >
-            {anchorItems.map((item) => (
+          {/* Desktop nav */}
+          <nav className="hidden items-center gap-1 md:flex" role="navigation">
+            {siteConfig.nav.map((item) => (
               <a
-                className="rounded px-4 py-2 font-medium text-gray-900 transition-all hover:bg-gray-100"
+                className="rounded-md px-4 py-2 font-medium text-muted-foreground text-sm transition-all hover:bg-muted hover:text-foreground"
                 href={item.href}
                 key={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
@@ -65,19 +58,74 @@ export default function Header() {
               </a>
             ))}
             <Link
-              className="rounded px-4 py-2 font-medium text-gray-900 transition-all hover:bg-gray-100"
+              className="rounded-md px-4 py-2 font-medium text-muted-foreground text-sm transition-all hover:bg-muted hover:text-foreground"
+              to="/ueber-mich"
+            >
+              Über mich
+            </Link>
+            <div className="ml-2">
+              <Button asChild className="h-9 px-5 font-semibold" size="sm">
+                <a
+                  href="#kontakt"
+                  onClick={(e) => handleNavClick(e, "#kontakt")}
+                >
+                  Kontakt
+                </a>
+              </Button>
+            </div>
+          </nav>
+
+          {/* Mobile toggle */}
+          <button
+            aria-expanded={isMenuOpen}
+            aria-label={isMenuOpen ? "Menü schließen" : "Menü öffnen"}
+            className="flex size-9 items-center justify-center rounded-md text-foreground transition-colors hover:bg-muted md:hidden"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? (
+              <XIcon className="size-5" />
+            ) : (
+              <MenuIcon className="size-5" />
+            )}
+          </button>
+        </div>
+
+        {/* Mobile nav */}
+        <div
+          className={cn(
+            "overflow-hidden transition-all duration-300 md:hidden",
+            isMenuOpen ? "max-h-96 pb-4" : "max-h-0"
+          )}
+        >
+          <Separator className="mb-3" />
+          <nav className="flex flex-col gap-1" role="navigation">
+            {siteConfig.nav.map((item) => (
+              <a
+                className="rounded-md px-3 py-2.5 font-medium text-foreground text-sm transition-all hover:bg-muted"
+                href={item.href}
+                key={item.href}
+                onClick={(e) => handleNavClick(e, item.href)}
+              >
+                {item.label}
+              </a>
+            ))}
+            <Link
+              className="rounded-md px-3 py-2.5 font-medium text-foreground text-sm transition-all hover:bg-muted"
               onClick={() => setIsMenuOpen(false)}
               to="/ueber-mich"
             >
               Über mich
             </Link>
-            <a
-              className="hover:-translate-y-0.5 rounded-lg bg-[#2563EB] px-6 py-3 font-semibold text-white transition-all hover:bg-[#004C99] hover:shadow-lg"
-              href="/#kontakt"
-              onClick={(e) => handleNavClick(e, "#kontakt")}
-            >
-              Kontakt
-            </a>
+            <div className="mt-2 px-3">
+              <Button asChild className="w-full font-semibold">
+                <a
+                  href="#kontakt"
+                  onClick={(e) => handleNavClick(e, "#kontakt")}
+                >
+                  Kontakt aufnehmen
+                </a>
+              </Button>
+            </div>
           </nav>
         </div>
       </div>

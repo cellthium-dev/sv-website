@@ -1,151 +1,120 @@
-import type { Service } from "../types";
+import { ArrowRightIcon, CheckIcon, StarIcon } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
+
+const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  e.preventDefault();
+  document
+    .querySelector(href)
+    ?.scrollIntoView({ behavior: "smooth", block: "start" });
+};
 
 export default function Services() {
-  const services: Service[] = [
-    {
-      icon: "📋",
-      title: "Technische Gutachten",
-      description:
-        "Umfassende technische Begutachtung von Photovoltaikanlagen und Batteriespeichersystemen nach VDE/DIN-Normen.",
-      features: [
-        "Anlagenabnahme & Inbetriebnahme",
-        "Bestandsaufnahme & Zustandsbewertung",
-        "Konformitätsprüfung",
-        "Versicherungsgutachten",
-      ],
-      ctaText: "Gutachten anfordern",
-      ctaLink: "#kontakt",
-    },
-    {
-      icon: "🔍",
-      title: "Schadenanalyse",
-      description:
-        "Detaillierte Untersuchung von Schäden und Leistungsminderungen an PV-Anlagen und Batteriesystemen.",
-      features: [
-        "Fehlerdiagnose & Ursachenanalyse",
-        "Thermografie-Untersuchungen",
-        "Elektrische Messungen (IV-Kennlinien)",
-        "Dokumentation für Versicherungen",
-      ],
-      ctaText: "Schadenfall melden",
-      ctaLink: "#kontakt",
-    },
-    {
-      icon: "💰",
-      title: "Wirtschaftlichkeitsprüfung",
-      description:
-        "Analyse und Bewertung der Wirtschaftlichkeit und Ertragsprognose Ihrer PV-Anlage.",
-      features: [
-        "Ertragsprüfung & Vergleichsanalyse",
-        "Performance Ratio Berechnung",
-        "Amortisationsrechnung",
-        "Optimierungsempfehlungen",
-      ],
-      ctaText: "Ertragsprüfung starten",
-      ctaLink: "#kontakt",
-    },
-    {
-      icon: "🏗️",
-      title: "Beratung für Installateure",
-      description:
-        "Fachliche Unterstützung für Installationsbetriebe bei komplexen Projekten.",
-      features: [
-        "Planungsberatung",
-        "Normenkonformität",
-        "Qualitätssicherung",
-        "Schulungen",
-      ],
-      ctaText: "Beratung buchen",
-      ctaLink: "#kontakt",
-    },
-    {
-      icon: "🛡️",
-      title: "Versicherungsberatung",
-      description:
-        "Neutrale Expertise für Versicherungen bei Schadenfällen und Leistungsbewertungen.",
-      features: [
-        "Schadensbewertung",
-        "Wertermittlung",
-        "Gutachten für Regulierung",
-        "Technische Klärung",
-      ],
-      ctaText: "Anfrage stellen",
-      ctaLink: "#kontakt",
-    },
-    {
-      icon: "💻",
-      title: "Online-Gutachten",
-      description:
-        "Schnelle Erstbewertung per Bild-Upload mit Festpreis-Transparenz.",
-      features: [
-        "Express-Rückmeldung (48h)",
-        "Festpreis ab 249€",
-        "Bild-Upload & Datenanalyse",
-        "Digitales Gutachten (PDF)",
-      ],
-      ctaText: "Online-Gutachten starten",
-      ctaLink: "#kontakt",
-    },
-  ];
-
-  const handleScroll = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    href: string
-  ) => {
-    e.preventDefault();
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
-
   return (
-    <section className="scroll-mt-24 py-16" id="leistungen">
-      <div className="container mx-auto px-5">
-        <h2 className="mb-4 text-center font-bold text-4xl">
-          Meine Leistungen
-        </h2>
-        <p className="mb-16 text-center text-gray-600 text-lg">
-          Umfassende Sachverständigenleistungen für Photovoltaik und
-          Batteriesysteme
-        </p>
+    <section className="scroll-mt-16 py-20 md:py-28" id="leistungen">
+      <div className="section-container">
+        {/* Section header */}
+        <div className="mb-14 max-w-2xl">
+          <div className="section-label mb-4">
+            <span className="solar-bar" />
+            <span>Leistungen</span>
+          </div>
+          <h2
+            className="mb-4 font-extrabold text-4xl tracking-tight md:text-5xl"
+            style={{ fontFamily: "var(--font-heading)" }}
+          >
+            Meine Leistungen
+          </h2>
+          <p className="text-lg text-muted-foreground leading-relaxed">
+            Umfassende Sachverständigenleistungen für Photovoltaik und
+            Batteriesysteme — unabhängig, präzise, rechtssicher.
+          </p>
+        </div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, index) => (
-            <div
-              className="hover:-translate-y-1 rounded-xl border border-gray-200 bg-white p-8 transition-all hover:shadow-2xl"
+        {/* Service cards grid */}
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {siteConfig.services.map((service, index) => (
+            <Card
+              className={cn(
+                "hover:-translate-y-1 relative flex flex-col transition-all duration-300 hover:shadow-xl",
+                service.highlight &&
+                  "shadow-lg shadow-primary/10 ring-2 ring-primary"
+              )}
               key={index}
             >
-              <div className="mb-4 text-5xl text-[#2563EB]">{service.icon}</div>
-              <h3 className="mb-4 font-bold text-2xl text-[#2563EB]">
-                {service.title}
-              </h3>
-              <p className="mb-4 text-gray-600">{service.description}</p>
-              <ul className="mb-6 space-y-2">
-                {service.features.map((feature, i) => (
-                  <li className="text-gray-700" key={i}>
-                    • {feature}
-                  </li>
-                ))}
-              </ul>
-              <a
-                className="block w-full rounded-lg bg-[#2563EB] px-6 py-3 text-center font-semibold text-white transition-all hover:bg-[#004C99] hover:shadow-lg"
-                href={service.ctaLink}
-                onClick={(e) => handleScroll(e, service.ctaLink)}
-              >
-                {service.ctaText}
-              </a>
-            </div>
+              {service.highlight && (
+                <div className="-top-3 absolute right-4">
+                  <Badge className="bg-[var(--solar)] px-3 py-1 font-semibold text-[var(--solar-foreground)]">
+                    <StarIcon className="mr-1 size-3" />
+                    Empfohlen
+                  </Badge>
+                </div>
+              )}
+
+              <CardHeader className="pb-2">
+                <div className="mb-3 text-3xl">{service.icon}</div>
+                <CardTitle
+                  className={cn(
+                    "font-bold text-xl",
+                    service.highlight ? "text-primary" : "text-foreground"
+                  )}
+                  style={{ fontFamily: "var(--font-heading)" }}
+                >
+                  {service.title}
+                </CardTitle>
+                <CardDescription className="mt-1 text-sm leading-relaxed">
+                  {service.description}
+                </CardDescription>
+              </CardHeader>
+
+              <CardContent className="flex-1">
+                <ul className="flex flex-col gap-2">
+                  {service.features.map((feature, i) => (
+                    <li className="flex items-start gap-2.5 text-sm" key={i}>
+                      <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" />
+                      <span className="text-foreground/80">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+
+              <CardFooter>
+                <Button
+                  asChild
+                  className="w-full font-semibold"
+                  variant={service.highlight ? "default" : "outline"}
+                >
+                  <a
+                    href={service.ctaLink}
+                    onClick={(e) => scrollTo(e, service.ctaLink)}
+                  >
+                    {service.ctaText}
+                    <ArrowRightIcon data-icon="inline-end" />
+                  </a>
+                </Button>
+              </CardFooter>
+            </Card>
           ))}
         </div>
 
-        <div className="mt-12 text-center">
+        {/* Bottom CTA */}
+        <div className="mt-12 flex justify-center">
           <a
-            className="inline-flex items-center gap-2 rounded-lg border-2 border-gray-300 bg-gray-100 px-6 py-4 transition-all hover:border-[#2563EB] hover:bg-[#2563EB] hover:text-white"
+            className="inline-flex items-center gap-2.5 rounded-lg border border-border px-5 py-3 font-medium text-muted-foreground text-sm transition-all hover:border-primary/30 hover:bg-primary/5 hover:text-primary"
             href="#"
           >
             <span>📄</span>
-            <span>Leistungsübersicht als PDF herunterladen</span>
+            Leistungsübersicht als PDF herunterladen
           </a>
         </div>
       </div>

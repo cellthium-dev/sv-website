@@ -1,56 +1,66 @@
+import { CookieIcon } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 
 export default function CookieBanner() {
-  const [isVisible, setIsVisible] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const consent = localStorage.getItem("cookieConsent");
     if (!consent) {
-      setTimeout(() => setIsVisible(true), 1000);
+      const t = setTimeout(() => setVisible(true), 800);
+      return () => clearTimeout(t);
     }
   }, []);
 
-  const acceptCookies = () => {
+  const accept = () => {
     localStorage.setItem("cookieConsent", "accepted");
-    setIsVisible(false);
-    console.log("Analytics enabled");
+    setVisible(false);
   };
 
-  const declineCookies = () => {
+  const decline = () => {
     localStorage.setItem("cookieConsent", "essential-only");
-    setIsVisible(false);
-    console.log("Only essential cookies");
+    setVisible(false);
   };
 
-  if (!isVisible) return null;
+  if (!visible) return null;
 
   return (
-    <div className="fixed right-0 bottom-0 left-0 z-[9999] bg-white p-6 shadow-2xl transition-transform">
-      <div className="container mx-auto">
-        <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
+    <div className="fixed right-4 bottom-4 left-4 z-50 animate-scale-in sm:right-4 sm:left-auto sm:max-w-sm">
+      <div className="rounded-2xl border border-border bg-card p-5 shadow-2xl shadow-black/10">
+        <div className="mb-4 flex items-start gap-3">
+          <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+            <CookieIcon className="size-4" />
+          </div>
           <div>
-            <strong>Cookie-Hinweis:</strong> Diese Website verwendet notwendige
-            Cookies zur Gewährleistung der Funktionalität. Weitere Informationen
-            finden Sie in unserer{" "}
-            <a className="text-[#2563EB] hover:underline" href="#datenschutz">
-              Datenschutzerklärung
-            </a>
-            .
-          </div>
-          <div className="flex flex-shrink-0 gap-3">
-            <button
-              className="rounded-lg bg-[#2563EB] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#004C99]"
-              onClick={acceptCookies}
+            <p
+              className="mb-1 font-semibold text-foreground text-sm"
+              style={{ fontFamily: "var(--font-heading)" }}
             >
-              Akzeptieren
-            </button>
-            <button
-              className="rounded-lg border-2 border-[#2563EB] bg-transparent px-6 py-3 font-semibold text-[#2563EB] transition-all hover:bg-[#2563EB] hover:text-white"
-              onClick={declineCookies}
-            >
-              Nur notwendige
-            </button>
+              Cookie-Einstellungen
+            </p>
+            <p className="text-muted-foreground text-xs leading-relaxed">
+              Diese Website verwendet Cookies für eine bessere Nutzererfahrung.
+              Weitere Informationen in der{" "}
+              <a className="text-primary hover:underline" href="/datenschutz">
+                Datenschutzerklärung
+              </a>
+              .
+            </p>
           </div>
+        </div>
+        <div className="flex gap-2">
+          <Button
+            className="flex-1 font-medium"
+            onClick={decline}
+            size="sm"
+            variant="outline"
+          >
+            Ablehnen
+          </Button>
+          <Button className="flex-1 font-medium" onClick={accept} size="sm">
+            Akzeptieren
+          </Button>
         </div>
       </div>
     </div>

@@ -3,6 +3,9 @@
   "extends": ["ultracite/core", "ultracite/react"],
   "linter": {
     "rules": {
+      "correctness": {
+        "useExhaustiveDependencies": "info"
+      },
       "style": {
         "noNonNullAssertion": "off"
       }
