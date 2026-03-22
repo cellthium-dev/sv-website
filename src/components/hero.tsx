@@ -1,5 +1,3 @@
-import { Button } from "@/components/ui/button";
-import { siteConfig } from "@/config/site";
 import {
   ArrowRightIcon,
   CheckCircle2Icon,
@@ -8,6 +6,8 @@ import {
   ShieldCheckIcon,
   ZapIcon,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { siteConfig } from "@/config/site";
 
 const badgeIcons: LucideIcon[] = [
   CheckCircle2Icon,

@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { MenuIcon, XIcon, ZapIcon } from "lucide-react";
+import { MenuIcon, XIcon } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -29,9 +29,11 @@ export default function Header() {
         <div className="flex h-16 items-center justify-between md:h-18">
           {/* Logo */}
           <Link className="group flex items-center gap-3" to="/">
-            <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <ZapIcon className="size-4" />
-            </div>
+            <img
+              alt="SV Bauten Logo"
+              className="size-9 shrink-0"
+              src="/favicon.svg"
+            />
             <div className="flex flex-col leading-none">
               <span
                 className="font-bold text-base text-foreground tracking-tight transition-colors group-hover:text-primary"

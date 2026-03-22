@@ -211,13 +211,13 @@ function UeberMich() {
                 <span className="mb-6 inline-block rounded-full border border-[var(--solar)]/30 bg-[var(--solar)]/15 px-4 py-1.5 font-semibold text-[var(--solar)] text-xs uppercase tracking-widest">
                   ISO/IEC 17024 Zertifizierter Sachverständiger
                 </span>
-                <h1 className="mb-2 font-bold text-4xl text-white leading-tight md:text-5xl">
+                <h1 className="mb-2 whitespace-nowrap font-bold text-4xl text-primary leading-tight brightness-125 md:text-5xl">
                   Andreas Bauten, M.Sc.
                 </h1>
-                <p className="mb-6 text-muted-foreground text-xl">
+                <p className="mb-6 font-bold text-[var(--dark-surface-foreground)]/80 text-xl leading-relaxed">
                   Sachverständiger für Photovoltaikanlagen
                 </p>
-                <p className="max-w-[520px] text-muted-foreground leading-[1.75]">
+                <p className="max-w-[520px] text-[var(--dark-surface-foreground)]/80 leading-[1.75]">
                   Als unabhängiger, nach DIN EN ISO/IEC 17024 zertifizierter
                   Sachverständiger für Photovoltaikanlagen verbinde ich über ein
                   Jahrzehnt Erfahrung in Energietechnik, Batteriesicherheit und
@@ -330,11 +330,11 @@ function UeberMich() {
             <h2 className="mb-2 translate-y-6 animate-on-scroll font-semibold text-3xl text-white leading-snug opacity-0 transition-all duration-[600ms] ease-out">
               Vollständige Elektrifizierung eines BMW 3 (Baujahr 1978)
             </h2>
-            <p className="mb-6 translate-y-6 animate-on-scroll text-lg text-muted-foreground opacity-0 transition-all duration-[600ms] ease-out">
+            <p className="mb-6 translate-y-6 animate-on-scroll text-[var(--dark-surface-foreground)]/80 text-lg opacity-0 transition-all duration-[600ms] ease-out">
               Privates Ingenieursprojekt | 2020–2023 | Mit TÜV-EBE-Abnahme und
               Straßenzulassung
             </p>
-            <p className="mb-12 max-w-[700px] translate-y-6 animate-on-scroll text-muted-foreground leading-[1.75] opacity-0 transition-all duration-[600ms] ease-out">
+            <p className="mb-12 max-w-[700px] translate-y-6 animate-on-scroll text-[var(--dark-surface-foreground)]/80 leading-[1.75] opacity-0 transition-all duration-[600ms] ease-out">
               Was als persönliche Leidenschaft begann, wurde zum umfassendsten
               Kompetenznachweis meiner Ingenieurslaufbahn: die vollständige
               Elektrifizierung eines klassischen BMW 3er – von der leeren
@@ -357,7 +357,7 @@ function UeberMich() {
                     "BMS-Auslegung, Parametrierung, Kalibrierung und Validierung (inkl. Bluetooth-Monitoring)",
                   ].map((li) => (
                     <li
-                      className="relative pl-5 text-[15px] text-muted-foreground leading-[1.6]"
+                      className="relative pl-5 text-[15px] text-[var(--dark-surface-foreground)]/80 leading-[1.6]"
                       key={li}
                     >
                       <span className="absolute top-[10px] left-0 block h-1.5 w-1.5 rounded-full bg-[var(--solar)]" />
@@ -376,7 +376,7 @@ function UeberMich() {
                     "Erfolgreiche TÜV-EBE-Abnahme – Nachweis höchster System-, Sicherheits- und Integrationskompetenz",
                   ].map((li) => (
                     <li
-                      className="relative pl-5 text-[15px] text-muted-foreground leading-[1.6]"
+                      className="relative pl-5 text-[15px] text-[var(--dark-surface-foreground)]/80 leading-[1.6]"
                       key={li}
                     >
                       <span className="absolute top-[10px] left-0 block h-1.5 w-1.5 rounded-full bg-[var(--solar)]" />
