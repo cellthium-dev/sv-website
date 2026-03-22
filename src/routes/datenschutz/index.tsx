@@ -23,7 +23,7 @@ function RouteComponent() {
               <ol className="list-decimal space-y-1 pl-4 text-sm">
                 <li>
                   <a
-                    className="text-[#2563EB] hover:underline"
+                    className="text-primary hover:underline"
                     href="#verantwortlicher"
                   >
                     Verantwortlicher und Kontakt
@@ -31,7 +31,7 @@ function RouteComponent() {
                 </li>
                 <li>
                   <a
-                    className="text-[#2563EB] hover:underline"
+                    className="text-primary hover:underline"
                     href="#geltungsbereich"
                   >
                     Geltungsbereich und Überblick
@@ -39,43 +39,43 @@ function RouteComponent() {
                 </li>
                 <li>
                   <a
-                    className="text-[#2563EB] hover:underline"
+                    className="text-primary hover:underline"
                     href="#rechtsgrundlagen"
                   >
                     Rechtsgrundlagen der Datenverarbeitung
                   </a>
                 </li>
                 <li>
-                  <a className="text-[#2563EB] hover:underline" href="#website">
+                  <a className="text-primary hover:underline" href="#website">
                     Datenverarbeitung beim Besuch dieser Website
                   </a>
                 </li>
                 <li>
-                  <a className="text-[#2563EB] hover:underline" href="#cookies">
+                  <a className="text-primary hover:underline" href="#cookies">
                     Cookies und vergleichbare Technologien
                   </a>
                 </li>
                 <li>
-                  <a className="text-[#2563EB] hover:underline" href="#kontakt">
+                  <a className="text-primary hover:underline" href="#kontakt">
                     Kontaktaufnahme und Kommunikation
                   </a>
                 </li>
                 <li>
                   <a
-                    className="text-[#2563EB] hover:underline"
+                    className="text-primary hover:underline"
                     href="#sachverstaendigen"
                   >
                     Sachverständigentätigkeit
                   </a>
                 </li>
                 <li>
-                  <a className="text-[#2563EB] hover:underline" href="#caleu">
+                  <a className="text-primary hover:underline" href="#caleu">
                     Online-Terminbuchung (Cal.eu)
                   </a>
                 </li>
                 <li>
                   <a
-                    className="text-[#2563EB] hover:underline"
+                    className="text-primary hover:underline"
                     href="#drittdienste"
                   >
                     Eingebettete Inhalte und Drittdienste
@@ -83,20 +83,20 @@ function RouteComponent() {
                 </li>
                 <li>
                   <a
-                    className="text-[#2563EB] hover:underline"
+                    className="text-primary hover:underline"
                     href="#videokonferenzen"
                   >
                     Videokonferenzen und Online-Beratung
                   </a>
                 </li>
                 <li>
-                  <a className="text-[#2563EB] hover:underline" href="#zahlung">
+                  <a className="text-primary hover:underline" href="#zahlung">
                     Zahlungsabwicklung
                   </a>
                 </li>
                 <li>
                   <a
-                    className="text-[#2563EB] hover:underline"
+                    className="text-primary hover:underline"
                     href="#empfaenger"
                   >
                     Empfänger und Auftragsverarbeiter
@@ -104,7 +104,7 @@ function RouteComponent() {
                 </li>
                 <li>
                   <a
-                    className="text-[#2563EB] hover:underline"
+                    className="text-primary hover:underline"
                     href="#drittlaender"
                   >
                     Datenübermittlung in Drittländer
@@ -112,7 +112,7 @@ function RouteComponent() {
                 </li>
                 <li>
                   <a
-                    className="text-[#2563EB] hover:underline"
+                    className="text-primary hover:underline"
                     href="#speicherdauer"
                   >
                     Speicherdauer im Überblick
@@ -120,20 +120,20 @@ function RouteComponent() {
                 </li>
                 <li>
                   <a
-                    className="text-[#2563EB] hover:underline"
+                    className="text-primary hover:underline"
                     href="#betroffenenrechte"
                   >
                     Ihre Rechte als betroffene Person
                   </a>
                 </li>
                 <li>
-                  <a className="text-[#2563EB] hover:underline" href="#pflicht">
+                  <a className="text-primary hover:underline" href="#pflicht">
                     Pflicht zur Bereitstellung personenbezogener Daten
                   </a>
                 </li>
                 <li>
                   <a
-                    className="text-[#2563EB] hover:underline"
+                    className="text-primary hover:underline"
                     href="#profiling"
                   >
                     Automatisierte Entscheidungsfindung
@@ -141,7 +141,7 @@ function RouteComponent() {
                 </li>
                 <li>
                   <a
-                    className="text-[#2563EB] hover:underline"
+                    className="text-primary hover:underline"
                     href="#datensicherheit"
                   >
                     Datensicherheit
@@ -149,7 +149,7 @@ function RouteComponent() {
                 </li>
                 <li>
                   <a
-                    className="text-[#2563EB] hover:underline"
+                    className="text-primary hover:underline"
                     href="#aktualitaet"
                   >
                     Aktualität und Änderungen
@@ -161,7 +161,7 @@ function RouteComponent() {
           <div className="min-w-0 flex-1 lg:order-1">
             {/* 1 */}
             <section className="mb-10 scroll-mt-24" id="verantwortlicher">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 1. Verantwortlicher und Kontakt
               </h2>
               <p className="mb-3">
@@ -178,7 +178,7 @@ function RouteComponent() {
                 <br />
                 E-Mail:{" "}
                 <a
-                  className="text-[#2563EB] hover:underline"
+                  className="text-primary hover:underline"
                   href="mailto:info@sv-bauten.de"
                 >
                   info@sv-bauten.de
@@ -196,7 +196,7 @@ function RouteComponent() {
 
             {/* 2 */}
             <section className="mb-10 scroll-mt-24" id="geltungsbereich">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 2. Geltungsbereich und Überblick
               </h2>
               <p className="mb-4">
@@ -212,7 +212,7 @@ function RouteComponent() {
 
             {/* 3 */}
             <section className="mb-10 scroll-mt-24" id="rechtsgrundlagen">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 3. Rechtsgrundlagen der Datenverarbeitung
               </h2>
               <ul className="space-y-3">
@@ -248,7 +248,7 @@ function RouteComponent() {
 
             {/* 4 */}
             <section className="mb-10 scroll-mt-24" id="website">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 4. Datenverarbeitung beim Besuch dieser Website
               </h2>
 
@@ -293,7 +293,7 @@ function RouteComponent() {
 
             {/* 5 */}
             <section className="mb-10 scroll-mt-24" id="cookies">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 5. Cookies und vergleichbare Technologien
               </h2>
 
@@ -336,7 +336,7 @@ function RouteComponent() {
 
             {/* 6 */}
             <section className="mb-10 scroll-mt-24" id="kontakt">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 6. Kontaktaufnahme und Kommunikation
               </h2>
 
@@ -381,7 +381,7 @@ function RouteComponent() {
 
             {/* 7 */}
             <section className="mb-10 scroll-mt-24" id="sachverstaendigen">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 7. Datenverarbeitung im Rahmen der Sachverständigentätigkeit
               </h2>
 
@@ -476,7 +476,7 @@ function RouteComponent() {
 
             {/* 8 */}
             <section className="mb-10 scroll-mt-24" id="caleu">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 8. Online-Terminbuchung (Cal.eu)
               </h2>
               <p className="mb-4">
@@ -498,7 +498,7 @@ function RouteComponent() {
               <p>
                 Weitere Informationen:{" "}
                 <a
-                  className="text-[#2563EB] hover:underline"
+                  className="text-primary hover:underline"
                   href="https://cal.com/privacy"
                   rel="noopener noreferrer"
                   target="_blank"
@@ -510,7 +510,7 @@ function RouteComponent() {
 
             {/* 9 */}
             <section className="mb-10 scroll-mt-24" id="drittdienste">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 9. Eingebettete Inhalte und Drittdienste
               </h2>
 
@@ -535,7 +535,7 @@ function RouteComponent() {
 
             {/* 10 */}
             <section className="mb-10 scroll-mt-24" id="videokonferenzen">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 10. Videokonferenzen und Online-Beratung
               </h2>
               <p className="mb-4">
@@ -551,7 +551,7 @@ function RouteComponent() {
 
             {/* 11 */}
             <section className="mb-10 scroll-mt-24" id="zahlung">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 11. Zahlungsabwicklung
               </h2>
               <p className="mb-4">
@@ -564,7 +564,7 @@ function RouteComponent() {
 
             {/* 12 */}
             <section className="mb-10 scroll-mt-24" id="empfaenger">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 12. Empfänger und Auftragsverarbeiter im Überblick
               </h2>
               <ul className="space-y-3">
@@ -590,7 +590,7 @@ function RouteComponent() {
 
             {/* 13 */}
             <section className="mb-10 scroll-mt-24" id="drittlaender">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 13. Datenübermittlung in Drittländer
               </h2>
               <p className="mb-4">
@@ -604,7 +604,7 @@ function RouteComponent() {
 
             {/* 14 */}
             <section className="mb-10 scroll-mt-24" id="speicherdauer">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 14. Speicherdauer im Überblick
               </h2>
               <ul className="space-y-2">
@@ -634,7 +634,7 @@ function RouteComponent() {
 
             {/* 15 */}
             <section className="mb-10 scroll-mt-24" id="betroffenenrechte">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 15. Ihre Rechte als betroffene Person
               </h2>
               <ul className="space-y-3">
@@ -673,7 +673,7 @@ function RouteComponent() {
                   gegen die Verarbeitung auf Grundlage von Art. 6 Abs. 1 lit. f
                   DSGVO Widerspruch einzulegen. Widerspruch an:{" "}
                   <a
-                    className="text-[#2563EB] hover:underline"
+                    className="text-primary hover:underline"
                     href="mailto:info@sv-bauten.de"
                   >
                     info@sv-bauten.de
@@ -689,7 +689,7 @@ function RouteComponent() {
                 Nordrhein-Westfalen, Kavalleriestraße 2–4, 40213 Düsseldorf,
                 Telefon: 0211 / 38424-0, E-Mail: poststelle@ldi.nrw.de,{" "}
                 <a
-                  className="text-[#2563EB] hover:underline"
+                  className="text-primary hover:underline"
                   href="https://www.ldi.nrw.de"
                   rel="noopener noreferrer"
                   target="_blank"
@@ -705,7 +705,7 @@ function RouteComponent() {
 
             {/* 16 */}
             <section className="mb-10 scroll-mt-24" id="pflicht">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 16. Pflicht zur Bereitstellung personenbezogener Daten
               </h2>
               <p className="mb-4">
@@ -720,7 +720,7 @@ function RouteComponent() {
 
             {/* 17 */}
             <section className="mb-10 scroll-mt-24" id="profiling">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 17. Automatisierte Entscheidungsfindung und Profiling
               </h2>
               <p className="mb-4">
@@ -733,7 +733,7 @@ function RouteComponent() {
 
             {/* 18 */}
             <section className="mb-10 scroll-mt-24" id="datensicherheit">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 18. Datensicherheit
               </h2>
               <p className="mb-2">Technische Maßnahmen:</p>
@@ -765,7 +765,7 @@ function RouteComponent() {
 
             {/* 19 */}
             <section className="mb-10 scroll-mt-24" id="aktualitaet">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 19. Aktualität und Änderungen dieser Datenschutzerklärung
               </h2>
               <p>

@@ -45,7 +45,7 @@ export default function Testimonials() {
         <div className="mb-12 grid gap-8 md:grid-cols-2">
           {testimonials.map((testimonial, index) => (
             <div
-              className="rounded-xl border-[#2563EB] border-l-4 bg-white p-8 shadow-sm transition-shadow hover:shadow-md"
+              className="rounded-xl border-primary border-l-4 bg-white p-8 shadow-sm transition-shadow hover:shadow-md"
               key={index}
             >
               <div className="mb-3 text-xl text-yellow-400">
@@ -54,7 +54,7 @@ export default function Testimonials() {
               <p className="mb-4 text-gray-600 italic leading-relaxed">
                 "{testimonial.text}"
               </p>
-              <div className="font-semibold text-[#2563EB]">
+              <div className="font-semibold text-primary">
                 {testimonial.author}
               </div>
               <div className="text-gray-500 text-sm">{testimonial.meta}</div>

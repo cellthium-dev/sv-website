@@ -27,7 +27,7 @@ function RouteComponent() {
           <p className="mb-1">
             E-Mail:{" "}
             <a
-              className="text-[#2563EB] hover:underline"
+              className="text-primary hover:underline"
               href="mailto:info@sv-bauten.de"
             >
               info@sv-bauten.de
@@ -50,7 +50,7 @@ function RouteComponent() {
           <p className="mb-1">
             Öffentlich prüfbarer Nachweis im EUcert-Absolventenregister:{" "}
             <a
-              className="text-[#2563EB] hover:underline"
+              className="text-primary hover:underline"
               href="https://www.european-certification.com/absolventen/?search_dc5df=1-25-1092"
               rel="noopener noreferrer"
               target="_blank"

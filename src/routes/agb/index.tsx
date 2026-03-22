@@ -30,67 +30,67 @@ function RouteComponent() {
               </h2>
               <ul className="space-y-1 text-sm">
                 <li>
-                  <a className="text-[#2563EB] hover:underline" href="#par1">
+                  <a className="text-primary hover:underline" href="#par1">
                     § 1 Geltungsbereich und Vertragspartner
                   </a>
                 </li>
                 <li>
-                  <a className="text-[#2563EB] hover:underline" href="#par2">
+                  <a className="text-primary hover:underline" href="#par2">
                     § 2 Vertragsgegenstand und Art der Leistung
                   </a>
                 </li>
                 <li>
-                  <a className="text-[#2563EB] hover:underline" href="#par3">
+                  <a className="text-primary hover:underline" href="#par3">
                     § 3 Vertragsschluss
                   </a>
                 </li>
                 <li>
-                  <a className="text-[#2563EB] hover:underline" href="#par4">
+                  <a className="text-primary hover:underline" href="#par4">
                     § 4 Mitwirkungspflichten des Auftraggebers
                   </a>
                 </li>
                 <li>
-                  <a className="text-[#2563EB] hover:underline" href="#par5">
+                  <a className="text-primary hover:underline" href="#par5">
                     § 5 Termine und Fristen
                   </a>
                 </li>
                 <li>
-                  <a className="text-[#2563EB] hover:underline" href="#par6">
+                  <a className="text-primary hover:underline" href="#par6">
                     § 6 Vergütung und Zahlungsbedingungen
                   </a>
                 </li>
                 <li>
-                  <a className="text-[#2563EB] hover:underline" href="#par7">
+                  <a className="text-primary hover:underline" href="#par7">
                     § 7 Gutachten, Berichte und Urheberrecht
                   </a>
                 </li>
                 <li>
-                  <a className="text-[#2563EB] hover:underline" href="#par8">
+                  <a className="text-primary hover:underline" href="#par8">
                     § 8 Gewährleistung und Haftung
                   </a>
                 </li>
                 <li>
-                  <a className="text-[#2563EB] hover:underline" href="#par9">
+                  <a className="text-primary hover:underline" href="#par9">
                     § 9 Vertraulichkeit und Datenschutz
                   </a>
                 </li>
                 <li>
-                  <a className="text-[#2563EB] hover:underline" href="#par10">
+                  <a className="text-primary hover:underline" href="#par10">
                     § 10 Widerrufsrecht für Verbraucher
                   </a>
                 </li>
                 <li>
-                  <a className="text-[#2563EB] hover:underline" href="#par11">
+                  <a className="text-primary hover:underline" href="#par11">
                     § 11 Eigentumsvorbehalt und Zurückbehaltungsrecht
                   </a>
                 </li>
                 <li>
-                  <a className="text-[#2563EB] hover:underline" href="#par12">
+                  <a className="text-primary hover:underline" href="#par12">
                     § 12 Vertragslaufzeit und Kündigung
                   </a>
                 </li>
                 <li>
-                  <a className="text-[#2563EB] hover:underline" href="#par13">
+                  <a className="text-primary hover:underline" href="#par13">
                     § 13 Schlussbestimmungen
                   </a>
                 </li>
@@ -100,7 +100,7 @@ function RouteComponent() {
           <div className="min-w-0 flex-1 lg:order-1">
             {/* §1 */}
             <section className="mb-10 scroll-mt-24" id="par1">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 § 1 Geltungsbereich und Vertragspartner
               </h2>
 
@@ -168,7 +168,7 @@ function RouteComponent() {
 
             {/* §2 */}
             <section className="mb-10 scroll-mt-24" id="par2">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 § 2 Vertragsgegenstand und Art der Leistung
               </h2>
 
@@ -220,7 +220,7 @@ function RouteComponent() {
 
             {/* §3 */}
             <section className="mb-10 scroll-mt-24" id="par3">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 § 3 Vertragsschluss
               </h2>
 
@@ -284,7 +284,7 @@ function RouteComponent() {
 
             {/* §4 */}
             <section className="mb-10 scroll-mt-24" id="par4">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 § 4 Mitwirkungspflichten des Auftraggebers
               </h2>
 
@@ -354,7 +354,7 @@ function RouteComponent() {
 
             {/* §5 */}
             <section className="mb-10 scroll-mt-24" id="par5">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 § 5 Termine und Fristen
               </h2>
 
@@ -434,7 +434,7 @@ function RouteComponent() {
 
             {/* §6 */}
             <section className="mb-10 scroll-mt-24" id="par6">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 § 6 Vergütung und Zahlungsbedingungen
               </h2>
 
@@ -643,7 +643,7 @@ function RouteComponent() {
 
             {/* §7 */}
             <section className="mb-10 scroll-mt-24" id="par7">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 § 7 Gutachten, Berichte und Urheberrecht
               </h2>
 
@@ -711,7 +711,7 @@ function RouteComponent() {
 
             {/* §8 */}
             <section className="mb-10 scroll-mt-24" id="par8">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 § 8 Gewährleistung und Haftung
               </h2>
 
@@ -782,7 +782,7 @@ function RouteComponent() {
 
             {/* §9 */}
             <section className="mb-10 scroll-mt-24" id="par9">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 § 9 Vertraulichkeit und Datenschutz
               </h2>
 
@@ -803,7 +803,7 @@ function RouteComponent() {
                 nach Maßgabe der DSGVO und des BDSG. Die vollständigen
                 Informationen finden Sie in unserer{" "}
                 <a
-                  className="text-[#2563EB] hover:underline"
+                  className="text-primary hover:underline"
                   href="/datenschutz"
                 >
                   Datenschutzerklärung
@@ -844,7 +844,7 @@ function RouteComponent() {
 
             {/* §10 */}
             <section className="mb-10 scroll-mt-24" id="par10">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 § 10 Widerrufsrecht für Verbraucher
               </h2>
 
@@ -861,7 +861,7 @@ function RouteComponent() {
               <p className="mb-4">
                 Die detaillierte Widerrufsbelehrung und das
                 Muster-Widerrufsformular finden Sie unter{" "}
-                <a className="text-[#2563EB] hover:underline" href="/widerruf">
+                <a className="text-primary hover:underline" href="/widerruf">
                   sv-bauten.de/widerruf
                 </a>{" "}
                 oder werden Ihnen bei Vertragsschluss übermittelt.
@@ -879,7 +879,7 @@ function RouteComponent() {
 
             {/* §11 */}
             <section className="mb-10 scroll-mt-24" id="par11">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 § 11 Eigentumsvorbehalt und Zurückbehaltungsrecht
               </h2>
 
@@ -902,7 +902,7 @@ function RouteComponent() {
 
             {/* §12 */}
             <section className="mb-10 scroll-mt-24" id="par12">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 § 12 Vertragslaufzeit und Kündigung
               </h2>
 
@@ -956,7 +956,7 @@ function RouteComponent() {
 
             {/* §13 */}
             <section className="mb-10 scroll-mt-24" id="par13">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 § 13 Schlussbestimmungen
               </h2>
 

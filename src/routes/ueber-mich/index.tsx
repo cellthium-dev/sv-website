@@ -107,7 +107,7 @@ const whyCards = [
   {
     icon: (
       <svg
-        className="h-6 w-6 text-[#1A73B5]"
+        className="size-6 text-primary"
         fill="none"
         stroke="currentColor"
         strokeWidth={1.5}
@@ -127,7 +127,7 @@ const whyCards = [
   {
     icon: (
       <svg
-        className="h-6 w-6 text-[#1A73B5]"
+        className="size-6 text-primary"
         fill="none"
         stroke="currentColor"
         strokeWidth={1.5}
@@ -147,7 +147,7 @@ const whyCards = [
   {
     icon: (
       <svg
-        className="h-6 w-6 text-[#1A73B5]"
+        className="size-6 text-primary"
         fill="none"
         stroke="currentColor"
         strokeWidth={1.5}
@@ -203,21 +203,21 @@ function UeberMich() {
       <Header />
       <main>
         {/* ── section 1: HERO ── */}
-        <section className="relative overflow-hidden bg-linear-to-br from-[#0F2B46] to-[#1A3A5C] px-6 py-20 md:py-24">
+        <section className="relative overflow-hidden bg-linear-to-br from-[var(--dark-surface)] to-[var(--dark-surface)] px-6 py-20 md:py-24">
           <div className="-right-1/5 -top-1/2 absolute h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,rgba(26,115,181,0.08)_0%,transparent_70%)]" />
           <div className="container mx-auto max-w-[1140px]">
             <div className="grid items-center gap-12 lg:grid-cols-2">
               <div className="relative z-10 lg:order-1">
-                <span className="mb-6 inline-block rounded-full border border-[#D4A03C]/30 bg-[#D4A03C]/15 px-4 py-1.5 font-semibold text-[#D4A03C] text-xs uppercase tracking-widest">
+                <span className="mb-6 inline-block rounded-full border border-[var(--solar)]/30 bg-[var(--solar)]/15 px-4 py-1.5 font-semibold text-[var(--solar)] text-xs uppercase tracking-widest">
                   ISO/IEC 17024 Zertifizierter Sachverständiger
                 </span>
                 <h1 className="mb-2 font-bold text-4xl text-white leading-tight md:text-5xl">
                   Andreas Bauten, M.Sc.
                 </h1>
-                <p className="mb-6 text-[#CBD5E0] text-xl">
+                <p className="mb-6 text-muted-foreground text-xl">
                   Sachverständiger für Photovoltaikanlagen
                 </p>
-                <p className="max-w-[520px] text-[#CBD5E0] leading-[1.75]">
+                <p className="max-w-[520px] text-muted-foreground leading-[1.75]">
                   Als unabhängiger, nach DIN EN ISO/IEC 17024 zertifizierter
                   Sachverständiger für Photovoltaikanlagen verbinde ich über ein
                   Jahrzehnt Erfahrung in Energietechnik, Batteriesicherheit und
@@ -246,10 +246,10 @@ function UeberMich() {
         <section className="bg-white px-6 py-[90px]">
           <div className="container mx-auto max-w-[1140px]">
             <div className="mb-14 translate-y-6 animate-on-scroll text-center opacity-0 transition-all duration-[600ms] ease-out">
-              <h2 className="mb-4 font-semibold text-3xl text-[#0F2B46] leading-snug">
+              <h2 className="mb-4 font-semibold text-3xl text-foreground leading-snug">
                 Was mich als Sachverständigen auszeichnet
               </h2>
-              <p className="mx-auto max-w-[700px] text-[#4A5568]">
+              <p className="mx-auto max-w-[700px] text-muted-foreground">
                 Meine Gutachten basieren nicht nur auf normativer Kompetenz,
                 sondern auf jahrelanger praktischer Ingenieursarbeit an
                 Batterie-, Sicherheits- und Hochvoltsystemen – Erfahrungswerte,
@@ -259,16 +259,16 @@ function UeberMich() {
             <div className="grid gap-7 md:grid-cols-3">
               {whyCards.map((card) => (
                 <div
-                  className="hover:-translate-y-1 translate-y-6 animate-on-scroll rounded-xl border border-[#E2E8F0] bg-white p-8 opacity-0 shadow-[0_2px_8px_rgba(0,0,0,0.06)] transition-all duration-[600ms] ease-out hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)]"
+                  className="hover:-translate-y-1 translate-y-6 animate-on-scroll rounded-xl border border-border bg-white p-8 opacity-0 shadow-[0_2px_8px_rgba(0,0,0,0.06)] transition-all duration-[600ms] ease-out hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)]"
                   key={card.title}
                 >
-                  <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[#1A73B5]/10">
+                  <div className="mb-5 flex size-12 items-center justify-center rounded-xl bg-primary/10">
                     {card.icon}
                   </div>
-                  <h3 className="mb-3 font-semibold text-[#1A73B5] text-xl leading-snug">
+                  <h3 className="mb-3 font-semibold text-primary text-xl leading-snug">
                     {card.title}
                   </h3>
-                  <p className="text-[#4A5568] text-[15px] leading-[1.7]">
+                  <p className="text-muted-foreground text-[15px] leading-[1.7]">
                     {card.desc}
                   </p>
                 </div>
@@ -278,37 +278,37 @@ function UeberMich() {
         </section>
 
         {/* ── section 3: BERUFLICHE MEILENSTEINE ── */}
-        <section className="bg-[#F7F8FA] px-6 py-[90px]">
+        <section className="bg-muted px-6 py-[90px]">
           <div className="container mx-auto max-w-[1140px]">
             <div className="mb-12 translate-y-6 animate-on-scroll opacity-0 transition-all duration-[600ms] ease-out">
-              <h2 className="font-semibold text-3xl text-[#0F2B46] leading-snug">
+              <h2 className="font-semibold text-3xl text-foreground leading-snug">
                 Berufliche Meilensteine
               </h2>
             </div>
-            <div className="relative border-[#1A73B5] border-l-2 pl-10">
+            <div className="relative border-primary border-l-2 pl-10">
               {timelineItems.map((item) => (
                 <div
                   className="relative mb-12 translate-y-6 animate-on-scroll opacity-0 transition-all duration-[600ms] ease-out last:mb-0"
                   key={item.title}
                 >
-                  <div className="-left-[47px] absolute top-0 h-3 w-3 rounded-full border-[#F7F8FA] border-[3px] bg-[#1A73B5] shadow-[0_0_0_2px_#1A73B5]" />
-                  <div className="rounded-xl border border-[#E2E8F0] bg-white p-7 shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
-                    <span className="mb-1.5 block font-semibold text-[#1A73B5] text-sm tracking-[0.3px]">
+                  <div className="-left-[47px] absolute top-0 size-3 rounded-full border-background border-[3px] bg-primary ring-1 ring-primary" />
+                  <div className="rounded-xl border border-border bg-white p-7 shadow-[0_2px_8px_rgba(0,0,0,0.06)]">
+                    <span className="mb-1.5 block font-semibold text-primary text-sm tracking-[0.3px]">
                       {item.date}
                     </span>
-                    <h3 className="mb-1 font-semibold text-[#0F2B46] text-xl">
+                    <h3 className="mb-1 font-semibold text-foreground text-xl">
                       {item.title}
                     </h3>
-                    <p className="mb-3 text-[#4A5568] text-[15px] italic">
+                    <p className="mb-3 text-muted-foreground text-[15px] italic">
                       {item.subtitle}
                     </p>
                     <ul className="space-y-1.5">
                       {item.items.map((li) => (
                         <li
-                          className="relative pl-5 text-[#4A5568] text-[15px] leading-[1.6]"
+                          className="relative pl-5 text-muted-foreground text-[15px] leading-[1.6]"
                           key={li}
                         >
-                          <span className="absolute top-[10px] left-0 block h-1.5 w-1.5 rounded-full bg-[#1A73B5]" />
+                          <span className="absolute top-[10px] left-0 block h-1.5 w-1.5 rounded-full bg-primary" />
                           {li}
                         </li>
                       ))}
@@ -321,20 +321,20 @@ function UeberMich() {
         </section>
 
         {/* ── section 4: BMW PROJEKT ── */}
-        <section className="relative overflow-hidden bg-[#0F2B46] px-6 py-[90px]">
+        <section className="relative overflow-hidden bg-[var(--dark-surface)] px-6 py-[90px]">
           <div className="-right-[100px] -top-[100px] pointer-events-none absolute h-[400px] w-[400px] rounded-full bg-[radial-gradient(circle,rgba(26,115,181,0.1)_0%,transparent_70%)]" />
           <div className="container mx-auto max-w-[1140px]">
-            <span className="mb-5 inline-block translate-y-6 animate-on-scroll rounded-full border border-[#D4A03C]/30 bg-[#D4A03C]/15 px-4 py-1.5 font-semibold text-[#D4A03C] text-xs uppercase tracking-widest opacity-0 transition-all duration-[600ms] ease-out">
+            <span className="mb-5 inline-block translate-y-6 animate-on-scroll rounded-full border border-[var(--solar)]/30 bg-[var(--solar)]/15 px-4 py-1.5 font-semibold text-[var(--solar)] text-xs uppercase tracking-widest opacity-0 transition-all duration-[600ms] ease-out">
               Besonderes Projekt
             </span>
             <h2 className="mb-2 translate-y-6 animate-on-scroll font-semibold text-3xl text-white leading-snug opacity-0 transition-all duration-[600ms] ease-out">
               Vollständige Elektrifizierung eines BMW 3 (Baujahr 1978)
             </h2>
-            <p className="mb-6 translate-y-6 animate-on-scroll text-[#CBD5E0] text-lg opacity-0 transition-all duration-[600ms] ease-out">
+            <p className="mb-6 translate-y-6 animate-on-scroll text-muted-foreground text-lg opacity-0 transition-all duration-[600ms] ease-out">
               Privates Ingenieursprojekt | 2020–2023 | Mit TÜV-EBE-Abnahme und
               Straßenzulassung
             </p>
-            <p className="mb-12 max-w-[700px] translate-y-6 animate-on-scroll text-[#CBD5E0] leading-[1.75] opacity-0 transition-all duration-[600ms] ease-out">
+            <p className="mb-12 max-w-[700px] translate-y-6 animate-on-scroll text-muted-foreground leading-[1.75] opacity-0 transition-all duration-[600ms] ease-out">
               Was als persönliche Leidenschaft begann, wurde zum umfassendsten
               Kompetenznachweis meiner Ingenieurslaufbahn: die vollständige
               Elektrifizierung eines klassischen BMW 3er – von der leeren
@@ -346,7 +346,7 @@ function UeberMich() {
 
             <div className="grid gap-12 lg:grid-cols-2">
               <div className="translate-y-6 animate-on-scroll opacity-0 transition-all duration-[600ms] ease-out">
-                <h3 className="mb-4 font-semibold text-[#D4A03C] text-xl">
+                <h3 className="mb-4 font-semibold text-[var(--solar)] text-xl">
                   Systemintegration & Entwicklung
                 </h3>
                 <ul className="mb-8 space-y-2">
@@ -357,15 +357,15 @@ function UeberMich() {
                     "BMS-Auslegung, Parametrierung, Kalibrierung und Validierung (inkl. Bluetooth-Monitoring)",
                   ].map((li) => (
                     <li
-                      className="relative pl-5 text-[#CBD5E0] text-[15px] leading-[1.6]"
+                      className="relative pl-5 text-muted-foreground text-[15px] leading-[1.6]"
                       key={li}
                     >
-                      <span className="absolute top-[10px] left-0 block h-1.5 w-1.5 rounded-full bg-[#D4A03C]" />
+                      <span className="absolute top-[10px] left-0 block h-1.5 w-1.5 rounded-full bg-[var(--solar)]" />
                       {li}
                     </li>
                   ))}
                 </ul>
-                <h3 className="mb-4 font-semibold text-[#D4A03C] text-xl">
+                <h3 className="mb-4 font-semibold text-[var(--solar)] text-xl">
                   Zulassung & Dokumentation
                 </h3>
                 <ul className="space-y-2">
@@ -376,10 +376,10 @@ function UeberMich() {
                     "Erfolgreiche TÜV-EBE-Abnahme – Nachweis höchster System-, Sicherheits- und Integrationskompetenz",
                   ].map((li) => (
                     <li
-                      className="relative pl-5 text-[#CBD5E0] text-[15px] leading-[1.6]"
+                      className="relative pl-5 text-muted-foreground text-[15px] leading-[1.6]"
                       key={li}
                     >
-                      <span className="absolute top-[10px] left-0 block h-1.5 w-1.5 rounded-full bg-[#D4A03C]" />
+                      <span className="absolute top-[10px] left-0 block h-1.5 w-1.5 rounded-full bg-[var(--solar)]" />
                       {li}
                     </li>
                   ))}
@@ -406,7 +406,7 @@ function UeberMich() {
             <div className="mt-12 flex translate-y-6 animate-on-scroll flex-wrap justify-center gap-4 opacity-0 transition-all duration-[600ms] ease-out">
               {["HV-Kompetenz", "TÜV-EBE-Abnahme"].map((chip) => (
                 <span
-                  className="rounded-full border border-[#1A73B5]/40 bg-[#1A73B5]/25 px-6 py-2 font-semibold text-sm text-white"
+                  className="rounded-full border border-primary/40 bg-primary/25 px-6 py-2 font-semibold text-sm text-white"
                   key={chip}
                 >
                   {chip}
@@ -420,10 +420,10 @@ function UeberMich() {
         <section className="bg-white px-6 py-[90px]">
           <div className="container mx-auto max-w-[1140px]">
             <div className="mb-14 translate-y-6 animate-on-scroll text-center opacity-0 transition-all duration-[600ms] ease-out">
-              <h2 className="mb-4 font-semibold text-3xl text-[#0F2B46] leading-snug">
+              <h2 className="mb-4 font-semibold text-3xl text-foreground leading-snug">
                 Zertifizierungen & Qualifikationen
               </h2>
-              <p className="mx-auto max-w-[700px] text-[#4A5568]">
+              <p className="mx-auto max-w-[700px] text-muted-foreground">
                 Offiziell zertifizierte Kompetenz – jede Qualifikation durch
                 anerkannte Institutionen bestätigt.
               </p>
@@ -431,7 +431,7 @@ function UeberMich() {
             <div className="mb-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {certCards.map((cert) => (
                 <div
-                  className="hover:-translate-y-1 flex translate-y-6 animate-on-scroll flex-col items-center rounded-xl border border-[#E2E8F0] bg-white p-8 text-center opacity-0 shadow-[0_2px_8px_rgba(0,0,0,0.06)] transition-all duration-[600ms] ease-out hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)]"
+                  className="hover:-translate-y-1 flex translate-y-6 animate-on-scroll flex-col items-center rounded-xl border border-border bg-white p-8 text-center opacity-0 shadow-[0_2px_8px_rgba(0,0,0,0.06)] transition-all duration-[600ms] ease-out hover:shadow-[0_8px_24px_rgba(0,0,0,0.1)]"
                   key={cert.title}
                 >
                   <div className="mb-5 flex h-20 items-center justify-center">
@@ -441,17 +441,17 @@ function UeberMich() {
                       src={cert.img}
                     />
                   </div>
-                  <h3 className="mb-2.5 flex min-h-[44px] items-center justify-center font-semibold text-[#1A73B5] text-[17px] leading-snug">
+                  <h3 className="mb-2.5 flex min-h-[44px] items-center justify-center font-semibold text-primary text-[17px] leading-snug">
                     {cert.title}
                   </h3>
-                  <p className="text-[#4A5568] text-sm leading-[1.6]">
+                  <p className="text-muted-foreground text-sm leading-[1.6]">
                     {cert.desc}
                   </p>
                 </div>
               ))}
             </div>
-            <div className="translate-y-6 animate-on-scroll border-[#E2E8F0] border-t pt-6 text-center opacity-0 transition-all duration-[600ms] ease-out">
-              <p className="text-[#4A5568] text-sm">
+            <div className="translate-y-6 animate-on-scroll border-border border-t pt-6 text-center opacity-0 transition-all duration-[600ms] ease-out">
+              <p className="text-muted-foreground text-sm">
                 Zusätzlich: Qualitätserfahrung nach ISO 9001, IATF 16949 sowie
                 Lieferantenaudit-Kompetenz (VDA 6.3)
               </p>
@@ -460,10 +460,10 @@ function UeberMich() {
         </section>
 
         {/* ── section 6: TECHNISCHE KOMPETENZEN ── */}
-        <section className="bg-[#F7F8FA] px-6 py-[90px]">
+        <section className="bg-muted px-6 py-[90px]">
           <div className="container mx-auto max-w-[1140px]">
             <div className="mb-12 translate-y-6 animate-on-scroll opacity-0 transition-all duration-[600ms] ease-out">
-              <h2 className="font-semibold text-3xl text-[#0F2B46] leading-snug">
+              <h2 className="font-semibold text-3xl text-foreground leading-snug">
                 Technische Kompetenzen
               </h2>
             </div>
@@ -493,16 +493,16 @@ function UeberMich() {
                     className="translate-y-6 animate-on-scroll opacity-0 transition-all duration-[600ms] ease-out"
                     key={group.title}
                   >
-                    <h3 className="mb-4 border-[#1A73B5]/15 border-b-2 pb-2 font-semibold text-[#1A73B5] text-xl">
+                    <h3 className="mb-4 border-primary/15 border-b-2 pb-2 font-semibold text-primary text-xl">
                       {group.title}
                     </h3>
                     <ul className="space-y-2">
                       {group.items.map((li) => (
                         <li
-                          className="relative pl-5 text-[#4A5568] text-[15px] leading-[1.6]"
+                          className="relative pl-5 text-muted-foreground text-[15px] leading-[1.6]"
                           key={li}
                         >
-                          <span className="absolute top-[10px] left-0 block h-1.5 w-1.5 rounded-full bg-[#1A73B5]" />
+                          <span className="absolute top-[10px] left-0 block h-1.5 w-1.5 rounded-full bg-primary" />
                           {li}
                         </li>
                       ))}
@@ -537,16 +537,16 @@ function UeberMich() {
                     className="translate-y-6 animate-on-scroll opacity-0 transition-all duration-[600ms] ease-out"
                     key={group.title}
                   >
-                    <h3 className="mb-4 border-[#1A73B5]/15 border-b-2 pb-2 font-semibold text-[#1A73B5] text-xl">
+                    <h3 className="mb-4 border-primary/15 border-b-2 pb-2 font-semibold text-primary text-xl">
                       {group.title}
                     </h3>
                     <ul className="space-y-2">
                       {group.items.map((li) => (
                         <li
-                          className="relative pl-5 text-[#4A5568] text-[15px] leading-[1.6]"
+                          className="relative pl-5 text-muted-foreground text-[15px] leading-[1.6]"
                           key={li}
                         >
-                          <span className="absolute top-[10px] left-0 block h-1.5 w-1.5 rounded-full bg-[#1A73B5]" />
+                          <span className="absolute top-[10px] left-0 block h-1.5 w-1.5 rounded-full bg-primary" />
                           {li}
                         </li>
                       ))}
@@ -561,10 +561,10 @@ function UeberMich() {
         {/* ── section 7: STANDORT & CTA ── */}
         <section className="bg-white px-6 py-[90px] text-center">
           <div className="container mx-auto max-w-[1140px]">
-            <h2 className="mb-4 translate-y-6 animate-on-scroll font-semibold text-3xl text-[#0F2B46] leading-snug opacity-0 transition-all duration-[600ms] ease-out">
+            <h2 className="mb-4 translate-y-6 animate-on-scroll font-semibold text-3xl text-foreground leading-snug opacity-0 transition-all duration-[600ms] ease-out">
               Standort & Tätigkeitsbereich
             </h2>
-            <p className="mx-auto mb-8 max-w-[700px] translate-y-6 animate-on-scroll text-[#4A5568] opacity-0 transition-all duration-[600ms] ease-out">
+            <p className="mx-auto mb-8 max-w-[700px] translate-y-6 animate-on-scroll text-muted-foreground opacity-0 transition-all duration-[600ms] ease-out">
               Standort: Aachen, Nordrhein-Westfalen. Bundesweit tätig mit
               Schwerpunkt NRW, Rheinland, Ruhrgebiet und Niederrhein.
               Online-Gutachten und Ferndiagnosen deutschlandweit möglich.
@@ -579,7 +579,7 @@ function UeberMich() {
                 "Bundesweit",
               ].map((tag) => (
                 <span
-                  className="rounded-full bg-[#E2E8F0] px-[18px] py-1.5 font-medium text-[#0F2B46] text-sm"
+                  className="rounded-full bg-muted px-[18px] py-1.5 font-medium text-foreground text-sm"
                   key={tag}
                 >
                   {tag}
@@ -588,7 +588,7 @@ function UeberMich() {
             </div>
             <div className="mb-10 translate-y-6 animate-on-scroll opacity-0 transition-all duration-[600ms] ease-out">
               <Link
-                className="hover:-translate-y-0.5 inline-block rounded-lg bg-[#1A73B5] px-10 py-4 font-semibold text-base text-white transition-all hover:bg-[#0F2B46]"
+                className="hover:-translate-y-0.5 inline-block rounded-lg bg-primary px-10 py-4 font-semibold text-base text-white transition-all hover:bg-[var(--dark-surface)]"
                 hash="kontakt"
                 to="/"
               >

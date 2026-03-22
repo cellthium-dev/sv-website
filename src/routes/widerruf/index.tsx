@@ -73,13 +73,13 @@ function RouteComponent() {
               </h2>
               <ol className="list-decimal space-y-1 pl-4 text-sm">
                 <li>
-                  <a className="text-[#2563EB] hover:underline" href="#geltung">
+                  <a className="text-primary hover:underline" href="#geltung">
                     Für wen gilt das Widerrufsrecht?
                   </a>
                 </li>
                 <li>
                   <a
-                    className="text-[#2563EB] hover:underline"
+                    className="text-primary hover:underline"
                     href="#belehrung"
                   >
                     Widerrufsbelehrung
@@ -87,7 +87,7 @@ function RouteComponent() {
                 </li>
                 <li>
                   <a
-                    className="text-[#2563EB] hover:underline"
+                    className="text-primary hover:underline"
                     href="#wertersatz"
                   >
                     Erläuterungen zum Wertersatz
@@ -95,7 +95,7 @@ function RouteComponent() {
                 </li>
                 <li>
                   <a
-                    className="text-[#2563EB] hover:underline"
+                    className="text-primary hover:underline"
                     href="#formular"
                   >
                     Muster-Widerrufsformular
@@ -103,20 +103,20 @@ function RouteComponent() {
                 </li>
                 <li>
                   <a
-                    className="text-[#2563EB] hover:underline"
+                    className="text-primary hover:underline"
                     href="#verhaeltnis"
                   >
                     Verhältnis zu unseren AGB
                   </a>
                 </li>
                 <li>
-                  <a className="text-[#2563EB] hover:underline" href="#kontakt">
+                  <a className="text-primary hover:underline" href="#kontakt">
                     Kontakt bei Fragen
                   </a>
                 </li>
                 <li>
                   <a
-                    className="text-[#2563EB] hover:underline"
+                    className="text-primary hover:underline"
                     href="#grundlagen"
                   >
                     Rechtliche Grundlagen
@@ -127,7 +127,7 @@ function RouteComponent() {
           </aside>
           <div className="min-w-0 flex-1 lg:order-1">
             <section className="mb-10 scroll-mt-24" id="geltung">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 1. Für wen gilt das Widerrufsrecht?
               </h2>
               <p className="mb-4">
@@ -171,7 +171,7 @@ function RouteComponent() {
             </section>
 
             <section className="mb-10 scroll-mt-24" id="belehrung">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 2. Widerrufsbelehrung
               </h2>
               <p className="mb-4 text-gray-600 text-sm">
@@ -205,7 +205,7 @@ function RouteComponent() {
                   <br />
                   E-Mail:{" "}
                   <a
-                    className="text-[#2563EB] hover:underline"
+                    className="text-primary hover:underline"
                     href="mailto:info@sv-bauten.de"
                   >
                     info@sv-bauten.de
@@ -251,7 +251,7 @@ function RouteComponent() {
             </section>
 
             <section className="mb-10 scroll-mt-24" id="wertersatz">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 3. Erläuterungen zum Wertersatz bei vorzeitigem Leistungsbeginn
               </h2>
 
@@ -325,7 +325,7 @@ function RouteComponent() {
             </section>
 
             <section className="mb-10 scroll-mt-24" id="formular">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 4. Muster-Widerrufsformular
               </h2>
               <p className="mb-4 text-gray-600 text-sm">
@@ -376,12 +376,12 @@ function RouteComponent() {
             </section>
 
             <section className="mb-10 scroll-mt-24" id="verhaeltnis">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 5. Verhältnis zu unseren AGB
               </h2>
               <p className="mb-4">
                 Diese Widerrufsbelehrung ergänzt unsere{" "}
-                <a className="text-[#2563EB] hover:underline" href="/agb">
+                <a className="text-primary hover:underline" href="/agb">
                   Allgemeinen Geschäftsbedingungen (AGB)
                 </a>
                 , insbesondere § 10 AGB (Widerrufsrecht für Verbraucher), § 2.1
@@ -392,7 +392,7 @@ function RouteComponent() {
             </section>
 
             <section className="mb-10 scroll-mt-24" id="kontakt">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 6. Kontakt bei Fragen zum Widerrufsrecht
               </h2>
               <address className="not-italic">
@@ -404,7 +404,7 @@ function RouteComponent() {
                 <p className="mb-1">
                   E-Mail:{" "}
                   <a
-                    className="text-[#2563EB] hover:underline"
+                    className="text-primary hover:underline"
                     href="mailto:info@sv-bauten.de"
                   >
                     info@sv-bauten.de
@@ -415,7 +415,7 @@ function RouteComponent() {
             </section>
 
             <section className="mb-10 scroll-mt-24" id="grundlagen">
-              <h2 className="mb-4 font-bold text-[#2563EB] text-xl">
+              <h2 className="mb-4 font-bold text-primary text-xl">
                 7. Rechtliche Grundlagen
               </h2>
               <p>
