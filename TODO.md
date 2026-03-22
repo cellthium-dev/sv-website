@@ -14,4 +14,7 @@
 [x] fix scroll to bottom on the page
 [x] clean up style with shadcn/ui
 use frontend + shadcn ui skills for the agent
+[x] replace windows icons with react lib icons
+[ ] unify and standardized primary color
+[ ] create a system design
 [ ] use themes and and dark mode

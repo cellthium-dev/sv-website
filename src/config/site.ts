@@ -28,10 +28,10 @@ export const siteConfig = {
 
   /** Trust / credential badges shown in the hero */
   badges: [
-    { icon: "✓", text: "ISO-17024 zertifiziert" },
-    { icon: "⚡", text: "BDSF-Mitglied" },
-    { icon: "🔒", text: "Functional Safety Expert" },
-    { icon: "🎓", text: "M.Sc. Elektrotechnik" },
+    { text: "ISO-17024 zertifiziert" },
+    { text: "BDSF-Mitglied" },
+    { text: "Functional Safety Expert" },
+    { text: "M.Sc. Elektrotechnik" },
   ],
 
   /** Hero section */
@@ -46,7 +46,7 @@ export const siteConfig = {
   /** Services offered */
   services: [
     {
-      icon: "📋",
+      iconKey: "clipboard-list",
       title: "Technische Gutachten",
       description:
         "Umfassende technische Begutachtung von Photovoltaikanlagen und Batteriespeichersystemen nach VDE/DIN-Normen.",
@@ -61,7 +61,7 @@ export const siteConfig = {
       highlight: false,
     },
     {
-      icon: "🔍",
+      iconKey: "scan-search",
       title: "Schadenanalyse",
       description:
         "Detaillierte Untersuchung von Schäden und Leistungsminderungen an PV-Anlagen und Batteriesystemen.",
@@ -76,7 +76,7 @@ export const siteConfig = {
       highlight: false,
     },
     {
-      icon: "💰",
+      iconKey: "trending-up",
       title: "Wirtschaftlichkeitsprüfung",
       description:
         "Analyse und Bewertung der Wirtschaftlichkeit und Ertragsprognose Ihrer PV-Anlage.",
@@ -91,7 +91,7 @@ export const siteConfig = {
       highlight: false,
     },
     {
-      icon: "🏗️",
+      iconKey: "wrench",
       title: "Beratung für Installateure",
       description:
         "Fachliche Unterstützung für Installationsbetriebe bei komplexen Projekten.",
@@ -106,7 +106,7 @@ export const siteConfig = {
       highlight: false,
     },
     {
-      icon: "🛡️",
+      iconKey: "shield-check",
       title: "Versicherungsberatung",
       description:
         "Neutrale Expertise für Versicherungen bei Schadenfällen und Leistungsbewertungen.",
@@ -121,7 +121,7 @@ export const siteConfig = {
       highlight: false,
     },
     {
-      icon: "💻",
+      iconKey: "monitor",
       title: "Online-Gutachten",
       description:
         "Schnelle Erstbewertung per Bild-Upload mit Festpreis-Transparenz.",

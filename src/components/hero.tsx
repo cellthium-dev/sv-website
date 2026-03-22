@@ -2,13 +2,14 @@ import {
   ArrowRightIcon,
   CheckCircle2Icon,
   GraduationCapIcon,
+  type LucideIcon,
   ShieldCheckIcon,
   ZapIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
 
-const badgeIcons = [
+const badgeIcons: LucideIcon[] = [
   CheckCircle2Icon,
   ZapIcon,
   ShieldCheckIcon,

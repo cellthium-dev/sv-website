@@ -1,4 +1,3 @@
-import { ArrowRightIcon, CheckIcon, StarIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -11,6 +10,28 @@ import {
 } from "@/components/ui/card";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
+import {
+  ArrowRightIcon,
+  CheckIcon,
+  ClipboardListIcon,
+  FileTextIcon,
+  type LucideIcon,
+  MonitorIcon,
+  ScanSearchIcon,
+  ShieldCheckIcon,
+  StarIcon,
+  TrendingUpIcon,
+  WrenchIcon,
+} from "lucide-react";
+
+const SERVICE_ICONS: Record<string, LucideIcon> = {
+  "clipboard-list": ClipboardListIcon,
+  "scan-search": ScanSearchIcon,
+  "trending-up": TrendingUpIcon,
+  wrench: WrenchIcon,
+  "shield-check": ShieldCheckIcon,
+  monitor: MonitorIcon,
+};
 
 const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
   e.preventDefault();
@@ -62,7 +83,12 @@ export default function Services() {
               )}
 
               <CardHeader className="pb-2">
-                <div className="mb-3 text-3xl">{service.icon}</div>
+                <div className="mb-3 flex size-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  {(() => {
+                    const Icon = SERVICE_ICONS[service.iconKey];
+                    return Icon ? <Icon className="size-5" /> : null;
+                  })()}
+                </div>
                 <CardTitle
                   className={cn(
                     "font-bold text-xl",
@@ -113,7 +139,7 @@ export default function Services() {
             className="inline-flex items-center gap-2.5 rounded-lg border border-border px-5 py-3 font-medium text-muted-foreground text-sm transition-all hover:border-primary/30 hover:bg-primary/5 hover:text-primary"
             href="#"
           >
-            <span>📄</span>
+            <FileTextIcon className="size-4 shrink-0" />
             Leistungsübersicht als PDF herunterladen
           </a>
         </div>
