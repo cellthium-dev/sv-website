@@ -8,7 +8,7 @@
 [x] add easier copy at widderuf page
 [x] fix cal.eu with light theme
 [x] update about me page
-[ ] update icon and title for the website
+[x] update favicon and title for the website
 [ ] fix cal.eu embedded link
 [ ] use frontend + shadcn ui skills for the agent
 [ ] clean up style with shadcn/ui
