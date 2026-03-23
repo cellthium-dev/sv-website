@@ -32,7 +32,9 @@ export default function Header() {
             <img
               alt="SV Bauten Logo"
               className="size-9 shrink-0"
+              height={36}
               src="/favicon.svg"
+              width={36}
             />
             <div className="flex flex-col leading-none">
               <span
@@ -48,17 +50,27 @@ export default function Header() {
           </Link>
 
           {/* Desktop nav */}
-          <nav className="hidden items-center gap-1 md:flex" role="navigation">
-            {siteConfig.nav.map((item) => (
-              <a
-                className="rounded-md px-4 py-2 font-medium text-muted-foreground text-sm transition-all hover:bg-muted hover:text-foreground"
-                href={item.href}
-                key={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-              >
-                {item.label}
-              </a>
-            ))}
+          <nav className="hidden items-center gap-1 md:flex">
+            {siteConfig.nav.map((item) =>
+              item.href.startsWith("/") ? (
+                <Link
+                  className="rounded-md px-4 py-2 font-medium text-muted-foreground text-sm transition-all hover:bg-muted hover:text-foreground"
+                  key={item.href}
+                  to={item.href as never}
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <a
+                  className="rounded-md px-4 py-2 font-medium text-muted-foreground text-sm transition-all hover:bg-muted hover:text-foreground"
+                  href={item.href}
+                  key={item.href}
+                  onClick={(e) => handleNavClick(e, item.href)}
+                >
+                  {item.label}
+                </a>
+              )
+            )}
             <Link
               className="rounded-md px-4 py-2 font-medium text-muted-foreground text-sm transition-all hover:bg-muted hover:text-foreground"
               to="/ueber-mich"
@@ -66,13 +78,22 @@ export default function Header() {
               Über mich
             </Link>
             <div className="ml-2">
-              <Button asChild className="h-9 px-5 font-semibold" size="sm">
-                <a
-                  href="#kontakt"
-                  onClick={(e) => handleNavClick(e, "#kontakt")}
-                >
-                  Kontakt
-                </a>
+              <Button
+                className="h-9 px-5 font-semibold"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  const target = document.querySelector("#kontakt");
+                  if (target) {
+                    target.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }
+                }}
+                size="sm"
+                type="button"
+              >
+                Kontakt
               </Button>
             </div>
           </nav>
@@ -83,6 +104,7 @@ export default function Header() {
             aria-label={isMenuOpen ? "Menü schließen" : "Menü öffnen"}
             className="flex size-9 items-center justify-center rounded-md text-foreground transition-colors hover:bg-muted md:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            type="button"
           >
             {isMenuOpen ? (
               <XIcon className="size-5" />
@@ -100,17 +122,28 @@ export default function Header() {
           )}
         >
           <Separator className="mb-3" />
-          <nav className="flex flex-col gap-1" role="navigation">
-            {siteConfig.nav.map((item) => (
-              <a
-                className="rounded-md px-3 py-2.5 font-medium text-foreground text-sm transition-all hover:bg-muted"
-                href={item.href}
-                key={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-              >
-                {item.label}
-              </a>
-            ))}
+          <nav className="flex flex-col gap-1">
+            {siteConfig.nav.map((item) =>
+              item.href.startsWith("/") ? (
+                <Link
+                  className="rounded-md px-3 py-2.5 font-medium text-foreground text-sm transition-all hover:bg-muted"
+                  key={item.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  to={item.href as never}
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <a
+                  className="rounded-md px-3 py-2.5 font-medium text-foreground text-sm transition-all hover:bg-muted"
+                  href={item.href}
+                  key={item.href}
+                  onClick={(e) => handleNavClick(e, item.href)}
+                >
+                  {item.label}
+                </a>
+              )
+            )}
             <Link
               className="rounded-md px-3 py-2.5 font-medium text-foreground text-sm transition-all hover:bg-muted"
               onClick={() => setIsMenuOpen(false)}
@@ -119,13 +152,21 @@ export default function Header() {
               Über mich
             </Link>
             <div className="mt-2 px-3">
-              <Button asChild className="w-full font-semibold">
-                <a
-                  href="#kontakt"
-                  onClick={(e) => handleNavClick(e, "#kontakt")}
-                >
-                  Kontakt aufnehmen
-                </a>
+              <Button
+                className="w-full font-semibold"
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  const target = document.querySelector("#kontakt");
+                  if (target) {
+                    target.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }
+                }}
+                type="button"
+              >
+                Kontakt aufnehmen
               </Button>
             </div>
           </nav>

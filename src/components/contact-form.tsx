@@ -1,5 +1,14 @@
+import { Link } from "@tanstack/react-router";
+import {
+  CheckIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  MailIcon,
+  MapPinIcon,
+  SendIcon,
+} from "lucide-react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -13,17 +22,8 @@ import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
-import { Link } from "@tanstack/react-router";
-import {
-  CheckIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  MailIcon,
-  MapPinIcon,
-  SendIcon,
-} from "lucide-react";
-import { useState } from "react";
 import type { FormData } from "../types";
+import { Checkbox } from "./ui/checkbox";
 
 const STEPS = ["Anfragetyp", "Details", "Kontaktdaten", "Bestätigung"];
 

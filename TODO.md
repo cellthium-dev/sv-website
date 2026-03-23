@@ -20,6 +20,7 @@ use frontend + shadcn ui skills for the agent
 [x] fix logo in the footer
 [x] fix mobile mode
 [x] add linter and formatter
+[x] clean up extensions and setup formatter
 [ ] article for the website
 create new site for the website
 [ ] handle contact form and online termin buchung

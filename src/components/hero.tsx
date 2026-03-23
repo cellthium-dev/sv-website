@@ -1,5 +1,3 @@
-import { Button } from "@/components/ui/button";
-import { siteConfig } from "@/config/site";
 import {
   ArrowRightIcon,
   CheckCircle2Icon,
@@ -8,6 +6,8 @@ import {
   ShieldCheckIcon,
   ZapIcon,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { siteConfig } from "@/config/site";
 
 const badgeIcons: LucideIcon[] = [
   CheckCircle2Icon,
@@ -15,13 +15,6 @@ const badgeIcons: LucideIcon[] = [
   ShieldCheckIcon,
   GraduationCapIcon,
 ];
-
-const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-  e.preventDefault();
-  document
-    .querySelector(href)
-    ?.scrollIntoView({ behavior: "smooth", block: "start" });
-};
 
 export default function Hero() {
   return (
@@ -69,21 +62,30 @@ export default function Hero() {
 
         {/* CTAs */}
         <div className="mb-16 flex animate-fade-in flex-col gap-4 opacity-0 delay-300 sm:flex-row">
-          <Button asChild className="h-12 px-8 font-semibold text-base">
-            <a href="#kontakt" onClick={(e) => scrollTo(e, "#kontakt")}>
-              Jetzt Beratung buchen
-              <ArrowRightIcon />
-            </a>
+          <Button
+            className="h-12 px-8 font-semibold text-base"
+            onClick={() =>
+              document
+                .querySelector("#kontakt")
+                ?.scrollIntoView({ behavior: "smooth", block: "start" })
+            }
+            type="button"
+          >
+            Jetzt Beratung buchen
+            <ArrowRightIcon />
           </Button>
 
           <Button
-            asChild
             className="h-12 border-white/20 bg-transparent px-8 font-semibold text-[var(--dark-surface-foreground)] text-base hover:border-white/30 hover:bg-white/10 hover:text-white"
+            onClick={() =>
+              document
+                .querySelector("#leistungen")
+                ?.scrollIntoView({ behavior: "smooth", block: "start" })
+            }
+            type="button"
             variant="outline"
           >
-            <a href="#leistungen" onClick={(e) => scrollTo(e, "#leistungen")}>
-              Leistungen ansehen
-            </a>
+            Leistungen ansehen
           </Button>
         </div>
 
@@ -96,7 +98,9 @@ export default function Hero() {
                 className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 font-medium text-[var(--dark-surface-foreground)]/80 text-sm"
                 key={badge.text}
               >
-                {Icon && <Icon className="size-4 shrink-0 text-primary" />}
+                {Icon ? (
+                  <Icon className="size-4 shrink-0 text-primary" />
+                ) : null}
                 {badge.text}
               </div>
             );
@@ -107,10 +111,11 @@ export default function Hero() {
       {/* Bottom decorative edge */}
       <div className="absolute right-0 bottom-0 left-0">
         <svg
-          aria-hidden
+          aria-hidden={true}
           className="h-8 w-full"
           fill="none"
           preserveAspectRatio="none"
+          role="presentation"
           viewBox="0 0 1440 32"
         >
           <path d="M0 32L1440 0V32H0Z" fill="var(--background)" />

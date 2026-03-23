@@ -1,9 +1,9 @@
+import { CalendarIcon, SearchIcon } from "lucide-react";
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { CalendarIcon, SearchIcon } from "lucide-react";
-import { useState } from "react";
 import type { Article } from "../types";
 
 const articles: Article[] = [
@@ -158,6 +158,7 @@ export default function KnowledgeBase() {
                 )}
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
+                type="button"
               >
                 {cat.label}
               </button>
@@ -176,8 +177,10 @@ export default function KnowledgeBase() {
                 <img
                   alt={article.title}
                   className="h-44 w-full flex-shrink-0 rounded-xl object-cover md:w-48"
+                  height={176}
                   loading="lazy"
                   src={article.image}
+                  width={192}
                 />
                 <div className="flex flex-1 flex-col">
                   <div className="mb-3 flex items-center gap-3">
