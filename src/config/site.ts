@@ -23,7 +23,7 @@ export const siteConfig = {
   nav: [
     { label: "Startseite", href: "#home" },
     { label: "Leistungen", href: "#leistungen" },
-    { label: "Wissen", href: "#wissen" },
+    { label: "Wissen", href: "/wissen" },
   ] as Array<{ label: string; href: string }>,
 
   /** Trust / credential badges shown in the hero */
@@ -147,7 +147,7 @@ export const siteConfig = {
     ],
     info: [
       { label: "Über mich", href: "#ueber-mich" },
-      { label: "Wissensbereich", href: "#wissen" },
+      { label: "Wissensbereich", href: "/wissen" },
       { label: "Kontakt", href: "#kontakt" },
     ],
     legal: [
