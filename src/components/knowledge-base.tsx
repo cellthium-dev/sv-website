@@ -1,9 +1,9 @@
-import { CalendarIcon, SearchIcon } from "lucide-react";
-import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { CalendarIcon, SearchIcon } from "lucide-react";
+import { useState } from "react";
 import type { Article } from "../types";
 
 const articles: Article[] = [
@@ -103,10 +103,7 @@ export default function KnowledgeBase() {
   });
 
   return (
-    <section
-      className="scroll-mt-60 py-20 md:scroll-mt-[4.5rem] md:py-28"
-      id="wissen"
-    >
+    <section className="scroll-mt-60 py-20 md:scroll-mt-0 md:py-28" id="wissen">
       <div className="section-container">
         {/* Section header */}
         <div className="mb-14 max-w-2xl">

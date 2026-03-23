@@ -1,3 +1,15 @@
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { siteConfig } from "@/config/site";
+import { cn } from "@/lib/utils";
 import {
   ArrowRightIcon,
   CheckIcon,
@@ -11,18 +23,6 @@ import {
   TrendingUpIcon,
   WrenchIcon,
 } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { siteConfig } from "@/config/site";
-import { cn } from "@/lib/utils";
 
 const SERVICE_ICONS: Record<string, LucideIcon> = {
   "clipboard-list": ClipboardListIcon,
@@ -43,7 +43,7 @@ const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
 export default function Services() {
   return (
     <section
-      className="scroll-mt-60 py-20 md:scroll-mt-[4.5rem] md:py-28"
+      className="scroll-mt-60 py-20 md:scroll-mt-0 md:py-28"
       id="leistungen"
     >
       <div className="section-container">

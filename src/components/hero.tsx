@@ -26,7 +26,7 @@ const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
 export default function Hero() {
   return (
     <section
-      className="relative scroll-mt-16 overflow-hidden bg-[var(--dark-surface)] text-[var(--dark-surface-foreground)] md:scroll-mt-[4.5rem]"
+      className="relative scroll-mt-40 overflow-hidden bg-[var(--dark-surface)] text-[var(--dark-surface-foreground)] md:scroll-mt-16"
       id="home"
     >
       {/* Geometric background accent */}
