@@ -11,7 +11,9 @@ function RouteComponent() {
     <div>
       <Header />
       <main className="container mx-auto max-w-6xl px-5 py-16">
-        <h1 className="mb-2 font-bold text-3xl">Datenschutzerklärung</h1>
+        <h1 className="mb-2 hyphens-auto font-bold text-3xl">
+          Datenschutzerklärung
+        </h1>
         <p className="mb-10 text-gray-500 text-sm">Stand: 13.03.2026</p>
 
         <div className="relative lg:flex lg:items-start lg:gap-10">

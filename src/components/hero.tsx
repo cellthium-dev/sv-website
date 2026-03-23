@@ -38,9 +38,9 @@ export default function Hero() {
         <div className="-top-32 -right-32 absolute size-[600px] rounded-full border border-white/5" />
         <div className="-top-16 -right-16 absolute size-[400px] rounded-full border border-white/5" />
         {/* Primary blue gradient glow */}
-        <div className="absolute top-0 right-0 h-full w-1/3 bg-gradient-to-l from-primary/10 to-transparent" />
+        <div className="absolute top-0 right-0 h-full w-1/3 bg-linear-to-l from-primary/10 to-transparent" />
         {/* Bottom grid line */}
-        <div className="absolute right-0 bottom-0 left-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+        <div className="absolute right-0 bottom-0 left-0 h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
       </div>
 
       <div className="section-container relative py-20 md:py-28 lg:py-36">

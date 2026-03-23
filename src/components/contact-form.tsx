@@ -13,6 +13,7 @@ import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
+import { Link } from "@tanstack/react-router";
 import {
   CheckIcon,
   ChevronLeftIcon,
@@ -107,9 +108,6 @@ export default function ContactForm() {
     }
     if (currentStep < 4) {
       setCurrentStep((s) => s + 1);
-      document
-        .getElementById("kontakt")
-        ?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 
@@ -148,9 +146,9 @@ export default function ContactForm() {
           </p>
         </div>
 
-        <div className="grid gap-8 lg:grid-cols-[1fr_320px]">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_320px]">
           {/* Form card */}
-          <div className="rounded-2xl border border-border bg-card p-6 md:p-8">
+          <div className="min-w-0 rounded-2xl border border-border bg-card p-6 md:p-8">
             {submitted ? (
               /* Success state */
               <div className="flex flex-col items-center justify-center gap-4 py-16 text-center">
@@ -309,7 +307,7 @@ export default function ContactForm() {
                           <span className="text-destructive">*</span>
                         </Label>
                         <Textarea
-                          className="resize-none"
+                          className="field-sizing-fixed min-h-[160px] resize-y text-sm"
                           id="description"
                           onChange={(e) =>
                             updateField("description", e.target.value)
@@ -497,16 +495,16 @@ export default function ContactForm() {
                             onCheckedChange={(v) => updateField("privacy", !!v)}
                           />
                           <Label
-                            className="cursor-pointer font-normal text-sm leading-relaxed"
+                            className="inline cursor-pointer font-normal text-sm leading-relaxed"
                             htmlFor="privacy"
                           >
                             Ich habe die{" "}
-                            <a
+                            <Link
                               className="text-primary hover:underline"
-                              href="/datenschutz"
+                              to="/datenschutz"
                             >
                               Datenschutzerklärung
-                            </a>{" "}
+                            </Link>{" "}
                             zur Kenntnis genommen und stimme der
                             Datenspeicherung für die Kontaktaufnahme zu.{" "}
                             <span className="text-destructive">*</span>
@@ -564,7 +562,7 @@ export default function ContactForm() {
                         Zusammenfassung Ihrer Anfrage
                       </h3>
 
-                      <div className="flex flex-col gap-2.5 rounded-xl border border-border bg-muted/40 p-5 text-sm">
+                      <div className="flex flex-col gap-2 hyphens-auto rounded-xl border border-border bg-muted/40 p-5 text-sm md:gap-2.5">
                         {[
                           {
                             label: "Anfragetyp",
@@ -590,11 +588,14 @@ export default function ContactForm() {
                         ]
                           .filter(Boolean)
                           .map((row) => (
-                            <div className="flex gap-3" key={row!.label}>
+                            <div
+                              className="flex gap-1 md:gap-3"
+                              key={row!.label}
+                            >
                               <span className="w-28 shrink-0 font-semibold text-foreground">
                                 {row!.label}:
                               </span>
-                              <span className="text-muted-foreground">
+                              <span className="min-w-0 break-words text-muted-foreground">
                                 {row!.value}
                               </span>
                             </div>
@@ -623,7 +624,7 @@ export default function ContactForm() {
                         </ul>
                       </div>
 
-                      <div className="flex justify-between pt-2">
+                      <div className="flex items-center justify-between pt-2">
                         <Button
                           className="px-6 font-semibold"
                           onClick={prevStep}
@@ -634,11 +635,11 @@ export default function ContactForm() {
                           Zurück
                         </Button>
                         <Button
-                          className="h-11 border-0 bg-[var(--solar)] px-8 font-semibold text-[var(--solar-foreground)] hover:bg-[var(--solar)]/90"
+                          className="w-fit border-0 bg-solar px-4 font-semibold text-solar-foreground hover:bg-solar/90"
                           type="submit"
                         >
-                          Anfrage absenden
-                          <SendIcon data-icon="inline-end" />
+                          <SendIcon />
+                          <p>Anfrage absenden</p>
                         </Button>
                       </div>
                     </div>
