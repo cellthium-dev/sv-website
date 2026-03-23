@@ -77,20 +77,82 @@ const getCustomerTypeLabel = (v: string) =>
 const isCompanyType = (v: string) =>
   v === "unternehmen" || v === "installateur";
 
+function StepIndicatorItem({
+  label,
+  step,
+  index,
+  currentStep,
+  totalSteps,
+}: {
+  label: string;
+  step: number;
+  index: number;
+  currentStep: number;
+  totalSteps: number;
+}) {
+  const done = currentStep > step;
+  const active = currentStep === step;
+  let circleClass: string;
+  if (done) {
+    circleClass = "border-primary bg-primary text-primary-foreground";
+  } else if (active) {
+    circleClass = "border-primary bg-background text-primary";
+  } else {
+    circleClass = "border-border bg-background text-muted-foreground";
+  }
+  let labelClass: string;
+  if (active) {
+    labelClass = "text-primary";
+  } else if (done) {
+    labelClass = "text-foreground";
+  } else {
+    labelClass = "text-muted-foreground";
+  }
+  return (
+    <div className="flex flex-1 items-center" key={step}>
+      <div className="flex flex-col items-center gap-1.5">
+        <div
+          className={cn(
+            "flex size-8 items-center justify-center rounded-full border-2 font-bold text-xs transition-all",
+            circleClass
+          )}
+        >
+          {done ? <CheckIcon className="size-3.5" /> : <span>{step}</span>}
+        </div>
+        <span className={cn("hidden font-medium text-xs sm:block", labelClass)}>
+          {label}
+        </span>
+      </div>
+      {index < totalSteps - 1 ? (
+        <div
+          className={cn(
+            "mx-2 h-px flex-1 transition-colors",
+            done ? "bg-primary" : "bg-border"
+          )}
+        />
+      ) : null}
+    </div>
+  );
+}
+
 export default function ContactForm() {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>(EMPTY_FORM);
   const [submitted, setSubmitted] = useState(false);
+  const [validationError, setValidationError] = useState("");
 
   const updateField = (key: keyof FormData, value: string | boolean) => {
     setFormData((prev) => ({ ...prev, [key]: value }));
   };
 
   const validateStep = (step: number): boolean => {
-    if (step === 1)
+    if (step === 1) {
       return formData.requestType !== "" && formData.customerType !== "";
-    if (step === 2) return formData.description.trim() !== "";
-    if (step === 3)
+    }
+    if (step === 2) {
+      return formData.description.trim() !== "";
+    }
+    if (step === 3) {
       return (
         formData.firstName.trim() !== "" &&
         formData.lastName.trim() !== "" &&
@@ -98,21 +160,25 @@ export default function ContactForm() {
         formData.phone.trim() !== "" &&
         formData.privacy
       );
+    }
     return true;
   };
 
   const nextStep = () => {
     if (!validateStep(currentStep)) {
-      alert("Bitte füllen Sie alle Pflichtfelder aus.");
+      setValidationError("Bitte füllen Sie alle Pflichtfelder aus.");
       return;
     }
+    setValidationError("");
     if (currentStep < 4) {
       setCurrentStep((s) => s + 1);
     }
   };
 
   const prevStep = () => {
-    if (currentStep > 1) setCurrentStep((s) => s - 1);
+    if (currentStep > 1) {
+      setCurrentStep((s) => s - 1);
+    }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -178,51 +244,24 @@ export default function ContactForm() {
                 {/* Step indicator */}
                 <div className="mb-8">
                   <div className="mb-3 flex items-center justify-between">
-                    {STEPS.map((label, i) => {
-                      const step = i + 1;
-                      const done = currentStep > step;
-                      const active = currentStep === step;
-                      return (
-                        <div className="flex flex-1 items-center" key={step}>
-                          <div className="flex flex-col items-center gap-1.5">
-                            <div
-                              className={cn(
-                                "flex size-8 items-center justify-center rounded-full border-2 font-bold text-xs transition-all",
-                                done
-                                  ? "border-primary bg-primary text-primary-foreground"
-                                  : active
-                                    ? "border-primary bg-background text-primary"
-                                    : "border-border bg-background text-muted-foreground"
-                              )}
-                            >
-                              {done ? <CheckIcon className="size-3.5" /> : step}
-                            </div>
-                            <span
-                              className={cn(
-                                "hidden font-medium text-xs sm:block",
-                                active
-                                  ? "text-primary"
-                                  : done
-                                    ? "text-foreground"
-                                    : "text-muted-foreground"
-                              )}
-                            >
-                              {label}
-                            </span>
-                          </div>
-                          {i < STEPS.length - 1 && (
-                            <div
-                              className={cn(
-                                "mx-2 h-px flex-1 transition-colors",
-                                done ? "bg-primary" : "bg-border"
-                              )}
-                            />
-                          )}
-                        </div>
-                      );
-                    })}
+                    {STEPS.map((label, i) => (
+                      <StepIndicatorItem
+                        currentStep={currentStep}
+                        index={i}
+                        key={label}
+                        label={label}
+                        step={i + 1}
+                        totalSteps={STEPS.length}
+                      />
+                    ))}
                   </div>
                 </div>
+
+                {validationError ? (
+                  <p className="mb-4 rounded-lg bg-destructive/10 px-4 py-2 text-destructive text-sm">
+                    {validationError}
+                  </p>
+                ) : null}
 
                 <form onSubmit={handleSubmit}>
                   {/* Step 1 */}

@@ -23,7 +23,9 @@ export default function CookieBanner() {
     setVisible(false);
   };
 
-  if (!visible) return null;
+  if (!visible) {
+    return null;
+  }
 
   return (
     <div className="fixed right-4 bottom-4 left-4 z-50 animate-scale-in sm:right-4 sm:left-auto sm:max-w-sm">

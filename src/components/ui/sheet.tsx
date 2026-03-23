@@ -65,7 +65,7 @@ function SheetContent({
         {...props}
       >
         {children}
-        {showCloseButton && (
+        {showCloseButton ? (
           <SheetPrimitive.Close asChild data-slot="sheet-close">
             <Button
               className="absolute top-3 right-3"
@@ -76,7 +76,7 @@ function SheetContent({
               <span className="sr-only">Close</span>
             </Button>
           </SheetPrimitive.Close>
-        )}
+        ) : null}
       </SheetPrimitive.Content>
     </SheetPortal>
   );

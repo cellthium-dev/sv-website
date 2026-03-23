@@ -1,25 +1,25 @@
-export interface Badge {
+export type Badge = {
   icon: string;
   text: string;
-}
+};
 
-export interface Service {
+export type Service = {
   icon: string;
   title: string;
   description: string;
   features: string[];
   ctaText: string;
   ctaLink: string;
-}
+};
 
-export interface Testimonial {
+export type Testimonial = {
   rating: number;
   text: string;
   author: string;
   meta: string;
-}
+};
 
-export interface Article {
+export type Article = {
   id: string;
   category: string;
   date: string;
@@ -27,16 +27,16 @@ export interface Article {
   title: string;
   excerpt: string;
   link: string;
-}
+};
 
-export interface TimelineItem {
+export type TimelineItem = {
   date: string;
   title: string;
   company: string;
   description: string[];
-}
+};
 
-export interface FormData {
+export type FormData = {
   requestType: string;
   customerType: string;
   description: string;
@@ -51,10 +51,10 @@ export interface FormData {
   preferredTime?: string;
   privacy: boolean;
   newsletter: boolean;
-}
+};
 
-export interface BookingData {
+export type BookingData = {
   date: Date | null;
   time: string | null;
   appointmentType: string;
-}
+};

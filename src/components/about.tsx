@@ -136,12 +136,12 @@ export default function About() {
                     note: "",
                   },
                 ].map((edu, i) => (
-                  <div className="flex gap-3" key={i}>
+                  <div className="flex gap-3" key={edu.degree}>
                     <div className="flex flex-col items-center pt-1">
                       <div className="size-2 shrink-0 rounded-full bg-primary" />
-                      {i < 2 && (
+                      {i < 2 ? (
                         <div className="mt-1.5 min-h-4 w-px flex-1 bg-border" />
-                      )}
+                      ) : null}
                     </div>
                     <div className="pb-2">
                       <p className="font-semibold text-foreground text-sm">
@@ -150,11 +150,11 @@ export default function About() {
                       <p className="mt-0.5 text-muted-foreground text-sm">
                         {edu.institution}
                       </p>
-                      {edu.note && (
+                      {edu.note ? (
                         <p className="mt-0.5 text-muted-foreground/70 text-xs">
                           {edu.note}
                         </p>
-                      )}
+                      ) : null}
                     </div>
                   </div>
                 ))}
@@ -230,8 +230,11 @@ export default function About() {
               {/* Timeline line */}
               <div className="absolute top-2 bottom-2 left-[7px] w-px bg-border" />
 
-              {timelineItems.map((item, index) => (
-                <div className="relative flex gap-6 pb-8 last:pb-0" key={index}>
+              {timelineItems.map((item) => (
+                <div
+                  className="relative flex gap-6 pb-8 last:pb-0"
+                  key={`${item.date}-${item.title}`}
+                >
                   {/* Dot */}
                   <div className="flex flex-col items-center">
                     <div className="relative z-10 mt-1 size-3.5 shrink-0 rounded-full border-2 border-primary bg-background" />
@@ -249,10 +252,10 @@ export default function About() {
                       {item.company}
                     </div>
                     <ul className="flex flex-col gap-1.5">
-                      {item.description.map((desc, i) => (
+                      {item.description.map((desc) => (
                         <li
                           className="text-foreground/70 text-sm leading-snug"
-                          key={i}
+                          key={desc}
                         >
                           {desc}
                         </li>

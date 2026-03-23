@@ -19,8 +19,10 @@ use frontend + shadcn ui skills for the agent
 [x] fixing style
 [x] fix logo in the footer
 [x] fix mobile mode
-[ ] handle contact form and online termin buchung
+[x] add linter and formatter
 [ ] article for the website
+create new site for the website
+[ ] handle contact form and online termin buchung
 [ ] leistungsübersicht pdf
 [ ] create a system design
 [ ] use themes and and dark mode

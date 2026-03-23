@@ -67,23 +67,24 @@ export default function Services() {
 
         {/* Service cards grid */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {siteConfig.services.map((service, index) => (
+          {siteConfig.services.map((service) => (
             <Card
               className={cn(
                 "hover:-translate-y-1 relative flex flex-col transition-all duration-300 hover:shadow-xl",
-                service.highlight &&
-                  "shadow-lg shadow-primary/10 ring-2 ring-primary"
+                service.highlight
+                  ? "shadow-lg shadow-primary/10 ring-2 ring-primary"
+                  : ""
               )}
-              key={index.toString()}
+              key={service.title}
             >
-              {service.highlight && (
+              {service.highlight ? (
                 <div className="absolute top-3 right-4">
                   <Badge className="bg-solar px-3 py-1 font-semibold text-solar-foreground brightness-110">
                     <StarIcon className="mr-1 size-3 fill-solar-foreground" />
                     Empfohlen
                   </Badge>
                 </div>
-              )}
+              ) : null}
 
               <CardHeader className="pb-2">
                 <div className="mb-3 flex size-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
@@ -108,8 +109,11 @@ export default function Services() {
 
               <CardContent className="flex-1">
                 <ul className="flex flex-col gap-2">
-                  {service.features.map((feature, i) => (
-                    <li className="flex items-start gap-2.5 text-sm" key={i}>
+                  {service.features.map((feature) => (
+                    <li
+                      className="flex items-start gap-2.5 text-sm"
+                      key={feature}
+                    >
                       <CheckIcon className="mt-0.5 size-4 shrink-0 text-primary" />
                       <span className="text-foreground/80">{feature}</span>
                     </li>
@@ -138,13 +142,13 @@ export default function Services() {
 
         {/* Bottom CTA */}
         <div className="mt-12 flex justify-center">
-          <a
+          <button
             className="inline-flex items-center gap-2.5 rounded-lg border border-border px-5 py-3 font-medium text-muted-foreground text-sm transition-all hover:border-primary/30 hover:bg-primary/5 hover:text-primary"
-            href="#"
+            type="button"
           >
             <FileTextIcon className="size-4 shrink-0" />
             Leistungsübersicht als PDF herunterladen
-          </a>
+          </button>
         </div>
       </div>
     </section>

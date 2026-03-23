@@ -43,10 +43,10 @@ export default function Testimonials() {
         </h2>
 
         <div className="mb-12 grid gap-8 md:grid-cols-2">
-          {testimonials.map((testimonial, index) => (
+          {testimonials.map((testimonial) => (
             <div
               className="rounded-xl border-primary border-l-4 bg-white p-8 shadow-sm transition-shadow hover:shadow-md"
-              key={index}
+              key={testimonial.author}
             >
               <div className="mb-3 text-xl text-yellow-400">
                 {"★".repeat(testimonial.rating)}
@@ -67,10 +67,10 @@ export default function Testimonials() {
             Vertrauenswürdige Partnerschaften
           </h4>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            {trustBadges.map((badge, index) => (
+            {trustBadges.map((badge) => (
               <div
                 className="rounded-lg border bg-white px-4 py-2 shadow-sm"
-                key={index}
+                key={badge}
               >
                 {badge}
               </div>

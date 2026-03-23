@@ -21,7 +21,9 @@ export default function Footer() {
               <img
                 alt="SV Bauten Logo"
                 className="size-8 shrink-0"
+                height={32}
                 src="/favicon.svg"
+                width={32}
               />
               <span
                 className="font-bold text-[var(--dark-surface-foreground)] text-base"
@@ -73,11 +75,11 @@ export default function Footer() {
                   <a
                     className="text-[var(--dark-surface-foreground)]/60 text-sm transition-colors hover:text-[var(--dark-surface-foreground)]"
                     href={link.href}
-                    onClick={
-                      link.href.startsWith("#")
-                        ? (e) => scrollTo(e, link.href)
-                        : undefined
-                    }
+                    onClick={(e) => {
+                      if (link.href.startsWith("#")) {
+                        scrollTo(e, link.href);
+                      }
+                    }}
                   >
                     {link.label}
                   </a>

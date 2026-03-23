@@ -11,7 +11,9 @@ function useScrollAnimation() {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el) {
+      return;
+    }
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -24,7 +26,9 @@ function useScrollAnimation() {
       { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
     );
     const items = el.querySelectorAll(".animate-on-scroll");
-    for (const item of items) observer.observe(item);
+    for (const item of items) {
+      observer.observe(item);
+    }
     return () => observer.disconnect();
   }, []);
   return ref;
@@ -107,8 +111,10 @@ const whyCards = [
   {
     icon: (
       <svg
+        aria-hidden={true}
         className="size-6 text-primary"
         fill="none"
+        role="presentation"
         stroke="currentColor"
         strokeWidth={1.5}
         viewBox="0 0 24 24"
@@ -127,8 +133,10 @@ const whyCards = [
   {
     icon: (
       <svg
+        aria-hidden={true}
         className="size-6 text-primary"
         fill="none"
+        role="presentation"
         stroke="currentColor"
         strokeWidth={1.5}
         viewBox="0 0 24 24"
@@ -147,8 +155,10 @@ const whyCards = [
   {
     icon: (
       <svg
+        aria-hidden={true}
         className="size-6 text-primary"
         fill="none"
+        role="presentation"
         stroke="currentColor"
         strokeWidth={1.5}
         viewBox="0 0 24 24"
@@ -175,8 +185,10 @@ const galleryPlaceholders = [
 
 const CameraIcon = () => (
   <svg
+    aria-hidden={true}
     className="h-8 w-8 text-white/40"
     fill="none"
+    role="presentation"
     stroke="currentColor"
     strokeWidth={1.5}
     viewBox="0 0 24 24"
@@ -438,7 +450,9 @@ function UeberMich() {
                     <img
                       alt={cert.alt}
                       className="max-h-20 max-w-full object-contain"
+                      height={80}
                       src={cert.img}
+                      width={120}
                     />
                   </div>
                   <h3 className="mb-2.5 flex min-h-[44px] items-center justify-center font-semibold text-[17px] text-primary leading-snug">
@@ -599,7 +613,9 @@ function UeberMich() {
               <img
                 alt="Offizieller Stempel – Andreas Bauten, zertifizierter Sachverständiger"
                 className="w-[110px] opacity-70 grayscale-[20%] transition-opacity hover:opacity-90"
+                height={110}
                 src="/images/stempel.png"
+                width={110}
               />
             </div>
           </div>
