@@ -13,7 +13,7 @@ export default function BookingSystem() {
 
   return (
     <section
-      className="scroll-mt-60 py-16 md:scroll-mt-[4.5rem]"
+      className="scroll-mt-16 py-16 md:scroll-mt-[4.5rem]"
       id="terminbuchung"
     >
       <div className="container mx-auto px-5">

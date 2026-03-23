@@ -1,9 +1,9 @@
+import { CalendarIcon, SearchIcon } from "lucide-react";
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { CalendarIcon, SearchIcon } from "lucide-react";
-import { useState } from "react";
 import type { Article } from "../types";
 
 const articles: Article[] = [
@@ -115,7 +115,7 @@ export default function KnowledgeBase() {
             <span>Wissen</span>
           </div>
           <h2
-            className="mb-4 font-extrabold text-4xl tracking-tight md:text-5xl"
+            className="mb-4 hyphens-auto font-extrabold text-4xl tracking-tight md:text-5xl"
             style={{ fontFamily: "var(--font-heading)" }}
           >
             Wissensbereich

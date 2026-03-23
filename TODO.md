@@ -18,7 +18,7 @@ use frontend + shadcn ui skills for the agent
 [x] unify and standardized primary color
 [x] fixing style
 [x] fix logo in the footer
-[ ] fix mobile mode
+[x] fix mobile mode
 [ ] handle contact form and online termin buchung
 [ ] article for the website
 [ ] leistungsübersicht pdf

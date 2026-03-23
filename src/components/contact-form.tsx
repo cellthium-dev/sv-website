@@ -1,27 +1,27 @@
+import {
+  CheckIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  MailIcon,
+  MapPinIcon,
+  SendIcon,
+} from "lucide-react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
-import {
-    CheckIcon,
-    ChevronLeftIcon,
-    ChevronRightIcon,
-    MailIcon,
-    MapPinIcon,
-    SendIcon,
-} from "lucide-react";
-import { useState } from "react";
 import type { FormData } from "../types";
 
 const STEPS = ["Anfragetyp", "Details", "Kontaktdaten", "Bestätigung"];
@@ -137,7 +137,7 @@ export default function ContactForm() {
             <span>Kontakt</span>
           </div>
           <h2
-            className="mb-4 font-extrabold text-4xl tracking-tight md:text-5xl"
+            className="mb-4 hyphens-auto font-extrabold text-4xl tracking-tight md:text-5xl"
             style={{ fontFamily: "var(--font-heading)" }}
           >
             Kontakt & Terminbuchung

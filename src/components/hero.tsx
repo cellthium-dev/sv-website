@@ -26,7 +26,7 @@ const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
 export default function Hero() {
   return (
     <section
-      className="relative scroll-mt-60 overflow-hidden bg-[var(--dark-surface)] text-[var(--dark-surface-foreground)] md:scroll-mt-[4.5rem]"
+      className="relative scroll-mt-16 overflow-hidden bg-[var(--dark-surface)] text-[var(--dark-surface-foreground)] md:scroll-mt-[4.5rem]"
       id="home"
     >
       {/* Geometric background accent */}
@@ -54,7 +54,7 @@ export default function Hero() {
 
         {/* Headline */}
         <h1
-          className="mb-6 max-w-4xl animate-fade-in font-extrabold text-4xl leading-[1.05] tracking-tight opacity-0 delay-100 sm:text-5xl md:text-6xl lg:text-7xl"
+          className="mb-6 max-w-4xl animate-fade-in hyphens-auto font-extrabold text-3xl leading-[1.05] tracking-tight opacity-0 delay-100 sm:text-5xl md:text-6xl lg:text-7xl"
           style={{ fontFamily: "var(--font-heading)" }}
         >
           Unabhängige Gutachten für{" "}
@@ -106,7 +106,13 @@ export default function Hero() {
 
       {/* Bottom decorative edge */}
       <div className="absolute right-0 bottom-0 left-0">
-        <svg aria-hidden className="w-full" fill="none" viewBox="0 0 1440 32">
+        <svg
+          aria-hidden
+          className="h-8 w-full"
+          fill="none"
+          preserveAspectRatio="none"
+          viewBox="0 0 1440 32"
+        >
           <path d="M0 32L1440 0V32H0Z" fill="var(--background)" />
         </svg>
       </div>

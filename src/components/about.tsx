@@ -1,7 +1,7 @@
+import { MapPinIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { MapPinIcon } from "lucide-react";
 import type { TimelineItem } from "../types";
 
 const timelineItems: TimelineItem[] = [

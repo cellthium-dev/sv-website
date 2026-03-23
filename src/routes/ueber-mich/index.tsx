@@ -211,7 +211,7 @@ function UeberMich() {
                 <span className="mb-6 inline-block rounded-full border border-[var(--solar)]/30 bg-[var(--solar)]/15 px-4 py-1.5 font-semibold text-[var(--solar)] text-xs uppercase tracking-widest">
                   ISO/IEC 17024 Zertifizierter Sachverständiger
                 </span>
-                <h1 className="mb-2 whitespace-nowrap font-bold text-4xl text-primary leading-tight brightness-125 md:text-5xl">
+                <h1 className="mb-2 font-bold text-4xl text-primary leading-tight brightness-125 md:text-5xl">
                   Andreas Bauten, M.Sc.
                 </h1>
                 <p className="mb-6 font-bold text-[var(--dark-surface-foreground)]/80 text-xl leading-relaxed">
