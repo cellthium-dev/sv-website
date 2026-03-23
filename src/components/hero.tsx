@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+import { siteConfig } from "@/config/site";
 import {
   ArrowRightIcon,
   CheckCircle2Icon,
@@ -6,8 +8,6 @@ import {
   ShieldCheckIcon,
   ZapIcon,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { siteConfig } from "@/config/site";
 
 const badgeIcons: LucideIcon[] = [
   CheckCircle2Icon,
@@ -26,7 +26,7 @@ const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
 export default function Hero() {
   return (
     <section
-      className="relative scroll-mt-16 overflow-hidden bg-[var(--dark-surface)] text-[var(--dark-surface-foreground)]"
+      className="relative scroll-mt-60 overflow-hidden bg-[var(--dark-surface)] text-[var(--dark-surface-foreground)] md:scroll-mt-[4.5rem]"
       id="home"
     >
       {/* Geometric background accent */}

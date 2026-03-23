@@ -1,27 +1,27 @@
-import {
-  CheckIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  MailIcon,
-  MapPinIcon,
-  SendIcon,
-} from "lucide-react";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
 } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
+import {
+    CheckIcon,
+    ChevronLeftIcon,
+    ChevronRightIcon,
+    MailIcon,
+    MapPinIcon,
+    SendIcon,
+} from "lucide-react";
+import { useState } from "react";
 import type { FormData } from "../types";
 
 const STEPS = ["Anfragetyp", "Details", "Kontaktdaten", "Bestätigung"];
@@ -125,7 +125,10 @@ export default function ContactForm() {
   };
 
   return (
-    <section className="scroll-mt-16 bg-muted/30 py-20 md:py-28" id="kontakt">
+    <section
+      className="scroll-mt-60 bg-muted/30 py-20 md:scroll-mt-[4.5rem] md:py-28"
+      id="kontakt"
+    >
       <div className="section-container">
         {/* Section header */}
         <div className="mb-14 max-w-2xl">

@@ -1,7 +1,7 @@
-import { MapPinIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { MapPinIcon } from "lucide-react";
 import type { TimelineItem } from "../types";
 
 const timelineItems: TimelineItem[] = [
@@ -81,7 +81,7 @@ const competences = [
 export default function About() {
   return (
     <section
-      className="scroll-mt-16 bg-muted/40 py-20 md:py-28"
+      className="scroll-mt-60 bg-muted/40 py-20 md:py-28"
       id="ueber-mich"
     >
       <div className="section-container">
