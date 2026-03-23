@@ -1,4 +1,3 @@
-import { ZapIcon } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { siteConfig } from "@/config/site";
 
@@ -19,9 +18,11 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="mb-4 flex items-center gap-3">
-              <div className="flex size-8 shrink-0 items-center justify-center rounded-md bg-primary text-primary-foreground">
-                <ZapIcon className="size-4" />
-              </div>
+              <img
+                alt="SV Bauten Logo"
+                className="size-8 shrink-0"
+                src="/favicon.svg"
+              />
               <span
                 className="font-bold text-[var(--dark-surface-foreground)] text-base"
                 style={{ fontFamily: "var(--font-heading)" }}
