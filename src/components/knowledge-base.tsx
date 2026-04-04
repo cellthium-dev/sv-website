@@ -2,11 +2,32 @@
 
 import { Link } from "@tanstack/react-router";
 import {
+  ActivityIcon,
+  AlertCircleIcon,
   ArrowRightIcon,
+  BarChart2Icon,
+  BatteryLowIcon,
   CalendarIcon,
+  CheckSquareIcon,
+  ClipboardListIcon,
+  CloudSnowIcon,
+  CoinsIcon,
+  CpuIcon,
+  FileCheckIcon,
   FileDownIcon,
+  FileTextIcon,
+  FlameIcon,
+  MessageSquareIcon,
+  ScaleIcon,
+  ScanIcon,
   SearchIcon,
+  ShieldCheckIcon,
+  ShieldIcon,
+  ThermometerIcon,
+  TrendingDownIcon,
+  WrenchIcon,
   XIcon,
+  ZapIcon,
 } from "lucide-react";
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
@@ -35,12 +56,12 @@ type Article = {
   zielgruppe: string;
   anlass: string;
   imgBg: string;
-  imgIcon: string;
+  imgIcon: LucideIcon;
 };
 
 type Download = {
   id: number;
-  icon: string;
+  icon: LucideIcon;
   title: string;
   desc: string;
 };
@@ -105,7 +126,7 @@ const ARTICLES: Article[] = [
     zielgruppe: "privatperson",
     anlass: "ertragsminderung",
     imgBg: "linear-gradient(135deg,#DC2626,#991B1B)",
-    imgIcon: "☀️",
+    imgIcon: AlertCircleIcon,
   },
   {
     id: 2,
@@ -124,7 +145,7 @@ const ARTICLES: Article[] = [
     zielgruppe: "privatperson",
     anlass: "ertragsminderung",
     imgBg: "linear-gradient(135deg,#F59E0B,#D97706)",
-    imgIcon: "📊",
+    imgIcon: TrendingDownIcon,
   },
   {
     id: 3,
@@ -143,7 +164,7 @@ const ARTICLES: Article[] = [
     zielgruppe: "privatperson",
     anlass: "ertragsminderung",
     imgBg: "linear-gradient(135deg,#8B5CF6,#6D28D9)",
-    imgIcon: "🔋",
+    imgIcon: BatteryLowIcon,
   },
   {
     id: 4,
@@ -162,7 +183,7 @@ const ARTICLES: Article[] = [
     zielgruppe: "versicherer",
     anlass: "schadensfall",
     imgBg: "linear-gradient(135deg,#6366F1,#4338CA)",
-    imgIcon: "⚖️",
+    imgIcon: ScaleIcon,
   },
   {
     id: 5,
@@ -181,7 +202,7 @@ const ARTICLES: Article[] = [
     zielgruppe: "privatperson",
     anlass: "qualitaetssicherung",
     imgBg: "linear-gradient(135deg,#10B981,#059669)",
-    imgIcon: "🔧",
+    imgIcon: WrenchIcon,
   },
   {
     id: 6,
@@ -200,7 +221,7 @@ const ARTICLES: Article[] = [
     zielgruppe: "rechtsanwalt",
     anlass: "gewaehrleistung",
     imgBg: "linear-gradient(135deg,#6366F1,#4338CA)",
-    imgIcon: "🏛️",
+    imgIcon: ShieldCheckIcon,
   },
   {
     id: 7,
@@ -219,7 +240,7 @@ const ARTICLES: Article[] = [
     zielgruppe: "installateur",
     anlass: "ertragsminderung",
     imgBg: "linear-gradient(135deg,#EF4444,#B91C1C)",
-    imgIcon: "🌡️",
+    imgIcon: ThermometerIcon,
   },
   {
     id: 8,
@@ -237,7 +258,7 @@ const ARTICLES: Article[] = [
     zielgruppe: "privatperson",
     anlass: "inbetriebnahme",
     imgBg: "linear-gradient(135deg,#DC2626,#991B1B)",
-    imgIcon: "🔍",
+    imgIcon: ShieldIcon,
   },
   {
     id: 9,
@@ -256,7 +277,7 @@ const ARTICLES: Article[] = [
     zielgruppe: "versicherer",
     anlass: "schadensfall",
     imgBg: "linear-gradient(135deg,#EF4444,#B91C1C)",
-    imgIcon: "🌨️",
+    imgIcon: CloudSnowIcon,
   },
   {
     id: 10,
@@ -275,7 +296,7 @@ const ARTICLES: Article[] = [
     zielgruppe: "unternehmen",
     anlass: "ertragsminderung",
     imgBg: "linear-gradient(135deg,#3B82F6,#1D4ED8)",
-    imgIcon: "📈",
+    imgIcon: ActivityIcon,
   },
   {
     id: 11,
@@ -294,7 +315,7 @@ const ARTICLES: Article[] = [
     zielgruppe: "privatperson",
     anlass: "qualitaetssicherung",
     imgBg: "linear-gradient(135deg,#DC2626,#991B1B)",
-    imgIcon: "⚡",
+    imgIcon: ZapIcon,
   },
   {
     id: 12,
@@ -313,7 +334,7 @@ const ARTICLES: Article[] = [
     zielgruppe: "unternehmen",
     anlass: "ertragsminderung",
     imgBg: "linear-gradient(135deg,#F59E0B,#D97706)",
-    imgIcon: "📉",
+    imgIcon: BarChart2Icon,
   },
   {
     id: 13,
@@ -332,7 +353,7 @@ const ARTICLES: Article[] = [
     zielgruppe: "installateur",
     anlass: "qualitaetssicherung",
     imgBg: "linear-gradient(135deg,#DC2626,#991B1B)",
-    imgIcon: "🔥",
+    imgIcon: FlameIcon,
   },
   {
     id: 14,
@@ -350,7 +371,7 @@ const ARTICLES: Article[] = [
     zielgruppe: "privatperson",
     anlass: "gewaehrleistung",
     imgBg: "linear-gradient(135deg,#EF4444,#B91C1C)",
-    imgIcon: "⚙️",
+    imgIcon: CpuIcon,
   },
   {
     id: 15,
@@ -369,7 +390,7 @@ const ARTICLES: Article[] = [
     zielgruppe: "versicherer",
     anlass: "schadensfall",
     imgBg: "linear-gradient(135deg,#6366F1,#4338CA)",
-    imgIcon: "📋",
+    imgIcon: FileCheckIcon,
   },
   {
     id: 16,
@@ -388,7 +409,7 @@ const ARTICLES: Article[] = [
     zielgruppe: "privatperson",
     anlass: "ertragsminderung",
     imgBg: "linear-gradient(135deg,#EC4899,#BE185D)",
-    imgIcon: "🔬",
+    imgIcon: ScanIcon,
   },
   {
     id: 17,
@@ -407,7 +428,7 @@ const ARTICLES: Article[] = [
     zielgruppe: "unternehmen",
     anlass: "qualitaetssicherung",
     imgBg: "linear-gradient(135deg,#10B981,#059669)",
-    imgIcon: "📝",
+    imgIcon: FileTextIcon,
   },
   {
     id: 18,
@@ -426,38 +447,38 @@ const ARTICLES: Article[] = [
     zielgruppe: "privatperson",
     anlass: "neuinstallation",
     imgBg: "linear-gradient(135deg,#F59E0B,#D97706)",
-    imgIcon: "💰",
+    imgIcon: CoinsIcon,
   },
 ];
 
 const DOWNLOADS: Download[] = [
   {
     id: 1,
-    icon: "📋",
+    icon: ClipboardListIcon,
     title: "Checkliste: Ertragsminderung – was Sie selbst prüfen können",
     desc: "10 Prüfpunkte, die Betreiber bei Ertragsrückgang sofort selbst kontrollieren können – bevor ein Sachverständiger hinzugezogen wird.",
   },
   {
     id: 2,
-    icon: "📄",
+    icon: FileTextIcon,
     title: "Übergabeprotokoll PV-Anlage (Muster)",
     desc: "Was ein ordentliches Abnahmedokument enthalten sollte – mit allen Messgrößen, Checklisten und Unterschriftenfeldern.",
   },
   {
     id: 3,
-    icon: "🗣️",
+    icon: MessageSquareIcon,
     title: "Leitfaden: Gespräch mit dem Installateur vorbereiten",
     desc: "Ihre Argumente, Ihre Rechte, Ihre nächsten Schritte – strukturiert aufbereitet für ein sachliches und zielführendes Gespräch.",
   },
   {
     id: 4,
-    icon: "🛡️",
+    icon: ShieldIcon,
     title: "Checkliste: Schadensfall melden – was Ihre Versicherung braucht",
     desc: "Welche Fotos, Dokumente und Informationen Sie zusammenstellen sollten, damit die Regulierung reibungslos verläuft.",
   },
   {
     id: 5,
-    icon: "✅",
+    icon: CheckSquareIcon,
     title: "Schnellcheck: Ist Ihre PV-Anlage normkonform installiert?",
     desc: "10 Punkte, die Sie als Betreiber selbst kontrollieren können – mit Verweis auf die zutreffenden Normen und Richtlinien.",
   },
@@ -1544,24 +1565,34 @@ export default function KnowledgeBase() {
           </div>
 
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {DOWNLOADS.map((d) => (
-              <div
-                className="flex flex-col rounded-xl border border-border bg-background p-6 transition-all hover:shadow-md"
-                key={d.id}
-              >
-                <div className="mb-4 text-4xl">{d.icon}</div>
-                <h3 className="mb-2 font-bold text-base text-foreground leading-snug">
-                  {d.title}
-                </h3>
-                <p className="mb-5 flex-1 text-muted-foreground text-sm leading-relaxed">
-                  {d.desc}
-                </p>
-                <Button className="w-full" disabled size="sm" variant="outline">
-                  <FileDownIcon className="mr-2 size-4" />
-                  In Kürze verfügbar
-                </Button>
-              </div>
-            ))}
+            {DOWNLOADS.map((d) => {
+              const DlIcon = d.icon;
+              return (
+                <div
+                  className="flex flex-col rounded-xl border border-border bg-background p-6 transition-all hover:shadow-md"
+                  key={d.id}
+                >
+                  <div className="mb-4">
+                    <DlIcon className="size-8 text-primary" />
+                  </div>
+                  <h3 className="mb-2 font-bold text-base text-foreground leading-snug">
+                    {d.title}
+                  </h3>
+                  <p className="mb-5 flex-1 text-muted-foreground text-sm leading-relaxed">
+                    {d.desc}
+                  </p>
+                  <Button
+                    className="w-full"
+                    disabled
+                    size="sm"
+                    variant="outline"
+                  >
+                    <FileDownIcon className="mr-2 size-4" />
+                    In Kürze verfügbar
+                  </Button>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -1923,8 +1954,9 @@ export default function KnowledgeBase() {
       >
         <div className="section-container">
           <div className="mx-auto max-w-2xl text-center">
-            <Badge className="mb-5 bg-white/20 font-semibold text-primary-foreground hover:bg-white/20">
-              📄 PDF-Download · 100% Kostenlos
+            <Badge className="mb-5 gap-1.5 bg-white/20 font-semibold text-primary-foreground hover:bg-white/20">
+              <FileDownIcon className="size-3.5" />
+              PDF-Download · 100% Kostenlos
             </Badge>
             <h2 className="mb-4 font-extrabold text-3xl text-primary-foreground tracking-tight md:text-4xl">
               Gratis Checkliste: 10 Punkte bei Ertragsminderung
@@ -1960,15 +1992,16 @@ export default function KnowledgeBase() {
 // ─── Article Card ─────────────────────────────────────────────────────────────
 
 function ArticleCard({ article }: { article: Article }) {
+  const ImgIcon = article.imgIcon;
   return (
     <article className="hover:-translate-y-1 flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all duration-300 hover:shadow-lg">
       {/* Colored header strip */}
       <div
         aria-hidden="true"
-        className="flex h-36 items-center justify-center text-5xl"
+        className="flex h-36 items-center justify-center"
         style={{ background: article.imgBg }}
       >
-        {article.imgIcon}
+        <ImgIcon className="size-12 text-white opacity-90" />
       </div>
 
       <div className="flex flex-1 flex-col p-5">

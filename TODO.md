@@ -29,10 +29,10 @@ create new site for the website
 [ ] use themes and and dark mode
 
 ### 04.04.2026
-[ ] [all] integrate all pages
+[x] [all] integrate all pages
+[x] [all] replace windows icon with lucide-react icon
 [ ] [all] update header for all pages
 [ ] [all] run frontend design skills
-[ ] [wissensbereich] replace windows icon with lucide-react icon
 [ ] [wissensbereich] use compare from kibo-ui
 [ ] [wissensbereich] use header with multiple points
 [ ] [contact] logic for contact selection

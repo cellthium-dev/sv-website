@@ -1,17 +1,28 @@
 import { Link } from "@tanstack/react-router";
 import {
+  ActivityIcon,
   AlertTriangleIcon,
   ArrowRightIcon,
+  BarChart2Icon,
+  BatteryChargingIcon,
+  BatteryIcon,
   BotIcon,
   CalculatorIcon,
   CheckCircleIcon,
   CheckIcon,
   ChevronDownIcon,
   ChevronRightIcon,
+  CoinsIcon,
+  EuroIcon,
   FileTextIcon,
+  GitMergeIcon,
+  HomeIcon,
+  InfoIcon,
   LanguagesIcon,
+  LeafIcon,
   RefreshCwIcon,
   SendIcon,
+  SunIcon,
   ZapIcon,
 } from "lucide-react";
 import { useRef, useState } from "react";
@@ -950,13 +961,21 @@ function SchnellcheckSection() {
   const [result, setResult] = useState<ScResult | null>(null);
 
   const systemOpts = [
-    { value: "pv_only", label: "PV-Anlage ohne Speicher", icon: "☀️" },
+    {
+      value: "pv_only",
+      label: "PV-Anlage ohne Speicher",
+      icon: <SunIcon className="size-8" />,
+    },
     {
       value: "pv_battery",
       label: "PV-Anlage mit Batteriespeicher",
-      icon: "🔋☀️",
+      icon: <BatteryChargingIcon className="size-8" />,
     },
-    { value: "battery_only", label: "Batteriespeicher allein", icon: "🔋" },
+    {
+      value: "battery_only",
+      label: "Batteriespeicher allein",
+      icon: <BatteryIcon className="size-8" />,
+    },
   ];
 
   const situationOpts = [
@@ -1066,7 +1085,9 @@ function SchnellcheckSection() {
                   onClick={() => pickSystem(o.value)}
                   type="button"
                 >
-                  <span className="text-3xl">{o.icon}</span>
+                  <span className="flex size-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    {o.icon}
+                  </span>
                   <span className="font-medium text-foreground text-sm">
                     {o.label}
                   </span>
@@ -1188,10 +1209,10 @@ function CalcTool({
   children,
 }: {
   id: string;
-  icon: string;
+  icon: ReactNode;
   title: string;
   badge: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
   const [open, setOpen] = useState(false);
   return (
@@ -1204,7 +1225,9 @@ function CalcTool({
         onClick={() => setOpen((o) => !o)}
         type="button"
       >
-        <span className="text-3xl">{icon}</span>
+        <span className="flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+          {icon}
+        </span>
         <div className="flex-1">
           <p className="font-bold text-foreground">{title}</p>
           <p className="text-muted-foreground text-xs">{badge}</p>
@@ -1238,10 +1261,10 @@ function FormGroup({
         {label}
         {tooltip && (
           <span
-            className="ml-1.5 cursor-help text-muted-foreground text-xs"
+            className="cursor-help text-muted-foreground text-xs"
             title={tooltip}
           >
-            ⓘ
+            <InfoIcon className="size-4" />
           </span>
         )}
       </Label>
@@ -2317,17 +2340,17 @@ function CalcE8() {
           <div className="grid grid-cols-3 gap-3">
             {[
               {
-                icon: "🚗",
+                icon: <CarIcon className="size-5" />,
                 value: `${fmt(result.autoKm)} km`,
                 label: "Autofahrt eingespart",
               },
               {
-                icon: "🌲",
+                icon: <LeafIcon className="size-5" />,
                 value: fmt(result.baeume),
                 label: "Buchen (Jahresbindung)",
               },
               {
-                icon: "⛽",
+                icon: <FuelIcon className="size-5" />,
                 value: `${fmt(result.benzin)} L`,
                 label: "Benzin vermieden",
               },
@@ -2336,7 +2359,9 @@ function CalcE8() {
                 className="flex flex-col items-center gap-1 rounded-xl border border-border bg-card py-3 text-center"
                 key={c.label}
               >
-                <span className="text-2xl">{c.icon}</span>
+                <span className="flex size-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  {c.icon}
+                </span>
                 <span className="font-bold text-foreground text-sm">
                   {c.value}
                 </span>
@@ -2877,7 +2902,7 @@ export default function ToolsPage() {
           <div className="space-y-4">
             <CalcTool
               badge="Für Privatpersonen · Anlagenbetreiber · Investoren"
-              icon="☀️📊"
+              icon={<SunIcon className="size-5" />}
               id="tool-e1"
               title="Soll-Ertrags-Rechner"
             >
@@ -2885,7 +2910,7 @@ export default function ToolsPage() {
             </CalcTool>
             <CalcTool
               badge="Für Anlagenbetreiber · Installateure · Versicherer"
-              icon="🔍📈"
+              icon={<BarChart2Icon className="size-5" />}
               id="tool-e2"
               title="Soll-Ist-Ertragsvergleich"
             >
@@ -2893,7 +2918,7 @@ export default function ToolsPage() {
             </CalcTool>
             <CalcTool
               badge="Für Privatpersonen · Betreiber"
-              icon="🏠⚡"
+              icon={<HomeIcon className="size-5" />}
               id="tool-e3"
               title="Eigenverbrauch- & Autarkiegrad-Rechner"
             >
@@ -2901,7 +2926,7 @@ export default function ToolsPage() {
             </CalcTool>
             <CalcTool
               badge="Für Investoren · Betreiber · Installateure"
-              icon="💰📉"
+              icon={<CoinsIcon className="size-5" />}
               id="tool-e4"
               title="Wirtschaftlichkeitsrechner"
             >
@@ -2909,7 +2934,7 @@ export default function ToolsPage() {
             </CalcTool>
             <CalcTool
               badge="Für Privatpersonen · Betreiber · Installateure"
-              icon="🔋📐"
+              icon={<BatteryChargingIcon className="size-5" />}
               id="tool-e5"
               title="Speicherdimensionierungs-Rechner"
             >
@@ -2917,7 +2942,7 @@ export default function ToolsPage() {
             </CalcTool>
             <CalcTool
               badge="Für Betreiber · Versicherer · Gutachter"
-              icon="📉🔬"
+              icon={<ActivityIcon className="size-5" />}
               id="tool-e6"
               title="Degradations- & Restleistungs-Rechner"
             >
@@ -2925,7 +2950,7 @@ export default function ToolsPage() {
             </CalcTool>
             <CalcTool
               badge="Für Installateure · Betreiber · Planer"
-              icon="⚡🔌"
+              icon={<ZapIcon className="size-5" />}
               id="tool-e7"
               title="DC-Leitungsverlust-Rechner"
             >
@@ -2933,7 +2958,7 @@ export default function ToolsPage() {
             </CalcTool>
             <CalcTool
               badge="Für alle Betreiber"
-              icon="🌍♻️"
+              icon={<LeafIcon className="size-5" />}
               id="tool-e8"
               title="CO₂-Einsparungsrechner"
             >
@@ -2941,7 +2966,7 @@ export default function ToolsPage() {
             </CalcTool>
             <CalcTool
               badge="Für Installateure · Planer · Sachverständige"
-              icon="🔗📏"
+              icon={<GitMergeIcon className="size-5" />}
               id="tool-e9"
               title="Strang-Konfigurations-Rechner"
             >
@@ -2949,7 +2974,7 @@ export default function ToolsPage() {
             </CalcTool>
             <CalcTool
               badge="Für Betreiber · Investoren"
-              icon="💶⚖️"
+              icon={<EuroIcon className="size-5" />}
               id="tool-e10"
               title="Einspeise- & Vergütungsrechner"
             >
