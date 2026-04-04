@@ -19,6 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { cn } from "@/lib/utils";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -52,6 +53,36 @@ type Case = {
   meta: string;
   teaser: string;
   tags: string[];
+};
+
+type GlossaryTerm = {
+  id: string;
+  tab: "glossar" | "normen";
+  title: string;
+  category: string;
+  catKey: string;
+  docType: string;
+  docTypeKey: string;
+  relevanz: string;
+  relevanzKey: string;
+  abstract: string;
+  tags: string[];
+  refs: string;
+  catColor: string;
+};
+
+type Comparison = {
+  id: number;
+  thema: string;
+  schwere: string;
+  title: string;
+  badColor: string;
+  goodColor: string;
+  explain2: string;
+  explain3: string;
+  tags: string[];
+  badIcon: string;
+  goodIcon: string;
 };
 
 // ─── Data ────────────────────────────────────────────────────────────────────
@@ -493,6 +524,712 @@ const STATS = [
   { number: "85 %", label: "erfolgreiche Regulierungen nach Gutachten" },
 ];
 
+const GLOSSARY_TERMS: GlossaryTerm[] = [
+  {
+    id: "g1",
+    tab: "glossar",
+    title: "Bypass-Diode",
+    category: "Modultechnik",
+    catKey: "modultechnik",
+    docType: "Fachbegriff",
+    docTypeKey: "fachbegriff",
+    relevanz: "Grundwissen",
+    relevanzKey: "grundwissen",
+    abstract:
+      "Schutzkomponente im PV-Modul, die bei Teilverschattung oder Zelldefekt den Strom um die betroffene Zellgruppe herumleitet. Ein Ausfall führt zu Hotspots und Ertragseinbußen.",
+    tags: ["Modul", "Hotspot", "Verschattung", "Diode", "Schutz"],
+    refs: "IEC 61215, DIN EN 62446-1",
+    catColor: "#EC4899",
+  },
+  {
+    id: "g2",
+    tab: "glossar",
+    title: "Isolationswiderstand",
+    category: "Sicherheit & Brandschutz",
+    catKey: "sicherheit",
+    docType: "Fachbegriff",
+    docTypeKey: "fachbegriff",
+    relevanz: "Fortgeschritten",
+    relevanzKey: "fortgeschritten",
+    abstract:
+      "Messgröße für die Qualität der elektrischen Isolation zwischen spannungsführenden Leitern und Erde. Ein zu niedriger Wert weist auf Feuchtigkeitseintritt, Kabelschäden oder Alterung hin und kann den Versicherungsschutz gefährden.",
+    tags: ["Sicherheit", "Messung", "Isolation", "Erdung", "Prüfung"],
+    refs: "DIN VDE 0100-600, DGUV Vorschrift 3",
+    catColor: "#DC2626",
+  },
+  {
+    id: "g3",
+    tab: "glossar",
+    title: "Performance Ratio (PR)",
+    category: "Ertrag & Monitoring",
+    catKey: "ertrag",
+    docType: "Fachbegriff",
+    docTypeKey: "fachbegriff",
+    relevanz: "Grundwissen",
+    relevanzKey: "grundwissen",
+    abstract:
+      "Verhältnis zwischen dem tatsächlichen und dem theoretisch möglichen Ertrag einer PV-Anlage unter realen Bedingungen. Der PR-Wert ist die wichtigste Kennzahl zur Bewertung der Anlageneffizienz.",
+    tags: ["Ertrag", "Kennzahl", "Monitoring", "Effizienz", "Vergleich"],
+    refs: "IEC 61724, Ertragsprognose",
+    catColor: "#3B82F6",
+  },
+  {
+    id: "g4",
+    tab: "glossar",
+    title: "PID (Potential Induced Degradation)",
+    category: "Modultechnik",
+    catKey: "modultechnik",
+    docType: "Fachbegriff",
+    docTypeKey: "fachbegriff",
+    relevanz: "Fortgeschritten",
+    relevanzKey: "fortgeschritten",
+    abstract:
+      "Spannungsinduzierte Degradation, bei der hohe Systemspannungen zu einem Leistungsverlust einzelner Zellen führen. Tritt bevorzugt bei negativem Pol zur Erde auf und ist in vielen Fällen reversibel.",
+    tags: [
+      "Degradation",
+      "Spannung",
+      "Moduldefekt",
+      "Leistungsverlust",
+      "Zelle",
+    ],
+    refs: "IEC 62804, Isolationswiderstand",
+    catColor: "#EC4899",
+  },
+  {
+    id: "g5",
+    tab: "glossar",
+    title: "String",
+    category: "Modultechnik",
+    catKey: "modultechnik",
+    docType: "Fachbegriff",
+    docTypeKey: "fachbegriff",
+    relevanz: "Grundwissen",
+    relevanzKey: "grundwissen",
+    abstract:
+      "Reihenschaltung mehrerer PV-Module, die gemeinsam an einen Wechselrichter-Eingang angeschlossen sind. String-Fehler betreffen alle Module der Reihe und verursachen überproportionale Ertragsverluste.",
+    tags: [
+      "Verschaltung",
+      "Modul",
+      "Wechselrichter",
+      "Reihenschaltung",
+      "Ertrag",
+    ],
+    refs: "Stringplan, DIN EN 62446-1",
+    catColor: "#EC4899",
+  },
+  {
+    id: "g6",
+    tab: "glossar",
+    title: "Kennlinienmessung (I-V-Kurve)",
+    category: "Ertrag & Monitoring",
+    catKey: "ertrag",
+    docType: "Fachbegriff",
+    docTypeKey: "fachbegriff",
+    relevanz: "Fortgeschritten",
+    relevanzKey: "fortgeschritten",
+    abstract:
+      "Messtechnisches Verfahren, bei dem die Strom-Spannungs-Kennlinie eines Moduls oder Strings aufgezeichnet wird. Ermöglicht die Identifikation von Zelldefekten, Verschattungseinflüssen und Kontaktproblemen.",
+    tags: ["Messung", "Kennlinie", "Diagnose", "String", "Prüfverfahren"],
+    refs: "IEC 62446-1, Performance Ratio",
+    catColor: "#3B82F6",
+  },
+  {
+    id: "g7",
+    tab: "glossar",
+    title: "Elektrolumineszenz (EL)",
+    category: "Modultechnik",
+    catKey: "modultechnik",
+    docType: "Fachbegriff",
+    docTypeKey: "fachbegriff",
+    relevanz: "Expertenwissen",
+    relevanzKey: "expertenwissen",
+    abstract:
+      "Bildgebendes Prüfverfahren, bei dem Module mit Strom beaufschlagt werden und die resultierende Infrarotemission Zellbrüche, Risse und Kontaktfehler sichtbar macht. Standardverfahren bei Hagelschadenbewertung.",
+    tags: [
+      "Prüfverfahren",
+      "Zellbruch",
+      "Hagel",
+      "Bildgebung",
+      "Qualitätskontrolle",
+    ],
+    refs: "IEC 61215, Hagelschaden",
+    catColor: "#EC4899",
+  },
+  {
+    id: "g8",
+    tab: "glossar",
+    title: "Cross-Mating",
+    category: "Sicherheit & Brandschutz",
+    catKey: "sicherheit",
+    docType: "Fachbegriff",
+    docTypeKey: "fachbegriff",
+    relevanz: "Fortgeschritten",
+    relevanzKey: "fortgeschritten",
+    abstract:
+      "Unzulässige Kombination von DC-Steckverbindern unterschiedlicher Hersteller. Führt zu erhöhtem Übergangswiderstand, Lichtbogenrisiko und im Extremfall zu Bränden – einer der häufigsten sicherheitsrelevanten Installationsmängel.",
+    tags: ["Steckverbinder", "Lichtbogen", "Brand", "Installation", "MC4"],
+    refs: "DIN EN 62852, Steckverbinder",
+    catColor: "#DC2626",
+  },
+  {
+    id: "g9",
+    tab: "glossar",
+    title: "BMS (Battery Management System)",
+    category: "Speichersysteme",
+    catKey: "speichersysteme",
+    docType: "Fachbegriff",
+    docTypeKey: "fachbegriff",
+    relevanz: "Fortgeschritten",
+    relevanzKey: "fortgeschritten",
+    abstract:
+      "Elektronisches Steuerungssystem eines Batteriespeichers, das Ladezustand, Temperatur, Zellspannungen und Balancierung überwacht. BMS-Fehler sind die häufigste Ursache für vorzeitige Speicheralterung.",
+    tags: [
+      "Batterie",
+      "Speicher",
+      "Steuerung",
+      "Zellbalancierung",
+      "Sicherheit",
+    ],
+    refs: "IEC 62619, Betreiberpflicht Speicherprüfung",
+    catColor: "#8B5CF6",
+  },
+  {
+    id: "g10",
+    tab: "glossar",
+    title: "Hotspot",
+    category: "Modultechnik",
+    catKey: "modultechnik",
+    docType: "Fachbegriff",
+    docTypeKey: "fachbegriff",
+    relevanz: "Grundwissen",
+    relevanzKey: "grundwissen",
+    abstract:
+      "Lokale Überhitzung einer Solarzelle, verursacht durch Zelldefekte, Teilverschattung oder defekte Bypass-Dioden. Erkennbar durch Thermografie. Im Extremfall Brandursache.",
+    tags: ["Thermografie", "Zelldefekt", "Überhitzung", "Modul", "Brandgefahr"],
+    refs: "Bypass-Diode, Thermografie, IEC 61215",
+    catColor: "#EC4899",
+  },
+  {
+    id: "g11",
+    tab: "glossar",
+    title: "Potentialausgleich",
+    category: "Sicherheit & Brandschutz",
+    catKey: "sicherheit",
+    docType: "Fachbegriff",
+    docTypeKey: "fachbegriff",
+    relevanz: "Fortgeschritten",
+    relevanzKey: "fortgeschritten",
+    abstract:
+      "Elektrische Verbindung aller leitfähigen Teile einer PV-Anlage mit der Erdungsanlage. Verhindert gefährliche Berührungsspannungen und ist normativ zwingend vorgeschrieben.",
+    tags: ["Erdung", "Blitzschutz", "Sicherheit", "Installation", "Gestell"],
+    refs: "DIN VDE 0100-540, DIN EN 62305",
+    catColor: "#DC2626",
+  },
+  {
+    id: "g12",
+    tab: "glossar",
+    title: "Degradation",
+    category: "Modultechnik",
+    catKey: "modultechnik",
+    docType: "Fachbegriff",
+    docTypeKey: "fachbegriff",
+    relevanz: "Grundwissen",
+    relevanzKey: "grundwissen",
+    abstract:
+      "Alterungsbedingte Leistungsabnahme von PV-Modulen. Unterschieden wird zwischen anfänglicher Degradation (LID/LeTID) und linearer Langzeitdegradation. Herstellergarantien decken typisch 80–85 % nach 25 Jahren.",
+    tags: ["Alterung", "Leistungsgarantie", "LID", "Modul", "Langzeit"],
+    refs: "Performance Ratio, PID, Leistungsgarantie",
+    catColor: "#EC4899",
+  },
+  {
+    id: "g13",
+    tab: "glossar",
+    title: "Stringplan",
+    category: "Montage & Verkabelung",
+    catKey: "montage",
+    docType: "Fachbegriff",
+    docTypeKey: "fachbegriff",
+    relevanz: "Grundwissen",
+    relevanzKey: "grundwissen",
+    abstract:
+      "Technische Zeichnung, die die Verschaltung aller Module dokumentiert. Unverzichtbares Dokument für Wartung, Fehlersuche und Versicherungsfall.",
+    tags: ["Dokumentation", "Verschaltung", "Modul", "Wartung", "Planung"],
+    refs: "DIN EN 62446-1, String",
+    catColor: "#F59E0B",
+  },
+  {
+    id: "g14",
+    tab: "glossar",
+    title: "AFDD (Arc Fault Detection Device)",
+    category: "Sicherheit & Brandschutz",
+    catKey: "sicherheit",
+    docType: "Fachbegriff",
+    docTypeKey: "fachbegriff",
+    relevanz: "Expertenwissen",
+    relevanzKey: "expertenwissen",
+    abstract:
+      "Fehlerlichtbogen-Schutzeinrichtung, die serielle Lichtbögen auf der DC-Seite erkennt und den Stromkreis unterbricht. In Deutschland empfohlen – insbesondere bei Anlagen auf brennbaren Dächern.",
+    tags: [
+      "Lichtbogen",
+      "Brandschutz",
+      "DC-Schutz",
+      "Schutzeinrichtung",
+      "Sicherheit",
+    ],
+    refs: "Cross-Mating, Steckverbinder, DIN VDE 0100-712",
+    catColor: "#DC2626",
+  },
+  {
+    id: "g15",
+    tab: "glossar",
+    title: "MPP-Tracking",
+    category: "Wechselrichter",
+    catKey: "wechselrichter",
+    docType: "Fachbegriff",
+    docTypeKey: "fachbegriff",
+    relevanz: "Grundwissen",
+    relevanzKey: "grundwissen",
+    abstract:
+      "Regelverfahren des Wechselrichters, das den Arbeitspunkt der PV-Module kontinuierlich auf den Punkt maximaler Leistung einstellt. Fehlerhaftes MPP-Tracking führt zu messbaren Ertragsverlusten.",
+    tags: ["Wechselrichter", "Leistung", "Optimierung", "Ertrag", "Regelung"],
+    refs: "Kennlinienmessung, Performance Ratio",
+    catColor: "#6366F1",
+  },
+  {
+    id: "n1",
+    tab: "normen",
+    title: "DIN EN 62446-1",
+    category: "Montage & Verkabelung",
+    catKey: "montage",
+    docType: "DIN-/VDE-Norm",
+    docTypeKey: "din-norm",
+    relevanz: "Grundwissen",
+    relevanzKey: "grundwissen",
+    abstract:
+      "Anforderungen an die Dokumentation, Inbetriebnahmeprüfung und periodische Prüfung von PV-Anlagen. Die zentrale Norm für die Abnahme und laufende Überwachung.",
+    tags: [
+      "Dokumentation",
+      "Inbetriebnahme",
+      "Prüfung",
+      "Abnahme",
+      "Protokoll",
+    ],
+    refs: "Isolationswiderstand, Stringplan, Kennlinienmessung",
+    catColor: "#F59E0B",
+  },
+  {
+    id: "n2",
+    tab: "normen",
+    title: "DIN VDE 0100-600",
+    category: "Sicherheit & Brandschutz",
+    catKey: "sicherheit",
+    docType: "DIN-/VDE-Norm",
+    docTypeKey: "din-norm",
+    relevanz: "Fortgeschritten",
+    relevanzKey: "fortgeschritten",
+    abstract:
+      "Erstprüfung elektrischer Anlagen. Definiert Prüfschritte wie Isolationswiderstandsmessung, Schleifenimpedanzmessung und Schutzleiterprüfung, die bei Inbetriebnahme nachweislich durchgeführt werden müssen.",
+    tags: [
+      "Erstprüfung",
+      "Elektrosicherheit",
+      "Messung",
+      "Inbetriebnahme",
+      "Protokoll",
+    ],
+    refs: "Isolationswiderstand, Potentialausgleich",
+    catColor: "#DC2626",
+  },
+  {
+    id: "n3",
+    tab: "normen",
+    title: "DGUV Vorschrift 3",
+    category: "Sicherheit & Brandschutz",
+    catKey: "sicherheit",
+    docType: "Betreiberpflicht",
+    docTypeKey: "betreiberpflicht",
+    relevanz: "Fortgeschritten",
+    relevanzKey: "fortgeschritten",
+    abstract:
+      "Vorschrift der Deutschen Gesetzlichen Unfallversicherung. Verpflichtet gewerbliche Betreiber zu regelmäßigen Wiederholungsprüfungen in festgelegten Intervallen.",
+    tags: [
+      "Wiederholungsprüfung",
+      "Betreiberpflicht",
+      "Gewerblich",
+      "Unfallversicherung",
+      "Prüffrist",
+    ],
+    refs: "Isolationswiderstand, DIN VDE 0100-600",
+    catColor: "#DC2626",
+  },
+  {
+    id: "n4",
+    tab: "normen",
+    title: "DIN EN 62305 (Blitzschutz)",
+    category: "Sicherheit & Brandschutz",
+    catKey: "sicherheit",
+    docType: "DIN-/VDE-Norm",
+    docTypeKey: "din-norm",
+    relevanz: "Fortgeschritten",
+    relevanzKey: "fortgeschritten",
+    abstract:
+      "Normreihe zum Blitzschutz baulicher Anlagen. Regelt äußeren und inneren Blitzschutz, Trennungsabstand zu PV-Anlagen und Überspannungsschutz.",
+    tags: [
+      "Blitzschutz",
+      "Überspannung",
+      "Erdung",
+      "Trennungsabstand",
+      "Gebäude",
+    ],
+    refs: "Potentialausgleich, Erdung",
+    catColor: "#DC2626",
+  },
+  {
+    id: "n5",
+    tab: "normen",
+    title: "IEC 61215",
+    category: "Modultechnik",
+    catKey: "modultechnik",
+    docType: "DIN-/VDE-Norm",
+    docTypeKey: "din-norm",
+    relevanz: "Fortgeschritten",
+    relevanzKey: "fortgeschritten",
+    abstract:
+      "Internationale Baumusterprüfung für kristalline PV-Module. Definiert Prüfsequenzen wie Hageltest, Feuchte-Wärme-Test und mechanische Belastung, die ein Modul bestehen muss.",
+    tags: ["Modulprüfung", "Zertifizierung", "Baumuster", "Qualität", "Test"],
+    refs: "Bypass-Diode, Elektrolumineszenz, Degradation",
+    catColor: "#EC4899",
+  },
+  {
+    id: "n6",
+    tab: "normen",
+    title: "EEG (Erneuerbare-Energien-Gesetz)",
+    category: "Wirtschaftlichkeit & Förderung",
+    catKey: "wirtschaftlichkeit",
+    docType: "EEG-Paragraph",
+    docTypeKey: "eeg",
+    relevanz: "Grundwissen",
+    relevanzKey: "grundwissen",
+    abstract:
+      "Gesetzlicher Rahmen für Einspeisung, Vergütung und Pflichten von Betreibern erneuerbarer Energieanlagen. Regelt Einspeisevergütung, Direktvermarktung, Meldepflichten und Netzanschluss.",
+    tags: [
+      "Einspeisevergütung",
+      "Förderung",
+      "Pflicht",
+      "Vergütung",
+      "Meldepflicht",
+    ],
+    refs: "Marktstammdatenregister, Betreiberpflichten",
+    catColor: "#F59E0B",
+  },
+  {
+    id: "n7",
+    tab: "normen",
+    title: "DIN VDE 0100-712",
+    category: "Montage & Verkabelung",
+    catKey: "montage",
+    docType: "DIN-/VDE-Norm",
+    docTypeKey: "din-norm",
+    relevanz: "Fortgeschritten",
+    relevanzKey: "fortgeschritten",
+    abstract:
+      "Spezifische Errichtungsbestimmung für PV-Stromversorgungssysteme. Regelt Kabeldimensionierung, Schutzmaßnahmen, Trenneinrichtungen und Kennzeichnung.",
+    tags: ["Errichtung", "Kabel", "Schutz", "Installation", "Planung"],
+    refs: "Cross-Mating, AFDD, Stringplan",
+    catColor: "#F59E0B",
+  },
+  {
+    id: "n8",
+    tab: "normen",
+    title: "IEC 62619",
+    category: "Speichersysteme",
+    catKey: "speichersysteme",
+    docType: "DIN-/VDE-Norm",
+    docTypeKey: "din-norm",
+    relevanz: "Fortgeschritten",
+    relevanzKey: "fortgeschritten",
+    abstract:
+      "Sicherheitsanforderungen für industrielle Lithium-Akkumulatoren. Definiert Prüfungen für thermische, elektrische und mechanische Sicherheit.",
+    tags: ["Batterie", "Sicherheit", "Lithium", "Zulassung", "Prüfung"],
+    refs: "BMS, Speichersystem",
+    catColor: "#8B5CF6",
+  },
+  {
+    id: "n9",
+    tab: "normen",
+    title: "Marktstammdatenregister (MaStR)",
+    category: "Wirtschaftlichkeit & Förderung",
+    catKey: "wirtschaftlichkeit",
+    docType: "Betreiberpflicht",
+    docTypeKey: "betreiberpflicht",
+    relevanz: "Grundwissen",
+    relevanzKey: "grundwissen",
+    abstract:
+      "Bundesnetzagentur-Register, in dem alle Strom- und Gaserzeugungsanlagen registriert sein müssen. Die Registrierung und regelmäßige Aktualisierung ist gesetzliche Pflicht.",
+    tags: [
+      "Registrierung",
+      "Bundesnetzagentur",
+      "Meldepflicht",
+      "Vergütung",
+      "Pflicht",
+    ],
+    refs: "EEG, Betreiberpflichten",
+    catColor: "#F59E0B",
+  },
+  {
+    id: "n10",
+    tab: "normen",
+    title: "VDE-AR-E 2510-50",
+    category: "Speichersysteme",
+    catKey: "speichersysteme",
+    docType: "Technische Richtlinie",
+    docTypeKey: "richtlinie",
+    relevanz: "Fortgeschritten",
+    relevanzKey: "fortgeschritten",
+    abstract:
+      "VDE-Anwendungsregel für stationäre Energiespeichersysteme mit Lithium-Batterien. Definiert Anforderungen an Aufstellung, Belüftung, Brandschutz und Zugänglichkeit.",
+    tags: ["Speicher", "Aufstellung", "Brandschutz", "Belüftung", "Sicherheit"],
+    refs: "BMS, IEC 62619",
+    catColor: "#8B5CF6",
+  },
+  {
+    id: "n11",
+    tab: "normen",
+    title: "DIN EN 62852",
+    category: "Montage & Verkabelung",
+    catKey: "montage",
+    docType: "DIN-/VDE-Norm",
+    docTypeKey: "din-norm",
+    relevanz: "Expertenwissen",
+    relevanzKey: "expertenwissen",
+    abstract:
+      "Anforderungen an Steckverbinder für DC-Anwendungen in PV-Systemen. Verbietet explizit die Kombination von Steckverbindern unterschiedlicher Hersteller (Cross-Mating).",
+    tags: ["Steckverbinder", "DC", "Zulassung", "Kompatibilität", "Sicherheit"],
+    refs: "Cross-Mating, Lichtbogen",
+    catColor: "#F59E0B",
+  },
+  {
+    id: "n12",
+    tab: "normen",
+    title: "Betriebssicherheitsverordnung (BetrSichV)",
+    category: "Sicherheit & Brandschutz",
+    catKey: "sicherheit",
+    docType: "Betreiberpflicht",
+    docTypeKey: "betreiberpflicht",
+    relevanz: "Fortgeschritten",
+    relevanzKey: "fortgeschritten",
+    abstract:
+      "Bundesverordnung zur Sicherheit überwachungsbedürftiger Anlagen. Verpflichtet Arbeitgeber, Gefährdungsbeurteilungen durchzuführen und Prüfungen durch befähigte Personen sicherzustellen.",
+    tags: [
+      "Betreiberpflicht",
+      "Gefährdungsbeurteilung",
+      "Prüfpflicht",
+      "Gewerblich",
+      "Arbeitgeber",
+    ],
+    refs: "DGUV Vorschrift 3, Wiederholungsprüfung",
+    catColor: "#DC2626",
+  },
+];
+
+const COMPARISONS: Comparison[] = [
+  {
+    id: 1,
+    thema: "modulinstallation",
+    schwere: "technisch",
+    title: "Modulklemmen: korrekt mittig gesetzt vs. zu weit am Rand montiert",
+    badColor: "linear-gradient(135deg,#FCA5A5,#EF4444)",
+    goodColor: "linear-gradient(135deg,#6EE7B7,#10B981)",
+    explain2:
+      "Falsch positionierte Klemmen erzeugen Biegespannung im Modulrahmen. Über Jahre entstehen Mikrorisse, die zu Hotspots und Ertragsverlusten führen.",
+    explain3:
+      "Klemmenposition im markierten Klemmbereich, typisch bei 20–25 % der Modullänge ab Außenkante. Drehmoment gemäß Herstellerangabe.",
+    tags: ["Modulklemme", "Montage", "Biegeradius", "Mikroriss", "Drehmoment"],
+    badIcon: "⊠ Klemme am Rand",
+    goodIcon: "✓ Klemme mittig",
+  },
+  {
+    id: 2,
+    thema: "modulinstallation",
+    schwere: "technisch",
+    title:
+      "Modulabstand für Hinterlüftung: eingehalten vs. Module ohne Belüftungsspalt",
+    badColor: "linear-gradient(135deg,#FCA5A5,#EF4444)",
+    goodColor: "linear-gradient(135deg,#6EE7B7,#10B981)",
+    explain2:
+      "Fehlende Hinterlüftung erhöht die Modultemperatur um bis zu 15 °C. Pro Grad Celsius sinkt die Leistung um 0,35–0,45 % – summiert sich zu mehreren Prozent Jahresertragsverlust.",
+    explain3:
+      "Modulabstand gemäß Herstellerdatenblatt. Bei Aufdachmontage mind. 10–15 cm Abstand für ausreichende Konvektionskühlung.",
+    tags: [
+      "Hinterlüftung",
+      "Temperatur",
+      "Ertragsverlust",
+      "Montage",
+      "Modulabstand",
+    ],
+    badIcon: "⊠ Kein Spalt",
+    goodIcon: "✓ 2cm Abstand",
+  },
+  {
+    id: 3,
+    thema: "kabel",
+    schwere: "sicherheit",
+    title:
+      "DC-Kabelführung: UV-geschützt und zugentlastet vs. frei hängende Kabel",
+    badColor: "linear-gradient(135deg,#FCA5A5,#EF4444)",
+    goodColor: "linear-gradient(135deg,#6EE7B7,#10B981)",
+    explain2:
+      "Frei hängende Kabel sind UV, Wind und Abrieb ausgesetzt. Fehlende Zugentlastung lockert Kontakte – Ausgangspunkt für Lichtbögen und Brände.",
+    explain3:
+      "Kabelführung in UV-beständigem Wellrohr gemäß DIN VDE 0100-712. Zugentlastung an jedem Steckverbinder.",
+    tags: [
+      "Kabelführung",
+      "UV-Schutz",
+      "Zugentlastung",
+      "DC-Seite",
+      "Brandschutz",
+    ],
+    badIcon: "⊠ Frei hängend",
+    goodIcon: "✓ UV-geschützt",
+  },
+  {
+    id: 4,
+    thema: "kabel",
+    schwere: "normen",
+    title:
+      "Steckverbinder: gleicher Hersteller korrekt verrastet vs. Cross-Mating",
+    badColor: "linear-gradient(135deg,#FCA5A5,#EF4444)",
+    goodColor: "linear-gradient(135deg,#6EE7B7,#10B981)",
+    explain2:
+      "Cross-Mating ist gemäß DIN EN 62852 verboten. Unterschiedliche Kontaktgeometrien führen zu Temperaturen über 300 °C – eine der häufigsten Brandursachen bei PV-Anlagen.",
+    explain3:
+      "Ausschließlich Stecker und Buchsen desselben Herstellers verwenden. Verrastung durch hörbares Einrasten und Zugprüfung verifizieren.",
+    tags: ["Cross-Mating", "Steckverbinder", "Normenverstoß", "Brand", "MC4"],
+    badIcon: "⊠ Cross-Mating",
+    goodIcon: "✓ Gleicher Hersteller",
+  },
+  {
+    id: 5,
+    thema: "thermografie",
+    schwere: "technisch",
+    title: "Thermografie: gleichmäßiges Wärmebild vs. Hotspot durch Zelldefekt",
+    badColor: "linear-gradient(135deg,#FCA5A5,#FCD34D)",
+    goodColor: "linear-gradient(135deg,#6EE7B7,#10B981)",
+    explain2:
+      "Ein Hotspot weist auf Zellbruch, Kontaktfehler oder defekte Bypass-Diode hin. Leistungsverlust und beschleunigte Alterung – im Extremfall Brandgefahr.",
+    explain3:
+      "Regelmäßige Thermografie-Inspektion gemäß IEC TS 62446-3. Hotspots > 20 °C Differenz erfordern zeitnahe elektrische Prüfung.",
+    tags: ["Thermografie", "Hotspot", "Infrarot", "Zelldefekt", "Temperatur"],
+    badIcon: "⊠ Hotspot >30°C",
+    goodIcon: "✓ Gleichmäßig",
+  },
+  {
+    id: 6,
+    thema: "thermografie",
+    schwere: "technisch",
+    title: "String-Thermografie: mit und ohne Bypass-Dioden-Fehler",
+    badColor: "linear-gradient(135deg,#FCA5A5,#FCD34D)",
+    goodColor: "linear-gradient(135deg,#6EE7B7,#10B981)",
+    explain2:
+      "Bei Ausfall einer Bypass-Diode wird das geschwächte Segment durch den String-Strom aufgeheizt. Leistungsverlust und Alterungsbeschleunigung.",
+    explain3:
+      "Bypass-Dioden-Test mittels Thermografie oder I-V-Kennlinienmessung. Bei Ausfall: Austausch der Anschlussdose durch Fachbetrieb.",
+    tags: [
+      "Bypass-Diode",
+      "Thermografie",
+      "String",
+      "Zellsegment",
+      "Anschlussdose",
+    ],
+    badIcon: "⊠ 1/3 Segmente heiß",
+    goodIcon: "✓ Gleichmäßig",
+  },
+  {
+    id: 7,
+    thema: "dach",
+    schwere: "sicherheit",
+    title: "Dachdurchführung: EPDM-Manschette vs. Baumarkt-Silikon",
+    badColor: "linear-gradient(135deg,#FCA5A5,#EF4444)",
+    goodColor: "linear-gradient(135deg,#6EE7B7,#10B981)",
+    explain2:
+      "Silikon-Fugen verspröden unter UV-Einwirkung. Wassereintritt in die Dachkonstruktion – die Versicherung kann die Regulierung ablehnen.",
+    explain3:
+      "Dachdurchführungen mit EPDM-Dichtmanschetten und Eindeckrahmen, eingebunden in die Dacheindeckung. Nur UV- und witterungsbeständige Materialien.",
+    tags: [
+      "Dachdurchführung",
+      "Abdichtung",
+      "EPDM",
+      "Wasserschaden",
+      "Dachintegration",
+    ],
+    badIcon: "⊠ Silikon rissig",
+    goodIcon: "✓ EPDM-Manschette",
+  },
+  {
+    id: 8,
+    thema: "dokumentation",
+    schwere: "normen",
+    title: "Anlagendokumentation: vollständig vs. unzureichend",
+    badColor: "linear-gradient(135deg,#FCA5A5,#EF4444)",
+    goodColor: "linear-gradient(135deg,#6EE7B7,#10B981)",
+    explain2:
+      "Unvollständige Dokumentation verstößt gegen DIN EN 62446-1 und kann dazu führen, dass Gewährleistungs- oder Versicherungsansprüche abgelehnt werden.",
+    explain3:
+      "Anlagenübersichtsplan, Stringplan, Messprotokolle (Isolationswiderstand, Leerlaufspannung je String), Inbetriebnahmeprotokoll mit Unterschrift.",
+    tags: [
+      "Dokumentation",
+      "Protokoll",
+      "Stringplan",
+      "Isolationsmessung",
+      "DIN 62446",
+    ],
+    badIcon: "⊠ Lose Zettel",
+    goodIcon: "✓ Vollständig",
+  },
+  {
+    id: 9,
+    thema: "blitzschutz",
+    schwere: "normen",
+    title: "Potentialausgleich: normgerecht angeschlossen vs. fehlende Erdung",
+    badColor: "linear-gradient(135deg,#FCA5A5,#EF4444)",
+    goodColor: "linear-gradient(135deg,#6EE7B7,#10B981)",
+    explain2:
+      "Fehlender Potentialausgleich erzeugt bei Blitzeinschlag oder Isolationsfehlern lebensgefährliche Berührungsspannungen. Kann den Versicherungsschutz aushebeln.",
+    explain3:
+      "Alle leitfähigen Teile gemäß DIN VDE 0100-540 mit dem Hauptpotentialausgleich verbinden. Zugelassene Erdungsklemmstellen verwenden.",
+    tags: [
+      "Potentialausgleich",
+      "Erdung",
+      "Blitzschutz",
+      "Sicherheit",
+      "Unterkonstruktion",
+    ],
+    badIcon: "⊠ Keine Erdung",
+    goodIcon: "✓ PA angeschlossen",
+  },
+  {
+    id: 10,
+    thema: "speicher",
+    schwere: "sicherheit",
+    title:
+      "Speicheraufstellung: normkonform im belüfteten Raum vs. im Abstellraum",
+    badColor: "linear-gradient(135deg,#FCA5A5,#EF4444)",
+    goodColor: "linear-gradient(135deg,#6EE7B7,#10B981)",
+    explain2:
+      "Im Falle eines Thermal Runaway setzt eine Lithium-Zelle toxische Gase frei. Ohne Belüftung und Abstände zu brennbarem Material kann ein unkontrollierbarer Brand entstehen.",
+    explain3:
+      "Aufstellung gemäß VDE-AR-E 2510-50: Mindestabstände zu brennbaren Materialien, natürliche Belüftung, Zugang für Wartung und Rettungskräfte.",
+    tags: [
+      "Speicher",
+      "Aufstellung",
+      "Thermal Runaway",
+      "Belüftung",
+      "Brandschutz",
+    ],
+    badIcon: "⊠ Abstellraum",
+    goodIcon: "✓ Technikraum",
+  },
+];
+
 // ─── Filter options ───────────────────────────────────────────────────────────
 
 const THEMA_OPTIONS = [
@@ -534,6 +1271,36 @@ export default function KnowledgeBase() {
   const [filterZielgruppe, setFilterZielgruppe] = useState("all");
   const [filterAnlass, setFilterAnlass] = useState("all");
   const [shown, setShown] = useState(BATCH);
+
+  // Glossary state
+  const [activeTab, setActiveTab] = useState<"glossar" | "normen">("glossar");
+  const [glossarySearch, setGlossarySearch] = useState("");
+  const [glossaryCat, setGlossaryCat] = useState("all");
+  const [glossaryRelevanz, setGlossaryRelevanz] = useState("all");
+
+  // Comparison state
+  const [compThema, setCompThema] = useState("all");
+  const [compSchwere, setCompSchwere] = useState("all");
+
+  const filteredGlossary = GLOSSARY_TERMS.filter((t) => {
+    if (t.tab !== activeTab) return false;
+    const q = glossarySearch.toLowerCase();
+    const matchSearch =
+      q === "" ||
+      t.title.toLowerCase().includes(q) ||
+      t.abstract.toLowerCase().includes(q) ||
+      t.tags.some((tag) => tag.toLowerCase().includes(q));
+    const matchCat = glossaryCat === "all" || t.catKey === glossaryCat;
+    const matchRel =
+      glossaryRelevanz === "all" || t.relevanzKey === glossaryRelevanz;
+    return matchSearch && matchCat && matchRel;
+  });
+
+  const filteredComparisons = COMPARISONS.filter((c) => {
+    const matchThema = compThema === "all" || c.thema === compThema;
+    const matchSchwere = compSchwere === "all" || c.schwere === compSchwere;
+    return matchThema && matchSchwere;
+  });
 
   const filtered = ARTICLES.filter((a) => {
     const q = searchQuery.toLowerCase();
@@ -886,6 +1653,268 @@ export default function KnowledgeBase() {
         </div>
       </section>
 
+      {/* ── Glossar & Normen ─────────────────────────────────────── */}
+      <section
+        aria-labelledby="glossary-title"
+        className="bg-muted/40 py-20 md:py-28"
+        id="glossary"
+      >
+        <div className="section-container">
+          <div className="mb-10 text-center">
+            <div className="section-label mb-3 justify-center">
+              <span className="solar-bar" />
+              <span>Wissensarchiv</span>
+            </div>
+            <h2
+              className="mb-3 font-extrabold text-3xl tracking-tight md:text-4xl"
+              id="glossary-title"
+            >
+              Verstehen, was zählt: PV-Fachbegriffe und Ihr rechtlicher Kompass
+            </h2>
+            <p className="mx-auto max-w-2xl text-muted-foreground">
+              Fachbegriffe nachschlagen, Normen verstehen und die Pflichten
+              kennen, die für den Betrieb Ihrer Anlage tatsächlich gelten.
+            </p>
+          </div>
+
+          {/* Tabs */}
+          <div className="mb-6 flex gap-2">
+            {(
+              [
+                { key: "glossar", label: "Fachbegriffe A–Z" },
+                { key: "normen", label: "Normen, Gesetze & Pflichten" },
+              ] as const
+            ).map((tab) => (
+              <button
+                className={cn(
+                  "rounded-lg border px-5 py-2 font-semibold text-sm transition-all",
+                  activeTab === tab.key
+                    ? "border-primary bg-primary text-primary-foreground"
+                    : "border-border bg-background text-muted-foreground hover:border-primary/40 hover:text-foreground"
+                )}
+                key={tab.key}
+                onClick={() => {
+                  setActiveTab(tab.key);
+                  setGlossarySearch("");
+                  setGlossaryCat("all");
+                  setGlossaryRelevanz("all");
+                }}
+                type="button"
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Filters */}
+          <div className="mb-8 flex flex-col gap-3 sm:flex-row">
+            <div className="relative flex-1">
+              <SearchIcon className="-translate-y-1/2 pointer-events-none absolute top-1/2 left-3 size-4 text-muted-foreground" />
+              <Input
+                className="h-10 pl-9"
+                onChange={(e) => setGlossarySearch(e.target.value)}
+                placeholder="Suchbegriff, Norm oder Pflicht eingeben…"
+                type="text"
+                value={glossarySearch}
+              />
+            </div>
+            <Select onValueChange={setGlossaryCat} value={glossaryCat}>
+              <SelectTrigger className="h-10 w-full sm:w-56">
+                <SelectValue placeholder="Alle Kategorien" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Alle Kategorien</SelectItem>
+                <SelectItem value="modultechnik">Modultechnik</SelectItem>
+                <SelectItem value="wechselrichter">Wechselrichter</SelectItem>
+                <SelectItem value="speichersysteme">Speichersysteme</SelectItem>
+                <SelectItem value="montage">Montage & Verkabelung</SelectItem>
+                <SelectItem value="ertrag">Ertrag & Monitoring</SelectItem>
+                <SelectItem value="sicherheit">
+                  Sicherheit & Brandschutz
+                </SelectItem>
+                <SelectItem value="wirtschaftlichkeit">
+                  Wirtschaftlichkeit & Förderung
+                </SelectItem>
+              </SelectContent>
+            </Select>
+            <Select
+              onValueChange={setGlossaryRelevanz}
+              value={glossaryRelevanz}
+            >
+              <SelectTrigger className="h-10 w-full sm:w-48">
+                <SelectValue placeholder="Alle Stufen" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Alle Stufen</SelectItem>
+                <SelectItem value="grundwissen">Grundwissen</SelectItem>
+                <SelectItem value="fortgeschritten">Fortgeschritten</SelectItem>
+                <SelectItem value="expertenwissen">Expertenwissen</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          {filteredGlossary.length > 0 ? (
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {filteredGlossary.map((term) => (
+                <GlossaryCard key={term.id} term={term} />
+              ))}
+            </div>
+          ) : (
+            <div className="py-16 text-center text-muted-foreground">
+              <p className="font-medium">Kein Eintrag gefunden.</p>
+              <button
+                className="mt-2 text-primary text-sm hover:underline"
+                onClick={() => {
+                  setGlossarySearch("");
+                  setGlossaryCat("all");
+                  setGlossaryRelevanz("all");
+                }}
+                type="button"
+              >
+                Filter zurücksetzen
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* ── Gut vs. Schlecht ─────────────────────────────────────── */}
+      <section
+        aria-labelledby="comparison-title"
+        className="py-20 md:py-28"
+        id="comparison"
+      >
+        <div className="section-container">
+          <div className="mb-10">
+            <div className="section-label mb-3">
+              <span className="solar-bar" />
+              <span>Praxisbeispiele</span>
+            </div>
+            <h2
+              className="mb-3 font-extrabold text-3xl tracking-tight md:text-4xl"
+              id="comparison-title"
+            >
+              Auf den zweiten Blick: Was gute von schlechter PV-Praxis
+              unterscheidet
+            </h2>
+            <p className="max-w-2xl text-muted-foreground">
+              Anonymisierte Realbeispiele aus der täglichen Gutachterpraxis.
+              Schulen Sie Ihr Auge für die Qualitätsmerkmale, die über
+              Sicherheit, Ertrag und Werterhalt entscheiden.
+            </p>
+          </div>
+
+          {/* Filters */}
+          <div className="mb-8 flex flex-wrap gap-3">
+            <Select onValueChange={setCompThema} value={compThema}>
+              <SelectTrigger className="h-10 w-full sm:w-64">
+                <SelectValue placeholder="Alle Themenfelder" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Alle Themenfelder</SelectItem>
+                <SelectItem value="modulinstallation">
+                  Modulinstallation
+                </SelectItem>
+                <SelectItem value="kabel">
+                  Kabelführung & Steckverbinder
+                </SelectItem>
+                <SelectItem value="thermografie">
+                  Thermografie-Auffälligkeiten
+                </SelectItem>
+                <SelectItem value="dach">
+                  Dachintegration & Unterkonstruktion
+                </SelectItem>
+                <SelectItem value="speicher">
+                  Speichersystem & Batterieraum
+                </SelectItem>
+                <SelectItem value="blitzschutz">
+                  Blitzschutz & Erdung
+                </SelectItem>
+                <SelectItem value="dokumentation">
+                  Dokumentation & Kennzeichnung
+                </SelectItem>
+              </SelectContent>
+            </Select>
+            <Select onValueChange={setCompSchwere} value={compSchwere}>
+              <SelectTrigger className="h-10 w-full sm:w-56">
+                <SelectValue placeholder="Alle Schweregrade" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Alle Schweregrade</SelectItem>
+                <SelectItem value="optisch">Optischer Mangel</SelectItem>
+                <SelectItem value="technisch">Technischer Mangel</SelectItem>
+                <SelectItem value="sicherheit">
+                  Sicherheitsrelevanter Mangel
+                </SelectItem>
+                <SelectItem value="normen">Normenverstoß</SelectItem>
+              </SelectContent>
+            </Select>
+            {(compThema !== "all" || compSchwere !== "all") && (
+              <button
+                className="flex items-center gap-1 rounded-lg border border-border px-3 py-2 text-muted-foreground text-sm hover:border-primary/30 hover:text-primary"
+                onClick={() => {
+                  setCompThema("all");
+                  setCompSchwere("all");
+                }}
+                type="button"
+              >
+                <XIcon className="size-3.5" />
+                Zurücksetzen
+              </button>
+            )}
+          </div>
+
+          {filteredComparisons.length > 0 ? (
+            <div className="grid gap-6 md:grid-cols-2">
+              {filteredComparisons.map((c) => (
+                <ComparisonCard comparison={c} key={c.id} />
+              ))}
+            </div>
+          ) : (
+            <div className="py-16 text-center text-muted-foreground">
+              <p className="font-medium">
+                Keine Vergleiche für diese Filterauswahl.
+              </p>
+            </div>
+          )}
+
+          {/* CTA */}
+          <div className="mt-12 rounded-2xl bg-dark-surface p-10 text-center">
+            <h3 className="mb-3 font-bold text-2xl text-dark-surface-foreground">
+              Sie haben Ähnlichkeiten mit Ihrer eigenen Anlage entdeckt?
+            </h3>
+            <p className="mx-auto mb-6 max-w-2xl text-dark-surface-foreground/75 leading-relaxed">
+              Viele der hier gezeigten Mängel sind mit bloßem Auge nicht
+              erkennbar. Eine professionelle Prüfung – vor Ort oder als
+              Fernbewertung anhand Ihrer Fotos – gibt Ihnen belastbare
+              Grundlagen.
+            </p>
+            <div className="flex flex-wrap justify-center gap-3">
+              <Button
+                asChild
+                className="border-white/30 text-dark-surface-foreground hover:border-white hover:bg-white/10"
+                variant="outline"
+              >
+                <Link to="/kontakt">
+                  Vor-Ort-Prüfung anfragen
+                  <ArrowRightIcon className="ml-1 size-4" />
+                </Link>
+              </Button>
+              <Button
+                asChild
+                className="border-white/30 text-dark-surface-foreground hover:border-white hover:bg-white/10"
+                variant="outline"
+              >
+                <Link to="/kontakt">
+                  Fernbewertung starten
+                  <ArrowRightIcon className="ml-1 size-4" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── Newsletter CTA ───────────────────────────────────────── */}
       <section
         aria-label="Gratis Checkliste"
@@ -992,5 +2021,152 @@ function ArticleCard({ article }: { article: Article }) {
         </Button>
       </div>
     </article>
+  );
+}
+
+// ─── Glossary Card ────────────────────────────────────────────────────────────
+
+function GlossaryCard({ term }: { term: GlossaryTerm }) {
+  const relevanzColors: Record<string, string> = {
+    grundwissen: "bg-emerald-100 text-emerald-700",
+    fortgeschritten: "bg-blue-100 text-blue-700",
+    expertenwissen: "bg-violet-100 text-violet-700",
+  };
+  const docTypeColors: Record<string, string> = {
+    norm: "bg-amber-100 text-amber-700",
+    richtlinie: "bg-sky-100 text-sky-700",
+    merkblatt: "bg-orange-100 text-orange-700",
+    fachbegriff: "bg-slate-100 text-slate-700",
+  };
+  return (
+    <div className="flex flex-col rounded-xl border border-border bg-card p-5 shadow-sm transition-shadow hover:shadow-md">
+      {/* Header */}
+      <div className="mb-3 flex items-start justify-between gap-2">
+        <h3 className="font-bold text-base text-foreground leading-snug">
+          {term.title}
+        </h3>
+        <span
+          className={`shrink-0 rounded-full px-2 py-0.5 font-semibold text-xs ${docTypeColors[term.docTypeKey] ?? "bg-muted text-muted-foreground"}`}
+        >
+          {term.docType}
+        </span>
+      </div>
+
+      {/* Category + relevance */}
+      <div className="mb-3 flex flex-wrap gap-1.5">
+        <span
+          className="rounded-full px-2 py-0.5 font-medium text-xs"
+          style={{ background: term.catColor + "22", color: term.catColor }}
+        >
+          {term.category}
+        </span>
+        <span
+          className={`rounded-full px-2 py-0.5 font-medium text-xs ${relevanzColors[term.relevanzKey] ?? "bg-muted text-muted-foreground"}`}
+        >
+          {term.relevanz}
+        </span>
+      </div>
+
+      {/* Abstract */}
+      <p className="mb-4 flex-1 text-muted-foreground text-sm leading-relaxed">
+        {term.abstract}
+      </p>
+
+      {/* Tags */}
+      <div className="mb-3 flex flex-wrap gap-1">
+        {term.tags.map((t) => (
+          <span
+            className="rounded-full bg-muted px-2 py-0.5 text-muted-foreground text-xs"
+            key={t}
+          >
+            {t}
+          </span>
+        ))}
+      </div>
+
+      {/* Refs */}
+      {term.refs && (
+        <p className="text-muted-foreground/60 text-xs">
+          <span className="font-medium">Quellen:</span> {term.refs}
+        </p>
+      )}
+    </div>
+  );
+}
+
+// ─── Comparison Card ──────────────────────────────────────────────────────────
+
+function ComparisonCard({ comparison: c }: { comparison: Comparison }) {
+  const schwerebadge: Record<string, string> = {
+    optisch: "bg-slate-100 text-slate-600",
+    technisch: "bg-amber-100 text-amber-700",
+    sicherheit: "bg-red-100 text-red-700",
+    normen: "bg-violet-100 text-violet-700",
+  };
+  const schwereLabel: Record<string, string> = {
+    optisch: "Optischer Mangel",
+    technisch: "Technischer Mangel",
+    sicherheit: "Sicherheitsrelevant",
+    normen: "Normenverstoß",
+  };
+  return (
+    <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+      {/* Title bar */}
+      <div className="flex items-center justify-between gap-3 border-border border-b bg-muted/40 px-5 py-3">
+        <span className="font-semibold text-foreground text-sm">{c.title}</span>
+        <span
+          className={`rounded-full px-2.5 py-0.5 font-semibold text-xs ${schwerebadge[c.schwere] ?? "bg-muted text-muted-foreground"}`}
+        >
+          {schwereLabel[c.schwere] ?? c.schwere}
+        </span>
+      </div>
+
+      {/* Split panel */}
+      <div className="grid grid-cols-2 divide-x divide-border">
+        {/* Bad */}
+        <div className="p-5">
+          <div
+            className="mb-3 flex size-10 items-center justify-center rounded-full text-xl"
+            style={{ background: c.badColor + "22" }}
+          >
+            {c.badIcon}
+          </div>
+          <p className="mb-2 font-bold text-sm" style={{ color: c.badColor }}>
+            Mangelhaft
+          </p>
+          <p className="text-muted-foreground text-sm leading-relaxed">
+            {c.explain2}
+          </p>
+        </div>
+
+        {/* Good */}
+        <div className="p-5">
+          <div
+            className="mb-3 flex size-10 items-center justify-center rounded-full text-xl"
+            style={{ background: c.goodColor + "22" }}
+          >
+            {c.goodIcon}
+          </div>
+          <p className="mb-2 font-bold text-sm" style={{ color: c.goodColor }}>
+            Normgerecht
+          </p>
+          <p className="text-muted-foreground text-sm leading-relaxed">
+            {c.explain3}
+          </p>
+        </div>
+      </div>
+
+      {/* Tags */}
+      <div className="flex flex-wrap gap-1.5 border-border border-t px-5 py-3">
+        {c.tags.map((t) => (
+          <span
+            className="rounded-full bg-muted px-2 py-0.5 text-muted-foreground text-xs"
+            key={t}
+          >
+            {t}
+          </span>
+        ))}
+      </div>
+    </div>
   );
 }
