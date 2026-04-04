@@ -1,13 +1,6 @@
+import { Link } from "@tanstack/react-router";
 import { Separator } from "@/components/ui/separator";
 import { siteConfig } from "@/config/site";
-
-const scrollTo = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-  e.preventDefault();
-  const target = document.querySelector(href);
-  if (target) {
-    target.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-};
 
 export default function Footer() {
   return (
@@ -49,13 +42,12 @@ export default function Footer() {
             <ul className="flex flex-col gap-2.5">
               {siteConfig.footerLinks.services.map((link) => (
                 <li key={link.label}>
-                  <a
+                  <Link
                     className="text-[var(--dark-surface-foreground)]/60 text-sm transition-colors hover:text-[var(--dark-surface-foreground)]"
-                    href={link.href}
-                    onClick={(e) => scrollTo(e, link.href)}
+                    to={link.href as never}
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -72,17 +64,12 @@ export default function Footer() {
             <ul className="flex flex-col gap-2.5">
               {siteConfig.footerLinks.info.map((link) => (
                 <li key={link.label}>
-                  <a
+                  <Link
                     className="text-[var(--dark-surface-foreground)]/60 text-sm transition-colors hover:text-[var(--dark-surface-foreground)]"
-                    href={link.href}
-                    onClick={(e) => {
-                      if (link.href.startsWith("#")) {
-                        scrollTo(e, link.href);
-                      }
-                    }}
+                    to={link.href as never}
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -99,12 +86,12 @@ export default function Footer() {
             <ul className="flex flex-col gap-2.5">
               {siteConfig.footerLinks.legal.map((link) => (
                 <li key={link.label}>
-                  <a
+                  <Link
                     className="text-[var(--dark-surface-foreground)]/60 text-sm transition-colors hover:text-[var(--dark-surface-foreground)]"
-                    href={link.href}
+                    to={link.href as never}
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

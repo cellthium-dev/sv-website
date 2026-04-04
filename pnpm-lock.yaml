@@ -50,6 +50,9 @@ importers:
       react-dom:
         specifier: ^19.2.0
         version: 19.2.1(react@19.2.1)
+      react-fast-marquee:
+        specifier: ^1.6.5
+        version: 1.6.5(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       shadcn:
         specifier: ^4.1.0
         version: 4.1.0(@types/node@24.10.1)(typescript@5.9.3)
@@ -2744,6 +2747,12 @@ packages:
     resolution: {integrity: sha512-ibrK8llX2a4eOskq1mXKu/TGZj9qzomO+sNfO98M6d9zIPOEhlBkMkBUBLd1vgS0gQsLDBzA+8jJBVXDnfHmJg==}
     peerDependencies:
       react: ^19.2.1
+
+  react-fast-marquee@1.6.5:
+    resolution: {integrity: sha512-swDnPqrT2XISAih0o74zQVE2wQJFMvkx+9VZXYYNSLb/CUcAzU9pNj637Ar2+hyRw6b4tP6xh4GQZip2ZCpQpg==}
+    peerDependencies:
+      react: '>= 16.8.0 || ^18.0.0'
+      react-dom: '>= 16.8.0 || ^18.0.0'
 
   react-refresh@0.18.0:
     resolution: {integrity: sha512-QgT5//D3jfjJb6Gsjxv0Slpj23ip+HtOpnNgnb2S5zU3CB26G/IDPGoy4RJB42wzFE46DRsstbW6tKHoKbhAxw==}
@@ -5906,6 +5915,11 @@ snapshots:
     dependencies:
       react: 19.2.1
       scheduler: 0.27.0
+
+  react-fast-marquee@1.6.5(react-dom@19.2.1(react@19.2.1))(react@19.2.1):
+    dependencies:
+      react: 19.2.1
+      react-dom: 19.2.1(react@19.2.1)
 
   react-refresh@0.18.0: {}
 

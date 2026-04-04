@@ -13,6 +13,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as WissenIndexRouteImport } from './routes/wissen/index'
 import { Route as WiderrufIndexRouteImport } from './routes/widerruf/index'
 import { Route as UeberMichIndexRouteImport } from './routes/ueber-mich/index'
+import { Route as LeistungenIndexRouteImport } from './routes/leistungen/index'
+import { Route as KontaktIndexRouteImport } from './routes/kontakt/index'
 import { Route as ImpressumIndexRouteImport } from './routes/impressum/index'
 import { Route as DatenschutzIndexRouteImport } from './routes/datenschutz/index'
 import { Route as AgbIndexRouteImport } from './routes/agb/index'
@@ -37,6 +39,16 @@ const UeberMichIndexRoute = UeberMichIndexRouteImport.update({
   path: '/ueber-mich/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LeistungenIndexRoute = LeistungenIndexRouteImport.update({
+  id: '/leistungen/',
+  path: '/leistungen/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KontaktIndexRoute = KontaktIndexRouteImport.update({
+  id: '/kontakt/',
+  path: '/kontakt/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ImpressumIndexRoute = ImpressumIndexRouteImport.update({
   id: '/impressum/',
   path: '/impressum/',
@@ -58,6 +70,8 @@ export interface FileRoutesByFullPath {
   '/agb/': typeof AgbIndexRoute
   '/datenschutz/': typeof DatenschutzIndexRoute
   '/impressum/': typeof ImpressumIndexRoute
+  '/kontakt/': typeof KontaktIndexRoute
+  '/leistungen/': typeof LeistungenIndexRoute
   '/ueber-mich/': typeof UeberMichIndexRoute
   '/widerruf/': typeof WiderrufIndexRoute
   '/wissen/': typeof WissenIndexRoute
@@ -67,6 +81,8 @@ export interface FileRoutesByTo {
   '/agb': typeof AgbIndexRoute
   '/datenschutz': typeof DatenschutzIndexRoute
   '/impressum': typeof ImpressumIndexRoute
+  '/kontakt': typeof KontaktIndexRoute
+  '/leistungen': typeof LeistungenIndexRoute
   '/ueber-mich': typeof UeberMichIndexRoute
   '/widerruf': typeof WiderrufIndexRoute
   '/wissen': typeof WissenIndexRoute
@@ -77,6 +93,8 @@ export interface FileRoutesById {
   '/agb/': typeof AgbIndexRoute
   '/datenschutz/': typeof DatenschutzIndexRoute
   '/impressum/': typeof ImpressumIndexRoute
+  '/kontakt/': typeof KontaktIndexRoute
+  '/leistungen/': typeof LeistungenIndexRoute
   '/ueber-mich/': typeof UeberMichIndexRoute
   '/widerruf/': typeof WiderrufIndexRoute
   '/wissen/': typeof WissenIndexRoute
@@ -88,6 +106,8 @@ export interface FileRouteTypes {
     | '/agb/'
     | '/datenschutz/'
     | '/impressum/'
+    | '/kontakt/'
+    | '/leistungen/'
     | '/ueber-mich/'
     | '/widerruf/'
     | '/wissen/'
@@ -97,6 +117,8 @@ export interface FileRouteTypes {
     | '/agb'
     | '/datenschutz'
     | '/impressum'
+    | '/kontakt'
+    | '/leistungen'
     | '/ueber-mich'
     | '/widerruf'
     | '/wissen'
@@ -106,6 +128,8 @@ export interface FileRouteTypes {
     | '/agb/'
     | '/datenschutz/'
     | '/impressum/'
+    | '/kontakt/'
+    | '/leistungen/'
     | '/ueber-mich/'
     | '/widerruf/'
     | '/wissen/'
@@ -116,6 +140,8 @@ export interface RootRouteChildren {
   AgbIndexRoute: typeof AgbIndexRoute
   DatenschutzIndexRoute: typeof DatenschutzIndexRoute
   ImpressumIndexRoute: typeof ImpressumIndexRoute
+  KontaktIndexRoute: typeof KontaktIndexRoute
+  LeistungenIndexRoute: typeof LeistungenIndexRoute
   UeberMichIndexRoute: typeof UeberMichIndexRoute
   WiderrufIndexRoute: typeof WiderrufIndexRoute
   WissenIndexRoute: typeof WissenIndexRoute
@@ -151,6 +177,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UeberMichIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/leistungen/': {
+      id: '/leistungen/'
+      path: '/leistungen'
+      fullPath: '/leistungen/'
+      preLoaderRoute: typeof LeistungenIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kontakt/': {
+      id: '/kontakt/'
+      path: '/kontakt'
+      fullPath: '/kontakt/'
+      preLoaderRoute: typeof KontaktIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/impressum/': {
       id: '/impressum/'
       path: '/impressum'
@@ -180,6 +220,8 @@ const rootRouteChildren: RootRouteChildren = {
   AgbIndexRoute: AgbIndexRoute,
   DatenschutzIndexRoute: DatenschutzIndexRoute,
   ImpressumIndexRoute: ImpressumIndexRoute,
+  KontaktIndexRoute: KontaktIndexRoute,
+  LeistungenIndexRoute: LeistungenIndexRoute,
   UeberMichIndexRoute: UeberMichIndexRoute,
   WiderrufIndexRoute: WiderrufIndexRoute,
   WissenIndexRoute: WissenIndexRoute,

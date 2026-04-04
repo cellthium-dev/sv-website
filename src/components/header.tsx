@@ -9,20 +9,6 @@ import { cn } from "@/lib/utils";
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const handleNavClick = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    href: string
-  ) => {
-    e.preventDefault();
-    setIsMenuOpen(false);
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    } else {
-      window.location.href = `/${href}`;
-    }
-  };
-
   return (
     <header className="sticky top-0 z-50 border-border/60 border-b bg-background/95 backdrop-blur-sm transition-all">
       <div className="section-container">
@@ -51,49 +37,18 @@ export default function Header() {
 
           {/* Desktop nav */}
           <nav className="hidden items-center gap-1 md:flex">
-            {siteConfig.nav.map((item) =>
-              item.href.startsWith("/") ? (
-                <Link
-                  className="rounded-md px-4 py-2 font-medium text-muted-foreground text-sm transition-all hover:bg-muted hover:text-foreground"
-                  key={item.href}
-                  to={item.href as never}
-                >
-                  {item.label}
-                </Link>
-              ) : (
-                <a
-                  className="rounded-md px-4 py-2 font-medium text-muted-foreground text-sm transition-all hover:bg-muted hover:text-foreground"
-                  href={item.href}
-                  key={item.href}
-                  onClick={(e) => handleNavClick(e, item.href)}
-                >
-                  {item.label}
-                </a>
-              )
-            )}
-            <Link
-              className="rounded-md px-4 py-2 font-medium text-muted-foreground text-sm transition-all hover:bg-muted hover:text-foreground"
-              to="/ueber-mich"
-            >
-              Über mich
-            </Link>
-            <div className="ml-2">
-              <Button
-                className="h-9 px-5 font-semibold"
-                onClick={() => {
-                  setIsMenuOpen(false);
-                  const target = document.querySelector("#kontakt");
-                  if (target) {
-                    target.scrollIntoView({
-                      behavior: "smooth",
-                      block: "start",
-                    });
-                  }
-                }}
-                size="sm"
-                type="button"
+            {siteConfig.nav.map((item) => (
+              <Link
+                className="rounded-md px-4 py-2 font-medium text-muted-foreground text-sm transition-all hover:bg-muted hover:text-foreground"
+                key={item.href}
+                to={item.href as never}
               >
-                Kontakt
+                {item.label}
+              </Link>
+            ))}
+            <div className="ml-2">
+              <Button asChild className="h-9 px-5 font-semibold" size="sm">
+                <Link to="/kontakt">Kontakt</Link>
               </Button>
             </div>
           </nav>
@@ -123,50 +78,21 @@ export default function Header() {
         >
           <Separator className="mb-3" />
           <nav className="flex flex-col gap-1">
-            {siteConfig.nav.map((item) =>
-              item.href.startsWith("/") ? (
-                <Link
-                  className="rounded-md px-3 py-2.5 font-medium text-foreground text-sm transition-all hover:bg-muted"
-                  key={item.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  to={item.href as never}
-                >
-                  {item.label}
-                </Link>
-              ) : (
-                <a
-                  className="rounded-md px-3 py-2.5 font-medium text-foreground text-sm transition-all hover:bg-muted"
-                  href={item.href}
-                  key={item.href}
-                  onClick={(e) => handleNavClick(e, item.href)}
-                >
-                  {item.label}
-                </a>
-              )
-            )}
-            <Link
-              className="rounded-md px-3 py-2.5 font-medium text-foreground text-sm transition-all hover:bg-muted"
-              onClick={() => setIsMenuOpen(false)}
-              to="/ueber-mich"
-            >
-              Über mich
-            </Link>
-            <div className="mt-2 px-3">
-              <Button
-                className="w-full font-semibold"
-                onClick={() => {
-                  setIsMenuOpen(false);
-                  const target = document.querySelector("#kontakt");
-                  if (target) {
-                    target.scrollIntoView({
-                      behavior: "smooth",
-                      block: "start",
-                    });
-                  }
-                }}
-                type="button"
+            {siteConfig.nav.map((item) => (
+              <Link
+                className="rounded-md px-3 py-2.5 font-medium text-foreground text-sm transition-all hover:bg-muted"
+                key={item.href}
+                onClick={() => setIsMenuOpen(false)}
+                to={item.href as never}
               >
-                Kontakt aufnehmen
+                {item.label}
+              </Link>
+            ))}
+            <div className="mt-2 px-3">
+              <Button asChild className="w-full font-semibold">
+                <Link onClick={() => setIsMenuOpen(false)} to="/kontakt">
+                  Kontakt aufnehmen
+                </Link>
               </Button>
             </div>
           </nav>

@@ -5,6 +5,7 @@ import {
   ChevronRightIcon,
   MailIcon,
   MapPinIcon,
+  PhoneIcon,
   SendIcon,
 } from "lucide-react";
 import { useState } from "react";
@@ -25,30 +26,61 @@ import { cn } from "@/lib/utils";
 import type { FormData } from "../types";
 import { Checkbox } from "./ui/checkbox";
 
-const STEPS = ["Anfragetyp", "Details", "Kontaktdaten", "Bestätigung"];
+const STEPS = ["Anliegen", "Details", "Kontaktdaten", "Bestätigung"];
 
 const REQUEST_TYPES = [
-  { value: "gutachten", label: "Technisches Gutachten" },
-  { value: "schadenanalyse", label: "Schadenanalyse" },
-  { value: "wirtschaftlichkeit", label: "Wirtschaftlichkeitsprüfung" },
-  { value: "anlagenabnahme", label: "Anlagenabnahme" },
-  { value: "beratung-installateur", label: "Beratung für Installateure" },
-  { value: "versicherung", label: "Anfrage Versicherung" },
-  { value: "online-gutachten", label: "Online-Gutachten (Express)" },
-  { value: "sonstiges", label: "Sonstige Anfrage" },
+  {
+    value: "fehlerdiagnose",
+    label: "Fehlerdiagnose / Verdacht auf Problem",
+    desc: "Ertragsverlust, Fehlermeldungen, sichtbare Schäden",
+  },
+  {
+    value: "ertragsminderung",
+    label: "Ertragsminderung / Leistungsabweichung",
+    desc: "Performance-Ratio, Monitoring, Degradation",
+  },
+  {
+    value: "anlagenabnahme",
+    label: "Anlagenabnahme / Inbetriebnahmeprüfung",
+    desc: "VDE 0100-712, DIN EN 62446-1, Neuanlage oder Erweiterung",
+  },
+  {
+    value: "versicherungsschaden",
+    label: "Versicherungsschaden / Schadensfall",
+    desc: "Sturm, Hagel, Brand, Überspannung, Installationsfehler",
+  },
+  {
+    value: "batteriespeicher",
+    label: "Batteriespeicher / Hochvoltsystem",
+    desc: "BMS, Zellchemie, Sicherheit, IEC 62933, UN 38.3",
+  },
+  {
+    value: "zweitmeinung",
+    label: "Zweitmeinung / Streitfall",
+    desc: "Gutachten prüfen, Gewährleistung, Schlichtung, Gericht",
+  },
+  {
+    value: "beratung",
+    label: "Beratung / Projektbegleitung / Sonstiges",
+    desc: "Due Diligence, Repowering, Schulung, Qualitätssicherung",
+  },
 ];
 
 const CUSTOMER_TYPES = [
   { value: "privatperson", label: "Privatperson" },
   { value: "unternehmen", label: "Unternehmen" },
-  { value: "installateur", label: "Installateur/Fachbetrieb" },
+  { value: "vermieter", label: "Vermieter / Verpächter" },
   { value: "versicherung", label: "Versicherung" },
+  { value: "installateur", label: "Installateur / Errichterbetrieb" },
+  { value: "rechtsanwalt", label: "Rechtsanwalt / Kanzlei" },
+  { value: "sonstige", label: "Sonstige" },
 ];
 
 const PREFERRED_TIMES = [
-  { value: "morning", label: "Vormittags (9–12 Uhr)" },
-  { value: "afternoon", label: "Nachmittags (12–15 Uhr)" },
-  { value: "evening", label: "Spätnachmittag (15–18 Uhr)" },
+  { value: "flexibel", label: "Flexibel" },
+  { value: "morning", label: "Vormittag (09–12 Uhr)" },
+  { value: "afternoon", label: "Nachmittag (12–17 Uhr)" },
+  { value: "evening", label: "Abend (nach 17 Uhr)" },
 ];
 
 const EMPTY_FORM: FormData = {
@@ -75,7 +107,10 @@ const getCustomerTypeLabel = (v: string) =>
   CUSTOMER_TYPES.find((t) => t.value === v)?.label ?? v;
 
 const isCompanyType = (v: string) =>
-  v === "unternehmen" || v === "installateur";
+  v === "unternehmen" ||
+  v === "installateur" ||
+  v === "rechtsanwalt" ||
+  v === "vermieter";
 
 function StepIndicatorItem({
   label,
@@ -267,38 +302,45 @@ export default function ContactForm() {
                   {/* Step 1 */}
                   {currentStep === 1 && (
                     <div className="flex animate-fadeIn flex-col gap-6">
-                      <h3
-                        className="font-bold text-xl"
-                        style={{ fontFamily: "var(--font-heading)" }}
-                      >
-                        Welche Art von Anfrage haben Sie?
-                      </h3>
-
-                      <div className="flex flex-col gap-2">
-                        <Label htmlFor="requestType">
-                          Anfragetyp <span className="text-destructive">*</span>
-                        </Label>
-                        <Select
-                          onValueChange={(v) => updateField("requestType", v)}
-                          value={formData.requestType}
+                      <div>
+                        <h3
+                          className="font-bold text-xl"
+                          style={{ fontFamily: "var(--font-heading)" }}
                         >
-                          <SelectTrigger className="h-11" id="requestType">
-                            <SelectValue placeholder="Bitte wählen..." />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {REQUEST_TYPES.map((t) => (
-                              <SelectItem key={t.value} value={t.value}>
-                                {t.label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
+                          Was können wir für Sie tun?
+                        </h3>
+                        <p className="mt-1 text-muted-foreground text-sm">
+                          Wählen Sie die Art Ihrer Anfrage aus.{" "}
+                          <span className="text-destructive">*</span>
+                        </p>
+                      </div>
+
+                      <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                        {REQUEST_TYPES.map((t) => (
+                          <button
+                            className={cn(
+                              "flex flex-col items-start gap-0.5 rounded-xl border px-4 py-3.5 text-left transition-all",
+                              formData.requestType === t.value
+                                ? "border-primary bg-primary/5 ring-1 ring-primary"
+                                : "border-border bg-background hover:border-primary/40 hover:bg-muted/50"
+                            )}
+                            key={t.value}
+                            onClick={() => updateField("requestType", t.value)}
+                            type="button"
+                          >
+                            <span className="font-semibold text-foreground text-sm leading-snug">
+                              {t.label}
+                            </span>
+                            <span className="text-muted-foreground text-xs leading-snug">
+                              {t.desc}
+                            </span>
+                          </button>
+                        ))}
                       </div>
 
                       <div className="flex flex-col gap-2">
                         <Label htmlFor="customerType">
-                          Sie sind...{" "}
-                          <span className="text-destructive">*</span>
+                          Ich bin … <span className="text-destructive">*</span>
                         </Label>
                         <Select
                           onValueChange={(v) => updateField("customerType", v)}
@@ -316,6 +358,11 @@ export default function ContactForm() {
                           </SelectContent>
                         </Select>
                       </div>
+
+                      <p className="rounded-lg border border-primary/20 bg-primary/5 px-4 py-2.5 text-muted-foreground text-xs">
+                        Für dringende Fälle: Express-Ferndiagnose ab 249 € –
+                        ohne Vor-Ort-Termin.
+                      </p>
 
                       <div className="flex justify-end pt-2">
                         <Button
@@ -692,6 +739,29 @@ export default function ContactForm() {
           <div className="flex flex-col gap-4">
             <div className="flex flex-1 flex-col items-start gap-3 rounded-2xl border border-border bg-card p-5">
               <div className="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <PhoneIcon className="size-5" />
+              </div>
+              <div>
+                <h4
+                  className="font-semibold text-sm"
+                  style={{ fontFamily: "var(--font-heading)" }}
+                >
+                  Telefon
+                </h4>
+                <a
+                  className="font-medium text-primary text-sm hover:underline"
+                  href={`tel:${siteConfig.contact.phone}`}
+                >
+                  {siteConfig.contact.phone}
+                </a>
+                <p className="mt-1 text-muted-foreground text-xs">
+                  {siteConfig.contact.hours}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-1 flex-col items-start gap-3 rounded-2xl border border-border bg-card p-5">
+              <div className="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
                 <MailIcon className="size-5" />
               </div>
               <div>
@@ -725,10 +795,10 @@ export default function ContactForm() {
                   Standort
                 </h4>
                 <p className="font-medium text-foreground text-sm">
-                  {siteConfig.contact.location}
+                  {siteConfig.contact.address}
                 </p>
                 <p className="mt-1 text-muted-foreground text-xs">
-                  Deutschlandweit tätig
+                  Bundesweit tätig · ISO/IEC 17024 zertifiziert
                 </p>
               </div>
             </div>

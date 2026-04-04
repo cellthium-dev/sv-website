@@ -13,17 +13,20 @@ export const siteConfig = {
 
   /** Contact details */
   contact: {
-    email: "service@sv-bauten.de",
-    address: "Banker-Feld-Str. 1, 52072 Aachen",
+    email: "info@sv-bauten.de",
+    phone: "+49 (0) 1567-9790851",
+    address: "52072 Aachen",
     location: "Aachen, NRW",
     coverage: "Deutschlandweit tätig mit Schwerpunkt NRW",
+    hours: "Mo–Fr: 09:00–17:00 Uhr",
   },
 
-  /** Navigation items */
+  /** Navigation items (Kontakt is separate CTA button) */
   nav: [
-    { label: "Startseite", href: "#home" },
-    { label: "Leistungen", href: "#leistungen" },
-    { label: "Wissen", href: "/wissen" },
+    { label: "Über mich", href: "/ueber-mich" },
+    { label: "Leistungen", href: "/leistungen" },
+    { label: "Wissensbereich", href: "/wissen" },
+    { label: "Tools", href: "/tools" },
   ] as Array<{ label: string; href: string }>,
 
   /** Trust / credential badges shown in the hero */
@@ -46,109 +49,110 @@ export const siteConfig = {
   /** Services offered */
   services: [
     {
-      iconKey: "clipboard-list",
-      title: "Technische Gutachten",
-      description:
-        "Umfassende technische Begutachtung von Photovoltaikanlagen und Batteriespeichersystemen nach VDE/DIN-Normen.",
-      features: [
-        "Anlagenabnahme & Inbetriebnahme",
-        "Bestandsaufnahme & Zustandsbewertung",
-        "Konformitätsprüfung",
-        "Versicherungsgutachten",
-      ],
-      ctaText: "Gutachten anfordern",
-      ctaLink: "#kontakt",
-      highlight: false,
-    },
-    {
       iconKey: "scan-search",
-      title: "Schadenanalyse",
+      title: "Fehlerdiagnose & Schadenanalyse",
       description:
-        "Detaillierte Untersuchung von Schäden und Leistungsminderungen an PV-Anlagen und Batteriesystemen.",
+        "Präzise Identifikation und Bewertung technischer Probleme an PV-Anlagen und Batteriespeichern. Von Ertragsminderungen über Moduldefekte bis hin zu Wechselrichterausfällen.",
       features: [
-        "Fehlerdiagnose & Ursachenanalyse",
-        "Thermografie-Untersuchungen",
-        "Elektrische Messungen (IV-Kennlinien)",
-        "Dokumentation für Versicherungen",
+        "Thermografische Untersuchung (Hotspot-Erkennung)",
+        "Kennlinienmessung (I-V-Kurvenanalyse)",
+        "Stringanalyse & Fehlersuche",
+        "Wechselrichter-Diagnose & Batteriespeicher-Prüfung",
       ],
       ctaText: "Schadenfall melden",
       ctaLink: "#kontakt",
       highlight: false,
     },
     {
-      iconKey: "trending-up",
-      title: "Wirtschaftlichkeitsprüfung",
+      iconKey: "clipboard-list",
+      title: "Anlagenabnahme & Inbetriebnahmeprüfung",
       description:
-        "Analyse und Bewertung der Wirtschaftlichkeit und Ertragsprognose Ihrer PV-Anlage.",
+        "Normgerechte Prüfung bei Neuinstallation, Erweiterung oder Repowering nach VDE 0100-712 und DIN EN 62446-1. Unabhängige Qualitätssicherung vor der Inbetriebnahme.",
       features: [
-        "Ertragsprüfung & Vergleichsanalyse",
-        "Performance Ratio Berechnung",
-        "Amortisationsrechnung",
-        "Optimierungsempfehlungen",
+        "Vor-Ort-Prüfung bei Inbetriebnahme",
+        "Dokumentenprüfung & Konformitätsbewertung",
+        "Prüfung Schutzmaßnahmen & Erdung",
+        "Isolationsmessung & Überspannungsschutz-Prüfung",
+      ],
+      ctaText: "Abnahme beauftragen",
+      ctaLink: "#kontakt",
+      highlight: false,
+    },
+    {
+      iconKey: "trending-up",
+      title: "Ertragsprüfung & Wirtschaftlichkeit",
+      description:
+        "Analyse bei Leistungsabweichungen und fundierte Bewertung der tatsächlichen Anlageneffizienz. Vergleich von Ertragsprognose und Realertrag mit konkreten Optimierungsempfehlungen.",
+      features: [
+        "Ertragsprognose vs. Realertrag (Performance Ratio)",
+        "Monitoring-Datenauswertung & Vergleichsanalyse",
+        "Amortisationsrechnung & ROI-Berechnung",
+        "Degradationsanalyse & Optimierungsempfehlungen",
       ],
       ctaText: "Ertragsprüfung starten",
       ctaLink: "#kontakt",
       highlight: false,
     },
     {
-      iconKey: "wrench",
-      title: "Beratung für Installateure",
+      iconKey: "shield-check",
+      title: "Schadensgutachten & Versicherungsfälle",
       description:
-        "Fachliche Unterstützung für Installationsbetriebe bei komplexen Projekten.",
+        "Gutachterliche Bewertung nach Sturm, Hagel, Brand, Überspannung oder Installationsfehlern. Klarer Fokus auf Ursache, Umfang und wirtschaftliche Folgen – normkonform und gerichtsfest.",
       features: [
-        "Planungsberatung",
-        "Normenkonformität",
-        "Qualitätssicherung",
-        "Schulungen",
+        "Schadensursachenermittlung & Dokumentation",
+        "Bewertung für Versicherungsregulierung",
+        "Beweissicherungsgutachten",
+        "Gerichtsgutachten nach ZPO",
       ],
-      ctaText: "Beratung buchen",
+      ctaText: "Schadensfall melden",
       ctaLink: "#kontakt",
       highlight: false,
     },
     {
-      iconKey: "shield-check",
-      title: "Versicherungsberatung",
+      iconKey: "wrench",
+      title: "Batteriespeicher & Hochvoltprüfung",
       description:
-        "Neutrale Expertise für Versicherungen bei Schadenfällen und Leistungsbewertungen.",
+        "Bewertung von Batteriespeichern und Hochvoltsystemen hinsichtlich Aufbau, Sicherheit und Einhaltung einschlägiger Normen. Expertise aus über 5 Jahren BMS-Entwicklung.",
       features: [
-        "Schadensbewertung",
-        "Wertermittlung",
-        "Gutachten für Regulierung",
-        "Technische Klärung",
+        "Bewertung Zellchemie & BMS-Logik",
+        "Sicherheitsprüfung (Brandrisiko, Aufstellung)",
+        "Ladeprofil-Analyse & Systemintegration",
+        "Konformität nach IEC 62933, UN 38.3, UL-Normen",
       ],
-      ctaText: "Anfrage stellen",
+      ctaText: "Speicher prüfen lassen",
       ctaLink: "#kontakt",
       highlight: false,
     },
     {
       iconKey: "monitor",
-      title: "Online-Gutachten",
+      title: "Online-Gutachten & Ferndiagnose",
       description:
-        "Schnelle Erstbewertung per Bild-Upload mit Festpreis-Transparenz.",
+        "Schnelle Ersteinschätzung auf Basis von Fotos, Monitoring-Daten und Unterlagen – bundesweit, ohne Vor-Ort-Termin. Kurzfristige Rückmeldung mit klarer Empfehlung.",
       features: [
-        "Express-Rückmeldung (48h)",
-        "Festpreis ab 249€",
-        "Bild-Upload & Datenanalyse",
+        "Express-Rückmeldung innerhalb 24–48 Stunden",
+        "Festpreis ab 249 €",
+        "Bild-Upload & Dokumentenanalyse",
         "Digitales Gutachten (PDF)",
       ],
       ctaText: "Online-Gutachten starten",
       ctaLink: "#kontakt",
-      highlight: true, // Featured service
+      highlight: true,
     },
   ],
 
   /** Footer links */
   footerLinks: {
     services: [
-      { label: "Technische Gutachten", href: "#leistungen" },
-      { label: "Schadenanalyse", href: "#leistungen" },
-      { label: "Wirtschaftlichkeitsprüfung", href: "#leistungen" },
-      { label: "Online-Gutachten", href: "#leistungen" },
+      { label: "Fehlerdiagnose & Schadenanalyse", href: "/leistungen" },
+      { label: "Anlagenabnahme & Inbetriebnahme", href: "/leistungen" },
+      { label: "Ertragsprüfung & Wirtschaftlichkeit", href: "/leistungen" },
+      { label: "Online-Gutachten ab 249 €", href: "/leistungen" },
     ],
     info: [
-      { label: "Über mich", href: "#ueber-mich" },
+      { label: "Über mich", href: "/ueber-mich" },
       { label: "Wissensbereich", href: "/wissen" },
-      { label: "Kontakt", href: "#kontakt" },
+      { label: "Tools", href: "/tools" },
+      { label: "Kontakt", href: "/kontakt" },
     ],
     legal: [
       { label: "Impressum", href: "/impressum" },
