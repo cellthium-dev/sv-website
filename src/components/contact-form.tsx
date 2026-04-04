@@ -229,24 +229,6 @@ export default function ContactForm() {
       id="kontakt"
     >
       <div className="section-container">
-        {/* Section header */}
-        <div className="mb-14 max-w-2xl">
-          <div className="section-label mb-4">
-            <span className="solar-bar" />
-            <span>Kontakt</span>
-          </div>
-          <h2
-            className="mb-4 hyphens-auto font-extrabold text-4xl tracking-tight md:text-5xl"
-            style={{ fontFamily: "var(--font-heading)" }}
-          >
-            Kontakt & Terminbuchung
-          </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            Nehmen Sie Kontakt auf oder buchen Sie direkt einen Termin für Ihre
-            Beratung.
-          </p>
-        </div>
-
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_320px]">
           {/* Form card */}
           <div className="min-w-0 rounded-2xl border border-border bg-card p-6 md:p-8">

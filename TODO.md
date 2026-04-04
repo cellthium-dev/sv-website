@@ -27,3 +27,8 @@ create new site for the website
 [ ] leistungsübersicht pdf
 [ ] create a system design
 [ ] use themes and and dark mode
+
+### 04.04.2026
+[ ] [wissensbereich] replace windows icon with lucide-react icon
+[ ] [wissensbereich] use compare from kibo-ui
+[ ] [contact] logic for contact selection
