@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as WissenIndexRouteImport } from './routes/wissen/index'
 import { Route as WiderrufIndexRouteImport } from './routes/widerruf/index'
 import { Route as UeberMichIndexRouteImport } from './routes/ueber-mich/index'
+import { Route as ToolsIndexRouteImport } from './routes/tools/index'
 import { Route as LeistungenIndexRouteImport } from './routes/leistungen/index'
 import { Route as KontaktIndexRouteImport } from './routes/kontakt/index'
 import { Route as ImpressumIndexRouteImport } from './routes/impressum/index'
@@ -37,6 +38,11 @@ const WiderrufIndexRoute = WiderrufIndexRouteImport.update({
 const UeberMichIndexRoute = UeberMichIndexRouteImport.update({
   id: '/ueber-mich/',
   path: '/ueber-mich/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolsIndexRoute = ToolsIndexRouteImport.update({
+  id: '/tools/',
+  path: '/tools/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LeistungenIndexRoute = LeistungenIndexRouteImport.update({
@@ -72,6 +78,7 @@ export interface FileRoutesByFullPath {
   '/impressum/': typeof ImpressumIndexRoute
   '/kontakt/': typeof KontaktIndexRoute
   '/leistungen/': typeof LeistungenIndexRoute
+  '/tools/': typeof ToolsIndexRoute
   '/ueber-mich/': typeof UeberMichIndexRoute
   '/widerruf/': typeof WiderrufIndexRoute
   '/wissen/': typeof WissenIndexRoute
@@ -83,6 +90,7 @@ export interface FileRoutesByTo {
   '/impressum': typeof ImpressumIndexRoute
   '/kontakt': typeof KontaktIndexRoute
   '/leistungen': typeof LeistungenIndexRoute
+  '/tools': typeof ToolsIndexRoute
   '/ueber-mich': typeof UeberMichIndexRoute
   '/widerruf': typeof WiderrufIndexRoute
   '/wissen': typeof WissenIndexRoute
@@ -95,6 +103,7 @@ export interface FileRoutesById {
   '/impressum/': typeof ImpressumIndexRoute
   '/kontakt/': typeof KontaktIndexRoute
   '/leistungen/': typeof LeistungenIndexRoute
+  '/tools/': typeof ToolsIndexRoute
   '/ueber-mich/': typeof UeberMichIndexRoute
   '/widerruf/': typeof WiderrufIndexRoute
   '/wissen/': typeof WissenIndexRoute
@@ -108,6 +117,7 @@ export interface FileRouteTypes {
     | '/impressum/'
     | '/kontakt/'
     | '/leistungen/'
+    | '/tools/'
     | '/ueber-mich/'
     | '/widerruf/'
     | '/wissen/'
@@ -119,6 +129,7 @@ export interface FileRouteTypes {
     | '/impressum'
     | '/kontakt'
     | '/leistungen'
+    | '/tools'
     | '/ueber-mich'
     | '/widerruf'
     | '/wissen'
@@ -130,6 +141,7 @@ export interface FileRouteTypes {
     | '/impressum/'
     | '/kontakt/'
     | '/leistungen/'
+    | '/tools/'
     | '/ueber-mich/'
     | '/widerruf/'
     | '/wissen/'
@@ -142,6 +154,7 @@ export interface RootRouteChildren {
   ImpressumIndexRoute: typeof ImpressumIndexRoute
   KontaktIndexRoute: typeof KontaktIndexRoute
   LeistungenIndexRoute: typeof LeistungenIndexRoute
+  ToolsIndexRoute: typeof ToolsIndexRoute
   UeberMichIndexRoute: typeof UeberMichIndexRoute
   WiderrufIndexRoute: typeof WiderrufIndexRoute
   WissenIndexRoute: typeof WissenIndexRoute
@@ -175,6 +188,13 @@ declare module '@tanstack/react-router' {
       path: '/ueber-mich'
       fullPath: '/ueber-mich/'
       preLoaderRoute: typeof UeberMichIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tools/': {
+      id: '/tools/'
+      path: '/tools'
+      fullPath: '/tools/'
+      preLoaderRoute: typeof ToolsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/leistungen/': {
@@ -222,6 +242,7 @@ const rootRouteChildren: RootRouteChildren = {
   ImpressumIndexRoute: ImpressumIndexRoute,
   KontaktIndexRoute: KontaktIndexRoute,
   LeistungenIndexRoute: LeistungenIndexRoute,
+  ToolsIndexRoute: ToolsIndexRoute,
   UeberMichIndexRoute: UeberMichIndexRoute,
   WiderrufIndexRoute: WiderrufIndexRoute,
   WissenIndexRoute: WissenIndexRoute,
