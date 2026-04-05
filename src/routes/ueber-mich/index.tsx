@@ -217,16 +217,13 @@ function UeberMich() {
       <Header />
       <main>
         {/* ── section 1: HERO ── */}
-        <section
-          aria-label="Über Andreas Bauten"
-          className="bg-muted py-20 md:py-28"
-        >
+        <section aria-label="Über Andreas Bauten" className="py-20 md:py-28">
           <div className="section-container">
             <div className="grid items-center gap-12 lg:grid-cols-2">
               {/* Left – text */}
               <div>
                 <Badge className="mb-5 bg-primary/10 font-semibold text-primary hover:bg-primary/10">
-                  ISO/IEC 17024 Zertifizierter Sachverständiger
+                  ISO/IEC 17024 zertifiziert
                 </Badge>
                 <h1 className="mb-2 font-extrabold text-4xl tracking-tight md:text-5xl">
                   Andreas Bauten, M.Sc.
@@ -266,7 +263,7 @@ function UeberMich() {
         </section>
 
         {/* ── section 2: WAS MICH AUSZEICHNET ── */}
-        <section className="bg-white px-6 py-[90px]">
+        <section className="bg-muted/40 px-6 py-[90px]">
           <div className="container mx-auto max-w-[1140px]">
             <div className="mb-14 translate-y-6 animate-on-scroll text-center opacity-0 transition-all duration-[600ms] ease-out">
               <h2 className="mb-4 font-semibold text-3xl text-foreground leading-snug">
@@ -301,7 +298,7 @@ function UeberMich() {
         </section>
 
         {/* ── section 3: BERUFLICHE MEILENSTEINE ── */}
-        <section className="bg-muted px-6 py-[90px]">
+        <section className="px-6 py-[90px]">
           <div className="container mx-auto max-w-[1140px]">
             <div className="mb-12 translate-y-6 animate-on-scroll opacity-0 transition-all duration-[600ms] ease-out">
               <h2 className="font-semibold text-3xl text-foreground leading-snug">
@@ -440,7 +437,7 @@ function UeberMich() {
         </section>
 
         {/* ── section 5: ZERTIFIZIERUNGEN ── */}
-        <section className="bg-white px-6 py-[90px]">
+        <section className="bg-muted/40 px-6 py-[90px]">
           <div className="container mx-auto max-w-[1140px]">
             <div className="mb-14 translate-y-6 animate-on-scroll text-center opacity-0 transition-all duration-[600ms] ease-out">
               <h2 className="mb-4 font-semibold text-3xl text-foreground leading-snug">
@@ -485,7 +482,7 @@ function UeberMich() {
         </section>
 
         {/* ── section 6: TECHNISCHE KOMPETENZEN ── */}
-        <section className="bg-muted px-6 py-[90px]">
+        <section className="px-6 py-[90px]">
           <div className="container mx-auto max-w-[1140px]">
             <div className="mb-12 translate-y-6 animate-on-scroll opacity-0 transition-all duration-[600ms] ease-out">
               <h2 className="font-semibold text-3xl text-foreground leading-snug">
@@ -584,7 +581,7 @@ function UeberMich() {
         </section>
 
         {/* ── section 7: STANDORT & CTA ── */}
-        <section className="bg-white px-6 py-[90px] text-center">
+        <section className="bg-muted/40 px-6 py-[90px] text-center">
           <div className="container mx-auto max-w-[1140px]">
             <h2 className="mb-4 translate-y-6 animate-on-scroll font-semibold text-3xl text-foreground leading-snug opacity-0 transition-all duration-[600ms] ease-out">
               Standort & Tätigkeitsbereich
@@ -604,7 +601,7 @@ function UeberMich() {
                 "Bundesweit",
               ].map((tag) => (
                 <span
-                  className="rounded-full bg-muted px-[18px] py-1.5 font-medium text-foreground text-sm"
+                  className="rounded-full px-[18px] py-1.5 font-medium text-foreground text-sm"
                   key={tag}
                 >
                   {tag}
