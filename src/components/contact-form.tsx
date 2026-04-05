@@ -225,7 +225,7 @@ export default function ContactForm() {
 
   return (
     <section
-      className="scroll-mt-60 bg-muted/30 py-20 md:scroll-mt-0 md:py-28"
+      className="w-full scroll-mt-60 bg-muted/30 p-10 md:scroll-mt-0 md:py-20"
       id="kontakt"
     >
       <div className="section-container">

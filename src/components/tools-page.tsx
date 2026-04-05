@@ -2824,7 +2824,7 @@ export default function ToolsPage() {
     <>
       {/* ── Hero ────────────────────────────────────────────────────── */}
       <section className="bg-dark-surface py-16 md:py-24">
-        <div className="section-container">
+        <div className="section-container grid">
           <div className="section-label mb-4 justify-center text-center">
             <span className="solar-bar" />
             <span className="text-dark-surface-foreground/70">

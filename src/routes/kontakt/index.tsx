@@ -65,7 +65,9 @@ function KontaktPage() {
                 style={{ fontFamily: "var(--font-heading)" }}
               >
                 Ihr direkter Draht zum{" "}
-                <span className="text-solar">Sachverständigen</span>
+                <span className="hyphens-auto text-primary">
+                  Sachverständigen
+                </span>
               </h1>
               <p className="mb-10 text-dark-surface-foreground/75 text-lg leading-relaxed">
                 Ob akuter Schadensfall oder langfristige Planung – wir sind Ihr
@@ -79,13 +81,13 @@ function KontaktPage() {
                   href={`tel:${siteConfig.contact.phone}`}
                 >
                   <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-white/10">
-                    <PhoneIcon className="size-5 text-solar" />
+                    <PhoneIcon className="size-5 text-primary" />
                   </span>
                   <div className="text-left">
                     <p className="font-semibold text-dark-surface-foreground/50 text-xs uppercase tracking-widest">
                       Rufen Sie uns an
                     </p>
-                    <p className="font-semibold text-dark-surface-foreground text-sm">
+                    <p className="font-semibold text-dark-surface-foreground text-sm md:whitespace-nowrap">
                       {siteConfig.contact.phone}
                     </p>
                   </div>
@@ -99,13 +101,13 @@ function KontaktPage() {
                   href={`mailto:${siteConfig.contact.email}`}
                 >
                   <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-white/10">
-                    <MailIcon className="size-5 text-solar" />
+                    <MailIcon className="size-5 text-primary" />
                   </span>
                   <div className="text-left">
                     <p className="font-semibold text-dark-surface-foreground/50 text-xs uppercase tracking-widest">
                       E-Mail schreiben
                     </p>
-                    <p className="font-semibold text-dark-surface-foreground text-sm">
+                    <p className="font-semibold text-dark-surface-foreground text-sm md:whitespace-nowrap">
                       {siteConfig.contact.email}
                     </p>
                   </div>
@@ -115,13 +117,13 @@ function KontaktPage() {
 
                 <div className="flex items-center gap-3">
                   <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-white/10">
-                    <MapPinIcon className="size-5 text-solar" />
+                    <MapPinIcon className="size-5 text-primary" />
                   </span>
                   <div className="text-left">
                     <p className="font-semibold text-dark-surface-foreground/50 text-xs uppercase tracking-widest">
                       Standort
                     </p>
-                    <p className="font-semibold text-dark-surface-foreground text-sm">
+                    <p className="font-semibold text-dark-surface-foreground text-sm md:whitespace-nowrap">
                       {siteConfig.contact.address} · Bundesweit tätig
                     </p>
                   </div>
@@ -129,7 +131,7 @@ function KontaktPage() {
               </div>
 
               <p className="mt-8 flex items-center justify-center gap-2 text-dark-surface-foreground/50 text-xs">
-                <ShieldCheckIcon className="size-3.5 shrink-0 text-solar" />
+                <ShieldCheckIcon className="size-3.5 shrink-0 text-primary" />
                 ISO/IEC 17024 zertifiziert · Unabhängig · Gerichtsfest
               </p>
             </div>
@@ -186,7 +188,7 @@ function KontaktPage() {
         {/* ── Standort & Vertrauen ──────────────────────────────────── */}
         <section
           aria-label="Standort und Vertrauen"
-          className="bg-muted/30 py-20 md:py-28"
+          className="bg-muted/30 p-20 md:py-28"
         >
           <div className="section-container">
             <div className="mb-12">
