@@ -225,6 +225,7 @@ function UeberMich() {
                 <Badge className="mb-5 bg-primary/10 font-semibold text-primary hover:bg-primary/10">
                   ISO/IEC 17024 zertifiziert
                 </Badge>
+
                 <h1 className="mb-2 font-extrabold text-4xl tracking-tight md:text-5xl">
                   Andreas Bauten, M.Sc.
                 </h1>
@@ -266,6 +267,10 @@ function UeberMich() {
         <section className="bg-muted/40 px-6 py-[90px]">
           <div className="container mx-auto max-w-[1140px]">
             <div className="mb-14 translate-y-6 animate-on-scroll text-center opacity-0 transition-all duration-[600ms] ease-out">
+              <div className="section-label mb-3 justify-center">
+                <span className="solar-bar" />
+                <span>Expertise</span>
+              </div>
               <h2 className="mb-4 font-semibold text-3xl text-foreground leading-snug">
                 Was mich als Sachverständigen auszeichnet
               </h2>
@@ -301,6 +306,10 @@ function UeberMich() {
         <section className="px-6 py-[90px]">
           <div className="container mx-auto max-w-[1140px]">
             <div className="mb-12 translate-y-6 animate-on-scroll opacity-0 transition-all duration-[600ms] ease-out">
+              <div className="section-label mb-3">
+                <span className="solar-bar" />
+                <span>Berufserfahrung</span>
+              </div>
               <h2 className="font-semibold text-3xl text-foreground leading-snug">
                 Berufliche Meilensteine
               </h2>
@@ -344,9 +353,13 @@ function UeberMich() {
         <section className="relative overflow-hidden bg-[var(--dark-surface)] px-6 py-[90px]">
           <div className="-right-[100px] -top-[100px] pointer-events-none absolute h-[400px] w-[400px] rounded-full bg-[radial-gradient(circle,rgba(26,115,181,0.1)_0%,transparent_70%)]" />
           <div className="container mx-auto max-w-[1140px]">
-            <span className="mb-5 inline-block translate-y-6 animate-on-scroll rounded-full border border-[var(--solar)]/30 bg-[var(--solar)]/15 px-4 py-1.5 font-semibold text-[var(--solar)] text-xs uppercase tracking-widest opacity-0 transition-all duration-[600ms] ease-out">
-              Besonderes Projekt
-            </span>
+            <div className="section-label mb-5">
+              <span className="solar-bar" />
+              <span className="text-primary brightness-150">
+                Projekterfahrung
+              </span>
+            </div>
+
             <h2 className="mb-2 translate-y-6 animate-on-scroll font-semibold text-3xl text-white leading-snug opacity-0 transition-all duration-[600ms] ease-out">
               Vollständige Elektrifizierung eines BMW 3 (Baujahr 1978)
             </h2>
@@ -425,12 +438,12 @@ function UeberMich() {
 
             <div className="mt-12 flex translate-y-6 animate-on-scroll flex-wrap justify-center gap-4 opacity-0 transition-all duration-[600ms] ease-out">
               {["HV-Kompetenz", "TÜV-EBE-Abnahme"].map((chip) => (
-                <span
-                  className="rounded-full border border-primary/40 bg-primary/25 px-6 py-2 font-semibold text-sm text-white"
+                <Badge
+                  className="bg-blue-50 font-semibold text-primary hover:bg-blue-50"
                   key={chip}
                 >
                   {chip}
-                </span>
+                </Badge>
               ))}
             </div>
           </div>
@@ -440,6 +453,10 @@ function UeberMich() {
         <section className="bg-muted/40 px-6 py-[90px]">
           <div className="container mx-auto max-w-[1140px]">
             <div className="mb-14 translate-y-6 animate-on-scroll text-center opacity-0 transition-all duration-[600ms] ease-out">
+              <div className="section-label mb-3 justify-center">
+                <span className="solar-bar" />
+                <span>Zertifizierungen</span>
+              </div>
               <h2 className="mb-4 font-semibold text-3xl text-foreground leading-snug">
                 Zertifizierungen & Qualifikationen
               </h2>
@@ -485,6 +502,10 @@ function UeberMich() {
         <section className="px-6 py-[90px]">
           <div className="container mx-auto max-w-[1140px]">
             <div className="mb-12 translate-y-6 animate-on-scroll opacity-0 transition-all duration-[600ms] ease-out">
+              <div className="section-label mb-3">
+                <span className="solar-bar" />
+                <span>Kompetenzen</span>
+              </div>
               <h2 className="font-semibold text-3xl text-foreground leading-snug">
                 Technische Kompetenzen
               </h2>
@@ -583,6 +604,10 @@ function UeberMich() {
         {/* ── section 7: STANDORT & CTA ── */}
         <section className="bg-muted/40 px-6 py-[90px] text-center">
           <div className="container mx-auto max-w-[1140px]">
+            <div className="section-label mb-3 justify-center">
+              <span className="solar-bar" />
+              <span>Standort</span>
+            </div>
             <h2 className="mb-4 translate-y-6 animate-on-scroll font-semibold text-3xl text-foreground leading-snug opacity-0 transition-all duration-[600ms] ease-out">
               Standort & Tätigkeitsbereich
             </h2>
