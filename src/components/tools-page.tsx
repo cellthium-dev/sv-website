@@ -232,7 +232,7 @@ type ChatMsg = { text: string; isUser: boolean };
 
 const CHAT_KB: Record<string, string> = {
   ablauf:
-    "Ein Gutachten läuft in fünf Schritten ab: **1. Kontaktaufnahme** – Sie schildern Ihr Anliegen. **2. Erstgespräch** – Wir klären Details und Umfang. **3. Angebot** – Transparentes Festpreisangebot. **4. Vor-Ort-Prüfung** – Messtechnische Untersuchung (Thermografie, Kennlinienmessung, Sichtprüfung). **5. Gutachten & Empfehlung** – Schriftlicher Bericht mit Handlungsempfehlungen.",
+    "Ein Gutachten läuft in fünf Schritten ab:\n**1. Kontaktaufnahme** – Sie schildern Ihr Anliegen.\n**2. Erstgespräch** – Wir klären Details und Umfang.\n**3. Angebot** – Transparentes Festpreisangebot.\n**4. Vor-Ort-Prüfung** – Messtechnische Untersuchung (Thermografie, Kennlinienmessung, Sichtprüfung).\n**5. Gutachten & Empfehlung** – Schriftlicher Bericht mit Handlungsempfehlungen.",
   kosten:
     "Die Kosten hängen vom Umfang der Begutachtung ab. Typische Richtwerte:\n• **Kurzgutachten / Fernbewertung:** ab ca. 300–500 EUR\n• **Vor-Ort-Begutachtung (Standardanlage):** ab ca. 800–1.500 EUR\n• **Umfassendes Gutachten (Gerichtsgutachten):** individuell nach Aufwand\n\nSie erhalten stets ein transparentes Festpreisangebot vor Auftragserteilung.",
   unterlagen:
@@ -635,7 +635,7 @@ function TranslatorSection() {
   };
 
   return (
-    <div className="rounded-2xl border border-border bg-card p-6">
+    <div className="flex flex-col rounded-2xl border border-border bg-card p-6">
       <div className="mb-4 flex items-center gap-3">
         <span className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
           <LanguagesIcon className="size-5" />
@@ -650,10 +650,9 @@ function TranslatorSection() {
         </div>
       </div>
 
-      <div className="relative mb-3">
+      <div className="relative mb-3 flex-1">
         <Textarea
-          className="field-sizing-fixed resize-none text-sm"
-          maxLength={500}
+          className="h-full text-sm"
           onChange={(e) => setInput(e.target.value)}
           placeholder={
             "z.\u00a0B. \u201eVRef_Error\u201c, \u201eString voltage mismatch\u201c, \u201eIso-Fehler\u201c, \u201eDerating Wechselrichter\u201c\u2026"
@@ -739,8 +738,58 @@ const QUICK_ACTIONS = [
   "Nach welchen Normen arbeiten Sie?",
 ];
 
-function ChatbotSection() {
-  const [open, setOpen] = useState(false);
+function renderChatText(text: string) {
+  return text.split("\n").map((line, i) => {
+    const parts = line.split(/(\*\*[^*]+\*\*)/g);
+    return (
+      // biome-ignore lint/suspicious/noArrayIndexKey: static render
+      <p className="mb-0.5" key={i}>
+        {parts.map((part, j) =>
+          part.startsWith("**") && part.endsWith("**") ? (
+            // biome-ignore lint/suspicious/noArrayIndexKey: static render
+            <strong key={j}>{part.slice(2, -2)}</strong>
+          ) : (
+            part
+          )
+        )}
+      </p>
+    );
+  });
+}
+
+function ChatbotCard({ onOpen }: { onOpen: () => void }) {
+  return (
+    <div className="flex flex-col rounded-2xl border border-border bg-card p-6">
+      <div className="mb-4 flex items-center gap-3">
+        <span className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+          <BotIcon className="size-5" />
+        </span>
+        <div>
+          <h3 className="font-bold text-foreground">KI-Erstberater</h3>
+          <p className="text-muted-foreground text-xs">
+            Fragen zu Ablauf, Kosten, Unterlagen und Leistungen
+          </p>
+        </div>
+      </div>
+      <p className="mb-3 flex-1 text-muted-foreground text-sm">
+        Haben Sie Fragen zum Ablauf, zu Kosten oder zu benötigten Unterlagen?
+        Unser Chatbot hilft bei der ersten Orientierung.
+      </p>
+      <Button className="w-full gap-2 font-semibold" onClick={onOpen}>
+        <BotIcon className="size-4" />
+        Chatbot öffnen
+      </Button>
+    </div>
+  );
+}
+
+function ChatbotSection({
+  open,
+  setOpen,
+}: {
+  open: boolean;
+  setOpen: (v: boolean) => void;
+}) {
   const [messages, setMessages] = useState<ChatMsg[]>([
     {
       text: "Guten Tag! Ich bin Ihr digitaler PV-Erstberater. Wie kann ich Ihnen heute helfen?",
@@ -762,9 +811,7 @@ function ChatbotSection() {
     if (!text.trim()) return;
     addMsg(text, true);
     const response = getLocalChatResponse(text);
-    setTimeout(() => {
-      addMsg(response, false);
-    }, 500);
+    setTimeout(() => addMsg(response, false), 500);
   };
 
   const handleSend = () => {
@@ -773,25 +820,37 @@ function ChatbotSection() {
   };
 
   return (
-    <div className="rounded-2xl border border-border bg-card p-6">
-      <div className="mb-4 flex items-center gap-3">
-        <span className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
-          <BotIcon className="size-5" />
-        </span>
-        <div>
-          <h3 className="font-bold text-foreground">
-            KI-Chatbot – Digitaler Erstberater
-          </h3>
-          <p className="text-muted-foreground text-xs">
-            Fragen zu Ablauf, Kosten, Unterlagen und Leistungen
-          </p>
-        </div>
-      </div>
+    <div className="fixed right-6 bottom-6 z-50 flex flex-col items-end gap-3">
+      {/* Chat panel */}
+      {open && (
+        <div className="flex w-[min(360px,calc(100vw-3rem))] flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl">
+          {/* Header */}
+          <div className="flex items-center justify-between gap-3 border-border border-b bg-muted/40 px-4 py-3">
+            <div className="flex items-center gap-2.5">
+              <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <BotIcon className="size-4" />
+              </span>
+              <div>
+                <p className="font-semibold text-foreground text-sm leading-none">
+                  KI-Erstberater
+                </p>
+                <p className="mt-0.5 text-muted-foreground text-xs">
+                  Erste Orientierung · Kein Ersatz für Gutachten
+                </p>
+              </div>
+            </div>
+            <Button
+              className="size-7 shrink-0"
+              onClick={() => setOpen(false)}
+              size="icon"
+              variant="ghost"
+            >
+              <ChevronDownIcon className="size-4" />
+            </Button>
+          </div>
 
-      {open ? (
-        <div className="flex flex-col gap-3">
           {/* Messages */}
-          <div className="flex max-h-72 flex-col gap-2 overflow-y-auto rounded-xl border border-border bg-muted/20 p-3">
+          <div className="flex max-h-72 flex-col gap-2 overflow-y-auto bg-muted/10 p-3">
             {messages.map((m, i) => (
               <div
                 className={cn(
@@ -803,19 +862,14 @@ function ChatbotSection() {
                 // biome-ignore lint/suspicious/noArrayIndexKey: static list
                 key={i}
               >
-                {m.text.split("\n").map((line, j) => (
-                  // biome-ignore lint/suspicious/noArrayIndexKey: static list
-                  <p className="mb-0.5" key={j}>
-                    {line}
-                  </p>
-                ))}
+                {renderChatText(m.text)}
               </div>
             ))}
             <div ref={messagesEndRef} />
           </div>
 
           {/* Quick actions */}
-          <div className="flex flex-wrap gap-1.5">
+          <div className="flex flex-wrap gap-1.5 border-border border-t px-3 py-2">
             {QUICK_ACTIONS.map((q) => (
               <button
                 className="rounded-full border border-border px-2.5 py-0.5 text-muted-foreground text-xs transition-colors hover:border-primary/40 hover:text-primary"
@@ -829,7 +883,7 @@ function ChatbotSection() {
           </div>
 
           {/* Input */}
-          <div className="flex gap-2">
+          <div className="flex gap-2 border-border border-t px-3 py-3">
             <Input
               className="flex-1 text-sm"
               maxLength={500}
@@ -851,46 +905,19 @@ function ChatbotSection() {
               <SendIcon className="size-4" />
             </Button>
           </div>
-          <p className="text-center text-muted-foreground/60 text-xs italic">
-            Diese Ersteinschätzung dient der Orientierung und ersetzt keine
-            sachverständige Begutachtung.
-          </p>
-          <Button
-            className="w-full"
-            onClick={() => setOpen(false)}
-            size="sm"
-            variant="ghost"
-          >
-            Chatbot schließen
-          </Button>
-        </div>
-      ) : (
-        <div className="space-y-3">
-          <p className="text-muted-foreground text-sm">
-            Haben Sie Fragen zum Ablauf, zu Kosten oder zu benötigten
-            Unterlagen? Unser Chatbot hilft bei der ersten Orientierung.
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {QUICK_ACTIONS.slice(0, 3).map((q) => (
-              <button
-                className="rounded-full border border-border px-3 py-1 text-muted-foreground text-xs transition-colors hover:border-primary/40 hover:text-primary"
-                key={q}
-                onClick={() => setOpen(true)}
-                type="button"
-              >
-                {q}
-              </button>
-            ))}
-          </div>
-          <Button
-            className="w-full gap-2 font-semibold"
-            onClick={() => setOpen(true)}
-          >
-            <BotIcon className="size-4" />
-            Chatbot öffnen
-          </Button>
         </div>
       )}
+
+      {/* FAB */}
+      <Button
+        aria-label={open ? "Chatbot schließen" : "Chatbot öffnen"}
+        className="h-14 gap-2.5 rounded-full pr-5 pl-4 shadow-lg"
+        onClick={() => setOpen(!open)}
+        size="lg"
+      >
+        <BotIcon className="size-5" />
+        <span className="font-semibold text-sm">KI-Erstberater</span>
+      </Button>
     </div>
   );
 }
@@ -2815,6 +2842,7 @@ function CalcE10() {
 // ── Main export ───────────────────────────────────────────────────────────────
 
 export default function ToolsPage() {
+  const [chatOpen, setChatOpen] = useState(false);
   return (
     <>
       {/* ── Hero ────────────────────────────────────────────────────── */}
@@ -2866,7 +2894,7 @@ export default function ToolsPage() {
           />
           <div className="grid gap-6 lg:grid-cols-3">
             <TranslatorSection />
-            <ChatbotSection />
+            <ChatbotCard onOpen={() => setChatOpen(true)} />
             <GutachtenCard />
           </div>
         </div>
@@ -2978,6 +3006,8 @@ export default function ToolsPage() {
           </div>
         </div>
       </section>
+
+      <ChatbotSection open={chatOpen} setOpen={setChatOpen} />
 
       {/* ── CTA strip ───────────────────────────────────────────────── */}
       <section className="bg-primary py-16">
