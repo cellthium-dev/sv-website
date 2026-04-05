@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef } from "react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import Footer from "../../components/footer";
 import Header from "../../components/header";
 
@@ -215,39 +217,48 @@ function UeberMich() {
       <Header />
       <main>
         {/* ── section 1: HERO ── */}
-        <section className="relative overflow-hidden bg-linear-to-br from-[var(--dark-surface)] to-[var(--dark-surface)] px-6 py-20 md:py-24">
-          <div className="-right-1/5 -top-1/2 absolute h-[600px] w-[600px] rounded-full bg-[radial-gradient(circle,rgba(26,115,181,0.08)_0%,transparent_70%)]" />
-          <div className="container mx-auto max-w-[1140px]">
+        <section
+          aria-label="Über Andreas Bauten"
+          className="bg-muted py-20 md:py-28"
+        >
+          <div className="section-container">
             <div className="grid items-center gap-12 lg:grid-cols-2">
-              <div className="relative z-10 lg:order-1">
-                <span className="mb-6 inline-block rounded-full border border-[var(--solar)]/30 bg-[var(--solar)]/15 px-4 py-1.5 font-semibold text-[var(--solar)] text-xs uppercase tracking-widest">
+              {/* Left – text */}
+              <div>
+                <Badge className="mb-5 bg-primary/10 font-semibold text-primary hover:bg-primary/10">
                   ISO/IEC 17024 Zertifizierter Sachverständiger
-                </span>
-                <h1 className="mb-2 font-bold text-4xl text-primary leading-tight brightness-125 md:text-5xl">
+                </Badge>
+                <h1 className="mb-2 font-extrabold text-4xl tracking-tight md:text-5xl">
                   Andreas Bauten, M.Sc.
                 </h1>
-                <p className="mb-6 font-bold text-[var(--dark-surface-foreground)]/80 text-xl leading-relaxed">
+                <p className="mb-5 font-semibold text-lg text-muted-foreground">
                   Sachverständiger für Photovoltaikanlagen
                 </p>
-                <p className="max-w-[520px] text-[var(--dark-surface-foreground)]/80 leading-[1.75]">
+                <p className="mb-8 max-w-lg text-muted-foreground leading-relaxed">
                   Als unabhängiger, nach DIN EN ISO/IEC 17024 zertifizierter
                   Sachverständiger für Photovoltaikanlagen verbinde ich über ein
                   Jahrzehnt Erfahrung in Energietechnik, Batteriesicherheit und
                   funktionaler Sicherheit mit der Fähigkeit, komplexe technische
-                  Sachverhalte verständlich und praxisnah aufzubereiten. Mein
-                  Hintergrund als Ingenieur – vom BMS-Entwickler über den Safety
-                  Engineer bis hin zum Elektrofahrzeug-Konstrukteur mit
-                  TÜV-Abnahme – gibt mir eine Analysetiefe, die weit über die
-                  reine PV-Begutachtung hinausgeht.
+                  Sachverhalte verständlich und praxisnah aufzubereiten.
                 </p>
+                <div className="flex flex-wrap gap-3">
+                  <Button asChild size="lg">
+                    <Link to="/kontakt">Kontakt aufnehmen</Link>
+                  </Button>
+                  <Button asChild size="lg" variant="outline">
+                    <Link to="/leistungen">Leistungen ansehen</Link>
+                  </Button>
+                </div>
               </div>
-              <div className="relative z-10 flex items-center justify-center lg:order-2">
+
+              {/* Right – seal image */}
+              <div className="flex items-center justify-center">
                 <img
                   alt="EUcert Zertifizierungssiegel – ISO/IEC 17024 – Andreas Bauten"
-                  className="max-w-full rotate-3 drop-shadow-[0_12px_32px_rgba(0,0,0,0.35)] transition-transform duration-400 hover:rotate-0 hover:scale-[1.03]"
-                  height={300}
+                  className="max-w-[260px] rotate-3 drop-shadow-xl transition-transform duration-500 hover:rotate-0 hover:scale-105"
+                  height={260}
                   src="/images/siegel-3d.png"
-                  width={300}
+                  width={260}
                 />
               </div>
             </div>
@@ -603,8 +614,7 @@ function UeberMich() {
             <div className="mb-10 translate-y-6 animate-on-scroll opacity-0 transition-all duration-[600ms] ease-out">
               <Link
                 className="hover:-translate-y-0.5 inline-block rounded-lg bg-primary px-10 py-4 font-semibold text-base text-white transition-all hover:bg-[var(--dark-surface)]"
-                hash="kontakt"
-                to="/"
+                to="/kontakt"
               >
                 Jetzt Beratung anfragen
               </Link>
