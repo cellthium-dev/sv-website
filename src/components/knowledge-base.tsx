@@ -13,6 +13,7 @@ import {
   CloudSnowIcon,
   CoinsIcon,
   CpuIcon,
+  EyeIcon,
   FileCheckIcon,
   FileDownIcon,
   FileTextIcon,
@@ -99,9 +100,9 @@ type GlossaryTerm = {
   catColor: string;
 };
 
-type Comparison = {
+type ComparisonType = {
   id: number;
-  thema: string;
+  theme: string;
   schwere: string;
   title: string;
   badColor: string;
@@ -1066,10 +1067,10 @@ const GLOSSARY_TERMS: GlossaryTerm[] = [
   },
 ];
 
-const COMPARISONS: Comparison[] = [
+const COMPARISONS: ComparisonType[] = [
   {
     id: 1,
-    thema: "modulinstallation",
+    theme: "modulinstallation",
     schwere: "technisch",
     title: "Modulklemmen: korrekt mittig gesetzt vs. zu weit am Rand montiert",
     badColor: "linear-gradient(135deg,#FCA5A5,#EF4444)",
@@ -1084,7 +1085,7 @@ const COMPARISONS: Comparison[] = [
   },
   {
     id: 2,
-    thema: "modulinstallation",
+    theme: "modulinstallation",
     schwere: "technisch",
     title:
       "Modulabstand für Hinterlüftung: eingehalten vs. Module ohne Belüftungsspalt",
@@ -1106,7 +1107,7 @@ const COMPARISONS: Comparison[] = [
   },
   {
     id: 3,
-    thema: "kabel",
+    theme: "kabel",
     schwere: "sicherheit",
     title:
       "DC-Kabelführung: UV-geschützt und zugentlastet vs. frei hängende Kabel",
@@ -1128,7 +1129,7 @@ const COMPARISONS: Comparison[] = [
   },
   {
     id: 4,
-    thema: "kabel",
+    theme: "kabel",
     schwere: "normen",
     title:
       "Steckverbinder: gleicher Hersteller korrekt verrastet vs. Cross-Mating",
@@ -1144,7 +1145,7 @@ const COMPARISONS: Comparison[] = [
   },
   {
     id: 5,
-    thema: "thermografie",
+    theme: "thermografie",
     schwere: "technisch",
     title: "Thermografie: gleichmäßiges Wärmebild vs. Hotspot durch Zelldefekt",
     badColor: "linear-gradient(135deg,#FCA5A5,#FCD34D)",
@@ -1159,7 +1160,7 @@ const COMPARISONS: Comparison[] = [
   },
   {
     id: 6,
-    thema: "thermografie",
+    theme: "thermografie",
     schwere: "technisch",
     title: "String-Thermografie: mit und ohne Bypass-Dioden-Fehler",
     badColor: "linear-gradient(135deg,#FCA5A5,#FCD34D)",
@@ -1180,7 +1181,7 @@ const COMPARISONS: Comparison[] = [
   },
   {
     id: 7,
-    thema: "dach",
+    theme: "dach",
     schwere: "sicherheit",
     title: "Dachdurchführung: EPDM-Manschette vs. Baumarkt-Silikon",
     badColor: "linear-gradient(135deg,#FCA5A5,#EF4444)",
@@ -1201,7 +1202,7 @@ const COMPARISONS: Comparison[] = [
   },
   {
     id: 8,
-    thema: "dokumentation",
+    theme: "dokumentation",
     schwere: "normen",
     title: "Anlagendokumentation: vollständig vs. unzureichend",
     badColor: "linear-gradient(135deg,#FCA5A5,#EF4444)",
@@ -1222,7 +1223,7 @@ const COMPARISONS: Comparison[] = [
   },
   {
     id: 9,
-    thema: "blitzschutz",
+    theme: "blitzschutz",
     schwere: "normen",
     title: "Potentialausgleich: normgerecht angeschlossen vs. fehlende Erdung",
     badColor: "linear-gradient(135deg,#FCA5A5,#EF4444)",
@@ -1243,7 +1244,7 @@ const COMPARISONS: Comparison[] = [
   },
   {
     id: 10,
-    thema: "speicher",
+    theme: "speicher",
     schwere: "sicherheit",
     title:
       "Speicheraufstellung: normkonform im belüfteten Raum vs. im Abstellraum",
@@ -1332,7 +1333,7 @@ export default function KnowledgeBase() {
   });
 
   const filteredComparisons = COMPARISONS.filter((c) => {
-    const matchThema = compThema === "all" || c.thema === compThema;
+    const matchThema = compThema === "all" || c.theme === compThema;
     const matchSchwere = compSchwere === "all" || c.schwere === compSchwere;
     return matchThema && matchSchwere;
   });
@@ -2140,32 +2141,42 @@ function GlossaryCard({ term }: { term: GlossaryTerm }) {
 
 // ─── Comparison Card ──────────────────────────────────────────────────────────
 
-function ComparisonCard({ comparison: c }: { comparison: Comparison }) {
-  const schwerebadge: Record<string, string> = {
-    optisch: "bg-slate-100 text-slate-600",
-    technisch: "bg-amber-100 text-amber-700",
-    sicherheit: "bg-red-100 text-red-700",
-    normen: "bg-violet-100 text-violet-700",
+function ComparisonCard({ comparison: c }: { comparison: ComparisonType }) {
+  const themaLabel: Record<string, string> = {
+    modulinstallation: "Modulinstallation",
+    kabel: "Kabel & Stecker",
+    thermografie: "Thermografie",
+    dach: "Dach & Unterkonstruktion",
+    speicher: "Speichersystem",
+    blitzschutz: "Blitzschutz & Erdung",
+    dokumentation: "Dokumentation",
   };
-  const schwereLabel: Record<string, string> = {
-    optisch: "Optischer Mangel",
-    technisch: "Technischer Mangel",
+  const severityLabel: Record<string, string> = {
+    optisch: "Optisch",
+    technisch: "Technisch",
     sicherheit: "Sicherheitsrelevant",
     normen: "Normenverstoß",
+  };
+  const severityIcon: Record<string, React.ReactNode> = {
+    optisch: <EyeIcon className="size-3" />,
+    technisch: <WrenchIcon className="size-3" />,
+    sicherheit: <AlertCircleIcon className="size-3" />,
+    normen: <FileCheckIcon className="size-3" />,
   };
   return (
     <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
       {/* Title bar */}
-      <div className="flex items-center justify-between gap-3 border-border border-b bg-muted/40 px-5 py-3">
-        <span className="font-semibold text-foreground text-sm">{c.title}</span>
-        <span
-          className={cn(
-            "shrink-0 rounded-full px-2.5 py-0.5 font-semibold text-xs",
-            schwerebadge[c.schwere] ?? "bg-muted text-muted-foreground"
-          )}
-        >
-          {schwereLabel[c.schwere] ?? c.schwere}
-        </span>
+      <div className="flex items-center justify-between border-border border-b bg-muted/40 px-5 py-3">
+        <p className="mb-2 font-semibold text-foreground text-sm leading-snug">
+          {c.title}
+        </p>
+        <div className="flex flex-wrap gap-1.5">
+          <Badge variant={"default"}>{themaLabel[c.theme] ?? c.theme}</Badge>
+          <Badge className="gap-1" variant="secondary">
+            {severityIcon[c.schwere]}
+            {severityLabel[c.schwere] ?? c.schwere}
+          </Badge>
+        </div>
       </div>
 
       {/* Comparison slider */}
