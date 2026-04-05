@@ -33,7 +33,7 @@ create new site for the website
 [x] [all] replace windows icon with lucide-react icon
 [ ] [all] update header for all pages
 [ ] [all] run frontend design skills
-[ ] [wissensbereich] use compare from kibo-ui
+[x] [wissensbereich] use compare from kibo-ui
 [ ] [wissensbereich] use header with multiple points
 [ ] [contact] logic for contact selection
 [ ] [tools] ai chatbot

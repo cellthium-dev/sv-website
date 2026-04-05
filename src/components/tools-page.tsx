@@ -8,6 +8,7 @@ import {
   BatteryIcon,
   BotIcon,
   CalculatorIcon,
+  CarIcon,
   CheckCircleIcon,
   CheckIcon,
   ChevronDownIcon,
@@ -25,7 +26,7 @@ import {
   SunIcon,
   ZapIcon,
 } from "lucide-react";
-import { useRef, useState } from "react";
+import { type ReactNode, useRef, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -77,12 +78,6 @@ const TILT_FACTORS: Record<string, number> = {
   leicht: 0.97,
   mittel: 1.0,
   steil: 0.92,
-};
-const TILT_LABELS: Record<string, string> = {
-  flach: "Flachdach",
-  leicht: "leichter Neigung",
-  mittel: "mittlerer Neigung",
-  steil: "steiler Neigung",
 };
 
 function fmt(n: number, d = 0) {
@@ -2350,7 +2345,7 @@ function CalcE8() {
                 label: "Buchen (Jahresbindung)",
               },
               {
-                icon: <FuelIcon className="size-5" />,
+                icon: <LeafIcon className="size-5" />,
                 value: `${fmt(result.benzin)} L`,
                 label: "Benzin vermieden",
               },

@@ -17,6 +17,7 @@ import {
   FileDownIcon,
   FileTextIcon,
   FlameIcon,
+  type LucideIcon,
   MessageSquareIcon,
   ScaleIcon,
   ScanIcon,
@@ -30,6 +31,11 @@ import {
   ZapIcon,
 } from "lucide-react";
 import { useState } from "react";
+import {
+  Comparison,
+  ComparisonHandle,
+  ComparisonItem,
+} from "@/components/kibo-ui/comparison";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -72,7 +78,8 @@ type Case = {
   badgeColor: string;
   title: string;
   meta: string;
-  teaser: string;
+  problem: string;
+  solution: string;
   tags: string[];
 };
 
@@ -489,10 +496,12 @@ const CASES: Case[] = [
     id: 1,
     badge: "Fehlerdiagnose",
     badgeColor: "#EF4444",
-    title: "Ertragseinbruch um 40 % – defekte Bypass-Dioden als Ursache",
-    meta: "Aufdachanlage, 9,8 kWp · 6 Jahre · Plötzlicher Ertragsrückgang",
-    teaser:
-      "Ein Eigenheimbesitzer bemerkte einen unerklärlichen Ertragsrückgang. Die Monitoring-Daten zeigten String-Abweichungen. Unsere Thermografie-Untersuchung identifizierte vier Module mit defekten Bypass-Dioden – ein Serienfehler des Herstellers. Gewährleistungsanspruch erfolgreich durchgesetzt.",
+    title: "Ertragseinbruch um 40 %",
+    meta: "Aufdachanlage, 9,8 kWp · 6 Jahre alt",
+    problem:
+      "Unerklärlicher Ertragsrückgang um 40 %. Monitoring zeigt String-Abweichungen. Wechselrichter meldet keine Fehler. Installateur sieht keinen Handlungsbedarf.",
+    solution:
+      "Thermografie identifizierte 4 Module mit defekten Bypass-Dioden – Serienfehler des Herstellers. Gutachten sicherte Gewährleistungsanspruch. Vollständiger Ersatz auf Herstellerkosten durchgesetzt.",
     tags: [
       "Bypass-Diode",
       "Thermografie",
@@ -504,11 +513,12 @@ const CASES: Case[] = [
     id: 2,
     badge: "Versicherungsfall",
     badgeColor: "#F59E0B",
-    title:
-      "Hagelschaden oder Installationsfehler? Versicherung lehnte Regulierung ab",
-    meta: "Schrägdachanlage, 15 kWp · 3 Jahre · Mikrorisse nach Hagel",
-    teaser:
-      "Nach einem schweren Hagelunwetter verweigerte die Versicherung die Regulierung mit dem Argument, die Schäden seien vorbestehend. Unsere Elektrolumineszenz-Aufnahmen bewiesen eindeutig den Zusammenhang zwischen Hagelereignis und Zellbruchmuster.",
+    title: "Hagelschaden – Versicherung verweigert Regulierung",
+    meta: "Schrägdachanlage, 15 kWp · 3 Jahre alt",
+    problem:
+      "Nach schwerem Hagel verweigert die Versicherung die Regulierung. Begründung: Schäden seien vorbestehend und nicht hagelbedingt. Schadensumme: 18.400 €.",
+    solution:
+      "Elektrolumineszenz-Aufnahmen bewiesen den direkten Zusammenhang zwischen Hagelereignis und Zellbruchmuster. Gutachten als Beweismittel – vollständige Regulierung erzielt.",
     tags: [
       "Hagelschaden",
       "Elektrolumineszenz",
@@ -520,20 +530,24 @@ const CASES: Case[] = [
     id: 3,
     badge: "Batteriespeicher",
     badgeColor: "#8B5CF6",
-    title: "Batteriespeicher: Kapazitätsverlust von 35 % nach nur 2 Jahren",
-    meta: "Heimspeicher LFP, 10 kWh · 2 Jahre · Beschleunigte Alterung",
-    teaser:
-      "Der Speicher eines Eigenheimbesitzers lieferte nach 2 Jahren nur noch 65 % der Nennkapazität. Unsere BMS-Datenanalyse und Impedanzmessung ergaben eine fehlerhafte Zellbalancierung als Grundursache – ein Garantiefall.",
+    title: "Speicher verliert 35 % Kapazität in 2 Jahren",
+    meta: "Heimspeicher LFP, 10 kWh · 2 Jahre alt",
+    problem:
+      "Speicher liefert nach 2 Jahren nur noch 65 % der Nennkapazität. Hersteller behauptet normale Alterung. Eigenverbrauchsquote eingebrochen. Garantieanspruch unklar.",
+    solution:
+      "BMS-Datenanalyse und Impedanzmessung ergaben fehlerhafte Zellbalancierung als Grundursache – kein normaler Verschleiß. Gutachten bestätigte Garantiefall. Austausch auf Herstellerkosten.",
     tags: ["Kapazitätsverlust", "BMS", "Impedanzmessung", "Garantie"],
   },
   {
     id: 4,
     badge: "Installationsmangel",
     badgeColor: "#DC2626",
-    title: "Neubau-PV-Anlage: 23 dokumentierte Installationsmängel bei Abnahme",
-    meta: "Aufdachanlage, 12 kWp · Neuanlage · Mangelhafte Installation",
-    teaser:
-      "Ein Bauherr beauftragte eine unabhängige Abnahmeprüfung seiner neuen PV-Anlage. Die Inspektion offenbarte 23 Mängel – von fehlenden Zugentlastungen über Cross-Mating bei Steckverbindern bis zu unterschrittenem Biegeradius der DC-Leitungen.",
+    title: "Neuanlage: 23 Mängel bei Abnahmeprüfung",
+    meta: "Aufdachanlage, 12 kWp · Neuanlage",
+    problem:
+      "Neue PV-Anlage wirft Fragen auf. Kein Abnahmeprotokoll übergeben. Installateur weicht Detailfragen aus. Anlage läuft, aber Qualität unklar.",
+    solution:
+      "Unabhängige Abnahmeprüfung offenbarte 23 dokumentierte Mängel: fehlende Zugentlastungen, Cross-Mating bei Steckverbindern, unterschrittener Biegeradius der DC-Leitungen. Mängelbeseitigung auf Installateurkosten.",
     tags: ["Abnahmeprüfung", "Installation", "Cross-Mating", "Neuanlage"],
   },
 ];
@@ -1645,22 +1659,33 @@ export default function KnowledgeBase() {
                 className="hover:-translate-y-0.5 flex flex-col rounded-xl border border-border bg-card p-6 transition-all hover:shadow-lg"
                 key={c.id}
               >
-                <div className="mb-4 flex items-start justify-between gap-3">
+                <div className="mb-3 flex items-start gap-3">
                   <span
-                    className="inline-block rounded-md px-2.5 py-1 font-semibold text-white text-xs"
+                    className="mt-0.5 shrink-0 rounded-md px-2.5 py-1 font-semibold text-white text-xs"
                     style={{ background: c.badgeColor }}
                   >
                     {c.badge}
                   </span>
+                  <div>
+                    <h3 className="font-bold text-foreground text-sm leading-snug">
+                      {c.title}
+                    </h3>
+                    <p className="mt-0.5 text-muted-foreground text-xs">
+                      {c.meta}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="mb-2 font-bold text-foreground text-lg leading-snug">
-                  {c.title}
-                </h3>
-                <p className="mb-3 font-medium text-muted-foreground/80 text-xs">
-                  {c.meta}
+                <p className="mb-1 text-muted-foreground text-sm leading-relaxed">
+                  <span className="font-semibold text-foreground">
+                    Problem:{" "}
+                  </span>
+                  {c.problem}
                 </p>
                 <p className="mb-5 flex-1 text-muted-foreground text-sm leading-relaxed">
-                  {c.teaser}
+                  <span className="font-semibold text-foreground">
+                    Ergebnis:{" "}
+                  </span>
+                  {c.solution}
                 </p>
                 <div className="mb-4 flex flex-wrap gap-1.5">
                   {c.tags.map((t) => (
@@ -1896,7 +1921,7 @@ export default function KnowledgeBase() {
           </div>
 
           {filteredComparisons.length > 0 ? (
-            <div className="grid gap-6 md:grid-cols-2">
+            <div className="grid gap-6 md:grid-cols-1">
               {filteredComparisons.map((c) => (
                 <ComparisonCard comparison={c} key={c.id} />
               ))}
@@ -1921,25 +1946,11 @@ export default function KnowledgeBase() {
               Grundlagen.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
-              <Button
-                asChild
-                className="border-white/30 text-dark-surface-foreground hover:border-white hover:bg-white/10"
-                variant="outline"
-              >
-                <Link to="/kontakt">
-                  Vor-Ort-Prüfung anfragen
-                  <ArrowRightIcon className="ml-1 size-4" />
-                </Link>
+              <Button asChild variant={"default"}>
+                <Link to="/kontakt">Vor-Ort-Prüfung anfragen</Link>
               </Button>
-              <Button
-                asChild
-                className="border-white/30 text-dark-surface-foreground hover:border-white hover:bg-white/10"
-                variant="outline"
-              >
-                <Link to="/kontakt">
-                  Fernbewertung starten
-                  <ArrowRightIcon className="ml-1 size-4" />
-                </Link>
+              <Button asChild variant={"outline"}>
+                <Link to="/kontakt">Fernbewertung starten</Link>
               </Button>
             </div>
           </div>
@@ -2148,46 +2159,55 @@ function ComparisonCard({ comparison: c }: { comparison: Comparison }) {
       <div className="flex items-center justify-between gap-3 border-border border-b bg-muted/40 px-5 py-3">
         <span className="font-semibold text-foreground text-sm">{c.title}</span>
         <span
-          className={`rounded-full px-2.5 py-0.5 font-semibold text-xs ${schwerebadge[c.schwere] ?? "bg-muted text-muted-foreground"}`}
+          className={cn(
+            "shrink-0 rounded-full px-2.5 py-0.5 font-semibold text-xs",
+            schwerebadge[c.schwere] ?? "bg-muted text-muted-foreground"
+          )}
         >
           {schwereLabel[c.schwere] ?? c.schwere}
         </span>
       </div>
 
-      {/* Split panel */}
-      <div className="grid grid-cols-2 divide-x divide-border">
-        {/* Bad */}
-        <div className="p-5">
-          <div
-            className="mb-3 flex size-10 items-center justify-center rounded-full text-xl"
-            style={{ background: c.badColor + "22" }}
-          >
-            {c.badIcon}
+      {/* Comparison slider */}
+      <Comparison className="h-56" mode="drag">
+        {/* Left – Mangelhaft */}
+        <ComparisonItem
+          className="flex flex-col gap-3 bg-red-50 p-5 dark:bg-red-950/30"
+          position="left"
+        >
+          <div className="flex items-center gap-2">
+            <span className="rounded-full bg-red-100 px-2.5 py-0.5 font-semibold text-red-700 text-xs dark:bg-red-900/50 dark:text-red-400">
+              {c.badIcon}
+            </span>
+            <span className="font-bold text-red-700 text-xs uppercase tracking-wider dark:text-red-400">
+              Mangelhaft
+            </span>
           </div>
-          <p className="mb-2 font-bold text-sm" style={{ color: c.badColor }}>
-            Mangelhaft
-          </p>
-          <p className="text-muted-foreground text-sm leading-relaxed">
+          <p className="text-foreground/80 text-sm leading-relaxed">
             {c.explain2}
           </p>
-        </div>
+        </ComparisonItem>
 
-        {/* Good */}
-        <div className="p-5">
-          <div
-            className="mb-3 flex size-10 items-center justify-center rounded-full text-xl"
-            style={{ background: c.goodColor + "22" }}
-          >
-            {c.goodIcon}
+        {/* Right – Normgerecht */}
+        <ComparisonItem
+          className="flex flex-col gap-3 bg-green-50 p-5 dark:bg-green-950/30"
+          position="right"
+        >
+          <div className="flex items-center gap-2">
+            <span className="rounded-full bg-green-100 px-2.5 py-0.5 font-semibold text-green-700 text-xs dark:bg-green-900/50 dark:text-green-400">
+              {c.goodIcon}
+            </span>
+            <span className="font-bold text-green-700 text-xs uppercase tracking-wider dark:text-green-400">
+              Normgerecht
+            </span>
           </div>
-          <p className="mb-2 font-bold text-sm" style={{ color: c.goodColor }}>
-            Normgerecht
-          </p>
-          <p className="text-muted-foreground text-sm leading-relaxed">
+          <p className="text-foreground/80 text-sm leading-relaxed">
             {c.explain3}
           </p>
-        </div>
-      </div>
+        </ComparisonItem>
+
+        <ComparisonHandle />
+      </Comparison>
 
       {/* Tags */}
       <div className="flex flex-wrap gap-1.5 border-border border-t px-5 py-3">
