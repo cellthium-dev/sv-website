@@ -29,6 +29,15 @@ import {
 import { type ReactNode, useRef, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -635,96 +644,107 @@ function TranslatorSection() {
   };
 
   return (
-    <div className="flex flex-col rounded-2xl border border-border bg-card p-6">
-      <div className="mb-4 flex items-center gap-3">
-        <span className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
-          <LanguagesIcon className="size-5" />
-        </span>
-        <div>
-          <h3 className="font-bold text-foreground">
-            KI-Fachjargon-Übersetzer
-          </h3>
-          <p className="text-muted-foreground text-xs">
-            Fehlermeldungen verständlich erklärt – kostenlos & sofort
-          </p>
-        </div>
-      </div>
+    <>
+      <Dialog onOpenChange={(open) => !open && setResult(null)} open={!!result}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <div className="mb-1 flex items-center gap-2.5">
+              <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <LanguagesIcon className="size-4" />
+              </span>
+              <DialogTitle>{input.trim()}</DialogTitle>
+            </div>
+            <DialogDescription>
+              KI-Fachjargon-Übersetzer · Erste Orientierung
+            </DialogDescription>
+          </DialogHeader>
 
-      <div className="relative mb-3 flex-1">
-        <Textarea
-          className="h-full text-sm"
-          onChange={(e) => setInput(e.target.value)}
-          placeholder={
-            "z.\u00a0B. \u201eVRef_Error\u201c, \u201eString voltage mismatch\u201c, \u201eIso-Fehler\u201c, \u201eDerating Wechselrichter\u201c\u2026"
-          }
-          rows={4}
-          value={input}
-        />
-        <span className="absolute right-2 bottom-2 text-muted-foreground text-xs">
-          {input.length}/500
-        </span>
-      </div>
+          {result && (
+            <div className="space-y-3">
+              <p className="text-foreground/80 text-sm leading-relaxed">
+                {result.erklaerung}
+              </p>
+              <div
+                className={cn(
+                  "rounded-lg px-3 py-2 font-semibold text-xs",
+                  riskConfig[result.risikostufe].cls
+                )}
+              >
+                {riskConfig[result.risikostufe].label}
+              </div>
+              <p className="text-muted-foreground text-xs">
+                <span className="font-semibold">Passende Leistung:</span>{" "}
+                {result.leistungsverweis}
+              </p>
+              <p className="text-muted-foreground/60 text-xs italic">
+                Diese Ersteinschätzung bietet Orientierung und ersetzt keine
+                professionelle Fehlerdiagnose.
+              </p>
+            </div>
+          )}
 
-      <Button
-        className="w-full gap-2 font-semibold"
-        disabled={!input.trim() || loading}
-        onClick={translate}
-      >
-        {loading ? (
-          <>
-            <RefreshCwIcon className="size-4 animate-spin" />
-            Wird analysiert…
-          </>
-        ) : (
-          <>
-            <ArrowRightIcon className="size-4" />
-            Übersetzen
-          </>
-        )}
-      </Button>
-
-      {result && (
-        <div className="mt-5 space-y-3 rounded-xl border border-border bg-muted/30 p-4">
-          <p className="font-semibold text-foreground text-sm">
-            {input.trim()}
-          </p>
-          <p className="text-muted-foreground text-sm leading-relaxed">
-            {result.erklaerung}
-          </p>
-          <div
-            className={cn(
-              "rounded-lg px-3 py-2 font-semibold text-xs",
-              riskConfig[result.risikostufe].cls
-            )}
-          >
-            {riskConfig[result.risikostufe].label}
-          </div>
-          <p className="text-muted-foreground text-xs">
-            <span className="font-semibold">Passende Leistung:</span>{" "}
-            {result.leistungsverweis}
-          </p>
-          <p className="text-muted-foreground/60 text-xs italic">
-            Diese Ersteinschätzung bietet Orientierung und ersetzt keine
-            professionelle Fehlerdiagnose.
-          </p>
-          <div className="flex gap-2">
+          <DialogFooter>
             <Button asChild size="sm">
-              <Link to="/kontakt">Anfragen</Link>
+              <Link to="/kontakt">Beratung anfragen</Link>
             </Button>
-            <Button
-              onClick={() => {
-                setResult(null);
-                setInput("");
-              }}
-              size="sm"
-              variant="outline"
-            >
-              Zurücksetzen
-            </Button>
+            <DialogClose asChild>
+              <Button onClick={() => setInput("")} size="sm" variant="outline">
+                Schließen
+              </Button>
+            </DialogClose>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      <div className="flex flex-col rounded-2xl border border-border bg-card p-6">
+        <div className="mb-4 flex items-center gap-3">
+          <span className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+            <LanguagesIcon className="size-5" />
+          </span>
+          <div>
+            <h3 className="font-bold text-foreground">
+              KI-Fachjargon-Übersetzer
+            </h3>
+            <p className="text-muted-foreground text-xs">
+              Fehlermeldungen verständlich erklärt – kostenlos & sofort
+            </p>
           </div>
         </div>
-      )}
-    </div>
+
+        <div className="relative mb-3 flex-1">
+          <Textarea
+            className="h-full text-sm"
+            onChange={(e) => setInput(e.target.value)}
+            placeholder={
+              "z.\u00a0B. \u201eVRef_Error\u201c, \u201eString voltage mismatch\u201c, \u201eIso-Fehler\u201c, \u201eDerating Wechselrichter\u201c\u2026"
+            }
+            rows={4}
+            value={input}
+          />
+          <span className="absolute right-2 bottom-2 text-muted-foreground text-xs">
+            {input.length}/500
+          </span>
+        </div>
+
+        <Button
+          className="w-full gap-2 font-semibold"
+          disabled={!input.trim() || loading}
+          onClick={translate}
+        >
+          {loading ? (
+            <>
+              <RefreshCwIcon className="size-4 animate-spin" />
+              Wird analysiert…
+            </>
+          ) : (
+            <>
+              <ArrowRightIcon className="size-4" />
+              Übersetzen
+            </>
+          )}
+        </Button>
+      </div>
+    </>
   );
 }
 
