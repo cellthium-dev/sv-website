@@ -2892,7 +2892,7 @@ export default function ToolsPage() {
               { label: "Berechnungstools", href: "#berechnungstools" },
             ].map((l) => (
               <a
-                className="rounded-full border border-white/20 px-4 py-1.5 text-dark-surface-foreground/80 text-sm transition-colors hover:border-white/40 hover:text-dark-surface-foreground"
+                className="rounded-full bg-blue-50 px-4 py-1.5 font-semibold text-primary text-sm transition-colors hover:bg-blue-100"
                 href={l.href}
                 key={l.label}
               >
