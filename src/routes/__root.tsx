@@ -6,7 +6,9 @@ function RootComponent() {
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: pathname is intentionally in deps to scroll to top on route change
   React.useEffect(() => {
-    window.scrollTo(0, 0);
+    if (!window.location.hash) {
+      window.scrollTo(0, 0);
+    }
   }, [pathname]);
 
   return <Outlet />;

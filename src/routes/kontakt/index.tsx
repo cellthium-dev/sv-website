@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import {
   BatteryFullIcon,
   CalendarIcon,
@@ -10,6 +10,7 @@ import {
   SendIcon,
   ShieldCheckIcon,
 } from "lucide-react";
+import { useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { siteConfig } from "@/config/site";
 import BookingSystem from "../../components/booking-system";
@@ -18,6 +19,12 @@ import Footer from "../../components/footer";
 import Header from "../../components/header";
 
 export const Route = createFileRoute("/kontakt/")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    tab:
+      (search.tab as string) === "termin"
+        ? ("termin" as const)
+        : ("anfrage" as const),
+  }),
   component: KontaktPage,
 });
 
@@ -45,6 +52,17 @@ const TRUST_BADGES = [
 ];
 
 function KontaktPage() {
+  const { tab } = Route.useSearch();
+  const navigate = useNavigate({ from: "/kontakt/" });
+
+  useEffect(() => {
+    if (window.location.hash === "#kontakt-formular") {
+      document
+        .getElementById("kontakt-formular")
+        ?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -139,7 +157,7 @@ function KontaktPage() {
         </section>
 
         {/* ── Anfrage / Termin Tabs ─────────────────────────────────── */}
-        <div className="bg-muted/30 pt-10 pb-0">
+        <div className="bg-muted/30 pt-10 pb-0" id="kontakt-formular">
           <div className="section-container">
             <div className="mb-14 max-w-2xl">
               <div className="section-label mb-4">
@@ -158,7 +176,15 @@ function KontaktPage() {
               </p>
             </div>
 
-            <Tabs className="w-full" defaultValue="anfrage">
+            <Tabs
+              className="w-full"
+              onValueChange={(val) =>
+                navigate({
+                  search: { tab: val as "anfrage" | "termin" },
+                })
+              }
+              value={tab}
+            >
               <TabsList className="h-12 w-full max-w-xs p-1">
                 <TabsTrigger
                   className="flex-1 gap-2 font-semibold"

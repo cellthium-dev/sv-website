@@ -210,7 +210,13 @@ function UeberMich() {
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <Button asChild size="lg">
-                    <Link to="/kontakt">Kontakt aufnehmen</Link>
+                    <Link
+                      hash="kontakt-formular"
+                      search={{ tab: "anfrage" }}
+                      to="/kontakt"
+                    >
+                      Kontakt aufnehmen
+                    </Link>
                   </Button>
                   <Button asChild size="lg" variant="outline">
                     <Link to="/leistungen">Leistungen ansehen</Link>
@@ -618,7 +624,9 @@ function UeberMich() {
             </div>
             <div className="mb-10 translate-y-6 animate-on-scroll opacity-0 transition-all duration-[600ms] ease-out">
               <Link
-                className="hover:-translate-y-0.5 inline-block rounded-lg bg-primary px-10 py-4 font-semibold text-base text-white transition-all hover:bg-[var(--dark-surface)]"
+                className="hover:-translate-y-0.5 inline-block rounded-lg bg-primary px-10 py-4 font-semibold text-base text-white transition-all hover:bg-primary/90"
+                hash="kontakt-formular"
+                search={{ tab: "termin" }}
                 to="/kontakt"
               >
                 Jetzt Beratung anfragen

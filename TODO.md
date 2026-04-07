@@ -41,3 +41,5 @@ create new site for the website
 ### 07.04.2025
 [x] update font family
 [x] update images for the bmw project
+[x] update link to directly open the cal.eu page when opening the termin vereinbaren
+[ ] update pages for the marquee

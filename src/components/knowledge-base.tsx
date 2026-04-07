@@ -1699,7 +1699,11 @@ export default function KnowledgeBase() {
                   ))}
                 </div>
                 <Button asChild size="sm" variant="outline">
-                  <Link to="/kontakt">
+                  <Link
+                    hash="kontakt-formular"
+                    search={{ tab: "anfrage" }}
+                    to="/kontakt"
+                  >
                     Ähnlichen Fall besprechen
                     <ArrowRightIcon className="ml-1 size-3.5" />
                   </Link>
@@ -1948,10 +1952,22 @@ export default function KnowledgeBase() {
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <Button asChild variant={"default"}>
-                <Link to="/kontakt">Vor-Ort-Prüfung anfragen</Link>
+                <Link
+                  hash="kontakt-formular"
+                  search={{ tab: "termin" }}
+                  to="/kontakt"
+                >
+                  Vor-Ort-Prüfung anfragen
+                </Link>
               </Button>
               <Button asChild variant={"outline"}>
-                <Link to="/kontakt">Fernbewertung starten</Link>
+                <Link
+                  hash="kontakt-formular"
+                  search={{ tab: "anfrage" }}
+                  to="/kontakt"
+                >
+                  Fernbewertung starten
+                </Link>
               </Button>
             </div>
           </div>

@@ -43,6 +43,7 @@ type ServiceCard = {
   features: string[];
   audiences: string[];
   ctaText: string;
+  ctaTab: "anfrage" | "termin";
 };
 
 const HAUPTLEISTUNGEN: ServiceCard[] = [
@@ -59,6 +60,7 @@ const HAUPTLEISTUNGEN: ServiceCard[] = [
     ],
     audiences: ["Versicherer", "Betreiber", "Rechtsanwälte"],
     ctaText: "Schadenfall melden",
+    ctaTab: "anfrage",
   },
   {
     icon: ClipboardListIcon,
@@ -73,6 +75,7 @@ const HAUPTLEISTUNGEN: ServiceCard[] = [
     ],
     audiences: ["Bauherren", "Unternehmen", "Installateure"],
     ctaText: "Abnahme beauftragen",
+    ctaTab: "anfrage",
   },
   {
     icon: TrendingUpIcon,
@@ -87,6 +90,7 @@ const HAUPTLEISTUNGEN: ServiceCard[] = [
     ],
     audiences: ["Investoren", "Privat", "Käufer"],
     ctaText: "Ertragsprüfung starten",
+    ctaTab: "anfrage",
   },
   {
     icon: ShieldCheckIcon,
@@ -101,6 +105,7 @@ const HAUPTLEISTUNGEN: ServiceCard[] = [
     ],
     audiences: ["Versicherer", "Rechtsanwälte", "Betreiber"],
     ctaText: "Schadensfall melden",
+    ctaTab: "anfrage",
   },
   {
     icon: WrenchIcon,
@@ -115,6 +120,7 @@ const HAUPTLEISTUNGEN: ServiceCard[] = [
     ],
     audiences: ["Betreiber", "Unternehmen", "Hersteller"],
     ctaText: "Speicher prüfen lassen",
+    ctaTab: "anfrage",
   },
   {
     icon: MessageSquareIcon,
@@ -129,6 +135,7 @@ const HAUPTLEISTUNGEN: ServiceCard[] = [
     ],
     audiences: ["Rechtsanwälte", "Betreiber", "Versicherer"],
     ctaText: "Zweitmeinung einholen",
+    ctaTab: "anfrage",
   },
 ];
 
@@ -138,6 +145,7 @@ type AdvisoryCard = {
   description: string;
   features: string[];
   ctaText: string;
+  ctaTab: "anfrage" | "termin";
   priceBadge?: string;
 };
 
@@ -154,6 +162,7 @@ const BERATUNGSLEISTUNGEN: AdvisoryCard[] = [
       "Schulungen & Workshops",
     ],
     ctaText: "Beratung buchen",
+    ctaTab: "termin",
   },
   {
     icon: CompassIcon,
@@ -167,6 +176,7 @@ const BERATUNGSLEISTUNGEN: AdvisoryCard[] = [
       "Repowering-Beratung",
     ],
     ctaText: "Termin vereinbaren",
+    ctaTab: "termin",
   },
   {
     icon: MonitorIcon,
@@ -180,6 +190,7 @@ const BERATUNGSLEISTUNGEN: AdvisoryCard[] = [
       "Digitales Gutachten (PDF)",
     ],
     ctaText: "Online-Gutachten starten",
+    ctaTab: "anfrage",
     priceBadge: "ab 249 €",
   },
 ];
@@ -190,6 +201,7 @@ type TargetGroup = {
   description: string;
   highlights: string[];
   ctaText: string;
+  ctaTab: "anfrage" | "termin";
 };
 
 const ZIELGRUPPEN: TargetGroup[] = [
@@ -200,6 +212,7 @@ const ZIELGRUPPEN: TargetGroup[] = [
       "Schnelle, normkonforme Schadensbewertung bei PV-Anlagen und Batteriespeichern. Standardisierte Prozesse, kurze Turnaround-Zeiten und höchste technische Sorgfalt.",
     highlights: ["Rahmenverträge möglich", "Kurze Turnaround-Zeiten"],
     ctaText: "Anfrage stellen",
+    ctaTab: "anfrage",
   },
   {
     icon: BriefcaseIcon,
@@ -208,6 +221,7 @@ const ZIELGRUPPEN: TargetGroup[] = [
       "Qualitätssicherung, Abnahmebegleitung und Konfliktklärung bei komplexen Projekten. Fachliche Rückendeckung durch unabhängige Expertise.",
     highlights: ["Begleitende Qualitätsprüfung", "Schulungsangebote"],
     ctaText: "Zusammenarbeit anfragen",
+    ctaTab: "anfrage",
   },
   {
     icon: TrendingUpIcon,
@@ -216,6 +230,7 @@ const ZIELGRUPPEN: TargetGroup[] = [
       "Bewertung gewerblicher Anlagen, Wirtschaftlichkeitsprüfung und technische Due Diligence. Belastbare Grundlage für Kaufentscheidungen und Portfoliobewertungen.",
     highlights: ["Technische Due Diligence", "Portfoliobewertung"],
     ctaText: "Beratung anfragen",
+    ctaTab: "anfrage",
   },
 ];
 
@@ -291,7 +306,13 @@ function LeistungenPage() {
               </p>
               <div className="flex flex-wrap justify-center gap-3">
                 <Button asChild size="lg">
-                  <Link to="/kontakt">Kostenlose Erstberatung</Link>
+                  <Link
+                    hash="kontakt-formular"
+                    search={{ tab: "termin" }}
+                    to="/kontakt"
+                  >
+                    Kostenlose Erstberatung
+                  </Link>
                 </Button>
                 <Button asChild size="lg" variant="outline">
                   <a href="#pdf-download">Leistungsübersicht als PDF</a>
@@ -369,7 +390,11 @@ function LeistungenPage() {
 
                     <CardFooter>
                       <Button asChild className="w-full" variant="outline">
-                        <Link to="/kontakt">
+                        <Link
+                          hash="kontakt-formular"
+                          search={{ tab: s.ctaTab }}
+                          to="/kontakt"
+                        >
                           {s.ctaText}
                           <ArrowRightIcon className="ml-1 size-4" />
                         </Link>
@@ -460,7 +485,11 @@ function LeistungenPage() {
                         className="w-full font-semibold"
                         variant={s.priceBadge ? "default" : "outline"}
                       >
-                        <Link to="/kontakt">
+                        <Link
+                          hash="kontakt-formular"
+                          search={{ tab: s.ctaTab }}
+                          to="/kontakt"
+                        >
                           {s.ctaText}
                           <ArrowRightIcon className="ml-1 size-4" />
                         </Link>
@@ -528,10 +557,14 @@ function LeistungenPage() {
                     </ul>
                     <Button
                       asChild
-                      className="border-white/30 text-dark-surface-foreground hover:border-white hover:bg-white/10"
+                      className="border-white/30 hover:border-white hover:bg-white/10 hover:text-dark-surface-foreground"
                       variant="outline"
                     >
-                      <Link to="/kontakt">
+                      <Link
+                        hash="kontakt-formular"
+                        search={{ tab: g.ctaTab }}
+                        to="/kontakt"
+                      >
                         {g.ctaText}
                         <ArrowRightIcon className="ml-1 size-4" />
                       </Link>
@@ -666,7 +699,13 @@ function LeistungenPage() {
                   className="bg-solar font-bold text-solar-foreground hover:brightness-95"
                   size="lg"
                 >
-                  <Link to="/kontakt">Kostenlose Erstberatung</Link>
+                  <Link
+                    hash="kontakt-formular"
+                    search={{ tab: "termin" }}
+                    to="/kontakt"
+                  >
+                    Kostenlose Erstberatung
+                  </Link>
                 </Button>
                 <Button
                   asChild
@@ -674,7 +713,13 @@ function LeistungenPage() {
                   size="lg"
                   variant="outline"
                 >
-                  <Link to="/kontakt">Termin vereinbaren</Link>
+                  <Link
+                    hash="kontakt-formular"
+                    search={{ tab: "anfrage" }}
+                    to="/kontakt"
+                  >
+                    Anfrage senden
+                  </Link>
                 </Button>
               </div>
             </div>
