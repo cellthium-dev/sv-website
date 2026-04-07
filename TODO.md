@@ -40,4 +40,4 @@ create new site for the website
 
 ### 07.04.2025
 [x] update font family
-[ ] add images
+[x] update images for the bmw project

@@ -178,37 +178,6 @@ const whyCards = [
   },
 ];
 
-const galleryPlaceholders = [
-  "Außenansicht des fertigen Fahrzeugs",
-  "Hochvolt-Batteriesystem im Einbauraum",
-  "BMS-Integration und Verkabelung",
-  "Motorraum mit E-Motor und Inverter",
-];
-
-const CameraIcon = () => (
-  <svg
-    aria-hidden={true}
-    className="h-8 w-8 text-white/40"
-    fill="none"
-    role="presentation"
-    stroke="currentColor"
-    strokeWidth={1.5}
-    viewBox="0 0 24 24"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
-
 function UeberMich() {
   const pageRef = useScrollAnimation();
 
@@ -421,16 +390,30 @@ function UeberMich() {
 
               <div className="overflow-x-auto sm:overflow-visible">
                 <div className="grid min-w-[520px] translate-y-6 animate-on-scroll grid-cols-2 gap-4 opacity-0 transition-all duration-[600ms] ease-out sm:min-w-0">
-                  {galleryPlaceholders.map((label) => (
-                    <div
-                      className="flex aspect-[4/3] flex-col items-center justify-center gap-3 rounded-xl border border-white/30 border-dashed bg-white/10 transition-colors hover:bg-white/15"
-                      key={label}
-                    >
-                      <CameraIcon />
-                      <span className="px-3 text-center text-[13px] text-white/50">
-                        {label}
-                      </span>
-                    </div>
+                  {[
+                    {
+                      src: "/about-me/bmw-1.JPG",
+                      alt: "Außenansicht des fertigen Fahrzeugs",
+                    },
+                    {
+                      src: "/about-me/bmw-2.JPG",
+                      alt: "Hochvolt-Batteriesystem im Einbauraum",
+                    },
+                    {
+                      src: "/about-me/bmw-3.JPG",
+                      alt: "BMS-Integration und Verkabelung",
+                    },
+                    {
+                      src: "/about-me/bmw-4.JPG",
+                      alt: "Motorraum mit E-Motor und Inverter",
+                    },
+                  ].map(({ src, alt }) => (
+                    <img
+                      alt={alt}
+                      className="aspect-[4/3] w-full rounded-xl object-cover"
+                      key={src}
+                      src={src}
+                    />
                   ))}
                 </div>
               </div>
