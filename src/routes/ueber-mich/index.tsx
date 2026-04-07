@@ -70,41 +70,45 @@ const timelineItems = [
     subtitle:
       "Freiberuflich | ISO/IEC 17024 zertifiziert (EUcert, gültig bis 07/2030)",
     items: [
-      "Vor-Ort-PV-Bewertungen, technische Diagnosen und Leistungsanalysen",
-      "Normkonforme Gutachten nach DIN/IEC bei Schadensfällen",
+      "Gutachten bei Errichtungsmängeln, Minderertrag und Schadensfällen an PV-Anlagen",
+      "Technische Diagnosen vor Ort: Thermografie, Kennlinienmessung, Elektrolumineszenz",
       "Risikobewertung, Dokumentenprüfung und Regulatorik-Beratung",
-      "Beratung zu Reparierbarkeit, Sicherheit und Ertragsoptimierung",
+      "Baubegleitende Abnahme von PV-Neuanlagen und unabhängige Versicherungsgutachten",
+      "Beratung zu Sicherheit, Reparierbarkeit und Ertragsoptimierung",
     ],
   },
   {
     date: "seit 07/2023",
-    title: "Senior Expert BMS | Battery | Validation",
+    title: "Senior Expert | BMS | Battery | Validation",
     subtitle: "PEM Motion GmbH, Aachen",
     items: [
-      "Entwicklung modularer Batterie- und Energiespeichersysteme (LFP/Na-Ion)",
-      "Tests und Validierung nach UN 38.3, ECE R100, UL 991 & UL 1998",
-      "Safety Engineer für Funktionale Sicherheit (ISO 26262 / IEC 61508)",
-      "Technischer Projektleiter internationaler Energie- und BMS-Projekte",
+      "Entwicklung modularer Batterie- und Energiespeichersysteme (LFP, NMC, Na-Ion) für E-Mobilität und stationäre Anwendungen",
+      "Tests und Validierung nach IEC 61508, ISO 26262, IEC 62619, IEC 62933-5-2, UN 38.3, UN ECE R100, UL 991 & UL 1998",
+      "Safety Manager für Funktionale Sicherheit (ISO 26262 / IEC 61508) und Automotive Cyber Security (ISO/SAE 21434)",
+      "BMS-Anforderungsmanagement und Qualitätssicherung (ISO 9001, IATF 16949, VDA 6.3) inkl. Informationssicherheit (ISO 27001, TISAX)",
+      "Technischer Projektleiter internationaler Energie-, BESS- und BMS-Projekte",
     ],
   },
   {
     date: "10/2020 – 06/2023",
-    title: "System Development Manager",
+    title: "Head of Safety & Development | BMS | Battery Systems",
     subtitle: "Futavis GmbH, Aachen",
     items: [
-      "Technische Anforderungsspezifikation für BMS & Batteriesysteme",
-      "Safety Manager: Funktionale Sicherheit (ISO 26262) & Cybersecurity (ISO/SAE 21434)",
+      "Technische Anforderungsspezifikation für BMS & Batteriesysteme (LFP, NMC) als Schnittstelle zwischen Entwicklung, Kunden und Geschäftsführung",
+      "Safety Manager: Funktionale Sicherheit (ISO 26262 / IEC 61508) & Automotive Cyber Security (ISO/SAE 21434)",
       "Qualitätsmanagement nach ISO 9001, IATF 16949 & Lieferantenaudits (VDA 6.3)",
+      "Technischer Pivot für BMS-Anforderungen in Polarion ALM – von der Kundenspezifikation bis zur Verifikation",
     ],
   },
   {
     date: "10/2019 – 05/2020",
-    title: "System Engineer – Batteriespeicher & E-Mobilität",
+    title: "Lead Engineer | Battery Systems | Cell-to-Storage",
     subtitle: "E-Stream Energy GmbH & Co. KG, Mönchengladbach",
     items: [
-      "Entwicklung und Konstruktion modularer Batteriespeichersysteme (19''-Rack, marktreif)",
-      "HV-Prüfung und Installation von Batteriesystemen in Elektrofahrzeugen",
-      "Risikobewertung für Batteriekonstruktion und HV-Sicherheitskonzepte",
+      "Entwicklung und Konstruktion modularer Batteriespeichersysteme (19''-Rack, marktreif) für stationäre Anwendungen",
+      "HV-Prüfung und Installation von Batteriesystemen in Elektrofahrzeugen inkl. Inbetriebnahme",
+      "Risikobewertung für Batteriekonstruktion und HV-Sicherheitskonzepte (DGUV, ISO, VDE)",
+      "Benchmarking von Batteriezellen und -modulen inkl. gewichteter Nutzwertanalyse zur Zellauswahl",
     ],
   },
 ];
@@ -130,7 +134,7 @@ const whyCards = [
       </svg>
     ),
     title: "Fast 10 Jahre Funktionale Sicherheit",
-    desc: "Seit 2016 arbeite ich kontinuierlich mit den Sicherheitsnormen ISO 26262 und IEC 61508 – von der Gefahrenanalyse (HARA) über FMEA/FTA bis zur Safety-Case-Dokumentation. Diese sicherheitstechnische Denkweise fließt in jedes Gutachten ein: Ich bewerte PV-Anlagen nicht nur nach Ertrag, sondern systematisch nach Risiko- und Schutzkonzepten.",
+    desc: "Seit 2016 arbeite ich kontinuierlich mit den Sicherheitsnormen ISO 26262 und IEC 61508 – von der Gefahrenanalyse (HARA) über FMEA/FTA bis zur Safety-Case-Dokumentation. Diese sicherheitstechnische Denkweise fließt in jedes Gutachten ein: Ich bewerte PV-Anlagen und Batteriespeicher nicht nur nach Ertrag, sondern systematisch nach Risiko-, Brand- und Schutzkonzepten.",
   },
   {
     icon: (
@@ -152,7 +156,7 @@ const whyCards = [
       </svg>
     ),
     title: "BMS- & Batterieexperte",
-    desc: "Entwicklung, Integration und Validierung von Batteriemanagementsystemen (LFP, Na-Ion) nach UN 38.3, ECE R100, UL 991 und UL 1998 – insbesondere für PV-Speichersysteme habe ich ein tiefgehendes Verständnis der Zellchemie, Ladelogik und BMS-Kommunikation, das über das Prüfschema klassischer PV-Gutachter hinausgeht.",
+    desc: "Entwicklung, Integration und Validierung von Batteriemanagementsystemen (BMS bzgl. LFP, NMC, Na-Ion) für PV-Speichersysteme und BESS nach IEC 60364-7-712, IEC 62619, IEC 62933-5-2, IEC 62109 und IEC 62485-5 – durch mein tiefgehendes Verständnis der Zellchemie, Ladelogik, BMS-Kommunikation und Systemarchitektur geht meine Analysetiefe weit über das Prüfschema klassischer PV-Gutachter hinaus.",
   },
   {
     icon: (
@@ -174,7 +178,7 @@ const whyCards = [
       </svg>
     ),
     title: "Ingenieur aus Überzeugung",
-    desc: "M.Sc. Elektrotechnik (RWTH Aachen), Schwerpunkt Energietechnik – mit internationaler Forschungserfahrung (Taiwan, Österreich). Ich bringe nicht nur Normenwissen mit, sondern kann Fehlerbilder auf Komponentenebene analysieren: von der Thermografie über I-V-Kennlinien bis hin zur FEM-Simulation.",
+    desc: "M.Sc. Elektrotechnik (RWTH Aachen), Schwerpunkt Energietechnik – mit internationaler Erfahrung in Leistungselektronik und Energiesystemen (Taiwan, Österreich). Ich bringe nicht nur Normenwissen mit, sondern kann Fehler und Schäden an PV-Anlagen bis auf Komponentenebene analysieren: von der Thermografie über Elektrolumineszenz bis hin zur Kennlinienmessung.",
   },
 ];
 
@@ -202,11 +206,18 @@ function UeberMich() {
                   Sachverständiger für Photovoltaikanlagen
                 </p>
                 <p className="mb-8 max-w-lg text-muted-foreground leading-relaxed">
-                  Als unabhängiger, nach DIN EN ISO/IEC 17024 zertifizierter
-                  Sachverständiger für Photovoltaikanlagen verbinde ich über ein
-                  Jahrzehnt Erfahrung in Energietechnik, Batteriesicherheit und
-                  funktionaler Sicherheit mit der Fähigkeit, komplexe technische
-                  Sachverhalte verständlich und praxisnah aufzubereiten.
+                  Als nach ISO/IEC 17024 zertifizierter Sachverständiger für
+                  Photovoltaikanlagen bringe ich über ein Jahrzehnt
+                  Ingenieurserfahrung aus BMS-Entwicklung, Batteriesicherheit
+                  und funktionaler Sicherheit mit – als BMS-Engineer, Safety
+                  Manager und TÜV-abgenommener Elektrofahrzeug-Konstrukteur. Ich
+                  bewerte PV-Anlagen und Speichersysteme nicht nur nach Ertrag,
+                  sondern systematisch nach Risiko- und Schutzkonzepten. Vor Ort
+                  setze ich Thermografie, Isolationsmessung, Kennlinienmessung
+                  und Elektrolumineszenz ein. Mein tiefes Verständnis von
+                  Zellchemie, BMS-Kommunikation und Systemarchitektur ermöglicht
+                  eine Analyse bis auf Komponentenebene – normgerecht
+                  dokumentiert.
                 </p>
                 <div className="flex flex-wrap gap-3">
                   <Button asChild size="lg">
@@ -349,7 +360,9 @@ function UeberMich() {
               Karosserie bis zur bestandenen TÜV-Einzelbetriebserlaubnis (EBE)
               für den öffentlichen Straßenverkehr. Dieses Projekt vereint
               Systemarchitektur, Hochvoltsicherheit, BMS-Engineering und
-              regulatorische Dokumentation auf höchstem Niveau.
+              regulatorische Dokumentation auf höchstem Niveau – Kompetenzen,
+              die ich heute unmittelbar in meine Arbeit als Sachverständiger für
+              Photovoltaikanlagen und Batteriespeichersysteme einbringe.
             </p>
 
             <div className="grid gap-12 lg:grid-cols-2">
@@ -359,10 +372,11 @@ function UeberMich() {
                 </h3>
                 <ul className="mb-8 space-y-2">
                   {[
-                    "Eigenständige Entwicklung der vollständigen EV-Antriebsarchitektur",
+                    "Eigenständige Entwicklung der vollständigen EV-Antriebsarchitektur – vom Konzept über die Auslegung bis zur Umsetzung",
                     "E-Motor-Auswahl, Integration und Abstimmung mit Inverter & DC/DC-Wandler",
-                    "Konstruktion eines maßgeschneiderten Hochvolt-Batteriesystems mit Sicherheitskonzept",
-                    "BMS-Auslegung, Parametrierung, Kalibrierung und Validierung (inkl. Bluetooth-Monitoring)",
+                    "Konstruktion eines maßgeschneiderten Hochvolt-Batteriesystems mit HV-Sicherheitskonzept nach DGUV und VDE",
+                    "Umrüstung der analogen Tankanzeige auf batteriebasierte SoC-Anzeige und Integration einer Bluetooth-Schnittstelle zur mobilen HV-Batterieüberwachung via App",
+                    "BMS-Auslegung, Parametrierung, Kalibrierung und Validierung",
                   ].map((li) => (
                     <li
                       className="relative pl-5 text-[15px] text-[var(--dark-surface-foreground)]/80 leading-[1.6]"
@@ -378,9 +392,9 @@ function UeberMich() {
                 </h3>
                 <ul className="space-y-2">
                   {[
-                    "Integration von Ladeelektronik (OBC), optimiert für öffentliche und private Ladeinfrastruktur",
+                    "Integration von Ladeelektronik (OBC) mit CCS-Ladekommunikation nach IEC 61851, optimiert für öffentliche und private Ladeinfrastruktur",
                     "Komplettes E/E-Redesign mit CAN-Kommunikation und HV-Freigaben",
-                    "Vollständige technische Dokumentation für die TÜV-Prüfung",
+                    "Vollständige technische Dokumentation für die TÜV-Prüfung nach §21 StVZO",
                     "Erfolgreiche TÜV-EBE-Abnahme – Nachweis höchster System-, Sicherheits- und Integrationskompetenz",
                   ].map((li) => (
                     <li
@@ -507,17 +521,20 @@ function UeberMich() {
                     items: [
                       "Thermografie (Modulhotspots, Anschlussfehler, Dioden-Defekte)",
                       "I-V-Kennlinienmessung & Stringanalyse",
+                      "Elektrolumineszenz-Prüfung (Mikrorisse, Zellbrüche, inaktive Zellbereiche)",
                       "Isolationsmessung & Erdungsprüfung",
-                      "Schutzmaßnahmenprüfung nach VDE 0100-712",
+                      "Schutzmaßnahmenprüfung nach VDE 0100-712 (IEC 60364-7-712)",
                       "Ertragsdiagramm- und Monitoring-Datenanalyse",
                     ],
                   },
                   {
                     title: "Normen & Standards",
                     items: [
-                      "VDE 0100-712, DIN EN 62446-1, IEC 62933/62619",
+                      "IEC 60364-7-712 (VDE 0100-712), IEC 62446-1, IEC 61730, IEC 61215",
+                      "IEC 62619, IEC 63056, IEC 62933-5-2, IEC 62485-5",
                       "ISO 26262, IEC 61508, ISO/SAE 21434",
-                      "UN 38.3, ECE R100, DGUV-Regeln",
+                      "UN 38.3, UN ECE R100, DGUV Information 200-005",
+                      "VDE-AR-N 4105, VDE-AR-E 2510-50",
                     ],
                   },
                 ].map((group) => (
@@ -551,17 +568,18 @@ function UeberMich() {
                       "Matlab/Simulink, CANoe/CANape",
                       "Altium Designer, LTSpice, PSpice",
                       "ANSYS FEM, LabView",
-                      "PV*SOL, PVsyst – PV-Analyse & Simulation",
+                      "PV*SOL, PVsyst – PV-Ertragsanalyse & Speichersimulation",
+                      "Monitoring-Plattformen: Fronius Solar.web, SMA Sunny Portal, SolarEdge, Hoymiles S-Miles",
                     ],
                   },
                   {
                     title: "Spezielle Expertise",
                     items: [
-                      "Bewertung Moduldegradation (LID/LeTID)",
-                      "Analyse typischer Fehlerbilder (PID, Hotspots, Delamination, Mikrorisse)",
-                      "Bewertung Batteriespeicher im PV-Kontext (Zellchemie, BMS-Logik, Ladeprofile)",
+                      "Bewertung Moduldegradation (LID/LeTID) und Alterungsanalyse",
+                      "Analyse typischer Fehlerbilder (PID, Hotspots, Delamination, Mikrorisse, Schneckenspuren)",
+                      "Bewertung Batteriespeicher im PV-Kontext (Zellchemie, BMS-Logik, Ladeprofile, Thermomanagement)",
                       "Risikobasierte Entscheidungsmodelle (FMEA, FTA, HARA)",
-                      "Interpretation Monitoring-Systeme (Fronius, SMA, Hoymiles, SolarEdge)",
+                      "Interpretation Monitoring-Systeme (Fronius, SMA, Hoymiles, SolarEdge) und Ertragsabweichungsanalyse",
                     ],
                   },
                 ].map((group) => (

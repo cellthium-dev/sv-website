@@ -44,3 +44,4 @@ create new site for the website
 [x] update link to directly open the cal.eu page when opening the termin vereinbaren
 [x] update pages for the marquee
 [x] delete full address
+[x] update about me page
