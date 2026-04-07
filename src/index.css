@@ -3,18 +3,23 @@
 @import "shadcn/tailwind.css";
 
 /* Brand fonts */
-@import "@fontsource-variable/syne";
-@import "@fontsource/dm-sans/400.css";
-@import "@fontsource/dm-sans/500.css";
-@import "@fontsource/dm-sans/600.css";
+@import "@fontsource-variable/montserrat";
+@import "@fontsource/poppins";
+@import "@fontsource/ibm-plex-mono";
 
 @custom-variant dark (&:is(.dark *));
 
 /* ─── Theme tokens ───────────────────────────────────────────── */
 @theme inline {
+  --font-montserrat: Montserrat Variable;
+  --font-poppins: Poppins;
+  --font-ibm-plex-mono: IBM Plex Mono;
+
   /* Typography */
-  --font-heading: "Syne Variable", sans-serif;
-  --font-sans: "DM Sans", sans-serif;
+  --font-heading: var(--font-montserrat);
+  --font-sans: var(--font-poppins);
+  --font-mono: var(--font-ibm-plex-mono);
+  --font-body: var(--font-poppins);
 
   /* Semantic color aliases */
   --color-background: var(--background);
@@ -178,6 +183,42 @@
   h5,
   h6 {
     font-family: var(--font-heading);
+  }
+  h1 {
+    font-family: var(--font-heading);
+    font-size: 2.25rem;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+  }
+  h2 {
+    font-family: var(--font-heading);
+    font-size: 1.875rem;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    font-weight: 600;
+  }
+  h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+  }
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.01em;
+  }
+  body,
+  p {
+    font-family: var(--font-body);
+    line-height: 1.6;
+  }
+  code,
+  pre {
+    font-family: var(--font-mono);
   }
 }
 

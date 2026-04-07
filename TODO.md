@@ -37,3 +37,7 @@ create new site for the website
 [ ] [wissensbereich] use header with multiple points
 [ ] [contact] logic for contact selection
 [ ] [tools] ai chatbot
+
+### 07.04.2025
+[x] update font family
+[ ] add images
