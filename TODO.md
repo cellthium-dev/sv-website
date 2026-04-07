@@ -42,4 +42,4 @@ create new site for the website
 [x] update font family
 [x] update images for the bmw project
 [x] update link to directly open the cal.eu page when opening the termin vereinbaren
-[ ] update pages for the marquee
+[x] update pages for the marquee

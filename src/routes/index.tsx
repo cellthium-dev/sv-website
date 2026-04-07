@@ -200,17 +200,14 @@ import {
   MarqueeItem,
 } from "@/components/kibo-ui/marquee";
 
-const MARQUEE_ITEMS = [
-  "PV-Aufdachanlage auf Einfamilienhaus",
-  "Thermografie-Aufnahme mit Hotspot",
-  "Großflächenanlage – Drohnenperspektive",
-  "Sachverständiger bei Vor-Ort-Prüfung",
-  "Nahaufnahme Modulreihen",
-  "Wechselrichter-Installation",
-  "Elektrolumineszenz-Prüfung",
-  "Flachdachanlage mit Aufständerung",
-  "Dachmontage-Detail Kabelführung",
-  "PV-Anlage im Abendlicht",
+const MARQUEE_IMAGES = [
+  { src: "/marquee/marquee_1.png", alt: "PV-Anlage Praxisaufnahme 1" },
+  { src: "/marquee/marquee_2.png", alt: "PV-Anlage Praxisaufnahme 2" },
+  { src: "/marquee/marquee_3.png", alt: "PV-Anlage Praxisaufnahme 3" },
+  { src: "/marquee/marquee_4.png", alt: "PV-Anlage Praxisaufnahme 4" },
+  { src: "/marquee/marquee_5.png", alt: "PV-Anlage Praxisaufnahme 5" },
+  { src: "/marquee/marquee_6.png", alt: "PV-Anlage Praxisaufnahme 6" },
+  { src: "/marquee/marquee_7.png", alt: "PV-Anlage Praxisaufnahme 7" },
 ];
 
 function GalleryMarquee() {
@@ -220,31 +217,15 @@ function GalleryMarquee() {
         <MarqueeFade side="left" />
         <MarqueeFade side="right" />
         <MarqueeContent speed={40}>
-          {MARQUEE_ITEMS.map((label) => (
-            <MarqueeItem key={label}>
-              <div className="flex h-28 w-52 flex-col items-center justify-center gap-2 rounded-xl border border-border bg-card text-center">
-                <svg
-                  className="size-7 text-muted-foreground/40"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={1.5}
-                  viewBox="0 0 24 24"
-                >
-                  <title>{label}</title>
-                  <path
-                    d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                <span className="px-3 text-muted-foreground/50 text-xs leading-tight">
-                  {label}
-                </span>
+          {MARQUEE_IMAGES.map(({ src, alt }) => (
+            <MarqueeItem key={src}>
+              <div className="h-36 w-60 overflow-hidden rounded-xl border border-border">
+                <img
+                  alt={alt}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                  src={src}
+                />
               </div>
             </MarqueeItem>
           ))}
@@ -451,14 +432,26 @@ function ContactCTA() {
             asChild
             className="h-12 bg-[var(--solar)] px-8 font-semibold text-[var(--solar-foreground)] text-base hover:bg-[var(--solar)]/90"
           >
-            <Link to="/kontakt">Anfrage senden</Link>
+            <Link
+              hash="kontakt-formular"
+              search={{ tab: "anfrage" }}
+              to="/kontakt"
+            >
+              Anfrage senden
+            </Link>
           </Button>
           <Button
             asChild
             className="h-12 border-white/30 bg-transparent px-8 font-semibold text-base text-white hover:border-white/50 hover:bg-white/10"
             variant="outline"
           >
-            <Link to="/kontakt">Termin buchen</Link>
+            <Link
+              hash="kontakt-formular"
+              search={{ tab: "termin" }}
+              to="/kontakt"
+            >
+              Termin buchen
+            </Link>
           </Button>
         </div>
         <p className="text-sm text-white tracking-wide">
