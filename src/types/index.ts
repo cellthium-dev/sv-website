@@ -37,18 +37,30 @@ export type TimelineItem = {
 };
 
 export type FormData = {
+  // Step 1 – Anliegen
   requestType: string;
+  // Step 2 – Anlage
   customerType: string;
+  zip: string;
+  kwp: string;
+  baujahr: string;
+  // Context-specific Anlage fields
+  aktenzeichen: string;
+  schadenstag: string;
+  installationsart: string;
+  speichertyp: string;
+  gegenstand: string;
+  themenfeld: string;
+  // Step 3 – Details
   description: string;
+  // Step 4 – Kontakt
   firstName: string;
   lastName: string;
-  company?: string;
+  company: string;
   email: string;
   phone: string;
-  street?: string;
-  zip?: string;
-  city?: string;
-  preferredTime?: string;
+  contactMethod: string;
+  preferredTime: string;
   privacy: boolean;
   newsletter: boolean;
 };

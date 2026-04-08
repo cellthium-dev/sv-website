@@ -8,7 +8,7 @@ import {
   PhoneIcon,
   SendIcon,
 } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -26,7 +26,9 @@ import { cn } from "@/lib/utils";
 import type { FormData } from "../types";
 import { Checkbox } from "./ui/checkbox";
 
-const STEPS = ["Anliegen", "Details", "Kontaktdaten", "Bestätigung"];
+// ─── Constants ───────────────────────────────────────────────────────────────
+
+const STEPS = ["Anliegen", "Anlage", "Details", "Kontakt", "Bestätigung"];
 
 const REQUEST_TYPES = [
   {
@@ -83,22 +85,62 @@ const PREFERRED_TIMES = [
   { value: "evening", label: "Abend (nach 17 Uhr)" },
 ];
 
+const CONTACT_METHODS = [
+  { value: "telefon", label: "Telefon" },
+  { value: "email", label: "E-Mail" },
+  { value: "whatsapp", label: "WhatsApp / Signal" },
+  { value: "egal", label: "Keine Präferenz" },
+];
+
+// Dynamic description placeholder per concern
+const DESCRIPTION_PLACEHOLDERS: Record<string, string> = {
+  fehlerdiagnose:
+    "Beschreiben Sie kurz das beobachtete Problem, z.\u00A0B. sichtbare Schäden, Fehlermeldungen, Ertragsverlauf\u2026",
+  ertragsminderung:
+    "Wie äußert sich die Ertragsminderung? Seit wann besteht die Abweichung? Liegen Monitoring-Daten vor?",
+  anlagenabnahme:
+    "Um welches Projekt handelt es sich? Wann ist die Inbetriebnahme geplant?",
+  versicherungsschaden:
+    "Was ist passiert? Beschreiben Sie den Schadenhergang und sichtbare Schäden.",
+  batteriespeicher:
+    "Welches Speichersystem ist betroffen? Welche Symptome oder Fragen haben Sie?",
+  zweitmeinung:
+    "Welche Punkte im bestehenden Gutachten sehen Sie kritisch? Was ist der Streitgegenstand?",
+  beratung: "Beschreiben Sie Ihr Beratungsanliegen oder Projekt.",
+};
+
+// File upload rules (matching reference app.js)
+const ALLOWED_FILE_TYPES = ["application/pdf", "image/jpeg", "image/png"];
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
+const MAX_FILES = 5;
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const EMPTY_FORM: FormData = {
   requestType: "",
   customerType: "",
+  zip: "",
+  kwp: "",
+  baujahr: "",
+  aktenzeichen: "",
+  schadenstag: "",
+  installationsart: "",
+  speichertyp: "",
+  gegenstand: "",
+  themenfeld: "",
   description: "",
   firstName: "",
   lastName: "",
   company: "",
   email: "",
   phone: "",
-  street: "",
-  zip: "",
-  city: "",
+  contactMethod: "",
   preferredTime: "",
   privacy: false,
   newsletter: false,
 };
+
+// ─── Helpers ─────────────────────────────────────────────────────────────────
 
 const getRequestTypeLabel = (v: string) =>
   REQUEST_TYPES.find((t) => t.value === v)?.label ?? v;
@@ -107,10 +149,16 @@ const getCustomerTypeLabel = (v: string) =>
   CUSTOMER_TYPES.find((t) => t.value === v)?.label ?? v;
 
 const isCompanyType = (v: string) =>
-  v === "unternehmen" ||
-  v === "installateur" ||
-  v === "rechtsanwalt" ||
-  v === "vermieter";
+  ["unternehmen", "installateur", "rechtsanwalt", "vermieter"].includes(v);
+
+// Concerns that show the "Installateur kontaktiert?" checkbox in Details
+const INSTALLER_CHECKBOX_CONCERNS = [
+  "fehlerdiagnose",
+  "ertragsminderung",
+  "zweitmeinung",
+];
+
+// ─── Step indicator ───────────────────────────────────────────────────────────
 
 function StepIndicatorItem({
   label,
@@ -127,24 +175,19 @@ function StepIndicatorItem({
 }) {
   const done = currentStep > step;
   const active = currentStep === step;
-  let circleClass: string;
-  if (done) {
-    circleClass = "border-primary bg-primary text-primary-foreground";
-  } else if (active) {
-    circleClass = "border-primary bg-background text-primary";
-  } else {
-    circleClass = "border-border bg-background text-muted-foreground";
-  }
-  let labelClass: string;
-  if (active) {
-    labelClass = "text-primary";
-  } else if (done) {
-    labelClass = "text-foreground";
-  } else {
-    labelClass = "text-muted-foreground";
-  }
+  const circleClass = done
+    ? "border-primary bg-primary text-primary-foreground"
+    : active
+      ? "border-primary bg-background text-primary"
+      : "border-border bg-background text-muted-foreground";
+  const labelClass = active
+    ? "text-primary"
+    : done
+      ? "text-foreground"
+      : "text-muted-foreground";
+
   return (
-    <div className="flex flex-1 items-center" key={step}>
+    <div className="flex flex-1 items-center">
       <div className="flex flex-col items-center gap-1.5">
         <div
           className={cn(
@@ -158,82 +201,213 @@ function StepIndicatorItem({
           {label}
         </span>
       </div>
-      {index < totalSteps - 1 ? (
+      {index < totalSteps - 1 && (
         <div
           className={cn(
             "mx-2 h-px flex-1 transition-colors",
             done ? "bg-primary" : "bg-border"
           )}
         />
-      ) : null}
+      )}
     </div>
   );
 }
+
+// ─── kWp slider ──────────────────────────────────────────────────────────────
+
+function KwpSlider({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  const num = Number.parseFloat(value) || 0;
+
+  const handleNumber = (raw: string) => {
+    const clamped = Math.min(1000, Math.max(0, Number.parseFloat(raw) || 0));
+    onChange(raw === "" ? "" : String(clamped));
+  };
+
+  const handleRange = (raw: string) => {
+    onChange(raw);
+  };
+
+  return (
+    <div className="flex flex-col gap-2">
+      <div className="flex items-center gap-3">
+        <Input
+          className="h-8 w-1/2"
+          max="1000"
+          min="0"
+          onChange={(e) => handleNumber(e.target.value)}
+          placeholder="z. B. 10"
+          step="0.5"
+          type="number"
+          value={value}
+        />
+        <span className="font-semibold text-primary text-sm tabular-nums">
+          {num > 0 ? `${num} kWp` : "–"}
+        </span>
+      </div>
+      <input
+        className="h-2 w-full cursor-pointer accent-primary"
+        max="100"
+        min="0"
+        onChange={(e) => handleRange(e.target.value)}
+        step="0.5"
+        type="range"
+        value={num}
+      />
+      <div className="flex justify-between text-muted-foreground text-xs">
+        <span>0 kWp</span>
+        <span>50 kWp</span>
+        <span>100 kWp</span>
+      </div>
+    </div>
+  );
+}
+
+// ─── Nav buttons ─────────────────────────────────────────────────────────────
+
+function NavButtons({
+  onPrev,
+  onNext,
+  nextDisabled = false,
+  isLast = false,
+}: {
+  onPrev?: () => void;
+  onNext?: () => void;
+  nextDisabled?: boolean;
+  isLast?: boolean;
+}) {
+  return (
+    <div
+      className={cn("flex pt-2", onPrev ? "justify-between" : "justify-end")}
+    >
+      {onPrev && (
+        <Button
+          className="px-6 font-semibold"
+          onClick={onPrev}
+          type="button"
+          variant="outline"
+        >
+          <ChevronLeftIcon data-icon="inline-start" />
+          Zurück
+        </Button>
+      )}
+      {isLast ? (
+        <Button
+          className="gap-2 bg-solar px-6 font-bold text-solar-foreground hover:brightness-95"
+          disabled={nextDisabled}
+          type="submit"
+        >
+          <SendIcon className="size-4" />
+          Anfrage absenden
+        </Button>
+      ) : (
+        <Button
+          className="px-6 font-semibold"
+          disabled={nextDisabled}
+          onClick={onNext}
+          type="button"
+        >
+          Weiter
+          <ChevronRightIcon data-icon="inline-end" />
+        </Button>
+      )}
+    </div>
+  );
+}
+
+// ─── Main component ───────────────────────────────────────────────────────────
 
 export default function ContactForm() {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>(EMPTY_FORM);
   const [submitted, setSubmitted] = useState(false);
-  const [validationError, setValidationError] = useState("");
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+  const [emailTouched, setEmailTouched] = useState(false);
+  const [installerContacted, setInstallerContacted] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const updateField = (key: keyof FormData, value: string | boolean) => {
+  const update = (key: keyof FormData, value: string | boolean) =>
     setFormData((prev) => ({ ...prev, [key]: value }));
+
+  const isEmailValid = EMAIL_REGEX.test(formData.email.trim());
+
+  // PLZ: numeric-only, max 5 digits
+  const handleZip = (raw: string) =>
+    update("zip", raw.replace(/[^0-9]/g, "").slice(0, 5));
+
+  // File upload handler with type/size/count/duplicate guards
+  const handleFiles = (list: FileList | null) => {
+    if (!list) return;
+    setUploadedFiles((prev) => {
+      const next = [...prev];
+      for (const file of Array.from(list)) {
+        if (next.length >= MAX_FILES) break;
+        if (!ALLOWED_FILE_TYPES.includes(file.type)) continue;
+        if (file.size > MAX_FILE_SIZE) continue;
+        if (next.some((f) => f.name === file.name)) continue;
+        next.push(file);
+      }
+      return next;
+    });
   };
 
-  const validateStep = (step: number): boolean => {
-    if (step === 1) {
-      return formData.requestType !== "" && formData.customerType !== "";
-    }
-    if (step === 2) {
-      return formData.description.trim() !== "";
-    }
-    if (step === 3) {
+  const removeFile = (i: number) =>
+    setUploadedFiles((prev) => prev.filter((_, idx) => idx !== i));
+
+  // Per-step validation
+  const isStepValid = (step: number): boolean => {
+    if (step === 1) return formData.requestType !== "";
+    if (step === 2)
+      return formData.customerType !== "" && formData.zip.length === 5;
+    if (step === 3) return formData.description.trim().length >= 20;
+    if (step === 4)
       return (
         formData.firstName.trim() !== "" &&
         formData.lastName.trim() !== "" &&
-        formData.email.trim() !== "" &&
+        isEmailValid &&
         formData.phone.trim() !== "" &&
         formData.privacy
       );
-    }
     return true;
   };
 
-  const nextStep = () => {
-    if (!validateStep(currentStep)) {
-      setValidationError("Bitte füllen Sie alle Pflichtfelder aus.");
-      return;
-    }
-    setValidationError("");
-    if (currentStep < 4) {
+  const goNext = () => {
+    if (isStepValid(currentStep) && currentStep < STEPS.length) {
       setCurrentStep((s) => s + 1);
     }
   };
 
-  const prevStep = () => {
-    if (currentStep > 1) {
-      setCurrentStep((s) => s - 1);
-    }
+  const goPrev = () => {
+    if (currentStep > 1) setCurrentStep((s) => s - 1);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isStepValid(4)) return;
     setSubmitted(true);
+    setUploadedFiles([]);
+    setInstallerContacted(false);
+    setEmailTouched(false);
     setFormData(EMPTY_FORM);
     setCurrentStep(1);
   };
 
   return (
     <section
-      className="w-full scroll-mt-60 bg-muted/30 p-10 md:scroll-mt-0 md:py-20"
+      className="w-full scroll-mt-60 bg-muted/30 md:scroll-mt-0 md:py-10"
       id="kontakt"
     >
       <div className="section-container">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_320px]">
-          {/* Form card */}
+          {/* ── Form card ── */}
           <div className="min-w-0 rounded-2xl border border-border bg-card p-6 md:p-8">
             {submitted ? (
-              /* Success state */
+              /* Success */
               <div className="flex flex-col items-center justify-center gap-4 py-16 text-center">
                 <div className="flex size-16 items-center justify-center rounded-full bg-primary/10 text-primary">
                   <CheckIcon className="size-8" />
@@ -259,29 +433,21 @@ export default function ContactForm() {
             ) : (
               <>
                 {/* Step indicator */}
-                <div className="mb-8">
-                  <div className="mb-3 flex items-center justify-between">
-                    {STEPS.map((label, i) => (
-                      <StepIndicatorItem
-                        currentStep={currentStep}
-                        index={i}
-                        key={label}
-                        label={label}
-                        step={i + 1}
-                        totalSteps={STEPS.length}
-                      />
-                    ))}
-                  </div>
+                <div className="mb-8 flex items-center justify-between">
+                  {STEPS.map((label, i) => (
+                    <StepIndicatorItem
+                      currentStep={currentStep}
+                      index={i}
+                      key={label}
+                      label={label}
+                      step={i + 1}
+                      totalSteps={STEPS.length}
+                    />
+                  ))}
                 </div>
 
-                {validationError ? (
-                  <p className="mb-4 rounded-lg bg-destructive/10 px-4 py-2 text-destructive text-sm">
-                    {validationError}
-                  </p>
-                ) : null}
-
                 <form onSubmit={handleSubmit}>
-                  {/* Step 1 */}
+                  {/* ── Step 1: Anliegen ── */}
                   {currentStep === 1 && (
                     <div className="flex animate-fadeIn flex-col gap-6">
                       <div>
@@ -292,7 +458,7 @@ export default function ContactForm() {
                           Was können wir für Sie tun?
                         </h3>
                         <p className="mt-1 text-muted-foreground text-sm">
-                          Wählen Sie die Art Ihrer Anfrage aus.{" "}
+                          Wählen Sie die Art Ihrer Anfrage.{" "}
                           <span className="text-destructive">*</span>
                         </p>
                       </div>
@@ -307,7 +473,7 @@ export default function ContactForm() {
                                 : "border-border bg-background hover:border-primary/40 hover:bg-muted/50"
                             )}
                             key={t.value}
-                            onClick={() => updateField("requestType", t.value)}
+                            onClick={() => update("requestType", t.value)}
                             type="button"
                           >
                             <span className="font-semibold text-foreground text-sm leading-snug">
@@ -320,107 +486,438 @@ export default function ContactForm() {
                         ))}
                       </div>
 
-                      <div className="flex flex-col gap-2">
-                        <Label htmlFor="customerType">
-                          Ich bin … <span className="text-destructive">*</span>
-                        </Label>
-                        <Select
-                          onValueChange={(v) => updateField("customerType", v)}
-                          value={formData.customerType}
-                        >
-                          <SelectTrigger className="h-11" id="customerType">
-                            <SelectValue placeholder="Bitte wählen..." />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {CUSTOMER_TYPES.map((t) => (
-                              <SelectItem key={t.value} value={t.value}>
-                                {t.label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <p className="rounded-lg border border-primary/20 bg-primary/5 px-4 py-2.5 text-muted-foreground text-xs">
-                        Für dringende Fälle: Express-Ferndiagnose ab 249 € –
-                        ohne Vor-Ort-Termin.
-                      </p>
-
-                      <div className="flex justify-end pt-2">
-                        <Button
-                          className="px-6 font-semibold"
-                          onClick={nextStep}
-                          type="button"
-                        >
-                          Weiter
-                          <ChevronRightIcon data-icon="inline-end" />
-                        </Button>
-                      </div>
+                      <NavButtons
+                        nextDisabled={!isStepValid(1)}
+                        onNext={goNext}
+                      />
                     </div>
                   )}
 
-                  {/* Step 2 */}
+                  {/* ── Step 2: Anlage ── */}
                   {currentStep === 2 && (
                     <div className="flex animate-fadeIn flex-col gap-6">
-                      <h3
-                        className="font-bold text-xl"
-                        style={{ fontFamily: "var(--font-heading)" }}
-                      >
-                        Details zu Ihrer Anfrage
-                      </h3>
+                      <div>
+                        <h3
+                          className="font-bold text-xl"
+                          style={{ fontFamily: "var(--font-heading)" }}
+                        >
+                          Angaben zur Anlage
+                        </h3>
+                        <p className="mt-1 text-muted-foreground text-sm">
+                          Helfen Sie uns, Ihre Situation besser einzuordnen.
+                        </p>
+                      </div>
 
+                      <div className="grid gap-4 sm:grid-cols-2">
+                        {/* Ich bin … */}
+                        <div className="flex flex-col gap-2">
+                          <Label htmlFor="customerType">
+                            Ich bin …{" "}
+                            <span className="text-destructive">*</span>
+                          </Label>
+                          <Select
+                            onValueChange={(v) => update("customerType", v)}
+                            value={formData.customerType}
+                          >
+                            <SelectTrigger className="h-8" id="customerType">
+                              <SelectValue placeholder="Bitte wählen…" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {CUSTOMER_TYPES.map((t) => (
+                                <SelectItem key={t.value} value={t.value}>
+                                  {t.label}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+
+                        {/* PLZ */}
+                        <div className="flex flex-col gap-2">
+                          <Label htmlFor="zip">
+                            PLZ des Standorts{" "}
+                            <span className="text-destructive">*</span>
+                          </Label>
+                          <Input
+                            className={cn(
+                              "h-8",
+                              formData.zip && formData.zip.length !== 5
+                                ? "border-destructive focus-visible:ring-destructive"
+                                : ""
+                            )}
+                            id="zip"
+                            inputMode="numeric"
+                            maxLength={5}
+                            onChange={(e) => handleZip(e.target.value)}
+                            placeholder="z. B. 52072"
+                            value={formData.zip}
+                          />
+                          {formData.zip && formData.zip.length !== 5 && (
+                            <p className="text-destructive text-xs">
+                              Bitte eine gültige 5-stellige PLZ eingeben.
+                            </p>
+                          )}
+                        </div>
+
+                        {/* kWp slider – spans both columns */}
+                        <div className="flex flex-col gap-2 sm:col-span-2">
+                          <Label>
+                            Anlagenleistung (kWp){" "}
+                            <span className="font-normal text-muted-foreground text-xs">
+                              (optional)
+                            </span>
+                          </Label>
+                          <KwpSlider
+                            onChange={(v) => update("kwp", v)}
+                            value={formData.kwp}
+                          />
+                        </div>
+
+                        {/* Baujahr */}
+                        <div className="flex flex-col gap-2">
+                          <Label htmlFor="baujahr">
+                            Baujahr der Anlage{" "}
+                            <span className="font-normal text-muted-foreground text-xs">
+                              (optional)
+                            </span>
+                          </Label>
+                          <Input
+                            className="h-8"
+                            id="baujahr"
+                            max={new Date().getFullYear()}
+                            min="1990"
+                            onChange={(e) => update("baujahr", e.target.value)}
+                            placeholder="z. B. 2018"
+                            type="number"
+                            value={formData.baujahr}
+                          />
+                        </div>
+
+                        {/* Context: single-field types sit in col 2 alongside Baujahr */}
+                        {formData.requestType === "anlagenabnahme" && (
+                          <div className="flex flex-col gap-2">
+                            <Label htmlFor="installationsart">
+                              Art der Installation
+                            </Label>
+                            <Select
+                              onValueChange={(v) =>
+                                update("installationsart", v)
+                              }
+                              value={formData.installationsart}
+                            >
+                              <SelectTrigger
+                                className="h-8"
+                                id="installationsart"
+                              >
+                                <SelectValue placeholder="Bitte wählen…" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="neuanlage">
+                                  Neuanlage
+                                </SelectItem>
+                                <SelectItem value="erweiterung">
+                                  Erweiterung
+                                </SelectItem>
+                                <SelectItem value="repowering">
+                                  Repowering
+                                </SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        )}
+
+                        {formData.requestType === "batteriespeicher" && (
+                          <div className="flex flex-col gap-2">
+                            <Label htmlFor="speichertyp">Speichertyp</Label>
+                            <Select
+                              onValueChange={(v) => update("speichertyp", v)}
+                              value={formData.speichertyp}
+                            >
+                              <SelectTrigger className="h-8" id="speichertyp">
+                                <SelectValue placeholder="Bitte wählen…" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="lithium-ionen">
+                                  Lithium-Ionen
+                                </SelectItem>
+                                <SelectItem value="blei-saeure">
+                                  Blei-Säure
+                                </SelectItem>
+                                <SelectItem value="sonstiges">
+                                  Sonstiges / Unbekannt
+                                </SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        )}
+
+                        {formData.requestType === "zweitmeinung" && (
+                          <div className="flex flex-col gap-2">
+                            <Label htmlFor="gegenstand">Streitgegenstand</Label>
+                            <Select
+                              onValueChange={(v) => update("gegenstand", v)}
+                              value={formData.gegenstand}
+                            >
+                              <SelectTrigger className="h-8" id="gegenstand">
+                                <SelectValue placeholder="Bitte wählen…" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="gewaehrleistung">
+                                  Gewährleistungsanspruch
+                                </SelectItem>
+                                <SelectItem value="versicherungsschaden">
+                                  Versicherungsschaden
+                                </SelectItem>
+                                <SelectItem value="mangelhafte-installation">
+                                  Mangelhafte Installation
+                                </SelectItem>
+                                <SelectItem value="sonstiges">
+                                  Sonstiges
+                                </SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        )}
+
+                        {formData.requestType === "beratung" && (
+                          <div className="flex flex-col gap-2">
+                            <Label htmlFor="themenfeld">Themenfeld</Label>
+                            <Select
+                              onValueChange={(v) => update("themenfeld", v)}
+                              value={formData.themenfeld}
+                            >
+                              <SelectTrigger className="h-8" id="themenfeld">
+                                <SelectValue placeholder="Bitte wählen…" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="due-diligence">
+                                  Due Diligence
+                                </SelectItem>
+                                <SelectItem value="projektbegleitung">
+                                  Projektbegleitung
+                                </SelectItem>
+                                <SelectItem value="repowering">
+                                  Repowering
+                                </SelectItem>
+                                <SelectItem value="sonstiges">
+                                  Sonstiges
+                                </SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        )}
+
+                        {/* Context: versicherungsschaden has 2 fields – each gets its own cell */}
+                        {formData.requestType === "versicherungsschaden" && (
+                          <>
+                            <div className="flex flex-col gap-2">
+                              <Label htmlFor="schadenstag">
+                                Schadenstag (Datum)
+                              </Label>
+                              <Input
+                                className="h-8"
+                                id="schadenstag"
+                                onChange={(e) =>
+                                  update("schadenstag", e.target.value)
+                                }
+                                type="date"
+                                value={formData.schadenstag}
+                              />
+                            </div>
+                            <div className="flex flex-col gap-2">
+                              <Label htmlFor="aktenzeichen">
+                                Aktenzeichen / Schadennummer{" "}
+                                <span className="font-normal text-muted-foreground text-xs">
+                                  (optional)
+                                </span>
+                              </Label>
+                              <Input
+                                className="h-8"
+                                id="aktenzeichen"
+                                onChange={(e) =>
+                                  update("aktenzeichen", e.target.value)
+                                }
+                                placeholder="z. B. VRS-2024-00123"
+                                value={formData.aktenzeichen}
+                              />
+                            </div>
+                          </>
+                        )}
+                      </div>
+
+                      <NavButtons
+                        nextDisabled={!isStepValid(2)}
+                        onNext={goNext}
+                        onPrev={goPrev}
+                      />
+                    </div>
+                  )}
+
+                  {/* ── Step 3: Details ── */}
+                  {currentStep === 3 && (
+                    <div className="flex animate-fadeIn flex-col gap-6">
+                      <div>
+                        <h3
+                          className="font-bold text-xl"
+                          style={{ fontFamily: "var(--font-heading)" }}
+                        >
+                          Beschreiben Sie Ihr Anliegen
+                        </h3>
+                        <p className="mt-1 text-muted-foreground text-sm">
+                          Je detaillierter, desto besser können wir Ihnen
+                          helfen.
+                        </p>
+                      </div>
+
+                      {/* Description with char counter */}
                       <div className="flex flex-col gap-2">
-                        <Label htmlFor="description">
-                          Beschreibung{" "}
-                          <span className="text-destructive">*</span>
-                        </Label>
+                        <div className="flex items-baseline justify-between">
+                          <Label htmlFor="description">
+                            Beschreibung{" "}
+                            <span className="text-destructive">*</span>
+                          </Label>
+                          <span
+                            className={cn(
+                              "text-xs tabular-nums",
+                              formData.description.length >= 20
+                                ? "text-emerald-600"
+                                : "text-muted-foreground"
+                            )}
+                          >
+                            {formData.description.length} / 20
+                          </span>
+                        </div>
                         <Textarea
                           className="field-sizing-fixed min-h-[160px] resize-y text-sm"
                           id="description"
                           onChange={(e) =>
-                            updateField("description", e.target.value)
+                            update("description", e.target.value)
                           }
-                          placeholder="Bitte beschreiben Sie Ihr Anliegen möglichst detailliert..."
+                          placeholder={
+                            DESCRIPTION_PLACEHOLDERS[formData.requestType] ??
+                            "Bitte beschreiben Sie Ihr Anliegen möglichst detailliert…"
+                          }
                           rows={6}
                           value={formData.description}
                         />
                         <p className="text-muted-foreground text-xs">
-                          Je detaillierter Ihre Beschreibung, desto besser
-                          können wir Ihnen helfen.
+                          Mindestens 20 Zeichen erforderlich.
                         </p>
                       </div>
 
-                      <div className="flex justify-between pt-2">
-                        <Button
-                          className="px-6 font-semibold"
-                          onClick={prevStep}
+                      {/* File upload */}
+                      <div className="flex flex-col gap-2">
+                        <Label>
+                          Anhänge{" "}
+                          <span className="font-normal text-muted-foreground text-xs">
+                            (optional – PDF, JPG, PNG · max. 10 MB · max. 5
+                            Dateien)
+                          </span>
+                        </Label>
+                        <button
+                          className="flex flex-col items-center gap-2 rounded-xl border border-border border-dashed bg-muted/30 px-4 py-6 text-center transition-colors hover:border-primary/40 hover:bg-primary/5"
+                          onClick={() => fileInputRef.current?.click()}
                           type="button"
-                          variant="outline"
                         >
-                          <ChevronLeftIcon data-icon="inline-start" />
-                          Zurück
-                        </Button>
-                        <Button
-                          className="px-6 font-semibold"
-                          onClick={nextStep}
-                          type="button"
-                        >
-                          Weiter
-                          <ChevronRightIcon data-icon="inline-end" />
-                        </Button>
+                          <span className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                            <svg
+                              className="size-5"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              viewBox="0 0 24 24"
+                            >
+                              <title>Hochladen</title>
+                              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                              <polyline points="17 8 12 3 7 8" />
+                              <line x1="12" x2="12" y1="3" y2="15" />
+                            </svg>
+                          </span>
+                          <span className="text-muted-foreground text-sm">
+                            Klicken zum Hochladen oder Dateien hierher ziehen
+                          </span>
+                        </button>
+                        <input
+                          accept=".pdf,.jpg,.jpeg,.png"
+                          className="hidden"
+                          multiple
+                          onChange={(e) => handleFiles(e.target.files)}
+                          ref={fileInputRef}
+                          type="file"
+                        />
+                        {uploadedFiles.length > 0 && (
+                          <div className="flex flex-wrap gap-2">
+                            {uploadedFiles.map((f, i) => (
+                              <div
+                                className="flex items-center gap-1.5 rounded-lg border border-border bg-muted/50 px-3 py-1.5 text-xs"
+                                key={f.name}
+                              >
+                                <span className="max-w-[160px] truncate text-foreground">
+                                  {f.name}
+                                </span>
+                                <span className="text-muted-foreground">
+                                  ({(f.size / 1024).toFixed(0)} KB)
+                                </span>
+                                <button
+                                  aria-label={`${f.name} entfernen`}
+                                  className="ml-1 text-muted-foreground hover:text-destructive"
+                                  onClick={() => removeFile(i)}
+                                  type="button"
+                                >
+                                  ×
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+                        )}
                       </div>
+
+                      {/* Installer checkbox for relevant concerns */}
+                      {INSTALLER_CHECKBOX_CONCERNS.includes(
+                        formData.requestType
+                      ) && (
+                        <div className="flex items-start gap-3 rounded-xl">
+                          <Checkbox
+                            checked={installerContacted}
+                            className="mt-0.5"
+                            id="installer"
+                            onCheckedChange={(v) => setInstallerContacted(!!v)}
+                          />
+                          <Label
+                            className="cursor-pointer font-normal text-sm leading-relaxed"
+                            htmlFor="installer"
+                          >
+                            Ich habe den Installateur bereits kontaktiert und
+                            keine zufriedenstellende Antwort erhalten.
+                          </Label>
+                        </div>
+                      )}
+
+                      <NavButtons
+                        nextDisabled={!isStepValid(3)}
+                        onNext={goNext}
+                        onPrev={goPrev}
+                      />
                     </div>
                   )}
 
-                  {/* Step 3 */}
-                  {currentStep === 3 && (
+                  {/* ── Step 4: Kontakt ── */}
+                  {currentStep === 4 && (
                     <div className="flex animate-fadeIn flex-col gap-5">
-                      <h3
-                        className="font-bold text-xl"
-                        style={{ fontFamily: "var(--font-heading)" }}
-                      >
-                        Ihre Kontaktdaten
-                      </h3>
+                      <div>
+                        <h3
+                          className="font-bold text-xl"
+                          style={{ fontFamily: "var(--font-heading)" }}
+                        >
+                          Ihre Kontaktdaten
+                        </h3>
+                        <p className="mt-1 text-muted-foreground text-sm">
+                          Pflichtfelder sind mit{" "}
+                          <span className="text-destructive">*</span> markiert.
+                        </p>
+                      </div>
 
                       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <div className="flex flex-col gap-2">
@@ -428,10 +925,9 @@ export default function ContactForm() {
                             Vorname <span className="text-destructive">*</span>
                           </Label>
                           <Input
-                            className="h-11"
                             id="firstName"
                             onChange={(e) =>
-                              updateField("firstName", e.target.value)
+                              update("firstName", e.target.value)
                             }
                             value={formData.firstName}
                           />
@@ -441,11 +937,8 @@ export default function ContactForm() {
                             Nachname <span className="text-destructive">*</span>
                           </Label>
                           <Input
-                            className="h-11"
                             id="lastName"
-                            onChange={(e) =>
-                              updateField("lastName", e.target.value)
-                            }
+                            onChange={(e) => update("lastName", e.target.value)}
                             value={formData.lastName}
                           />
                         </div>
@@ -455,101 +948,116 @@ export default function ContactForm() {
                         <div className="flex flex-col gap-2">
                           <Label htmlFor="company">Firma</Label>
                           <Input
-                            className="h-11"
                             id="company"
-                            onChange={(e) =>
-                              updateField("company", e.target.value)
-                            }
+                            onChange={(e) => update("company", e.target.value)}
                             value={formData.company}
                           />
                         </div>
                       )}
 
                       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                        {/* Email with real-time validation */}
                         <div className="flex flex-col gap-2">
                           <Label htmlFor="email">
                             E-Mail <span className="text-destructive">*</span>
                           </Label>
-                          <Input
-                            className="h-11"
-                            id="email"
-                            onChange={(e) =>
-                              updateField("email", e.target.value)
-                            }
-                            type="email"
-                            value={formData.email}
-                          />
+                          <div className="relative">
+                            <Input
+                              className={cn(
+                                "h-8 pr-9",
+                                emailTouched && formData.email
+                                  ? isEmailValid
+                                    ? "border-emerald-500 focus-visible:ring-emerald-500"
+                                    : "border-destructive focus-visible:ring-destructive"
+                                  : ""
+                              )}
+                              id="email"
+                              onBlur={() => setEmailTouched(true)}
+                              onChange={(e) => update("email", e.target.value)}
+                              type="email"
+                              value={formData.email}
+                            />
+                            {emailTouched && formData.email && (
+                              <span className="-translate-y-1/2 pointer-events-none absolute top-1/2 right-3">
+                                {isEmailValid ? (
+                                  <CheckIcon className="size-4 text-emerald-500" />
+                                ) : (
+                                  <svg
+                                    className="size-4 text-destructive"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth={2.5}
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <title>Ungültig</title>
+                                    <line x1="18" x2="6" y1="6" y2="18" />
+                                    <line x1="6" x2="18" y1="6" y2="18" />
+                                  </svg>
+                                )}
+                              </span>
+                            )}
+                          </div>
+                          {emailTouched && formData.email && !isEmailValid && (
+                            <p className="text-destructive text-xs">
+                              Bitte eine gültige E-Mail-Adresse eingeben.
+                            </p>
+                          )}
                         </div>
+
                         <div className="flex flex-col gap-2">
                           <Label htmlFor="phone">
                             Telefon <span className="text-destructive">*</span>
                           </Label>
                           <Input
-                            className="h-11"
                             id="phone"
-                            onChange={(e) =>
-                              updateField("phone", e.target.value)
-                            }
+                            onChange={(e) => update("phone", e.target.value)}
                             type="tel"
                             value={formData.phone}
                           />
                         </div>
                       </div>
 
-                      <div className="flex flex-col gap-2">
-                        <Label htmlFor="street">Straße & Hausnummer</Label>
-                        <Input
-                          className="h-11"
-                          id="street"
-                          onChange={(e) =>
-                            updateField("street", e.target.value)
-                          }
-                          value={formData.street}
-                        />
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <div className="flex flex-col gap-2">
-                          <Label htmlFor="zip">PLZ</Label>
-                          <Input
-                            className="h-11"
-                            id="zip"
-                            onChange={(e) => updateField("zip", e.target.value)}
-                            value={formData.zip}
-                          />
+                          <Label htmlFor="contactMethod">
+                            Bevorzugter Kontaktweg
+                          </Label>
+                          <Select
+                            onValueChange={(v) => update("contactMethod", v)}
+                            value={formData.contactMethod}
+                          >
+                            <SelectTrigger id="contactMethod">
+                              <SelectValue placeholder="Keine Präferenz" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {CONTACT_METHODS.map((t) => (
+                                <SelectItem key={t.value} value={t.value}>
+                                  {t.label}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
                         </div>
                         <div className="flex flex-col gap-2">
-                          <Label htmlFor="city">Ort</Label>
-                          <Input
-                            className="h-11"
-                            id="city"
-                            onChange={(e) =>
-                              updateField("city", e.target.value)
-                            }
-                            value={formData.city}
-                          />
+                          <Label htmlFor="preferredTime">
+                            Bevorzugter Zeitraum
+                          </Label>
+                          <Select
+                            onValueChange={(v) => update("preferredTime", v)}
+                            value={formData.preferredTime}
+                          >
+                            <SelectTrigger id="preferredTime">
+                              <SelectValue placeholder="Keine Präferenz" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {PREFERRED_TIMES.map((t) => (
+                                <SelectItem key={t.value} value={t.value}>
+                                  {t.label}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
                         </div>
-                      </div>
-
-                      <div className="flex flex-col gap-2">
-                        <Label htmlFor="preferredTime">
-                          Bevorzugte Kontaktzeit
-                        </Label>
-                        <Select
-                          onValueChange={(v) => updateField("preferredTime", v)}
-                          value={formData.preferredTime}
-                        >
-                          <SelectTrigger className="h-11" id="preferredTime">
-                            <SelectValue placeholder="Keine Präferenz" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            {PREFERRED_TIMES.map((t) => (
-                              <SelectItem key={t.value} value={t.value}>
-                                {t.label}
-                              </SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
                       </div>
 
                       <Separator />
@@ -560,7 +1068,7 @@ export default function ContactForm() {
                             checked={formData.privacy}
                             className="mt-0.5"
                             id="privacy"
-                            onCheckedChange={(v) => updateField("privacy", !!v)}
+                            onCheckedChange={(v) => update("privacy", !!v)}
                           />
                           <Label
                             className="inline cursor-pointer font-normal text-sm leading-relaxed"
@@ -578,15 +1086,12 @@ export default function ContactForm() {
                             <span className="text-destructive">*</span>
                           </Label>
                         </div>
-
                         <div className="flex items-start gap-3">
                           <Checkbox
                             checked={formData.newsletter}
                             className="mt-0.5"
                             id="newsletter"
-                            onCheckedChange={(v) =>
-                              updateField("newsletter", !!v)
-                            }
+                            onCheckedChange={(v) => update("newsletter", !!v)}
                           />
                           <Label
                             className="cursor-pointer font-normal text-sm leading-relaxed"
@@ -598,69 +1103,106 @@ export default function ContactForm() {
                         </div>
                       </div>
 
-                      <div className="flex justify-between pt-2">
-                        <Button
-                          className="px-6 font-semibold"
-                          onClick={prevStep}
-                          type="button"
-                          variant="outline"
-                        >
-                          <ChevronLeftIcon data-icon="inline-start" />
-                          Zurück
-                        </Button>
-                        <Button
-                          className="px-6 font-semibold"
-                          onClick={nextStep}
-                          type="button"
-                        >
-                          Weiter
-                          <ChevronRightIcon data-icon="inline-end" />
-                        </Button>
-                      </div>
+                      <NavButtons
+                        nextDisabled={!isStepValid(4)}
+                        onNext={goNext}
+                        onPrev={goPrev}
+                      />
                     </div>
                   )}
 
-                  {/* Step 4: Summary */}
-                  {currentStep === 4 && (
+                  {/* ── Step 5: Bestätigung ── */}
+                  {currentStep === 5 && (
                     <div className="flex animate-fadeIn flex-col gap-6">
-                      <h3
-                        className="font-bold text-xl"
-                        style={{ fontFamily: "var(--font-heading)" }}
-                      >
-                        Zusammenfassung Ihrer Anfrage
-                      </h3>
+                      <div>
+                        <h3
+                          className="font-bold text-xl"
+                          style={{ fontFamily: "var(--font-heading)" }}
+                        >
+                          Zusammenfassung Ihrer Anfrage
+                        </h3>
+                        <p className="mt-1 text-muted-foreground text-sm">
+                          Bitte prüfen Sie Ihre Angaben, dann absenden.
+                        </p>
+                      </div>
 
                       <div className="flex flex-col gap-2 hyphens-auto rounded-xl border border-border bg-muted/40 p-5 text-sm md:gap-2.5">
-                        {[
-                          {
-                            label: "Anfragetyp",
-                            value: getRequestTypeLabel(formData.requestType),
-                          },
-                          {
-                            label: "Kundentyp",
-                            value: getCustomerTypeLabel(formData.customerType),
-                          },
-                          {
-                            label: "Name",
-                            value: `${formData.firstName} ${formData.lastName}`,
-                          },
-                          formData.company
-                            ? { label: "Firma", value: formData.company }
-                            : null,
-                          { label: "E-Mail", value: formData.email },
-                          { label: "Telefon", value: formData.phone },
-                          {
-                            label: "Beschreibung",
-                            value: formData.description,
-                          },
-                        ]
+                        {(
+                          [
+                            {
+                              label: "Anfragetyp",
+                              value: getRequestTypeLabel(formData.requestType),
+                            },
+                            {
+                              label: "Kundentyp",
+                              value: getCustomerTypeLabel(
+                                formData.customerType
+                              ),
+                            },
+                            formData.zip
+                              ? { label: "PLZ", value: formData.zip }
+                              : null,
+                            formData.kwp
+                              ? {
+                                  label: "Anlagenleistung",
+                                  value: `${formData.kwp} kWp`,
+                                }
+                              : null,
+                            formData.baujahr
+                              ? {
+                                  label: "Baujahr",
+                                  value: formData.baujahr,
+                                }
+                              : null,
+                            {
+                              label: "Name",
+                              value: `${formData.firstName} ${formData.lastName}`,
+                            },
+                            formData.company
+                              ? { label: "Firma", value: formData.company }
+                              : null,
+                            { label: "E-Mail", value: formData.email },
+                            { label: "Telefon", value: formData.phone },
+                            formData.contactMethod
+                              ? {
+                                  label: "Kontaktweg",
+                                  value:
+                                    CONTACT_METHODS.find(
+                                      (m) => m.value === formData.contactMethod
+                                    )?.label ?? formData.contactMethod,
+                                }
+                              : null,
+                            formData.preferredTime
+                              ? {
+                                  label: "Zeitraum",
+                                  value:
+                                    PREFERRED_TIMES.find(
+                                      (t) => t.value === formData.preferredTime
+                                    )?.label ?? formData.preferredTime,
+                                }
+                              : null,
+                            uploadedFiles.length > 0
+                              ? {
+                                  label: "Anhänge",
+                                  value: `${uploadedFiles.length} Datei(en)`,
+                                }
+                              : null,
+                            {
+                              label: "Beschreibung",
+                              value: formData.description,
+                            },
+                          ] as Array<{
+                            label: string;
+                            value: string;
+                          } | null>
+                        )
                           .filter(Boolean)
                           .map((row) => (
                             <div
                               className="flex gap-1 md:gap-3"
                               key={row!.label}
                             >
-                              <span className="w-28 shrink-0 font-semibold text-foreground">
+                              <span className="w-32 shrink-0 font-semibold text-foreground">
                                 {row!.label}:
                               </span>
                               <span className="min-w-0 break-words text-muted-foreground">
@@ -692,24 +1234,7 @@ export default function ContactForm() {
                         </ul>
                       </div>
 
-                      <div className="flex items-center justify-between pt-2">
-                        <Button
-                          className="px-6 font-semibold"
-                          onClick={prevStep}
-                          type="button"
-                          variant="outline"
-                        >
-                          <ChevronLeftIcon data-icon="inline-start" />
-                          Zurück
-                        </Button>
-                        <Button
-                          className="w-fit border-0 bg-solar px-4 font-semibold text-solar-foreground hover:bg-solar/90"
-                          type="submit"
-                        >
-                          <SendIcon />
-                          <p>Anfrage absenden</p>
-                        </Button>
-                      </div>
+                      <NavButtons isLast onPrev={goPrev} />
                     </div>
                   )}
                 </form>
@@ -717,7 +1242,7 @@ export default function ContactForm() {
             )}
           </div>
 
-          {/* Sidebar: quick contact */}
+          {/* ── Sidebar: quick contact ── */}
           <div className="flex flex-col gap-4">
             <div className="flex flex-1 flex-col items-start gap-3 rounded-2xl border border-border bg-card p-5">
               <div className="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
