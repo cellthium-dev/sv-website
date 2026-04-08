@@ -30,9 +30,15 @@ export default function Hero() {
 
   return (
     <section
-      className="relative flex min-h-[85vh] items-center justify-center overflow-hidden bg-[var(--dark-surface)] text-[var(--dark-surface-foreground)]"
+      className="relative flex min-h-[85vh] items-center justify-center overflow-hidden bg-[url('/marquee/marquee_2.png')] bg-center bg-cover text-dark-surface-foreground"
       id="home"
     >
+      {/* Dark overlay for text legibility */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-black/70"
+      />
+
       {/* Background accents */}
       <div
         aria-hidden
@@ -47,7 +53,7 @@ export default function Hero() {
       <div className="section-container relative py-24 text-center md:py-32">
         {/* Badge */}
         <div className="mb-7 animate-fade-in opacity-0">
-          <span className="inline-block rounded-full border border-[var(--solar)]/30 bg-[var(--solar)]/12 px-5 py-2 font-semibold text-[var(--solar)] text-xs uppercase tracking-[1.5px]">
+          <span className="inline-block rounded-full border border-(--solar)/30 bg-(--solar)/12 px-5 py-2 font-semibold text-solar text-xs uppercase tracking-[1.5px]">
             ISO/IEC 17024 Zertifizierter Sachverständiger
           </span>
         </div>
@@ -62,7 +68,7 @@ export default function Hero() {
         </h1>
 
         {/* Subtitle */}
-        <p className="mx-auto mb-8 max-w-2xl animate-fade-in text-[var(--dark-surface-foreground)]/70 text-lg leading-relaxed opacity-0 delay-200 md:text-xl">
+        <p className="mx-auto mb-8 max-w-2xl animate-fade-in text-(--dark-surface-foreground)/70 text-lg leading-relaxed opacity-0 delay-200 md:text-xl">
           Unabhängige Sachverständigenprüfung für Photovoltaikanlagen und
           Batteriespeicher – messtechnisch fundiert, rechtssicher dokumentiert,
           verständlich erklärt.
@@ -74,7 +80,7 @@ export default function Hero() {
           className="mb-10 flex h-10 items-center justify-center"
         >
           <p
-            className="text-[var(--dark-surface-foreground)]/60 text-base italic transition-opacity duration-500 md:text-lg"
+            className="text-(--dark-surface-foreground)/60 text-base italic transition-opacity duration-500 md:text-lg"
             style={{ opacity: visible ? 1 : 0 }}
           >
             {TICKER_ITEMS[tickerIndex]}
@@ -91,26 +97,12 @@ export default function Hero() {
           </Button>
           <Button
             asChild
-            className="h-12 border-white/20 bg-transparent px-8 font-semibold text-[var(--dark-surface-foreground)] text-base hover:border-white/30 hover:bg-white/10 hover:text-white"
+            className="h-12 border-white/20 bg-transparent px-8 font-semibold text-base text-dark-surface-foreground hover:border-white/30 hover:bg-white/10 hover:text-white"
             variant="outline"
           >
             <Link to="/leistungen">Leistungen entdecken</Link>
           </Button>
         </div>
-      </div>
-
-      {/* Bottom decorative edge */}
-      <div className="absolute right-0 bottom-0 left-0">
-        <svg
-          aria-hidden={true}
-          className="h-8 w-full"
-          fill="none"
-          preserveAspectRatio="none"
-          role="presentation"
-          viewBox="0 0 1440 32"
-        >
-          <path d="M0 32L1440 0V32H0Z" fill="var(--background)" />
-        </svg>
       </div>
     </section>
   );

@@ -45,3 +45,6 @@ create new site for the website
 [x] update pages for the marquee
 [x] delete full address
 [x] update about me page
+[x] update start page to use background image
+[ ] fix tools
+[ ] add Leistungsübersicht as pdf
