@@ -46,5 +46,6 @@ create new site for the website
 [x] delete full address
 [x] update about me page
 [x] update start page to use background image
+[x] removing price 249€ 
 [ ] fix tools
 [ ] add Leistungsübersicht as pdf

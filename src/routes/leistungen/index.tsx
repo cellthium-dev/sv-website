@@ -185,13 +185,11 @@ const BERATUNGSLEISTUNGEN: AdvisoryCard[] = [
       "Schnelle Ersteinschätzung auf Basis von Fotos, Monitoring-Daten und Unterlagen – bundesweit, ohne Vor-Ort-Termin. Kurzfristige Rückmeldung mit klarer Empfehlung zum weiteren Vorgehen.",
     features: [
       "Express-Rückmeldung innerhalb 24–48 Stunden",
-      "Festpreis ab 249 €",
       "Bild-Upload & Dokumentenanalyse",
       "Digitales Gutachten (PDF)",
     ],
     ctaText: "Online-Gutachten starten",
     ctaTab: "anfrage",
-    priceBadge: "ab 249 €",
   },
 ];
 

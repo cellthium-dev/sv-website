@@ -955,9 +955,6 @@ function GutachtenCard() {
           <h3 className="font-bold text-foreground">
             Online-Gutachten (Fernbewertung)
           </h3>
-          <Badge className="mt-0.5 bg-solar text-solar-foreground text-xs">
-            ab 249 €
-          </Badge>
         </div>
       </div>
       <p className="mb-4 flex-1 text-muted-foreground text-sm leading-relaxed">

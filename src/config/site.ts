@@ -130,7 +130,6 @@ export const siteConfig = {
         "Schnelle Ersteinschätzung auf Basis von Fotos, Monitoring-Daten und Unterlagen – bundesweit, ohne Vor-Ort-Termin. Kurzfristige Rückmeldung mit klarer Empfehlung.",
       features: [
         "Express-Rückmeldung innerhalb 24–48 Stunden",
-        "Festpreis ab 249 €",
         "Bild-Upload & Dokumentenanalyse",
         "Digitales Gutachten (PDF)",
       ],
@@ -146,7 +145,6 @@ export const siteConfig = {
       { label: "Fehlerdiagnose & Schadenanalyse", href: "/leistungen" },
       { label: "Anlagenabnahme & Inbetriebnahme", href: "/leistungen" },
       { label: "Ertragsprüfung & Wirtschaftlichkeit", href: "/leistungen" },
-      { label: "Online-Gutachten ab 249 €", href: "/leistungen" },
     ],
     info: [
       { label: "Über mich", href: "/ueber-mich" },
