@@ -1,3 +1,4 @@
+import emailjs from "@emailjs/browser";
 import { Link } from "@tanstack/react-router";
 import {
   CheckIcon,
@@ -275,11 +276,13 @@ function NavButtons({
   onNext,
   nextDisabled = false,
   isLast = false,
+  isSubmitting = false,
 }: {
   onPrev?: () => void;
   onNext?: () => void;
   nextDisabled?: boolean;
   isLast?: boolean;
+  isSubmitting?: boolean;
 }) {
   return (
     <div
@@ -288,6 +291,7 @@ function NavButtons({
       {onPrev && (
         <Button
           className="px-6 font-semibold"
+          disabled={isSubmitting}
           onClick={onPrev}
           type="button"
           variant="outline"
@@ -298,12 +302,12 @@ function NavButtons({
       )}
       {isLast ? (
         <Button
-          className="gap-2 bg-solar px-6 font-bold text-solar-foreground hover:brightness-95"
-          disabled={nextDisabled}
+          className="gap-2 bg-solar px-6 font-bold text-solar-foreground hover:bg-solar/90"
+          disabled={nextDisabled || isSubmitting}
           type="submit"
         >
           <SendIcon className="size-4" />
-          Anfrage absenden
+          {isSubmitting ? "Wird gesendet…" : "Anfrage absenden"}
         </Button>
       ) : (
         <Button
@@ -322,10 +326,16 @@ function NavButtons({
 
 // ─── Main component ───────────────────────────────────────────────────────────
 
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID as string;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string;
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string;
+
 export default function ContactForm() {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>(EMPTY_FORM);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const [emailTouched, setEmailTouched] = useState(false);
   const [installerContacted, setInstallerContacted] = useState(false);
@@ -386,15 +396,76 @@ export default function ContactForm() {
     if (currentStep > 1) setCurrentStep((s) => s - 1);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!isStepValid(4)) return;
-    setSubmitted(true);
-    setUploadedFiles([]);
-    setInstallerContacted(false);
-    setEmailTouched(false);
-    setFormData(EMPTY_FORM);
-    setCurrentStep(1);
+
+    setIsSubmitting(true);
+    setSubmitError(null);
+
+    const contactMethodLabel =
+      CONTACT_METHODS.find((m) => m.value === formData.contactMethod)?.label ??
+      "Keine Angabe";
+    const preferredTimeLabel =
+      PREFERRED_TIMES.find((t) => t.value === formData.preferredTime)?.label ??
+      "Keine Angabe";
+    const requestTypeLabel = getRequestTypeLabel(formData.requestType);
+    const customerTypeLabel = getCustomerTypeLabel(formData.customerType);
+
+    const templateParams = {
+      to_email: "info@sv-bauten.de",
+      // Step 1
+      request_type: requestTypeLabel,
+      // Step 2
+      customer_type: customerTypeLabel,
+      zip: formData.zip,
+      kwp: formData.kwp || "–",
+      baujahr: formData.baujahr || "–",
+      // Context fields (only non-empty values appear)
+      aktenzeichen: formData.aktenzeichen || "–",
+      schadenstag: formData.schadenstag || "–",
+      installationsart: formData.installationsart || "–",
+      speichertyp: formData.speichertyp || "–",
+      gegenstand: formData.gegenstand || "–",
+      themenfeld: formData.themenfeld || "–",
+      // Step 3
+      description: formData.description,
+      installer_contacted: installerContacted ? "Ja" : "Nein",
+      attachments:
+        uploadedFiles.length > 0
+          ? uploadedFiles.map((f) => f.name).join(", ")
+          : "Keine",
+      // Step 4
+      first_name: formData.firstName,
+      last_name: formData.lastName,
+      company: formData.company || "–",
+      email: formData.email,
+      phone: formData.phone,
+      contact_method: contactMethodLabel,
+      preferred_time: preferredTimeLabel,
+      newsletter: formData.newsletter ? "Ja" : "Nein",
+    };
+
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        { publicKey: EMAILJS_PUBLIC_KEY }
+      );
+      setSubmitted(true);
+      setUploadedFiles([]);
+      setInstallerContacted(false);
+      setEmailTouched(false);
+      setFormData(EMPTY_FORM);
+      setCurrentStep(1);
+    } catch {
+      setSubmitError(
+        "Die Anfrage konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt per E-Mail."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -1234,7 +1305,17 @@ export default function ContactForm() {
                         </ul>
                       </div>
 
-                      <NavButtons isLast onPrev={goPrev} />
+                      {submitError && (
+                        <p className="rounded-lg border border-destructive/30 bg-destructive/5 px-4 py-3 text-destructive text-sm">
+                          {submitError}
+                        </p>
+                      )}
+
+                      <NavButtons
+                        isLast
+                        isSubmitting={isSubmitting}
+                        onPrev={goPrev}
+                      />
                     </div>
                   )}
                 </form>

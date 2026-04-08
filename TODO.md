@@ -48,5 +48,5 @@ create new site for the website
 [x] update start page to use background image
 [x] removing price 249€ 
 [x] fix flow for the contact form 
-[ ] send the contact form to info@sv-bauten.de
+[x] send the contact form to info@sv-bauten.de
 [ ] add Leistungsübersicht as pdf

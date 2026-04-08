@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@calcom/embed-react": "^1.5.3",
+    "@emailjs/browser": "^4.4.1",
     "@fontsource-variable/geist": "^5.2.8",
     "@fontsource-variable/montserrat": "^5.2.8",
     "@fontsource-variable/syne": "^5.2.7",
