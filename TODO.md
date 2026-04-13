@@ -49,4 +49,6 @@ create new site for the website
 [x] removing price 249€ 
 [x] fix flow for the contact form 
 [x] send the contact form to info@sv-bauten.de
-[ ] add Leistungsübersicht as pdf
+[x] delete stats in the wissensbereich
+[x] add Leistungsübersicht as pdf
+[ ] handle vcard

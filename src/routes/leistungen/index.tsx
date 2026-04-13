@@ -313,7 +313,9 @@ function LeistungenPage() {
                   </Link>
                 </Button>
                 <Button asChild size="lg" variant="outline">
-                  <a href="#pdf-download">Leistungsübersicht als PDF</a>
+                  <a href="/leistungen/Leistungsübersicht_Sachverstaendinger-Bauten_Photovoltaik-Batteriespeicher.pdf">
+                    Leistungsübersicht als PDF
+                  </a>
                 </Button>
               </div>
             </div>
@@ -731,20 +733,18 @@ function LeistungenPage() {
           id="pdf-download"
         >
           <div className="section-container text-center">
-            <button
+            <a
               className="inline-flex items-center gap-2.5 rounded-lg border border-border px-5 py-3 font-semibold text-primary text-sm transition-all hover:border-primary/30 hover:bg-primary/5"
-              type="button"
+              download="Leistungsübersicht_Sachverstaendinger-Bauten_Photovoltaik-Batteriespeicher.pdf"
+              href="/leistungen/Leistungsübersicht_Sachverstaendinger-Bauten_Photovoltaik-Batteriespeicher.pdf"
             >
               <FileDownIcon className="size-5 shrink-0" />
               Leistungsübersicht als PDF herunterladen
-            </button>
+            </a>
             <p className="mt-2 text-muted-foreground text-sm">
               Alle Gutachtenarten, typische Anwendungsfälle und Abläufe
               übersichtlich auf einer Seite – ideal zum internen Teilen oder
               Ausdrucken.
-            </p>
-            <p className="mt-1 text-muted-foreground/60 text-xs">
-              PDF-Download wird in Kürze verfügbar sein.
             </p>
           </div>
         </section>
