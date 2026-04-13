@@ -215,7 +215,7 @@ function KontaktPage() {
         {/* ── Standort & Vertrauen ──────────────────────────────────── */}
         <section
           aria-label="Standort und Vertrauen"
-          className="bg-muted/30 p-20 md:py-28"
+          className="bg-muted/30 py-20 md:py-28"
         >
           <div className="section-container">
             <div className="mb-12">
