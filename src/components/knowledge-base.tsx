@@ -553,13 +553,6 @@ const CASES: Case[] = [
   },
 ];
 
-const STATS = [
-  { number: "500+", label: "begutachtete PV-Anlagen" },
-  { number: "78 %", label: "vermeidbare Installationsmängel festgestellt" },
-  { number: "22 %", label: "durchschnittliche Ertragsrückgewinnung" },
-  { number: "85 %", label: "erfolgreiche Regulierungen nach Gutachten" },
-];
-
 const GLOSSARY_TERMS: GlossaryTerm[] = [
   {
     id: "g1",
@@ -1634,23 +1627,6 @@ export default function KnowledgeBase() {
               Anonymisierte Fallstudien aus unserer täglichen Gutachterarbeit.
               Finden Sie den Fall, der Ihrer Situation ähnelt.
             </p>
-          </div>
-
-          {/* Stats */}
-          <div className="mb-12 grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {STATS.map((s) => (
-              <div
-                className="rounded-xl border border-border bg-card p-5 text-center"
-                key={s.label}
-              >
-                <div className="mb-1 font-extrabold text-3xl text-primary">
-                  {s.number}
-                </div>
-                <div className="text-muted-foreground text-sm leading-snug">
-                  {s.label}
-                </div>
-              </div>
-            ))}
           </div>
 
           {/* Case cards */}
