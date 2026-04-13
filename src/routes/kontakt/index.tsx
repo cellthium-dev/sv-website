@@ -9,6 +9,7 @@ import {
   PhoneIcon,
   SendIcon,
   ShieldCheckIcon,
+  UserPlusIcon,
 } from "lucide-react";
 import { useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -318,20 +319,28 @@ function KontaktPage() {
               <p className="text-center text-muted-foreground text-sm sm:text-left">
                 Sie möchten keinen Termin buchen, haben aber eine kurze Frage?
               </p>
-              <div className="flex flex-wrap justify-center gap-3">
+              <div className="grid grid-cols-1 flex-wrap justify-center gap-3 md:grid-cols-2">
                 <a
-                  className="flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2 font-medium text-foreground text-sm transition-colors hover:border-primary/40 hover:text-primary"
+                  className="flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2 font-medium text-foreground text-sm transition-colors hover:border-primary/40 hover:text-primary md:col-span-1"
                   href={`mailto:${siteConfig.contact.email}`}
                 >
                   <MailIcon className="size-4" />
                   {siteConfig.contact.email}
                 </a>
                 <a
-                  className="flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2 font-medium text-foreground text-sm transition-colors hover:border-primary/40 hover:text-primary"
+                  className="flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2 font-medium text-foreground text-sm transition-colors hover:border-primary/40 hover:text-primary md:col-span-1"
                   href={`tel:${siteConfig.contact.phone}`}
                 >
                   <PhoneIcon className="size-4" />
                   {siteConfig.contact.phone}
+                </a>
+                <a
+                  className="flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2 font-medium text-foreground text-sm transition-colors hover:border-primary/40 hover:text-primary"
+                  download="Andreas_Bauten.vcf"
+                  href="/kontakt/vCard_Andreas_Bauten.vcf"
+                >
+                  <UserPlusIcon className="size-4" />
+                  Kontakt speichern
                 </a>
                 <a
                   aria-label="WhatsApp schreiben"

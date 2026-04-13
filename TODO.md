@@ -51,4 +51,4 @@ create new site for the website
 [x] send the contact form to info@sv-bauten.de
 [x] delete stats in the wissensbereich
 [x] add Leistungsübersicht as pdf
-[ ] handle vcard
+[x] integrate vcard
